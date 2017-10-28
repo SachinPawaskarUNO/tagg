@@ -5,7 +5,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Answer Security Questions</div>
-                        {!! Form::model($user_securityquestion, ['method' => 'GET','action'=>['UserSecurityquestionController@check', $user_securityquestion->question_id, $email_address]]) !!}
+                        {!! Form::model($user_securityquestion, ['method' => 'GET','action'=>['UserSecurityQuestionController@check', $user_securityquestion->question_id, $email_address]]) !!}
 
                     <div class="panel-body">
                         <div class="form-group">
