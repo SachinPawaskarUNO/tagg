@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\DonationRequest;
@@ -21,8 +22,6 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Auth;
 use Excel;
 use App\Organization;
-
-
 
 
 class DonationRequestController extends Controller
@@ -60,20 +59,18 @@ class DonationRequestController extends Controller
         $request_item_types = Request_item_type::pluck('item_name', 'id');
         $request_item_purpose = Request_item_purpose::pluck('purpose_name', 'id');
         $request_event_type = Request_event_type::pluck('type_name', 'id');
-        $donationrequest=DonationRequest::find($id);
+        $donationrequest = DonationRequest::find($id);
         return view('donationrequests.edit', compact('donationrequest'))->with('states', $states)->with('requester_types', $requester_types)->with('request_item_types', $request_item_types)
             ->with('request_item_purpose', $request_item_purpose)->with('request_event_type', $request_event_type);
 //        return view('donationrequests.edit',compact('donationrequest', 'requester_types'));
     }
 
 
-
-
-    public function update($id,Request $request)
+    public function update($id, Request $request)
     {
 
-        $donationrequest= new DonationRequest($request->all());
-        $donationrequest=DonationRequest::find($id);
+        $donationrequest = new DonationRequest($request->all());
+        $donationrequest = DonationRequest::find($id);
         $donationrequest->update($request->all());
         return redirect('donationrequests');
     }
@@ -131,6 +128,7 @@ class DonationRequestController extends Controller
         $donationRequest->tax_exempt = $request->taxexempt;
         $donationRequest->item_requested = $request->item_requested;
         $donationRequest->dollar_amount = $request->dollar_amount;
+        $donationRequest->approved_dollar_amount = $request->dollar_amount;
         $donationRequest->item_purpose = $request->item_purpose;
         $donationRequest->needed_by_date = $request->needed_by_date;
         $donationRequest->event_name = $request->eventname;
@@ -141,35 +139,37 @@ class DonationRequestController extends Controller
         $donationRequest->venue = $request->venue;
         $donationRequest->marketing_opportunities = $request->marketingopportunities;
         $this->validate($request, [
-       'needed_by_date' => 'after:today',
+            'needed_by_date' => 'after:today',
         ]);
         $donationRequest->save();
-        if($request->hasFile('attachment')) {
+        if ($request->hasFile('attachment')) {
             $file = new File();
             $file->donation_request_id = $donationRequest->id;
             $file->original_filename = $request->file('attachment')->getClientOriginalName();
-            $file->file_path = Storage::putFile('public', $request->file('attachment') );
-            $file->file_type='attachment';
-      $file->save();
-      // $attachment =$request->file('attachment');
-      // $imageFileName = time() . '.' . $attachment->getClientOriginalExtension();
-      // $s3 = \Storage::disk('s3');
-      // $filePath = '/tagg-uno/' . $imageFileName;
-      // $s3->put($filePath, file_get_contents($attachment), 'public');
-      // $this->validate($request, [
-      //     'attachment' => 'image|mimes:doc,docx,pdf,jpeg,png,jpg,gif,svg|max:2048',
-      // ]);
+            $file->file_path = Storage::putFile('public', $request->file('attachment'));
+            $file->file_type = 'attachment';
+            $file->save();
+            // $attachment =$request->file('attachment');
+            // $imageFileName = time() . '.' . $attachment->getClientOriginalExtension();
+            // $s3 = \Storage::disk('s3');
+            // $filePath = '/tagg-uno/' . $imageFileName;
+            // $s3->put($filePath, file_get_contents($attachment), 'public');
+            // $this->validate($request, [
+            //     'attachment' => 'image|mimes:doc,docx,pdf,jpeg,png,jpg,gif,svg|max:2048',
+            // ]);
 
-      $imageName = time().'.'.$request->attachment->getClientOriginalExtension();
-      $image = $request->file('attachment');
-      $t = Storage::disk('s3')->put($imageName, file_get_contents($image), 'public');
-      $imageName = Storage::disk('s3')->url($imageName);
-        // return $path;
+            $imageName = time() . '.' . $request->attachment->getClientOriginalExtension();
+            $image = $request->file('attachment');
+            $t = Storage::disk('s3')->put($imageName, file_get_contents($image), 'public');
+            $imageName = Storage::disk('s3')->url($imageName);
+            // return $path;
         }
         //fire NewBusiness event to initiate sending welcome mail
 
         event(new DonationRequestReceived($donationRequest));
 
+        // Execute Business rules on newly submitted request
+        app('App\Http\Controllers\RuleEngineController')->runRuleOnSubmit($donationRequest);
         return redirect('/');
     }
 
@@ -184,11 +184,12 @@ class DonationRequestController extends Controller
         $item_requested_name = $item_requested->item_name;
         $donationRequest = Requester_type::findOrFail($donationrequest->requester_type);
         $donationRequestName = $donationRequest->type_name;
-        return view('donationrequests.show',compact('donationrequest', 'event_purpose_name', 'donation_purpose_name'
-        , 'item_requested_name', 'donationRequestName'));
+        return view('donationrequests.show', compact('donationrequest', 'event_purpose_name', 'donation_purpose_name'
+            , 'item_requested_name', 'donationRequestName'));
     }
 
-    public function changeDonationStatus(Request $request) {
+    public function changeDonationStatus(Request $request)
+    {
 
 
 //id
@@ -245,7 +246,7 @@ class DonationRequestController extends Controller
         return response()->json(['idsArray' => $request['ids'], 'status' => $request['status']]);
     }
 
-    public function updatestatus (Request $request)
+    public function updatestatus(Request $request)
     {
         dd($request);
     }

@@ -8,25 +8,66 @@
 @endsection
 @section('header')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.3.0/bootbox.min.js"></script>
-     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
-     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
+    {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
 
 
 @endsection
 @section('content')
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
-});
-</script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
+
+
     <!--<section class="bs-docs-section clearfix"> -->
     {{--{{ Form::open(['method' => 'post', 'action' => ['RuleEngineController@saveRule', $ruleType]]) }}--}}
-    <form id="mainForm" action="{{ action('RuleEngineController@saveRule') }}">
+    <div class="col-md-12 col-lg-10 col-lg-offset-1">
+        <h1>Basic Settings</h1>
+        <form id="budgetNoticeForm" action="{{ action('RuleEngineController@saveBudgetNotice') }}">
+            <div class="col-md-8 form-group">
+                <label>Monthly Budget:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="monthlyBudget" type="number" name="monthlyBudget" pattern="[0-9]+([\.,][0-9]+)?" min="0.00"
+                       step="0.01" required
+                       title="Enter your estimated monthly budget. Requests that would put you above your monthly budget will be removed from pending approval. NOTE: A budget of 0.00 will disable this functionality."
+                       value="{{ $monthlyBudget }}" size="10"/>
+            </div>
+            <div class="col-md-8">
+                <label>Required Days Notice:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="daysNotice" type="number" min="0" step="1" name="daysNotice" required
+                       title="Enter your minimum days notice. Requests that need to be fulfilled before your organization can fulfill them will be automatically declined."
+                       value="{{ $daysNotice }}" size="10"/>
+            </div>
+            <div class="col-md-12 col-lg-10 col-lg-offset-1">
+                <button id="btnSaveBudgetNotice" class="btn btn-primary" type="submit">Save
+                </button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <br/>
+        <br/>
+        <br/>
+    </div>
 
+    <form id="mainForm" action="{{ action('RuleEngineController@saveRule') }}">
+        <!--<Rules help in new window/tab>  -->
+        <div class="col-md-12" style="padding-left:82.5%">
+            <a href="{{url('/help') }}" target="_blank">
+                <h7><b><u>How to set rules?</u></b></h7>
+            </a>
+        </div>
         <div class="col-md-12 col-lg-10 col-lg-offset-1 form-group">
-           <div class="col-md-8">
-             <a href="#" data-title="Rule management help" data-toggle="popover" data-content="Select individual fields and corresponding conditions to set the rules for auto rejection and pre approval of donation requests.The auto rejection rule helps you in setting parameters to reject the donation request and the pre approval rule helps you in setting parameters for approving the donation requests for further evaluation.">Help</a>
-&nbsp;&nbsp;<label>Rule Selected:</label>{!! Form::select('rule_type', array(null => 'Select...') + $rule_types->all(), null, ['class'=>'form-control ddlType', 'id'=>'ddlRuleType']) !!}</div>
+            <h1>Global Business Rules (Admin Only)</h1>
+            <div class="col-md-8">
+                <label for="ddlRuleType">Rule Selected:</label>
+                {!! Form::select('rule_type', array(null => 'Select...') + $rule_types->all(), null, ['class'=>'form-control ddlType', 'id'=>'ddlRuleType', 'name'=>'ddlRuleType']) !!}
+                <a href="#" data-title="Rule management help" data-toggle="popover"
+                   data-content="Select individual fields and corresponding conditions to set the rules for auto rejection and pre approval of donation requests.
+                   The auto rejection rule helps you in setting parameters to reject the donation request and the pre approval rule helps you in setting parameters
+                    for approving the donation requests for further evaluation.">Help</a>
+            </div>
         </div>
         <input id="ruleType" type="hidden" name="ruleType" value="{{ $_GET['rule'] }}"/>
         <div class="col-md-12 col-lg-10 col-lg-offset-1">
@@ -35,9 +76,18 @@ $(document).ready(function(){
                 <!-- <button class="btn btn-error parse-sql" type="button" data-target="plugins">Preview Rule SQL</button> -->
                 <button class="btn btn-warning reset" type="button" data-target="plugins">Clear Rules</button>
                 <button class="btn btn-success set-json" type="button" data-target="plugins">Reset Rules</button>
-                <button id="btnSave" class="btn btn-primary parse-json" type="submit" data-target="plugins">Save Rules</button>
-                <button id="btnRun" type="button" href="{{ action('RuleEngineController@runRule') }}" class="btn btn-default">Run Rule Workflow</button>
-                <button id="btnRunBudget" type="button" href="{{ action('RuleEngineController@runBudgetCheckRule') }}" class="btn btn-default">Run Budget</button>
+                <button id="btnSave" class="btn btn-primary parse-json" type="submit" data-target="plugins">Save Rules
+                </button>
+                <button id="btnRun" type="button" href="{{ action('RuleEngineController@manualRunRule') }}"
+                        class="btn btn-default">Run Rule Workflow
+                </button>
+                <button id="btnRunBudget" type="button" href="{{ action('RuleEngineController@runBudgetCheckRule') }}"
+                        class="btn btn-default">Run Budget
+                </button>
+                <button id="btnRunMinimumNoticeCheckRule" type="button"
+                        href="{{ action('RuleEngineController@runMinimumNoticeCheckRule') }}"
+                        class="btn btn-default">Run Required Days Notice
+                </button>
             </div>
             <br/>
             <input id="ruleSet" type="hidden" name="ruleSet" value="" size="100"/>
@@ -49,7 +99,7 @@ $(document).ready(function(){
 
 
     </form>
-{{--    {{ Form::close() }}--}}
+    {{--    {{ Form::close() }}--}}
 
     <!-- </section> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker3.min.css"
@@ -82,6 +132,7 @@ $(document).ready(function(){
         .modal-backdrop {
             z-index: -1;
         }
+
         .ddlType {
             width: 50%;
         }
@@ -90,24 +141,24 @@ $(document).ready(function(){
     <script>
         $('#ddlRuleType').val({{ $_GET['rule'] }});
 
-        @if ($rule)
+                @if ($rule)
         var rules_plugins = {!!  htmlspecialchars_decode($rule, ENT_NOQUOTES) !!};
-        @else
+                @else
         var rules_plugins = {
-        'condition': 'AND',
-            'rules': [
-                {
-                    'id': 'dollar_amount',
-                   'field': 'dollar_amount',
-                    'type': 'double',
-                    'input': 'number',
-                    'operator': 'equal',
-                    'value': '0'
-                }
+                'condition': 'AND',
+                'rules': [
+                    {
+                        'id': 'dollar_amount',
+                        'field': 'dollar_amount',
+                        'type': 'double',
+                        'input': 'number',
+                        'operator': 'equal',
+                        'value': '0.00'
+                    }
                 ],
                 'not': false,
                 'valid': true
-        };
+            };
         @endif
 
 
@@ -119,11 +170,15 @@ $(document).ready(function(){
 
         $('#btnRun').on('click', function () {
             var iRuleType = $('#ruleType').val();
-            window.location.href = '{{ action('RuleEngineController@runRule') }}?rule=' + iRuleType;
+            window.location.href = '{{ action('RuleEngineController@manualRunRule') }}?rule=' + iRuleType;
         });
 
         $('#btnRunBudget').on('click', function () {
             window.location.href = '{{ action('RuleEngineController@runBudgetCheckRule') }}';
+        });
+
+        $('#btnRunMinimumNoticeCheckRule').on('click', function () {
+            window.location.href = '{{ action('RuleEngineController@runMinimumNoticeCheckRule') }}';
         });
 
         $('#btnSave').on('click', function () {
@@ -137,7 +192,7 @@ $(document).ready(function(){
                 });*/
             }
         });
-        
+
         $('#builder-plugins').queryBuilder({
             plugins: [
                 'sortable',

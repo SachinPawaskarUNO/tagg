@@ -1,5 +1,7 @@
 <?php
+
 namespace App;
+
 use Illuminate\Database\Eloquent\Model;
 
 class DonationRequest extends Model
@@ -32,28 +34,37 @@ class DonationRequest extends Model
         'venue',
         'marketing_opportunities',
         'approved_dollar_amount',
+        'approved_organization_id',
+        'approved_user_id',
+        'rule_process_date',
         'approval_status_id',
         'email_sent'
     ];
+
 //     protected $table = 'donation_requests';
 
-    public function donationRequestTypes() {
-        return $this->hasOne('App\Requester_type','requester_type', 'id');
+    public function donationRequestTypes()
+    {
+        return $this->hasOne('App\Requester_type', 'requester_type', 'id');
     }
 
-    public function donationRequestType() {
+    public function donationRequestType()
+    {
         return $this->belongsTo('App\Request_item_type', 'item_requested', 'id');
     }
 
-    public function donationRequestPurpose() {
-        return $this->hasOne('App\Request_item_purpose', 'item_purpose','id');
+    public function donationRequestPurpose()
+    {
+        return $this->hasOne('App\Request_item_purpose', 'item_purpose', 'id');
     }
 
-    public function donationOrganization() {
+    public function donationOrganization()
+    {
         return $this->hasOne('App\Organization_type');
     }
 
-    public function donationApprovalStatus() {
+    public function donationApprovalStatus()
+    {
         return $this->belongsTo('App\Approval_Status', 'approval_status_id', 'id');
     }
 }
