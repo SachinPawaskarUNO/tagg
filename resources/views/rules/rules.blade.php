@@ -23,10 +23,14 @@ $(document).ready(function(){
     {{--{{ Form::open(['method' => 'post', 'action' => ['RuleEngineController@saveRule', $ruleType]]) }}--}}
     <form id="mainForm" action="{{ action('RuleEngineController@saveRule') }}">
 
+<!--<Rules help in new window/tab>  -->
+      <div class="col-md-12"style="padding-left:82.5%">
+        <a href="{{url('/help') }}" target="_blank">
+          <h7><b><u>How to set rules?</u></b></h7></a>
+        </div>
+
         <div class="col-md-12 col-lg-10 col-lg-offset-1 form-group">
-           <div class="col-md-8">
-             <a href="#" data-title="Rule management help" data-toggle="popover" data-content="Select individual fields and corresponding conditions to set the rules for auto rejection and pre approval of donation requests.The auto rejection rule helps you in setting parameters to reject the donation request and the pre approval rule helps you in setting parameters for approving the donation requests for further evaluation.">Help</a>
-&nbsp;&nbsp;<label>Rule Selected:</label>{!! Form::select('rule_type', array(null => 'Select...') + $rule_types->all(), null, ['class'=>'form-control ddlType', 'id'=>'ddlRuleType']) !!}</div>
+          <label>Rule Selected:</label>{!! Form::select('rule_type', array(null => 'Select...') + $rule_types->all(), null, ['class'=>'form-control ddlType', 'id'=>'ddlRuleType']) !!}</div>
         </div>
         <input id="ruleType" type="hidden" name="ruleType" value="{{ $_GET['rule'] }}"/>
         <div class="col-md-12 col-lg-10 col-lg-offset-1">
@@ -37,7 +41,7 @@ $(document).ready(function(){
                 <button class="btn btn-success set-json" type="button" data-target="plugins">Reset Rules</button>
                 <button id="btnSave" class="btn btn-primary parse-json" type="submit" data-target="plugins">Save Rules</button>
                 <button id="btnRun" type="button" href="{{ action('RuleEngineController@runRule') }}" class="btn btn-default">Run Rule Workflow</button>
-                <button id="btnRunBudget" type="button" href="{{ action('RuleEngineController@runBudgetCheckRule') }}" class="btn btn-default">Run Budget</button>
+
             </div>
             <br/>
             <input id="ruleSet" type="hidden" name="ruleSet" value="" size="100"/>
@@ -120,10 +124,7 @@ $(document).ready(function(){
         $('#btnRun').on('click', function () {
             var iRuleType = $('#ruleType').val();
             window.location.href = '{{ action('RuleEngineController@runRule') }}?rule=' + iRuleType;
-        });
 
-        $('#btnRunBudget').on('click', function () {
-            window.location.href = '{{ action('RuleEngineController@runBudgetCheckRule') }}';
         });
 
         $('#btnSave').on('click', function () {
@@ -137,7 +138,48 @@ $(document).ready(function(){
                 });*/
             }
         });
-        
+
+        /*
+        var rules_plugins = {
+            condition: 'AND',
+            rules: [
+                {
+                    id: 'amount',
+                    operator: 'less',
+                    value: 500.00
+                }, {
+                    condition: 'OR',
+                    rules: [{
+                        id: 'requester_type',
+                        operator: 'equal',
+                        value: 2
+                    }, {
+                        id: 'requester_type',
+                        operator: 'equal',
+                        value: 6
+                    }, {
+                        id: 'requester_type',
+                        operator: 'not_equal',
+                        value: 1
+                    }]
+                }, {
+                    condition: 'AND',
+                    rules: [{
+                        id: 'requester',
+                        operator: 'equal',
+                        value: 'Naggy Group 1'
+                    }, {
+                        id: 'requester',
+                        operator: 'equal',
+                        value: 'Naggy Group 2'
+                    }, {
+                        id: 'amount',
+                        operator: 'less_or_equal',
+                        value: 50.00
+                    }]
+                }]
+        };
+*/
         $('#builder-plugins').queryBuilder({
             plugins: [
                 'sortable',
@@ -218,7 +260,11 @@ $(document).ready(function(){
 
         ////////////////////////////////////////////////////////////////////////////
         // the default rules, what will be used on page loads...
-        /*
+        /*var datatablesRequest = {};
+        var _rules = defaultRules = {"condition":"AND","rules":[
+            {"id":"active","field":"active","type":"integer","input":"radio","operator":"equal","value":"1"}
+        ]};
+
         // a button/link that is used to update the rules.
         function updateFilters() {
             _rules = $('#querybuilder').queryBuilder('getRules');

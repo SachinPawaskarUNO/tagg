@@ -6,7 +6,6 @@ use App\Rule_type;
 use Auth;
 use App\Rule;
 use App\DonationRequest;
-use App\Organization;
 use App\User;
 use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
@@ -132,30 +131,51 @@ class RuleEngineController extends Controller
         //dd($rows);
     }
 
-    public function runBudgetCheckRule()
+    public function rulesHelp()
     {
-        // Get Active organizations
-        $organizations = Organization::query()->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())->get(['id']);
+        return view('rules.help');
+    }
 
-        foreach ($organizations as $organization) {
-            $monthlyBudget = Organization::query()->where('id', '=', $organization->id)->get(['monthly_budget'])->first()->monthly_budget;
-            $amountSpent = DonationRequest::query()->whereMonth('needed_by_date', '=', Carbon::today()->month)->whereYear('needed_by_date', '=', Carbon::today()->year)
-                ->where([['approved_organization_id', $organization->id], ['approval_status_id', 5]])
-                ->sum('approved_dollar_amount');
-            $donationRequests = DonationRequest::query()->where([['organization_id', '=', $organization->id], ['approval_status_id', '<', 4]])->get();
-            foreach ($donationRequests as $donationRequest)
-            {
-                $requestAmount = $donationRequest->dollar_amount;
-                If (($requestAmount + $amountSpent) >= $monthlyBudget)
-                {
-                    // auto-reject each request that would put organization over budget
-                    $donationRequest->approval_status_id = 4;
-                    $donationRequest->approved_organization_id = $organization->id;
-                    $donationRequest->rule_process_date = Carbon::now();
-                    $donationRequest->save();
-                }
-            }
-        }
-        return redirect()->back();
+    // EXAMPLE ONLY
+    function displayUserDatatable()
+    {
+        /* builder is POST'd by the datatable */
+        $queryBuilderJSON = Input::get('rules');
+        $show_columns = array('id', 'user_name', 'email');
+        $query = new QueryBuilderParser($show_columns);
+        /** Illuminate/Database/Query/Builder $queryBuilder **/
+        $queryBuilder = $query->parse(DB::table('users'));
+        return Datatable::query($queryBuilder)
+            ->showColumns($show_columns)
+            ->orderColumns($show_columns)
+            ->searchColumns($show_columns)
+            ->make();
+    }
+
+    // WORK IN PROGRESS
+    function getDonationData(Request $request)
+    {
+        $queryBuilderJSON = '{"condition": "AND", "rules": [], "not": false, "valid": true }';
+        if (Input::has('querybuilder') && Input::get('querybuilder') != 'null')
+            $queryBuilderJSON = Input::get('querybuilder');
+        $show_columns = array(
+            'event_type',
+            'item_requested',
+            'item_purpose',
+            'tax_exempt',
+            'requester_type',
+            'requester'
+        );
+        $query = new QueryBuilderParser($show_columns);
+        $Q = DonationRequest::with(
+            'event_type',
+            'item_requested',
+            'item_purpose',
+            'tax_exempt',
+            'requester_type',
+            'requester'
+        );
+        $queryBuilder = $query->parse($queryBuilderJSON, $Q);
+        return Datatables::of($queryBuilder->get())->make(true);
     }
 }

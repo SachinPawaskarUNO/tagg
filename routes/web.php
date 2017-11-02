@@ -24,6 +24,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/about-us', function () { return view('Front-page');});
+Route::get('/help', function () { return view('help');});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -104,9 +106,8 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::post('/donation/change-status', 'DonationRequestController@changeDonationStatus');
 
 // Rules stuff
-Route::get('guirules', 'RuleEngineController@rulesGui');
+Route::get('help', 'RuleEngineController@rulesHelp');
 Route::get('runRule', 'RuleEngineController@runRule');
-Route::get('runBudgetCheckRule', 'RuleEngineController@runBudgetCheckRule');
 Route::get('saveRule', 'RuleEngineController@saveRule');
 Route::get('loadRule', 'RuleEngineController@loadRule');
 //Route::get('/rules', 'RuleEngineController@rules');
