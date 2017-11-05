@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 
-
 {{--@section('header')--}}
 
     {{--<!-- Bootstrap Core CSS -->--}}
@@ -139,6 +138,7 @@
                                     <th class="text-center">Request Amount</th>
                                     <th class="text-center">Request For</th>
                                     {{--<th class="text-center">Event Name</th>--}}
+                                    <th class="text-center">Location</th>
                                     <th class="text-center">Handout Date</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">View Details</th>
@@ -153,6 +153,8 @@
                                         <td style="vertical-align: middle">${{ $donationrequest->dollar_amount }}</td>
                                         <td style="vertical-align: middle">{{ $donationrequest->donationRequestType->item_name }}</td>
                                         {{--<td style="vertical-align: middle">{{ $donationrequest->event_name }}</td>--}}
+                                        <td style="vertical-align: middle">{{$donationrequest->organization->org_name }}</td>
+
                                         <td style="vertical-align: middle"><?php echo date("m/d/Y", strtotime($donationrequest->needed_by_date)); ?></td>
 
                                         <td id="status{{$donationrequest->id}}" style="vertical-align: middle">{{ $donationrequest->donationApprovalStatus->status_name }}</td>

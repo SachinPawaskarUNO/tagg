@@ -26,7 +26,7 @@
                                 <th class="text-center">Organization Type</th>
                                 <th class="text-center">Address</th>
                                 <th class="text-center">Phone Number</th>
-                                <th class="text-center">Operations</th>
+                                <th class="text-center" colspan="2">Operations</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,14 +38,14 @@
                                         {{ $organization->organization['street_address2'] }}
                                         , {{ $organization->organization['city'] }}
                                         , {{ $organization->organization['state'] }} {{ $organization['zipcode'] }}</td>
-                                    <td style="vertical-align: middle">{{ $organization->organization['phone_number'] }}</td>
+                                    <td style="vertical-align: middle">{{ $organization->organization['phone_number']}}</td>
+                                    <td style="vertical-align: middle"><a href="{{route('organizations.edit',$organization->child_org_id)}}" class="btn btn-warning">Edit</a></td>
                                     <td style="vertical-align: middle">
                                         {{ Form::open([
                                                         'method' => 'DELETE',
                                                         'action' => ['OrganizationController@destroy', $organization->child_org_id]
                                                       ]) }}
-                                        <input type="submit" value="Delete" class = 'btn btn-warning' onClick="return confirm('Are you sure you want to delete the Business Location?');">
-
+                                        <input type="submit" value="Delete" class = 'btn btn-danger' onClick="return confirm('Are you sure you want to delete the Business Location?');">
                                         {{ Form::close() }}
                                     </td>
                                 </tr>
