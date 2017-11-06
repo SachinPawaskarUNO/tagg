@@ -101,7 +101,7 @@ Route::get('/emaileditor/editsendmail','EmailTemplateController@send');
 
 //Dashboard
 
-Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard', 'DashboardController@index') ->name('dashboardindex');
 
 Route::post('/donation/change-status', 'DonationRequestController@changeDonationStatus');
 
@@ -120,3 +120,5 @@ Route::resource('/rules', 'RuleEngineController');
 Route::get('/webhook/chargeSuccess', 'SubscriptionController@chargeSuccess');
 
 Route::get('subscription/popup', 'SubscriptionController@subscribe');
+
+Route::get('compose-email', 'EmailTemplateController@send');

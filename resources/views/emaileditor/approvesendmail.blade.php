@@ -10,13 +10,30 @@
             theme: 'modern',
             width: 745,
             height: 300,
-            plugins: [
-                'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-                'save table contextmenu directionality emoticons template paste textcolor'
-            ],
+            menubar: false,
+
             content_css: 'css/content.css',
-            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent  | print preview media fullpage ',
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | print preview | PlaceHolders',
+            //toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+
+            setup: function(editor) {
+                editor.addButton('PlaceHolders', {
+                    type: 'menubutton',
+                    text: 'Place Holders',
+                    icon: false,
+                    menu: [{
+                        text: 'Patron',
+                        onclick: function () {
+                            editor.insertContent('&nbsp;<b>{patron}</b>&nbsp;');
+                        }
+                    }, {
+                        text: 'My Business Name',
+                        onclick: function () {
+                            editor.insertContent('&nbsp;<b>{organization}</b>&nbsp;');
+                        }
+                    }]
+                });
+            }
         });
 
     </script>
@@ -29,7 +46,7 @@
 
                     <div class="panel-body">
 
-                        {!! Form::model($emailtemplate, ['method' => 'POST', 'route'=>['emailtemplates.update', $emailtemplate->id], 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($emailtemplate, ['method' => 'GET', 'route'=>['approveandsendmail'], 'class' => 'form-horizontal']) !!}
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -43,8 +60,10 @@
 
                         <div class="form-group">
                             {!! Form::label('To', 'To:', ['class'=>'col-md-3 control-label', ]) !!}
-                            <div class="col-lg-9">
-                                {!! Form:: !!}
+                            <div class="col-lg-9" align="center">
+                                {!! Form::text('To', $emails, ['class'=>'col-md-9 control-label'] ) !!}
+                                {!! Form::hidden('names', $names) !!}
+                                {!! Form::hidden('status', 'Approve') !!}
                                 {{--{!! Form::text('email_subject', null, ['required'], ['class' => 'form-control']) !!}--}}
                             </div>
                         </div>
@@ -56,16 +75,6 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('Email Header', 'Email Header:', ['class'=>'col-md-3 control-label' ]) !!}
-
-                            <div class="form-group">
-                                <!--div class="col-lg-6"-->
-                                {!! Form::text('email_header', null, ['required'], ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
                             {!! Form::label('Email Message', '* Email Message:', ['class'=>'col-md-3 control-label' ]) !!}
                         </div>
 
@@ -75,19 +84,9 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('Email Footer', 'Email Footer:', ['class'=>'col-md-3 control-label' ]) !!}
-
-                            <div class="form-group">
-                                <!--div class="col-lg-6"-->
-                                {!! Form::text('email_footer', null, ['required'], ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Approve and Send', ['class' => 'btn btn-primary']) !!}
-                                <a href="{{ route('emailtemplates.index')}}" class="btn btn-primary">Cancel</a>
+                                <a href="{{ route('dashboardindex')}}" class="btn btn-primary">Cancel</a>
 
                             </div>
                         </div>
