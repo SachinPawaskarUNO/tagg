@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\DonationRequest;
+use Illuminate\Http\Request;
 use App\Mail\SendManualRequest;
 use Mail;
+use Auth;
 
 
 class EmailController extends Controller
@@ -36,10 +39,39 @@ class EmailController extends Controller
 
     }*/
 
-    public function manualRequestMail() {
+    public function manualRequestMail(Request $request) {
 
-        Mail::to('somebody@gmail.com')->send(new SendManualRequest());
+        $emails = str_replace(array("[","]",'"'),"", ($request-> To));
+        $array = explode(',', $emails); //split string into array seperated by ', '
+        $emails=[];
+        foreach($array as $value) //loop over values
+        {
+            array_push($emails, $value);
+        }
+        $names = str_replace(array('","')," ", ($request-> names));
+        $names = str_replace(array('"]["'),",", ($names));
+        $names =str_replace(array("[","]",'"'),"", ($names));
+        $array = explode(',', $names);
+        $names=[];
+        foreach($array as $value) //loop over values
+        {
+            array_push($names, $value);
+        }
+        //dd($names);
+        foreach($emails as $index => $email)
+        {
+            $request->email_message = str_replace('{patron}',$names[$index], $request->email_message);
+            $request->email_message = str_replace('{organization}',Auth::user()->organization->org_name, $request->email_message);
+            if($request->status == 'Approve'){
 
-        return redirect('\home');
+            }
+            elseif($request->status == 'Reject'){
+
+            }
+            Mail::to($email)->send(new SendManualRequest($request));
+        }
+
+
+        return back();
     }
 }
