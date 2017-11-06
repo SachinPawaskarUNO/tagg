@@ -2,10 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\DonationRequest;
-use App\Events\SendAutoRejectEmail;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 /*
@@ -13,6 +10,7 @@ const REJECTED = 'Rejected';
 
 const APPROVED = 'Approved';
 */
+
 class ScheduledRuleJob extends Command
 {
     /**

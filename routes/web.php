@@ -24,7 +24,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/about-us', function () { return view('Front-page');});
-Route::get('/help', function () { return view('help');});
+Route::get('/help', function () {
+    return view('help');
+});
 
 
 Route::get('/home', 'HomeController@index')->name('home');

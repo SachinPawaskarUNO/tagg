@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Organization;
-use App\ParentChildOrganizations;
-use Illuminate\Http\Request;
-use App\State;
 use App\Organization_type;
+use App\ParentChildOrganizations;
+use App\State;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
-
 
 
 class OrganizationController extends Controller
@@ -18,7 +18,12 @@ class OrganizationController extends Controller
     public function index()
     {
         $childOrganizations = ParentChildOrganizations::where('parent_org_id', '=', Auth::user()->organization_id)->get();
-        return view('organizations.index', compact('childOrganizations'));
+        $count = $childOrganizations->count();
+        $subscriptiondb = DB::table('subscriptions')->where('organization_id', Auth::user()->organization_id)->value('quantity');
+        $subscription = $subscriptiondb - 1;
+
+        return view('organizations.index', compact('childOrganizations', 'count', 'subscriptiondb', 'subscription'));
+
     }
 
     public function edit($id)

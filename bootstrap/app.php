@@ -64,4 +64,5 @@ If (env('APP_ENV') == 'production') {
         $monolog->pushHandler($handler);
     });
 }
+
 return $app;

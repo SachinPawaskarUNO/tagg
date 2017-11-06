@@ -10,7 +10,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/wpanec-uno/QueryBuilderParser"
+      "url": "https://github.com/timgws/QueryBuilderParser"
     }
   ],
     "require": {

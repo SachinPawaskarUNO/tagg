@@ -12,8 +12,8 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\withErrors;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Session;
 use Validator;
 
 
@@ -39,23 +39,12 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $organization = Auth::user()->organization_id;
-//        $count = User::where('organization_id', $organization)->count();
-        $subscription = DB::table('subscriptions')->where('organization_id', $organization)->value('quantity');
         $parentChildOrg = ParentChildOrganizations::where('parent_org_id', '=', Auth::user()->organization->id)->get();
-//        dd($parentChildOrg[0]);
         $childOrgIds = $parentChildOrg->pluck('child_org_id');
-        $count = User::where('organization_id', $childOrgIds)->count();
-//        dd($count);
-
         $childOrgNames = Organization::whereIn('id', $childOrgIds)->pluck('org_name', 'id');
 
-        if ($count <= $subscription) {
             return view('users.show', compact('user', 'childOrgNames'));
-        } else {
-            Session::flash('flash_message', 'Adding users crossed plan limit!');
-            return view('users.index', compact('user'));
-        }
+
     }
 
     public function create(Request $request)
@@ -94,7 +83,11 @@ class UserController extends Controller
 
         event(new NewBusiness($user));
 
-        return redirect('/securityquestions/create')-> with('userId',$userid);
+        if (env('securityquestion') == 'true') {
+            return redirect('/securityquestions/create')->with('userId', $userid);
+        } else {
+            return redirect('/home');
+        }
 
     }
 
