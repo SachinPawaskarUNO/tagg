@@ -15,9 +15,10 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 
 
     @yield('css')
@@ -51,6 +52,17 @@
             top: 75%;
             left: 55%;
             transform: translate(-60%, 30%);
+        }
+
+        h4 {
+            font-size: 30px;
+            color: red;
+            position: relative;
+            float: bottom;
+            top: 75%;
+            left: 55%;
+            transform: translate(-60%, 30%);
+            text-decoration-line: underline;
         }
 
         h3
@@ -143,7 +155,10 @@
             color: #1abc9c !important;
         }
         .col-sm-6
-        {display: block;}
+        {display: block;
+           padding:5px;
+
+        }
 
         .containerimg {
             width: 100%;
@@ -182,6 +197,19 @@
             padding-right: 25px !important;
             padding-left: 25px !important;
         }
+
+        .w3-bar .w3-button {
+            padding: 16px;
+        }
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+        body, html {
+            height: 100%;
+            line-height: 1.8;
+        }
+
+
+
+
     </style>
 </head>
 
@@ -194,16 +222,12 @@
 </script>
 @yield('scripts')
 <div id="app">
+
+
     <nav class="navbar-toggleable-md navbar-light primarybg-" style="background-color: #8e24aa;padding-bottom: .5px">
         <div class="container-fluid">
 
-            <!-- Collapsed Hamburger -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+
 
             <div class="row">
                 <div class="col-sm-3" style='padding-left: 0px;padding-top: 0.5px'>
@@ -218,23 +242,21 @@
                 </div>
                 <div class="col-sm-9 col-md-offset-3" style='position:absolute;right: 0px;top:0px;' >
                     <div class="collapse navbar-collapse" id="myNavbar" >
-                        <!-- Right Side Of Navbar -->
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- Authentication Links -->
+
+
+                                               <!-- Right Side Of Navbar -->
+                      <ul class="nav navbar-nav navbar-right visible-md-block visible-lg-block">
+
                             @if (Auth::guest())
-                                <li><a href="{{ url('/') }}#about">About Us</a></li>
-                                <li><a href="{{ url('/') }}#sign">Sign Up !</a></li>
-                                <li><a href="{{ url('/') }}#how">How This Works</a></li>
-                                <li>
-                                <a href="#" id="myaccount" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false"> My Account
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/') }}#about" class="w3-bar-item w3-button">About Us</a></li>
+                                <li><a href="{{ url('/') }}#how" class="w3-bar-item w3-button">How This Works</a></li>
+                                <li><a href="{{ url('/') }}#sign" class="w3-bar-item w3-button">Sign Up !</a></li>
                                 <li><a href="{{ route('login') }}" class="w3-bar-item w3-button ">Login</a></li>
-                               <li> <a href="{{ route('register') }}" class="w3-bar-item w3-button ">Register</a></li>
-                               <li><a href="{{ route('donationrequests.create', ['orgId' => '1'])}} " class="w3-bar-item w3-button ">RequestDonation</a></li>
-                                </ul>
+
+
+                               </ul>
+                                </div>
+
                                 </li>
                                     @else
 
@@ -248,6 +270,7 @@
                                     </a>
 
                                     <ul class="dropdown-menu" role="menu">
+                                        <div class="w3-dropdown-content w3-card-4 w3-bar-block">
                                         <li>
                                             <a href="{{ url('/rules?rule=1')}}">Donation Preference</a>
                                         </li>
@@ -259,11 +282,12 @@
                                                 Communication Template
                                             </a>
                                         </li>
-
+</div>
                                     </ul>
                                 </li>
 
                                 <li class="dropdown">
+
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-expanded="false">
                                         {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span
@@ -292,14 +316,101 @@
                                             </form>
                                         </li>
                                     </ul>
+
                                 </li>
                             @endif
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
     </nav>
+        </div>
+
+   </div>
+</div>
+
+
+<div id="navDemo" class="visible-xs-block visible-sm-block">
+    @if (Auth::guest())
+        <li> <a href="{{ url('/') }}#about" class="w3-bar-item w3-button">About Us</a></li>
+        <li><a href="{{ url('/') }}#how" class="w3-bar-item w3-button">How This Works</a></li>
+        <li><a href="{{ url('/') }}#sign" class="w3-bar-item w3-button">Sign Up !</a></li>
+        <li><a href="{{ route('login') }}" class="w3-bar-item w3-button ">Login</a></li>
+
+                </div>
+            </ul>
+        </li>
+    @else
+<ul>
+        <li><a href="{{ url('/dashboard')}}" class="w3-bar-item w3-button current">Dashboard</a></li>
+        <li><a href="{{ route('donationrequests.index')}}" class="w3-bar-item w3-button ">Search Donations</a></li>
+        <li  class="dropdown">
+            <div class="w3-dropdown-content w3-card-4 w3-bar-block">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+               aria-expanded="false">
+                My Organization
+                <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" role="menu">
+
+                    <li>
+                        <a href="{{ url('/rules?rule=1')}}">Donation Preference</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('organizations.index')}}">Business Locations</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('emailtemplates.index') }}">
+                            Communication Template
+                        </a>
+                    </li>
+                </ul>
+                </div>
+        </li>
+
+        <li class="dropdown">
+            <div class="w3-dropdown-content w3-card-4 w3-bar-block">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                   aria-expanded="false">
+                    {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span
+                            class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="{{ route('users.index')}}">Profile Management</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('reset-password') }}">
+                            Reset Password
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </li>
+</ul>
+        @endif
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <br>
     <div id="content">
         {{--@include('layouts.partials._status')--}}

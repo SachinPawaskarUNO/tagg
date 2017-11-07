@@ -27,17 +27,32 @@
         <h1>Basic Settings</h1>
         <form id="budgetNoticeForm" action="{{ action('RuleEngineController@saveBudgetNotice') }}">
             <div class="col-md-8 form-group">
-                <label>Monthly Budget:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="monthlyBudget" type="number" name="monthlyBudget" pattern="[0-9]+([\.,][0-9]+)?" min="0.00"
-                       step="0.01" required
-                       title="Enter your estimated monthly budget. Requests that would put you above your monthly budget will be removed from pending approval. NOTE: A budget of 0.00 will disable this functionality."
-                       value="{{ $monthlyBudget }}" size="10"/>
-            </div>
-            <div class="col-md-8">
-                <label>Required Days Notice:</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="daysNotice" type="number" min="0" step="1" name="daysNotice" required
-                       title="Enter your minimum days notice. Requests that need to be fulfilled before your organization can fulfill them will be automatically declined."
-                       value="{{ $daysNotice }}" size="10"/>
+                <br />
+                <table width="50%">
+                    <tr>
+                        <td>
+                            <label style="cursor: help;"
+                                    title="Enter your estimated monthly budget. Requests that would put you above your monthly budget will be removed from pending approval. NOTE: A budget of 0.00 will disable this functionality.">
+                                Monthly Budget:</label>&nbsp;
+                        </td>
+                        <td>
+                            <input id="monthlyBudget" type="number" name="monthlyBudget" pattern="[0-9]+([\.,][0-9]+)?" min="0.00"
+                                   step="0.01" required value="{{ $monthlyBudget }}" size="10"/>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2">&nbsp;</td></tr>
+                    <tr>
+                        <td>
+                            <label style="cursor: help;"
+                                    title="Enter your minimum days notice. Requests that need to be fulfilled before your business can fulfill them will be automatically declined.">
+                                Required Days Notice: &nbsp;</label>
+                        </td>
+                        <td>
+                            <input id="daysNotice" type="number" min="0" step="1" name="daysNotice" required
+                                   value="{{ $daysNotice }}" size="10"/>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="col-md-12 col-lg-10 col-lg-offset-1">
                 <button id="btnSaveBudgetNotice" class="btn btn-primary" type="submit">Save
@@ -55,18 +70,26 @@
         <!--<Rules help in new window/tab>  -->
         <div class="col-md-12" style="padding-left:82.5%">
             <a href="{{url('/help') }}" target="_blank">
-                <h7><b><u>How to set rules?</u></b></h7>
+                <h1><b><u>How to set rules?</u></b></h1>
             </a>
         </div>
         <div class="col-md-12 col-lg-10 col-lg-offset-1 form-group">
             <h1>Global Business Rules (Admin Only)</h1>
             <div class="col-md-8">
-                <label for="ddlRuleType">Rule Selected:</label>
-                {!! Form::select('rule_type', array(null => 'Select...') + $rule_types->all(), null, ['class'=>'form-control ddlType', 'id'=>'ddlRuleType', 'name'=>'ddlRuleType']) !!}
-                <a href="#" data-title="Rule management help" data-toggle="popover"
+                <table width="60%">
+                    <tr>
+                        <td>
+                            <label for="ddlRuleType">Rule Selected:</label>
+                        </td>
+                        <td width="70%">
+                            {!! Form::select('rule_type', array(null => 'Select...') + $rule_types->all(), null, ['class'=>'form-control ddlType', 'id'=>'ddlRuleType', 'name'=>'ddlRuleType']) !!}
+                        </td>
+                    </tr>
+                </table>
+                {{--<a href="#" data-title="Rule management help" data-toggle="popover"
                    data-content="Select individual fields and corresponding conditions to set the rules for auto rejection and pre approval of donation requests.
                    The auto rejection rule helps you in setting parameters to reject the donation request and the pre approval rule helps you in setting parameters
-                    for approving the donation requests for further evaluation.">Help</a>
+                    for approving the donation requests for further evaluation.">Help</a>--}}
             </div>
         </div>
         <input id="ruleType" type="hidden" name="ruleType" value="{{ $_GET['rule'] }}"/>
@@ -76,7 +99,7 @@
                 <!-- <button class="btn btn-error parse-sql" type="button" data-target="plugins">Preview Rule SQL</button> -->
                 <button class="btn btn-warning reset" type="button" data-target="plugins">Clear Rules</button>
                 <button class="btn btn-success set-json" type="button" data-target="plugins">Reset Rules</button>
-                <button id="btnSave" class="btn btn-primary parse-json" type="submit" data-target="plugins">Save Rules
+                <button id="btnSave" class="btn btn-primary parse-json" type="button" data-target="plugins">Save Rules
                 </button>
                 <button id="btnRun" type="button" href="{{ action('RuleEngineController@manualRunRule') }}"
                         class="btn btn-default">Run Rule Workflow
@@ -186,6 +209,7 @@
             var result = $('#builder-' + target).queryBuilder('getRules');
             if (!$.isEmptyObject(result)) {
                 $('#ruleSet').val(format4popup(result));
+                document.getElementById("mainForm").submit();
                 /*bootbox.alert({
                     title: $(this).text(),
                     message: '<pre class="code-popup">' + format4popup(result) + '</pre>'
@@ -207,13 +231,13 @@
             filters: [{
                 id: 'needed_by_date',
                 label: 'Date Needed',
-                type: 'datetime',
+                type: 'date',
                 validation: {
                     format: 'MM/DD/YYYY'
                 },
                 plugin: 'datepicker',
-                // operators: ['less_or_equal', 'greater_or_equal', 'greater', 'less', 'between', 'not_between'],
-                operators: ['less_or_equal', 'greater_or_equal', 'greater', 'less'],
+                operators: ['less_or_equal', 'greater_or_equal', 'greater', 'less', 'between', 'not_between'],
+                // operators: ['less_or_equal', 'greater_or_equal', 'greater', 'less'],
                 plugin_config: {
                     format: 'mm/dd/yyyy',
                     todayBtn: 'linked',
@@ -229,7 +253,7 @@
                 id: 'requester_type',
                 label: 'Requester Type',
                 type: 'integer',
-                input: 'select',
+                input: 'checkbox',
                 values: {
                     1: 'Animal Welfare',
                     2: 'Arts, Culture & Humanities',
@@ -245,8 +269,8 @@
                     12: 'Youth Sports/Activities',
                     13: 'Others'
                 },
-                //operators: ['equal', 'not_equal', 'in', 'not_in']
-                operators: ['equal', 'not_equal']
+                operators: ['in', 'not_in']
+                // operators: ['equal', 'not_equal']
             }, {
                 id: 'tax_exempt',
                 label: 'Tax Exempt',

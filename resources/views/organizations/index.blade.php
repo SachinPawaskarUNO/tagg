@@ -33,13 +33,13 @@
                                 @foreach($childOrganizations as $organization)
                                 <tr class="text-center">
                                     <td style="vertical-align: middle">{{ $organization->organization['org_name'] }}</td>
-                                    <td style="vertical-align: middle">{{ $organization->organization['organization_type_id'] }}</td>
+                                    <td style="vertical-align: middle">{{ $organization->organization->organizationType->type_name }}</td>
                                     <td style="vertical-align: middle">{{ $organization->organization['street_address1'] }}
                                         {{ $organization->organization['street_address2'] }}
                                         , {{ $organization->organization['city'] }}
                                         , {{ $organization->organization['state'] }} {{ $organization['zipcode'] }}</td>
                                     <td style="vertical-align: middle">{{ $organization->organization['phone_number']}}</td>
-                                    <td style="vertical-align: middle"><a href="{{route('organizations.edit',$organization->child_org_id)}}" class="btn btn-warning">Update</a></td>
+                                    <td style="vertical-align: middle"><a href="{{route('organizations.edit',$organization->child_org_id)}}" class="btn btn-warning">Edit</a></td>
                                     <td style="vertical-align: middle">
                                         {{ Form::open([
                                                         'method' => 'DELETE',

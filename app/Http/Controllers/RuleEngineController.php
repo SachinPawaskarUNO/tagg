@@ -50,7 +50,6 @@ class RuleEngineController extends Controller
 
     public function loadRule($request)
     {
-        // dd($request);
         $rule_types = Rule_type::where('active', '=', 1)->pluck('type_name', 'id');
         $orgId = Auth::user()->organization_id;
         $ruleType = $request->rule ?? 1;
@@ -66,7 +65,6 @@ class RuleEngineController extends Controller
 
     public function saveRule(Request $request)
     {
-        //
         $strJSON = $request->ruleSet;
         $ruleType = $request->ruleType;
         $ruleOwner = Auth::user()->organization_id;
@@ -94,9 +92,9 @@ class RuleEngineController extends Controller
     }
 
     //////////////////////////////  T0D0 ITEMS  //////////////////////////////
-    // TODO: Call runBudgetCheckRule() from cron job - talk to San for integration
+    //
     // TODO: Simplify Rule execution: a lot of redundant code in running rules that could be condensed with some work.
-    // TODO: Create UI for updating days notice and monthly budget
+    // TODO: Beautify UI for updating days notice and monthly budget
     //
     //////////////////////////////  END T0D0  //////////////////////////////
 
@@ -171,57 +169,51 @@ class RuleEngineController extends Controller
     public function manualRunRule(Request $request)
     {
         $ruleOwner = Auth::user()->organization_id;
-        $this->manualRunAutoRejectRule($ruleOwner);
-        $this->manualRunPendingApprovalRule($ruleOwner);
-        $this->manualRunPendingRejectionRule($ruleOwner);
+        $orgIdArray = ParentChildOrganizations::where('parent_org_id', $ruleOwner)->pluck('child_org_id')->toArray();
+        array_push($orgIdArray, $ruleOwner);
+        $this->manualRunAutoRejectRule($ruleOwner, $orgIdArray);
+        $this->manualRunPendingApprovalRule($ruleOwner, $orgIdArray);
+        $this->manualRunPendingRejectionRule($orgIdArray);
 
         return redirect()->to('/donationrequests'); //->back(); //->with('msg', Response::JSON($rows));
     }
 
-    protected function manualRunAutoRejectRule($ruleOwner)
+    protected function manualRunAutoRejectRule($ruleOwner, $orgIdsFilteredArray)
     {
         $table = DB::table('donation_requests');
         $ruleRow = Rule::query()->where([['rule_owner_id', '=', $ruleOwner], ['rule_type_id', '=', 1], ['active', '=', 1]])->first();
         if ($ruleRow) {
+            DB::enableQueryLog();
             $queryBuilderJSON = $ruleRow->rule;
             $json = json_decode($queryBuilderJSON, true);
-            $arr = $this->filteredQueryBuilderJsonArray($json, $ruleOwner);
-            //dd($arr);
-            //dd($json);
+            $arr = $this->filteredQueryBuilderJsonArray($json, $orgIdsFilteredArray);
             $qbp = new QueryBuilderParser(
                 ['id', 'organization_id', 'requester', 'requester_type', 'needed_by_date', 'tax_exempt', 'dollar_amount', 'approved_organization_id', 'approval_status_id']
             );
-            //dd($table);
-            $query = $qbp->parse(json_encode($arr), $table);
-            //dd($query);
-            //$rows = $query->get();
+            $query = $qbp->parse(json_encode($arr, JSON_UNESCAPED_SLASHES), $table);
             $query->update(['approval_status_id' => 4, 'approved_organization_id' => $ruleOwner, 'rule_process_date' => Carbon::now(), 'updated_at' => Carbon::tomorrow()]);
-            //dd($rows);
         }
     }
 
-    protected function manualRunPendingApprovalRule($ruleOwner)
+    protected function manualRunPendingApprovalRule($ruleOwner, $orgIdsFilteredArray)
     {
         $table = DB::table('donation_requests');
         $ruleRow = Rule::query()->where([['rule_owner_id', '=', $ruleOwner], ['rule_type_id', '=', 2], ['active', '=', 1]])->first();
         if ($ruleRow) {
             $queryBuilderJSON = $ruleRow->rule;
             $json = json_decode($queryBuilderJSON, true);
-            $arr = $this->filteredQueryBuilderJsonArray($json, $ruleOwner);
+            $arr = $this->filteredQueryBuilderJsonArray($json, $orgIdsFilteredArray);
             $qbp = new QueryBuilderParser(
                 ['id', 'organization_id', 'requester', 'requester_type', 'needed_by_date', 'tax_exempt', 'dollar_amount', 'approved_organization_id', 'approval_status_id']
             );
             $query = $qbp->parse(json_encode($arr), $table);
             $query->update(['approval_status_id' => 3, 'rule_process_date' => Carbon::now(), 'updated_at' => Carbon::now()]);
-            //$rows = $query->get();
-            //dd($query);
-            //dd($rows);
         }
     }
 
-    protected function manualRunPendingRejectionRule($ruleOwner)
+    protected function manualRunPendingRejectionRule($orgIdsFilteredArray)
     {
-        $query = DB::table('donation_requests')->where([['organization_id', '=', $ruleOwner], ['approval_status_id', '=', 1]]);
+        $query = DB::table('donation_requests')->where('approval_status_id', '=', 1)->whereIn('organization_id', $orgIdsFilteredArray);
         $exists = $query->get(['id']);
         if ($exists->isNotEmpty()) {
             $query->update(['approval_status_id' => 2, 'rule_process_date' => Carbon::now(), 'updated_at' => Carbon::now()]);
@@ -275,7 +267,6 @@ class RuleEngineController extends Controller
                     ->where([['approved_organization_id', $organization->id], ['approval_status_id', 5]])
                     ->sum('approved_dollar_amount');
                 $pendingDonationRequests = DonationRequest::query()->where('organization_id', '=', $organization->id)->whereIn('approval_status_id', [1, 3])->get();
-                //dd($pendingDonationRequests);
                 foreach ($pendingDonationRequests as $donationRequest) {
                     $requestAmount = $donationRequest->dollar_amount;
                     If (($requestAmount + $amountSpent) >= $monthlyBudget) {
