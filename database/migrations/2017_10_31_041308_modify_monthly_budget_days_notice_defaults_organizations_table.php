@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class ModifyMonthlyBudgetDaysNoticeDefaultsOrganizationsTable extends Migration
 {
@@ -14,7 +14,7 @@ class ModifyMonthlyBudgetDaysNoticeDefaultsOrganizationsTable extends Migration
     public function up()
     {
         Schema::table('organizations', function (Blueprint $table) {
-            $table->decimal('monthly_budget',11,2)->default(0.00)->change();
+            $table->decimal('monthly_budget', 11, 2)->default(0.00)->change();
             $table->integer('required_days_notice')->default(14)->change();
         });
     }
@@ -27,7 +27,7 @@ class ModifyMonthlyBudgetDaysNoticeDefaultsOrganizationsTable extends Migration
     public function down()
     {
         Schema::table('organizations', function (Blueprint $table) {
-            $table->decimal('monthly_budget',11,2)->nullable()->change();
+            $table->decimal('monthly_budget', 11, 2)->nullable()->change();
             $table->integer('required_days_notice')->default(14)->change();
         });
     }

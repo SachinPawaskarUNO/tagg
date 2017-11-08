@@ -189,7 +189,7 @@
 
                                 <div class="col-md-6">
                                     <input id="phone_number" type="text" class="form-control" name="phone_number"
-                                           value="{{ old('phone_number') }}" placeholder="Phone Number" required
+                                           value="{{ old('phone_number') }}" placeholder="Example ###-###-####"required
                                            autofocus>
 
                                     @if ($errors->has('phone_number'))

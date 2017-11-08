@@ -10,9 +10,30 @@
     theme: 'modern',
     width: 745,
     height: 300,
+      menubar: false,
   
     content_css: 'css/content.css',
-    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | link image | print preview | PlaceHolders',
+      //toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+
+      setup: function(editor) {
+          editor.addButton('PlaceHolders', {
+              type: 'menubutton',
+              text: 'Place Holders',
+              icon: false,
+              menu: [{
+                  text: 'Patron',
+                  onclick: function () {
+                      editor.insertContent('&nbsp;<b>{patron}</b>&nbsp;');
+                  }
+              }, {
+                  text: 'My Business Name',
+                  onclick: function () {
+                      editor.insertContent('&nbsp;<b>{organization}</b>&nbsp;');
+                  }
+              }]
+          });
+      }
   });
 
   </script>
@@ -45,17 +66,6 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('Email Greetings', 'Email Greetings:', ['class'=>'col-md-3 control-label', ]) !!}
-                            <div class="col-lg-9">
-                                {!! Form::text('email_header', null, ['required'], ['class' => 'form-control']) !!}
-
-                                
-                            </div>
-                        </div>
-
-                     
-                        
-                        <div class="form-group">
                             {!! Form::label('Email Message', '* Email Message:', ['class'=>'col-md-3 control-label' ]) !!}
                         </div>
 
@@ -64,13 +74,6 @@
                               {!! Form::textarea('email_message', null, ['required'], ['class' => 'col-md-4 control-label']) !!}
                                                         </div>
 
-                       <div class="form-group">
-                            {!! Form::label('Email Footer', '* Email Footer:', ['class'=>'col-md-3 control-label', ]) !!}
-                            <div class="col-lg-9">
-                                {!! Form::text('email_footer', null, ['required'], ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">

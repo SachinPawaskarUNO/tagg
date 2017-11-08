@@ -100,7 +100,7 @@
                             <label for="phonenumber" class="col-md-4 control-label">Phone Number <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="phonenumber" type="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required title="Enter your 10 digit Phone Number as 555-555-5555" class="form-control" name="phonenumber" value="{{ old('phonenumber') }}" placeholder="Your Phonenumber" required autofocus>
+                                <input id="phonenumber" type="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required title="Enter your 10 digit Phone Number as 555-555-5555" class="form-control" name="phonenumber" value="{{ old('phonenumber') }}" placeholder="Example ###-###-####" required autofocus>
 
                                 @if ($errors->has('phonenumber'))
                                     <span class="help-block">
@@ -280,7 +280,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('enddate') ? ' has-error' : '' }}">
+                       {{-- <div class="form-group{{ $errors->has('enddate') ? ' has-error' : '' }}">
                             <label for="enddate" class="col-md-4 control-label">End Date <span style="color: red; font-size: 20px; vertical-align:middle;"></span></label>
 
                             <div class="col-md-6">
@@ -292,7 +292,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div>   --}} 
 
                         <div class="form-group{{ $errors->has('event_type') ? ' has-error' : '' }}">
                             <label for="event_type" class="col-md-4 control-label">Purpose Of The Event <span style="color: red; font-size: 20px; vertical-align:middle;"></span></label>

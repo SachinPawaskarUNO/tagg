@@ -3,25 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\DonationRequest;
-use App\Events\SendAutoRejectEmail;
+use App\Events\DonationRequestReceived;
 use App\Events\TriggerAcceptEmailEvent;
 use App\Events\TriggerRejectEmailEvent;
 use App\File;
+use App\Organization;
 use App\Request_event_type;
 use App\Request_item_purpose;
 use App\Request_item_type;
 use App\Requester_type;
 use App\State;
+use Auth;
+use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Http\withErrors;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
-use App\Events\DonationRequestReceived;
-use App\Organization_type;
-use Illuminate\Contracts\Filesystem\Filesystem;
-use Auth;
-use Excel;
-use App\Organization;
 
 
 class DonationRequestController extends Controller
@@ -128,7 +125,7 @@ class DonationRequestController extends Controller
         $donationRequest->tax_exempt = $request->taxexempt;
         $donationRequest->item_requested = $request->item_requested;
         $donationRequest->dollar_amount = $request->dollar_amount;
-        $donationRequest->approved_dollar_amount = $request->dollar_amount;
+//        $donationRequest->approved_dollar_amount = $request->dollar_amount;
         $donationRequest->item_purpose = $request->item_purpose;
         $donationRequest->needed_by_date = $request->needed_by_date;
         $donationRequest->event_name = $request->eventname;
@@ -140,6 +137,7 @@ class DonationRequestController extends Controller
         $donationRequest->marketing_opportunities = $request->marketingopportunities;
         $this->validate($request, [
             'needed_by_date' => 'after:today',
+               'taxexempt' => "required",
         ]);
         $donationRequest->save();
         if ($request->hasFile('attachment')) {
@@ -190,21 +188,19 @@ class DonationRequestController extends Controller
 
     public function changeDonationStatus(Request $request)
     {
-
-
-//id
-        // idsArray = [id];
+        $userId = Auth::user()->id;
+        $organizationId = Auth::user()->organization_id;
 
         if ($request->input('approve') == 'Approve') {
             $approved_amount = $request->approved_amount;
             $donation_id = $request->id;
             $donation = DonationRequest::where('id', $donation_id)->get();
-            $donation[0]->update(['dollar_amount' => $approved_amount]);
             $donation[0]->update(['approval_status_id' => 5]);
             $donation[0]->update(['approved_dollar_amount' => $approved_amount]);
+            $donation[0]->update(['approved_organization_id' => $organizationId]);
+            $donation[0]->update(['approved_user_id' => $userId]);
             event(new TriggerAcceptEmailEvent($donation[0]));
 
-            $organizationId = Auth::user()->organization_id;
             $organization = Organization::findOrFail($organizationId);
             $organizationName = $organization->org_name;
             $donationrequests = DonationRequest::where('organization_id', '=', $organizationId)->get();
@@ -214,9 +210,10 @@ class DonationRequestController extends Controller
             $donation_id = $request->id;
             $donation = DonationRequest::where('id', $donation_id)->get();
             $donation[0]->update(['approval_status_id' => 4]);
+            $donation[0]->update(['approved_organization_id' => $organizationId]);
+            $donation[0]->update(['approved_user_id' => $userId]);
             event(new TriggerRejectEmailEvent($donation[0]));
 
-            $organizationId = Auth::user()->organization_id;
             $organization = Organization::findOrFail($organizationId);
             $organizationName = $organization->org_name;
             $donationrequests = DonationRequest::where('organization_id', '=', $organizationId)->get();
