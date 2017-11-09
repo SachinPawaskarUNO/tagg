@@ -33,8 +33,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\TriggerRejectEmailEvent' => [
             'App\Listeners\TriggerRejectMailView',
         ],
-
-
+        'App\Events\SendRemindersEvent' => [
+            'App\Listeners\SendRemindersMessage',
+        ],
     ];
 
     /**

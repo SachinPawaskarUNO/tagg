@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
         ->everyFiveMinutes();
         $schedule->command('CronJob:scheduledrulejob')->twiceDaily(11, 15);
 
+        $schedule->command('command:SendReminders')->mondays();
     }
 
     /**

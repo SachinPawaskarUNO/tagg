@@ -29,7 +29,6 @@ class DonationRequest extends Model
         'event_type',
         'est_attendee_count',
         'event_start_date',
-        'event_end_date',
         'est_attendee_count',
         'venue',
         'marketing_opportunities',
@@ -66,5 +65,10 @@ class DonationRequest extends Model
     public function donationApprovalStatus()
     {
         return $this->belongsTo('App\Approval_Status', 'approval_status_id', 'id');
+    }
+
+    public function organization()
+    {
+        return $this->hasOne('App\Organization');
     }
 }

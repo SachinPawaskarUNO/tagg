@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Register Here</div>
+                    <div class="panel-heading">Register Your Business</div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="post" action="{{ action('UserController@create') }}">
@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password <span
+                                <label for="password" class="col-md-4 control-label">Create Password <span
                                             style="color: red; font-size: 20px; vertical-align:middle;">*</span>
                                 </label>
 
@@ -88,7 +88,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('org_name') ? ' has-error' : '' }}">
-                                <label for="org_name" class="col-md-4 control-label"> Name Of Your Organization <span
+                                <label for="org_name" class="col-md-4 control-label"> Name Of Your Business <span
                                             style="color: red; font-size: 20px; vertical-align:middle;">*</span>
                                 </label>
 
@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('organization_type_id') ? ' has-error' : '' }}">
-                                <label for="org_description" class="col-md-4 control-label"> Organization Type <span
+                                <label for="org_description" class="col-md-4 control-label"> Business Type <span
                                             style="color: red; font-size: 20px; vertical-align:middle;">*</span>
                                 </label>
 
@@ -178,7 +178,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
-                                <label for="zipcode" class="col-md-4 control-label">Zipcode <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                                <label for="zipcode" class="col-md-4 control-label">Zip Code <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                                 <div class="col-md-6">
                                     <input id="zipcode" type="text" pattern="[0-9]{5}" required title="Enter a 5 digit zipcode" class="form-control"
@@ -198,7 +198,7 @@
                                 <label for="phone_number" class="col-md-4 control-label">Phone Number <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                                 <div class="col-md-6">
                                     <input id="phone_number" type="text" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required title="Enter your 10 digit Phone Number as 555-555-5555" class="form-control" name="phone_number"
-                                           value="{{ old('phone_number') }}" placeholder="Phone Number" required
+                                           value="{{ old('phone_number') }}" placeholder="Example ###-###-####" required
                                            autofocus>
                                     @if ($errors->has('phone_number'))
                                         <span class="help-block">

@@ -28,4 +28,15 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact('donationrequests', 'organizationName', 'amountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber'));
     }
+
+    public function indexTaggAdmin() {
+
+        $organizations = Organization::all();
+        $amountDonated = DonationRequest::where('approval_status_id', 5)->sum('dollar_amount');
+        $rejectedNumber = DonationRequest::where('approval_status_id', 4)->count();
+        $approvedNumber = DonationRequest::where('approval_status_id', 5)->count();
+        $pendingNumber = DonationRequest::whereIn('approval_status_id', [2, 3])->count();
+        return view('dashboard.admin-index', compact('organizations', 'amountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber'));
+        
+    }
 }

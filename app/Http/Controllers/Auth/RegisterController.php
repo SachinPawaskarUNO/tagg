@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\NewBusiness;
 use App\Http\Controllers\Controller;
 use App\Organization_type;
 use App\State;
@@ -30,6 +29,10 @@ class RegisterController extends Controller
      *
      * @var string
      */
+
+
+//    protected $redirectTo = '/home';
+
     protected $redirectTo = '/securityquestions/create';
 
     /**

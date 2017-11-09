@@ -2,11 +2,10 @@
 
 namespace App\Mail;
 
+use App\Organization;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Organization;
 
 class RejectMailManual extends Mailable
 {

@@ -26,7 +26,7 @@
                             {{ csrf_field() }} -->
                         <input type="hidden" name="orgId" value="{{ $_GET['orgId'] }}">
                         <div class="form-group{{ $errors->has('requester') ? ' has-error' : '' }}">
-                            <label for="requester" class="col-md-4 control-label">Name Of The Organization <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label for="requester" class="col-md-4 control-label">Name of the Organization <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-md-6">
 
                                 <input id="requester" type="text" class="form-control" name="requester" value="{{ old('requester')}}" placeholder="Name of your organization" required autofocus>
@@ -100,7 +100,10 @@
                             <label for="phonenumber" class="col-md-4 control-label">Phone Number <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="phonenumber" type="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required title="Enter your 10 digit Phone Number as 555-555-5555" class="form-control" name="phonenumber" value="{{ old('phonenumber') }}" placeholder="Your Phonenumber" required autofocus>
+
+
+                                <input id="phonenumber" type="tel" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required title="Enter your 10 digit Phone Number as 555-555-5555" class="form-control" name="phonenumber" value="{{ old('phonenumber') }}" placeholder="Example ###-###-####" required autofocus>
+
 
                                 @if ($errors->has('phonenumber'))
                                     <span class="help-block">
@@ -114,7 +117,7 @@
                             <label for="address1" class="col-md-4 control-label">Address 1 <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="address1" type="text" class="form-control" name="address1" value="{{ old('address1') }}" placeholder="Street Address, Company Name or C/O" required autofocus>
+                                <input id="address1" type="text" class="form-control" name="address1" value="{{ old('address1') }}" placeholder="Street Address/PO Box" required autofocus>
 
                                 @if ($errors->has('address1'))
                                     <span class="help-block">
@@ -127,7 +130,7 @@
                         <div class="form-group">
                             <label for="address2" class="col-md-4 control-label">Address 2</label>
                             <div class="col-md-6">
-                                <input id="address2" type="text" class="form-control" name="address2" value="{{ old('address2') }}" placeholder="Apartment Name, Building Number, Floor">
+                                <input id="address2" type="text" class="form-control" name="address2" value="{{ old('address2') }}" placeholder="Address 2">
                             </div>
                         </div>
 
@@ -135,7 +138,7 @@
                             <label for="city" class="col-md-4 control-label">City <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control" name="city" value="{{ old('city') }}" placeholder="Name of your " required autofocus>
+                                <input id="city" type="text" class="form-control" name="city" value="{{ old('city') }}" placeholder="Your City" required autofocus>
 
                                 @if ($errors->has('city'))
                                     <span class="help-block">
@@ -160,10 +163,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
-                            <label for="zipcode" class="col-md-4 control-label">Zipcode <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label for="zipcode" class="col-md-4 control-label">Zip code <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="zipcode" type="text" pattern="[0-9]{5}" required title="Enter a 5 digit zipcode" class="form-control" name="zipcode" value="{{ old('zipcode') }}" placeholder="Your Zipcode" required autofocus>
+                                <input id="zipcode" type="text" pattern="[0-9]{5}" required title="Enter a 5 digit zipcode" class="form-control" name="zipcode" value="{{ old('zipcode') }}" placeholder="Your Zip code" required autofocus>
 
                                 @if ($errors->has('zipcode'))
                                     <span class="help-block">
@@ -253,10 +256,10 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('eventname') ? ' has-error' : '' }}">
-                            <label for="eventname" class="col-md-4 control-label">Name of the Event <span style="color: red; font-size: 20px; vertical-align:middle;"></span></label>
+                            <label for="eventname" class="col-md-4 control-label">Name of the Event <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="eventname" type="text" class="form-control" name="eventname" value="{{ old('eventname') }}" placeholder="Your Event Name" autofocus>
+                                <input id="eventname" type="text" class="form-control" name="eventname" value="{{ old('eventname') }}" placeholder="Your Event Name" required autofocus>
 
                                 @if ($errors->has('eventname'))
                                     <span class="help-block">
@@ -280,19 +283,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('enddate') ? ' has-error' : '' }}">
-                            <label for="enddate" class="col-md-4 control-label">End Date <span style="color: red; font-size: 20px; vertical-align:middle;"></span></label>
 
-                            <div class="col-md-6">
-                                <input id="enddate" type="date" class="form-control" name="enddate" value="{{ old('enddate') }}" placeholder="End Date" autofocus>
-
-                                @if ($errors->has('enddate'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('enddate') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
 
                         <div class="form-group{{ $errors->has('event_type') ? ' has-error' : '' }}">
                             <label for="event_type" class="col-md-4 control-label">Purpose Of The Event <span style="color: red; font-size: 20px; vertical-align:middle;"></span></label>

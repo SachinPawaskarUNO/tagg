@@ -53,4 +53,9 @@ class Organization extends Model
         return $this->hasMany('App\ParentChildOrganizations');
     }
 
+    public function donationRequest()
+    {
+        return $this->hasMany('App\DonationRequest');
+    }
+
 }

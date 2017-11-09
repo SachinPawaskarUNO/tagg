@@ -24,7 +24,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/about-us', function () { return view('Front-page');});
-Route::get('/help', function () { return view('help');});
+Route::get('/help', function () {
+    return view('help');
+});
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -101,7 +103,7 @@ Route::get('/emaileditor/editsendmail','EmailTemplateController@send');
 
 //Dashboard
 
-Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard', 'DashboardController@index') ->name('dashboardindex');
 
 Route::post('/donation/change-status', 'DonationRequestController@changeDonationStatus');
 
@@ -120,3 +122,7 @@ Route::resource('/rules', 'RuleEngineController');
 Route::get('/webhook/chargeSuccess', 'SubscriptionController@chargeSuccess');
 
 Route::get('subscription/popup', 'SubscriptionController@subscribe');
+
+Route::get('compose-email', 'EmailTemplateController@send');
+
+Route::get('/dashboard-taggadmin', 'DashboardController@indexTaggAdmin') ->name('dashboardindex-taggadmin');

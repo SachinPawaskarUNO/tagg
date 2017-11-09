@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="col-xs-9 text-left">
                                     <div class="huge">{{$amountDonated}}</div>
-                                    <div>TOTAL AMOUNT DONATED</div>
+                                    <div>AVERAGE AMOUNT DONATED</div>
                                 </div>
                             </div>
                         </div>
@@ -85,17 +85,85 @@
                                 </div>
                                 <div class="col-xs-9 text-left">
                                     <div class="huge">{{$pendingNumber}}</div>
-                                    <div>PENDING</div>
+                                    <div>NUMBER OF DONATIONS</div>
                                 </div>
                             </div>
                         </div>
-                        {{--<a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">View Details</span>
-                                <span class="pull-left"><i class="fa fa-arrow-circle-left"></i></span>
-                                <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user-circle fa-5x" style="color: greenyellow"></i>
+                                </div>
+                                <div class="col-xs-9 text-left">
+                                    <div class="huge">{{$pendingNumber}}</div>
+                                    <div>ACTIVE CUSTOMERS</div>
+                                </div>
                             </div>
-                        </a>--}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-address-book-o fa-5x" ></i>
+                                </div>
+                                <div class="col-xs-9 text-left">
+                                    <div class="huge">{{$pendingNumber}}</div>
+                                    <div>ACTIVE LOCATIONS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user-circle fa-5x" style="color: darkgreen"></i>
+                                </div>
+                                <div class="col-xs-9 text-left">
+                                    <div class="huge">{{$pendingNumber}}</div>
+                                    <div>NEW CUSTOMERS THIS WEEK</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user-circle fa-5x" style="color: yellow"></i>
+                                </div>
+                                <div class="col-xs-9 text-left">
+                                    <div class="huge">{{$pendingNumber}}</div>
+                                    <div>NEW CUSTOMERS THIS MONTH</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user-circle fa-5x" style="color: blue"></i>
+                                </div>
+                                <div class="col-xs-9 text-left">
+                                    <div class="huge">{{$pendingNumber}}</div>
+                                    <div>NEW CUSTOMERS THIS YEAR</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,61 +177,47 @@
                             <b>Pending Requests</b>
                         </div>
 
-                        <!-- Donation request -->
-                        <!-- /.panel-heading -->
                         <div class="panel-body">
-                            @if(sizeOf($donationrequests) != 0)
+                            @if(sizeOf($organizations) != 0)
                                 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%" style=>
                                     <thead>
-                                    <tr class="bg-info">
-                                        <th class="text-center">SelectAll <input type="checkbox" id="selectall"/></th>
-                                        <th class="text-center">Organization Name</th>
-                                        <th class="text-center">Request Amount</th>
-                                        <th class="text-center">Request For</th>
-                                        {{--<th class="text-center">Event Name</th>--}}
-                                        <th class="text-center">Location</th>
-                                        <th class="text-center">Handout Date</th>
-                                        <th class="text-center">Status</th>
-                                        <th class="text-center">View Details</th>
-                                    </tr>
+                                        <tr class="bg-info">
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Org ID</th>
+                                            <th class="text-center">Organization Name</th>
+                                            <th class="text-center">Total Donations</th>
+                                            <th class="text-center">Approved</th>
+                                            {{--<th class="text-center">Event Name</th>--}}
+                                            <th class="text-center">Rejected</th>
+                                            <th class="text-center">Amount Donated YTD</th>
+                                            <th class="text-center">Details</th>
+                                        </tr>
                                     </thead>
 
                                     <tbody  style="text-align: center">
-                                    @foreach ($donationrequests as $donationrequest)
-                                        <tr>
-                                            <td style="vertical-align: middle"><input type="checkbox" class="myCheckbox" ids="{{$donationrequest->id}}"/></td>
-                                            <td style="vertical-align: middle">{{ $donationrequest->requester }}</td>
-                                            <td style="vertical-align: middle">${{ $donationrequest->dollar_amount }}</td>
-                                            <td style="vertical-align: middle">{{ $donationrequest->donationRequestType->item_name }}</td>
-                                            {{--<td style="vertical-align: middle">{{ $donationrequest->event_name }}</td>--}}
-                                             <td style="vertical-align: middle">{{$donationrequest->organization->org_name }}</td>
-                                            <td style="vertical-align: middle"><?php echo date("m/d/Y", strtotime($donationrequest->needed_by_date)); ?></td>
+                                        @foreach ($organizations as $organization)
+                                            <tr>
+                                                <td style="vertical-align: middle">status</td>
+                                                <td style="vertical-align: middle">{{ $organization->id }}</td>
+                                                <td style="vertical-align: middle">{{ $organization->org_name }}</td>
+                                                <td style="vertical-align: middle">${{ $organization->donationRequest->sum('dollar_amount') }}</td>
+                                                <td style="vertical-align: middle">{{ $organization->donationRequest->where('approval_status_id', '5')->count() }}</td>
+                                                <td style="vertical-align: middle">{{ $organization->donationRequest->where('approval_status_id', '4')->count() }}</td>
+                                                <td style="vertical-align: middle">something</td>
+                                                <td>
+                                                    view details
 
-                                            <td id="status{{$donationrequest->id}}" style="vertical-align: middle">{{ $donationrequest->donationApprovalStatus->status_name }}</td>
-                                            <td>
-                                                <a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn btn-warning" title="Detail">
-                                                    <span class="glyphicon glyphicon-list-alt"></span></a>
-
-                                            </td>
-                                            {{--<td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn btn-primary"> Detail </a>--}}
-                                            {{--                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn btn-warning"> Edit </a>--}}
-                                        </tr>
-                                    @endforeach
-
+                                                </td>
+                                                {{--<td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn btn-primary"> Detail </a>--}}
+                                                {{--                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn btn-warning"> Edit </a>--}}
+                                            </tr>
+                                        @endforeach
                                     </tbody>
-                                    @else
-                                        <div>No pending donation requests to show.</div>
-                                    @endif
                                 </table>
-                                {!! Form::open(['action' =>  'EmailTemplateController@send', 'method' => 'GET']) !!}
-                                {{ Form::hidden('hiddenname','' , array('id' => 'selected-ids-hidden')) }}
-                                {{ Form::hidden('pagefrom', '/dashboard') }}
-                                {{--add if condition to show approve and reject buttons only if there are pending requests and atleast one is selected--}}
-                                @if(sizeOf($donationrequests) != 0)
-                                    {!! Form::submit( 'Approve', ['class' => 'btn btn-default', 'name' => 'submitbutton', 'value' => 'approve'])!!}
-                                    {!! Form::submit( 'Reject', ['class' => 'btn btn-default', 'name' => 'submitbutton', 'value' => 'reject']) !!}
-                                @endif
-                                {!! Form::close() !!}
+                            @else
+                                <div>No pending donation requests to show.</div>
+                            @endif
+
                         </div>
 
                         <!-- Donation request -->

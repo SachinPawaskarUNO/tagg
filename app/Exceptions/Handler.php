@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Stripe\Error as Stripe;
 
 class Handler extends ExceptionHandler
 {
@@ -48,6 +49,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof Stripe\InvalidRequest) {
+
+            return redirect()->back()->withErrors(['not a valid coupon code']);
+
+        }
 
         return parent::render($request, $exception);
     }

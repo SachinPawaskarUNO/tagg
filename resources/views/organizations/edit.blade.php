@@ -4,11 +4,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Update Organization Profile</div>
+                    <div class="panel-heading">Update Location</div>
 
                     <div class="panel-body">
 
-                        {!! Form::model($organization,['method' => 'PATCH','route'=>['organizations.update', $organization->id], 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($organization, ['method' => 'PATCH','route'=>['organizations.update', $organization->id], 'class' => 'form-horizontal']) !!}
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -21,14 +21,28 @@
                         @endif
 
                         <div class="form-group">
-                            <label for="first_name" class="col-md-4 control-label"> Organization Name <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label for="org_name" class="col-md-4 control-label"> Business Name <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
                                 {!! Form::text('org_name',null,['class' => 'form-control', 'required']) !!}
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('org_description') ? ' has-error' : '' }}">
+                            <label for="org_description" class="col-md-4 control-label">Business Description</label>
+
+                            <div class="col-md-6">
+                                <input id="org_description" type="text" class="form-control" name="org_description" value="{{ old('org_description') }}"  required autofocus>
+
+                                @if ($errors->has('org_description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('org_description') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group">
-                            <label for="org_description" class="col-md-4 control-label">Organization Type <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label for="org_description" class="col-md-4 control-label">Business Type <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
 
@@ -41,13 +55,14 @@
                                 @endif
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="street_address1" class="col-md-4 control-label">Address 1 <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label for="street_address1" class="col-md-4 control-label">Street Address 1 <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">{!! Form::text('street_address1',null,['class' => 'form-control', 'required']) !!}</div>
                         </div>
 
                         <div class="form-group">
-                            <label for="street_address2" class="col-md-4 control-label"> Address 2 </label>
+                            <label for="street_address2" class="col-md-4 control-label">Street Address 2 </label>
                             <div class="col-lg-6">   {!! Form::text('street_address2', null,['class'=>'form-control']) !!}</div>
                         </div>
 
@@ -72,7 +87,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('zipcode') ? ' has-error' : '' }}">
-                            <label for="zipcode" class="col-md-4 control-label">Zipcode <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label for="zipcode" class="col-md-4 control-label">Zip Code <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6"> {!! Form::text('zipcode',null,['class' => 'form-control', 'required']) !!}</div>
                         </div>
 

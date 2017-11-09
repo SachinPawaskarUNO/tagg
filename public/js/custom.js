@@ -51,7 +51,6 @@ $("body").on('keyup', '#cardNumber', function () {
     }
 
 });
-
 $("body").on('keyup', '#expiryMonth', function () {
     var regexp1 = new RegExp("[^0-9]");
     if (regexp1.test(document.getElementById("expiryMonth").value)) {

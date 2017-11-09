@@ -2,9 +2,12 @@
 namespace App\Http\Controllers;
 use App\Organization;
 use Auth;
+use App\ParentChildOrganizations;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Cashier\Http\Controllers\WebhookController;
+
 
 class SubscriptionController extends Controller
 {
@@ -13,13 +16,37 @@ class SubscriptionController extends Controller
     public function getIndex()
     {
         $id = Auth::user()->organization_id;
-        $organization = Organization::find($id);
-        if ($organization->subscribed('main')) {
-            return redirect('/home');
-        } else {
-            return view('subscriptions.payment');
-        }
 
+        //if organization is child and it's sparent org does not have a active subscription redirect it to 'subscription expired' page
+        $ischild = (ParentChildOrganizations::where('child_org_id', '=', $id)->exists());
+
+        if ($ischild) {
+
+            $parentorgid = ParentChildOrganizations::where('child_org_id', $id)->value('parent_org_id');
+
+            $organization = Organization::find($parentorgid);
+            if ($organization->subscribed('main')) {
+
+                return redirect('/dashboard');
+
+            } else {
+
+                return view('subscriptions.expiredsubscription');
+
+            }
+        }
+        else {
+
+            $organization = Organization::find($id);
+            if ($organization->subscribed('main')) {
+
+                return redirect('/dashboard');
+            } else {
+
+                return view('subscriptions.payment');
+            }
+
+        }
 
     }
     public function postJoin(Request $request)
@@ -27,21 +54,47 @@ class SubscriptionController extends Controller
         $id = Auth::user()->organization_id;
         $organization = Organization::find($id);
         $pickedPlan = $request->get('plan');
+        $coupon = $request->get('coupon');
         if ($organization->subscribedToPlan($pickedPlan, 'main')) {
             return redirect('subscription')->with('status', 'Plan Already Submitted!');
         } else {
-            if ($request->input('plan') == "annually") {
-                $organization->newSubscription('main', $request->input('plan'))->withCoupon("OFF20")->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
-                    'email' => $organization->org_name
 
-                ]);
+            if ($request->input('plan') == "annually") {
+                if (isset($coupon)) {
+                    $organization->newSubscription('main', $request->input('plan'))->withCoupon("OFF20")->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
+                        'email' => $organization->org_name
+
+                    ]);
+                    $organization->trial_ends_at = Carbon::now()->lastOfMonth();
+                    $organization->save();
+
+                } else {
+                    $organization->newSubscription('main', $request->input('plan'))->withCoupon("OFF20")->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
+                        'email' => $organization->org_name
+
+                    ]);
+                    $organization->trial_ends_at = Carbon::now()->lastOfMonth();
+                    $organization->save();
+                }
             } else {
-                $organization->newSubscription('main', $request->input('plan'))->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
-                    'email' => $organization->org_name
-                ]);
+                if ($request->input('plan') == "monthly") {
+                    if (isset($coupon)) {
+                        $organization->newSubscription('main', $request->input('plan'))->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
+                            'email' => $organization->org_name
+                        ]);
+                        $organization->trial_ends_at = Carbon::now()->lastOfMonth();
+                        $organization->save();
+                    } else {
+                        $organization->newSubscription('main', $request->input('plan'))->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
+                            'email' => $organization->org_name
+                        ]);
+                        $organization->trial_ends_at = Carbon::now()->lastOfMonth();
+                        $organization->save();
+                    }
+                }
             }
 
-            return redirect('home')->with('status', 'Successfully Submitted!');
+            return redirect('/dashboard')->with('status', 'Successfully Submitted!');
 
         }
     }
