@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof Stripe\InvalidRequest) {
 
-            return redirect()->back()->withErrors(['not a valid coupon code']);
+            return redirect()->back()->withErrors([' The coupon code entered is not valid, please enter a valid code']);
 
         }
 

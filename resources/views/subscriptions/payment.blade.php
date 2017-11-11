@@ -276,7 +276,7 @@
                         <label for="coupon" class="control-label">Coupon</label>
                         <div class="col-md-6" style="padding-left: 0px;">
                             <input id="coupon" type="text" class="form-control" name="coupon"
-                                   value="{{ old('coupon') }}" placeholder="coupon" required
+                                   value="{{ old('coupon') }}" placeholder="Coupon" required
                                    autofocus>
 
                             @if ($errors->has('coupon'))

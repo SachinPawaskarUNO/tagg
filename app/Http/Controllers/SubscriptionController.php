@@ -1,13 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 use App\Organization;
-use Auth;
 use App\ParentChildOrganizations;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Cashier\Http\Controllers\WebhookController;
-
 
 class SubscriptionController extends Controller
 {
@@ -66,6 +65,16 @@ class SubscriptionController extends Controller
         }
 
     }
+
+    public function validateCoupon($coupon)
+    {
+        $coupon_validate = \Stripe\Coupon::retrieve($coupon);
+        if ($coupon_validate == '') {
+            return false;
+        } else {
+            return true;
+        }
+    }
     public function postJoin(Request $request)
     {
         $id = Auth::user()->organization_id;
@@ -82,32 +91,31 @@ class SubscriptionController extends Controller
                         'email' => $organization->org_name
 
                     ]);
-                    $organization->trial_ends_at = Carbon::now()->lastOfMonth();
-                    $organization->save();
 
                 } else {
                     $organization->newSubscription('main', $request->input('plan'))->withCoupon("OFF20")->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
                         'email' => $organization->org_name
 
                     ]);
-                    $organization->trial_ends_at = Carbon::now()->lastOfMonth();
-                    $organization->save();
+
                 }
+                $organization->trial_ends_at = Carbon::now()->addYear(1);
+                $organization->save();
             } else {
                 if ($request->input('plan') == "monthly") {
                     if (isset($coupon)) {
                         $organization->newSubscription('main', $request->input('plan'))->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
                             'email' => $organization->org_name
                         ]);
-                        $organization->trial_ends_at = Carbon::now()->lastOfMonth();
-                        $organization->save();
+
                     } else {
                         $organization->newSubscription('main', $request->input('plan'))->withMetadata(array('organization_id' => $organization->id))->quantity($request->input('user_locations'))->create($request->input('token'), [
                             'email' => $organization->org_name
                         ]);
-                        $organization->trial_ends_at = Carbon::now()->lastOfMonth();
-                        $organization->save();
+
                     }
+                    $organization->trial_ends_at = Carbon::now()->addMonth(1);
+                    $organization->save();
                 }
             }
 

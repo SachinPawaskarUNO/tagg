@@ -1,3 +1,4 @@
+
 $("body").on('change', '#plan', function () {
     var plan = $('#plan').val();
     var user = $('#user_locations').val();
@@ -19,6 +20,7 @@ $("body").on('change', '#plan', function () {
         }
     }
 });
+
 $("body").on('keyup', '#user_locations', function () {
     var user = $('#user_locations').val();
     var plan = $('#plan').val();
@@ -51,6 +53,7 @@ $("body").on('keyup', '#cardNumber', function () {
     }
 
 });
+
 $("body").on('keyup', '#expiryMonth', function () {
     var regexp1 = new RegExp("[^0-9]");
     if (regexp1.test(document.getElementById("expiryMonth").value)) {
