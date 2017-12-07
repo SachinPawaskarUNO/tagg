@@ -32,8 +32,6 @@
             $('#explain').hide();
             $('#explain_purpose').hide()
         });
-
-
     </script>
 
 
@@ -486,7 +484,6 @@
                 $('#item_purpose_explain').val('');
             }
         });
-
         $('#btnSubmit').on('click', function () {
             if (document.getElementById('yesCheck').checked) {
                 if ($('#attachment')[0].files.length === 0) {

@@ -50,13 +50,28 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof Stripe\InvalidRequest) {
+        if ($exception instanceof ModelNotFoundException or $exception instanceof NotFoundHttpException or $exception instanceof HttpResponseException or $exception instanceof AuthorizationException or $exception instanceof ValidationException)
+
+
+        {
+            // ajax 404 json feedback
+            if ($request->ajax()) {
+                return response()->json(['error' => 'Not Found'], 404);
+            }
+
+            // normal 404 view page feedback
+            return response()->view('errors.missing', [], 404);
+        }
+
+        elseif ($exception instanceof Stripe\InvalidRequest) {
 
             return redirect()->back()->withErrors([' The coupon code entered is not valid, please enter a valid code']);
 
         }
 
+
         elseif ($exception instanceof ErrorException ) {
+
 
             // flash your message
 
