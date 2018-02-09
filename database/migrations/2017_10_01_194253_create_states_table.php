@@ -14,10 +14,11 @@ class CreateStatesTable extends Migration
     public function up()
     {
         Schema::create('states', function (Blueprint $table) {
+            $table->increments('id');
             $table->char('state_code', 2)->unique();
             $table->string('state_name')->unique();
             $table->unique(['state_code','state_name']);
-            $table->primary('state_code');
+            // $table->primary('state_code');
             $table->timestamps();
         });
     }
