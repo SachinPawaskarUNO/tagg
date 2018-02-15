@@ -108,24 +108,29 @@ class CqAppSeeder extends Seeder {
 
 		// Role - Root
 		$ru = Role::create(array(
-		    'name' => 'Root'
+			'id' => '1',
+			'name' => 'Root'
 		));
 
 		// Role - CQ Admin
 		$cqa = Role::create(array(
-		    'name' => 'CQ Admin'
+			'id' => '2',
+			'name' => 'CQ Admin'
 		));
 
 		// Role - CQ User
 		$cqu = Role::create(array(
-		    'name' => 'CQ User'
+			'id' => '3', 
+			'name' => 'CQ User'
 		));
 		// Role - Business Admin
 		$bau = Role::create(array(
-		    'name' => 'Business Admin'
+			'id' => '4',
+			'name' => 'Business Admin'
 		));
 		// Role - Business User
 		$buu = Role::create(array(
+			'id' => '5',
 		    'name' => 'Business User'
 		));
 		
@@ -133,19 +138,20 @@ class CqAppSeeder extends Seeder {
 
 		// Org types Organization_typesTableSeeder 
 
-		$orest = Organization_type::create(['type_name' => 'Restaurant', 'type_description' => 'Restaurant']);
-        $ortl = Organization_type::create(['type_name' => 'Retail', 'type_description' => 'Retail']);
-        $ohlth = Organization_type::create(['type_name' => 'Health/Beauty', 'type_description' => 'Health/Beauty']);;
-        $oentr = Organization_type::create(['type_name' => 'Entertainment', 'type_description' => 'Entertainment']);
-        $ohspt = Organization_type::create(['type_name' => 'Hospitality/Travel', 'type_description' => 'Hospitality/Travel']);
-        $ob2bs = Organization_type::create(['type_name' => 'B2B Service', 'type_description' => 'B2B Service']);
-        $ob2cs = Organization_type::create(['type_name' => 'B2C Service', 'type_description' => 'B2C Service']);
-        $oothr = Organization_type::create(['type_name' => 'Others', 'type_description' => 'Anything other than the above options']);
+		$orest = Organization_type::create(['id' => '1','type_name' => 'Restaurant', 'type_description' => 'Restaurant']);
+        $ortl = Organization_type::create(['id' => '2', 'type_name' => 'Retail', 'type_description' => 'Retail']);
+        $ohlth = Organization_type::create(['id' => '3', 'type_name' => 'Health/Beauty', 'type_description' => 'Health/Beauty']);;
+        $oentr = Organization_type::create(['id' => '4','type_name' => 'Entertainment', 'type_description' => 'Entertainment']);
+        $ohspt = Organization_type::create(['id' => '5','type_name' => 'Hospitality/Travel', 'type_description' => 'Hospitality/Travel']);
+        $ob2bs = Organization_type::create(['id' => '6','type_name' => 'B2B Service', 'type_description' => 'B2B Service']);
+        $ob2cs = Organization_type::create(['id' => '7','type_name' => 'B2C Service', 'type_description' => 'B2C Service']);
+        $oothr = Organization_type::create(['id' => '8','type_name' => 'Others', 'type_description' => 'Anything other than the above options']);
 
 				$this->command->info('Org type done ! ');
 
 		// create orgs OrganizationsTableSeeder 
 		$oroot = Organization::create(array(
+		'id' => '1',
 		'org_name' => 'CharityQ',
 		'organization_type_id' => $oothr->id,
 		'org_description' => 'Administrator and Owner of CharityQ',
@@ -158,22 +164,23 @@ class CqAppSeeder extends Seeder {
 		'trial_ends_at' => '2038-01-16'
 		));
 
-		$buser = Organization::create(array(
-		'org_name' => 'NFM',
-		'organization_type_id' => $ortl->id,
-		'org_description' => 'NFM',
-		'street_address1' => 'NFM St',
-		'street_address2' => 'Ste. A',
-		'city' => 'Omaha',
-		'zipcode' => '68130',
-		'state' => $ne->state_code,
-		'phone_number' => '(402) 715-5230',
-		'trial_ends_at' => '2019-01-16'
-		));
+		// $buser = Organization::create(array(
+		// 'org_name' => 'NFM',
+		// 'organization_type_id' => $ortl->id,
+		// 'org_description' => 'NFM',
+		// 'street_address1' => 'NFM St',
+		// 'street_address2' => 'Ste. A',
+		// 'city' => 'Omaha',
+		// 'zipcode' => '68130',
+		// 'state' => $ne->state_code,
+		// 'phone_number' => '(402) 715-5230',
+		// 'trial_ends_at' => '2019-01-16'
+		// ));
 			$this->command->info('Orgs done ! ');
 
 		// create user
 		$rootuser = User::create(array(
+			'id' => '1',
             'first_name' => 'root',
             'last_name' => 'admin',
             'user_name' => 'admin@cq.com',
@@ -187,36 +194,37 @@ class CqAppSeeder extends Seeder {
             'state' => $ne->state_code,
 			'phone_number' => '(402) 715-5230'));
 			// business user
-			$nfmusr = User::create(array(
-				'first_name' => 'Admin',
-				'last_name' => 'Nfm',
-				'user_name' => 'admin@nfm.com',
-				'email' => 'admin@nfm.com',
-				'password' => bcrypt('secret'),
-				'organization_id' => $buser->id,
-				'street_address1' => '17117 Oak Drive',
-				'street_address2' => 'Ste. A',
-				'city' => 'Omaha',
-				'zipcode' => '68130',
-				'state' => $ne->state_code,
-				'phone_number' => '(402) 715-5230'));
+			// $nfmusr = User::create(array(
+			// 	'first_name' => 'Admin',
+			// 	'last_name' => 'Nfm',
+			// 	'user_name' => 'admin@nfm.com',
+			// 	'email' => 'admin@nfm.com',
+			// 	'password' => bcrypt('secret'),
+			// 	'organization_id' => $buser->id,
+			// 	'street_address1' => '17117 Oak Drive',
+			// 	'street_address2' => 'Ste. A',
+			// 	'city' => 'Omaha',
+			// 	'zipcode' => '68130',
+			// 	'state' => $ne->state_code,
+			// 	'phone_number' => '(402) 715-5230'));
 		// assign role 
 		RoleUser::create(array(
+			'id' => '1',
             'role_id' => $ru->id,
             'user_id' => $rootuser->id
 		));
-		RoleUser::create(array(
-            'role_id' => $bau->id,
-            'user_id' => $nfmusr->id
-        ));
+		// RoleUser::create(array(
+        //     'role_id' => $bau->id,
+        //     'user_id' => $nfmusr->id
+        // ));
 			$this->command->info('Root user done ! ');
 
 		// create rule 
-		$acpt = Rule_type::create(array( 'type_name' => 'Auto-Reject', 'type_description' => 'Donation Requests that match the criteria of this rule will be automatically rejected by the system.', 'active' => true));
-		$preacpt = Rule_type::create(array( 'type_name' => 'Pre-Accept', 'type_description' => 'Donation Requests that match the criteria of this rule will be flagged as ready for acceptance by the user.', 'active' => true));
+		$acpt = Rule_type::create(array( 'id' => '1' ,'type_name' => 'Auto-Reject', 'type_description' => 'Donation Requests that match the criteria of this rule will be automatically rejected by the system.', 'active' => true));
+		$preacpt = Rule_type::create(array( 'id' => '2' ,'type_name' => 'Pre-Accept', 'type_description' => 'Donation Requests that match the criteria of this rule will be flagged as ready for acceptance by the user.', 'active' => true));
 		
 		// Rule
-		 Rule::create(array('rule_type_id' => $preacpt->id, 'rule_owner_id' => $oroot->id, 'active' => true,
+		 Rule::create(array('id' => '1', 'rule_type_id' => $preacpt->id, 'rule_owner_id' => $oroot->id, 'active' => true,
             'rule' => '{
                         "condition": "OR",
                         "rules": [
@@ -241,7 +249,7 @@ class CqAppSeeder extends Seeder {
                         "valid": true
                         }'
         ));
-		Rule::create(array('rule_type_id' => $acpt->id, 'rule_owner_id' => $oroot->id, 'active' => true,
+		Rule::create(array('id' => '2', 'rule_type_id' => $acpt->id, 'rule_owner_id' => $oroot->id, 'active' => true,
             'rule' => '{
             "condition": "AND",
             "rules": [
@@ -273,18 +281,22 @@ class CqAppSeeder extends Seeder {
 			$this->command->info('Rules done  ! ');
 		// Request_event_typesTableSeeder
 		Request_event_type::create(array(
+			'id' => '1',
 		'type_name' => 'Fundraiser/Gala', 
 		'type_description' => 'Fundraiser'
 		));
 		Request_event_type::create(array(
+			'id' => '2',
 		'type_name' => 'Walk/Run/Ride Event',
 		'type_description' => 'Walk/Run/Ride Event'
 		));
 		Request_event_type::create(array(
+			'id' => '3',
 		'type_name' => 'Charity Dinner', 
 		'type_description' => 'Spaghetti, Pancake, etc. feed.'
 		));
 		Request_event_type::create(array(
+			'id' => '4',
 		'type_name' => 'Other', 
 		'type_description' => 'Other Purposes'
 		));
@@ -292,38 +304,43 @@ class CqAppSeeder extends Seeder {
 		// Request_item_typesTableSeeder 
 
 		Request_item_type::create(array(
+			'id' => '1',
 		'item_name' => 'Cash/Check', 'item_description' => 'Monetary Donation'
 		));
 		Request_item_type::create(array(
+			'id' => '2',
 		'item_name' => 'Gift Card', 'item_description' => 'Store Credit'
 		));
 		Request_item_type::create(array(
+			'id' => '3',
 		'item_name' => 'Product/Service Donation', 'item_description' => 'Donation of Items or Services'
 		));
 		Request_item_type::create(array(
+			'id' => '4',
 		'item_name' => 'Sponsorship/Awareness', 'item_description' => 'Request for visibility'
 		));
 		Request_item_type::create(array(
+			'id' => '5',
 		'item_name' => 'Other (please explain)', 'item_description' => 'Other Types of Requests'
 		));
 
 		// Request_item_purposesTableSeeder 
-		Request_item_purpose::create(array('purpose_name' => 'Raffle/Door Prize', 'purpose_description' => 'Raffle/Door Prize'));
-		Request_item_purpose::create(array('purpose_name' => 'Live Auction', 'purpose_description' => 'Live Auction'));
-		Request_item_purpose::create(array('purpose_name' => 'Silent Auction', 'purpose_description' => 'Silent Auction'));
-		Request_item_purpose::create(array('purpose_name' => 'Online Auction', 'purpose_description' => 'Online Auction'));
-		Request_item_purpose::create(array('purpose_name' => 'Supporting Services', 'purpose_description' => 'Participate in facilitating the event'));
-		Request_item_purpose::create(array('purpose_name' => 'Awareness', 'purpose_description' => 'Increasing awareness for the event'));
-		Request_item_purpose::create(array('purpose_name' => 'Funding Event', 'purpose_description' => 'Pay for Costs of Event'));
-		Request_item_purpose::create(array('purpose_name' => 'Donation', 'purpose_description' => 'Contribute toward requesters Goal'));
-		Request_item_purpose::create(array('purpose_name' => 'Other (please explain)', 'purpose_description' => 'Other Purposes'));
+		Request_item_purpose::create(array('id' => '1','purpose_name' => 'Raffle/Door Prize', 'purpose_description' => 'Raffle/Door Prize'));
+		Request_item_purpose::create(array('id' => '2','purpose_name' => 'Live Auction', 'purpose_description' => 'Live Auction'));
+		Request_item_purpose::create(array('id' => '3','purpose_name' => 'Silent Auction', 'purpose_description' => 'Silent Auction'));
+		Request_item_purpose::create(array('id' => '4','purpose_name' => 'Online Auction', 'purpose_description' => 'Online Auction'));
+		Request_item_purpose::create(array('id' => '5','purpose_name' => 'Supporting Services', 'purpose_description' => 'Participate in facilitating the event'));
+		Request_item_purpose::create(array('id' => '6','purpose_name' => 'Awareness', 'purpose_description' => 'Increasing awareness for the event'));
+		Request_item_purpose::create(array('id' => '7','purpose_name' => 'Funding Event', 'purpose_description' => 'Pay for Costs of Event'));
+		Request_item_purpose::create(array('id' => '8','purpose_name' => 'Donation', 'purpose_description' => 'Contribute toward requesters Goal'));
+		Request_item_purpose::create(array('id' => '9','purpose_name' => 'Other (please explain)', 'purpose_description' => 'Other Purposes'));
 
 		// Request_item_type
-		Request_item_type::create(array('item_name' => 'Cash/Check', 'item_description' => 'Monetary Donation'));
-		Request_item_type::create(array('item_name' => 'Gift Card', 'item_description' => 'Store Credit'));
-		Request_item_type::create(array('item_name' => 'Product/Service Donation', 'item_description' => 'Donation of Items or Services'));
-		Request_item_type::create(array('item_name' => 'Sponsorship/Awareness', 'item_description' => 'Request for visibility'));
-		Request_item_type::create(array('item_name' => 'Other (please explain)', 'item_description' => 'Other Types of Requests'));
+		// Request_item_type::create(array('id' => '1','item_name' => 'Cash/Check', 'item_description' => 'Monetary Donation'));
+		// Request_item_type::create(array('id' => '2','item_name' => 'Gift Card', 'item_description' => 'Store Credit'));
+		// Request_item_type::create(array('id' => '3','item_name' => 'Product/Service Donation', 'item_description' => 'Donation of Items or Services'));
+		// Request_item_type::create(array('id' => '4','item_name' => 'Sponsorship/Awareness', 'item_description' => 'Request for visibility'));
+		// Request_item_type::create(array('id' => '5','item_name' => 'Other (please explain)', 'item_description' => 'Other Types of Requests'));
 
 		// Requester_type
 		Requester_type::create(array('type_name' => 'Animal Welfare', 'type_description' => 'This is an Animal Welfare'));
@@ -361,26 +378,31 @@ class CqAppSeeder extends Seeder {
 		// Approval_statusesTableSeeder 
 		
 		$subrw = Approval_status::create(array(
+			'id' => '1' ,
 			'status_name' => 'Submitted',
 			'status_description' => 'Request submitted to business for review.'
 		));
 		
 		$subrj = Approval_status::create(array(
+			'id' => '2' ,
 			'status_name' => 'Pending Rejection', 
 			'status_description' => 'Request flagged as ready for business to reject.'
 		));
 
 		$suba = Approval_status::create(array(
-			 'status_name' => 'Pending Approval', 
+			'id' => '3' , 
+			'status_name' => 'Pending Approval', 
 			 'status_description' => 'Request flagged as ready for business to approve.'
 		));
 
 		$subrrb = Approval_status::create(array(
+			'id' => '4' ,
 			'status_name' => 'Rejected',
 			'status_description' => 'Request rejected by business.'
 		));
 
 		$subrab = Approval_status::create(array(
+			'id' => '5' ,
 			'status_name' => 'Approved', 
 			'status_description' => 'Request accepted by business.'
 		));
@@ -389,6 +411,7 @@ class CqAppSeeder extends Seeder {
 
 		// Subscription
 		Subscription::create(array(
+			'id' => '1',
             'organization_id' => $oroot->id,
             'name' => 'main',
             'stripe_id' => 'sub_BjE4mUEBCjk86q',
@@ -402,23 +425,29 @@ class CqAppSeeder extends Seeder {
 		// we'll create diff email EmailTemplateTypes
 
 		$eadmin = EmailTemplateTypes::create(array(
-		    'template_type' => 'B Admin'
+			'id' => '1',
+			'template_type' => 'Business Admin'
 		));
 		$euser = EmailTemplateTypes::create(array(
-		    'template_type' => 'B user'
+			'id' => '2',
+			'template_type' => 'Business user'
 		));
 		$eaprv = EmailTemplateTypes::create(array(
-		    'template_type' => 'Donation approved'
+			'id' => '3',
+			'template_type' => 'Donation approved'
 		));
 		$erjct = EmailTemplateTypes::create(array(
-		    'template_type' => 'Donation Rejected'
+			'id' => '4',
+			'template_type' => 'Donation Rejected'
 		));
 		$efpwd = EmailTemplateTypes::create(array(
-		    'template_type' => 'F passwd'
+			'id' => '5',
+			'template_type' => 'Forgot password'
 		));
 
 		// Email templates 
 		EmailTemplate::create(array(
+			'id' => '1',
 			'template_type_id' => $eadmin->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
@@ -428,6 +457,7 @@ class CqAppSeeder extends Seeder {
 		));
 		
 		EmailTemplate::create(array(
+			'id' => '2',
 			'template_type_id' => $euser->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
@@ -438,6 +468,7 @@ class CqAppSeeder extends Seeder {
 		));
 		
 		EmailTemplate::create(array(
+			'id' => '3',
 			'template_type_id' => $eaprv->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Decision about your donation request', 
@@ -451,13 +482,17 @@ class CqAppSeeder extends Seeder {
 			));
 		
 		EmailTemplate::create(array(
+			'id' => '4',
 			'template_type_id' => $erjct->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Your donation request has been declined', 
 			'email_message' => '<p style="background: white;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">Dear &nbsp;<strong><span>{Addressee},&nbsp;</span></strong></span></p>
 		<p style="background: white;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">Thank you for entering a request for donation on our website. Unfortunately, at this time we are not able to help out with your event.&nbsp;All of our Omaha locations have partnered with TAGG (Together a Greater Good) so that we can support as many local organizations as possible. In lieu of donating to specific raffles, auctions and galas, and sponsorships, we donate 5% of a guest&rsquo;s tab to an organization of their choosing. &nbsp;&nbsp;</span></p>
 		<p style="font-family: Calibri, sans-serif;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">This is done through the TAGG mobile app, which is available for download on iPhones and Androids. Just search &ldquo;Together a Greater Good&rdquo; and you should find it!</span></p>'));
-		EmailTemplate::create(array('template_type_id' => $efpwd->id, 'organization_id' => $oroot->id, 'email_subject' => 'Password Change Request', 'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
+		
+		EmailTemplate::create(array(
+		'id' => '5',
+		'template_type_id' => $efpwd->id, 'organization_id' => $oroot->id, 'email_subject' => 'Password Change Request', 'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
 		<p>You have changed your password for CharityQ application. If it is not you that changed password please contact your admin as soon as possible.</p>
 		<p>Sincerely,</p>
 		<p>- CharityQ Team</p>'
