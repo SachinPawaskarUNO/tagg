@@ -23,7 +23,7 @@
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
                 <div class="panel panel-default" style="padding-left: 5px;padding-right: 5px;">
-                    <div class="panel-heading"><h1> Subscription </h1></div>
+                    <div class="panel-heading"><h1> Choose Your Plan</h1></div>
                     <h2 style="text-align:center;"></h2>
 
                 {{ Form::open(['method'=> 'POST', 'action' => 'SubscriptionController@getIndex','id'=>'subscription-form']) }}
