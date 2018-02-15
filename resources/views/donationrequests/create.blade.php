@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('content')
     <br>
@@ -35,7 +36,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="divRequestForm" class="panel panel-default">
-                    <div class="panel-heading">Donation Request Form</div>
+                    <div class="panel-heading">Please complete the form</div>
 
                     <div class="panel-body">
                     {!! Form::open(['url' => 'attachment', 'class' => 'form-horizontal', 'id' => 'donationRequestForm', 'files' => true]) !!}
@@ -46,7 +47,7 @@
                             {{ csrf_field() }} -->
                         <input type="hidden" name="orgId" value="{{ $_GET['orgId'] }}">
                         <div class="form-group{{ $errors->has('requester') ? ' has-error' : '' }}">
-                            <label for="requester" class="col-md-4 control-label">Name of the Organization <span
+                            <label for="requester" class="col-md-4 control-label ">Name of the Organization <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-md-6">
 
