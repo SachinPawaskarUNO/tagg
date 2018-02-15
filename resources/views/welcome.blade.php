@@ -344,14 +344,15 @@
             <!--//BLOCK ROW END-->
             
         </div>
-    </section>             
+    </section>
+    <div class="row">
+        <div class="alert alert-dark text-center" role="alert">
+            <p>&#42 Save 20&#37 by paying annually.</p> 
+          </div>
+      </div>            
 	<footer>
     	<a class="bottom_btn" href="#">&copy; CharityQ</a>
     </footer>
 </div>
-
-
-
-
     </body>
 @endsection
