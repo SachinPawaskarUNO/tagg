@@ -20,6 +20,7 @@
 </script>
         </div>
 
+    <link href="{!! asset('css/custom.css') !!}" media="all" rel="stylesheet" type="text/css" />
 
 
     <!-- First Container -->
@@ -102,7 +103,252 @@
             </p>
         </div>
     </div>
-
+    <! ========================  
+    Pricing Table  	 
+  ========================	!>
+<div id="generic_price_table">   
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--PRICE HEADING START-->
+                    <div class="price-heading clearfix">
+                        <h2>Pricing</h2>
+                    </div>
+                    <!--//PRICE HEADING END-->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            
+            <!--BLOCK ROW START-->
+            <div class="row">
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Small Business</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">19</span>
+                                    <span class="cent">.00</span>
+                                    <span class="month">/MON</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                            	<li><span>Up to 5</span> Locations</li>
+                                <li><span>Per</span> Month</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content active clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Business</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">49</span>
+                                    <span class="cent">.00</span>
+                                    <span class="month">/MON</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                                <li><span>Up to 25</span> Locations</li>
+                                <li><span>Per</span> Month</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Enterprise</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">199</span>
+                                    <span class="cent">.00</span>
+                                    <span class="month">/MON</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                                <li><span>Up to 100 </span>Locations</li>
+                                <li><span>Per</span> Month</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Unlimited</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">249</span>
+                                    <span class="cent">.00</span>
+                                    <span class="month">/MON</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                                <li><span>Unlimited</span> Locations</li>
+                                <li><span>Per</span> Month</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+            </div>	
+            <!--//BLOCK ROW END-->
+            
+        </div>
+    </section>             
+	<footer>
+    	<a class="bottom_btn" href="#">&copy; CharityQ</a>
+    </footer>
+</div>
 
 
 

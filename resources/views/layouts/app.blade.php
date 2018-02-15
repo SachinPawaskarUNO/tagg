@@ -392,6 +392,9 @@
                                                 class="glyphicon glyphicon-info-sign"></span></a></li>
                                 <li><a href="{{ url('/') }}#how" class="w3-bar-item w3-button">How This Works&nbsp;<span
                                                 class="glyphicon glyphicon-question-sign"></span></a></li>
+                                <li><a href="{{ url('/') }}#generic_price_table" class="w3-bar-item w3-button">Pricing&nbsp;<span
+                                                class="glyphicon glyphicon-question-sign"></span></a></li>
+    
                                 <li><a href="{{ route('register') }}" class="w3-bar-item w3-button">Sign Up <span
                                                 class="glyphicon glyphicon-user"></span></a></li>
                                 <li><a href="{{ route('login') }}" class="w3-bar-item w3-button ">Login&nbsp;<span
@@ -432,7 +435,7 @@
                                                 <a href="{{ url('/rules?rule=1')}}">Donation Preferences</a>
                                             </li>
                                             <li>
-                                                <a href="{{ url('/donationrequests/create') }}?orgId={{encrypt(Auth::user()->organization_id)}}">Manual Donation Request</a>
+                                                <a href="{{ url('/donationrequests/create') }}?orgId={{encrypt(Auth::user()->organization_id)}}" target="_blank">Manual Donation Request</a>
                                             </li>
                                         @endif
                                         <li>
