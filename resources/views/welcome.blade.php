@@ -137,7 +137,7 @@
                             	<!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span>Small Business</span>
+                                    <span>Small</span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -150,7 +150,7 @@
                                     <span class="sign">$</span>
                                     <span class="currency">19</span>
                                     <span class="cent">.00</span>
-                                    <span class="month">/MON</span>
+                                    <span class="month">/MO&#42;</span>
                                 </span>
                             </div>
                             <!--//PRICE END-->
@@ -169,7 +169,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -192,7 +192,7 @@
                             	<!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span>Business</span>
+                                    <span>Medium</span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -205,7 +205,7 @@
                                     <span class="sign">$</span>
                                     <span class="currency">49</span>
                                     <span class="cent">.00</span>
-                                    <span class="month">/MON</span>
+                                    <span class="month">/MO&#42;</span>
                                 </span>
                             </div>
                             <!--//PRICE END-->
@@ -224,7 +224,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -246,7 +246,7 @@
                             	<!--HEAD START-->
                                 <div class="head_bg"></div>
                                 <div class="head">
-                                    <span>Enterprise</span>
+                                    <span>Large</span>
                                 </div>
                                 <!--//HEAD END-->
                                 
@@ -259,7 +259,7 @@
                                     <span class="sign">$</span>
                                     <span class="currency">199</span>
                                     <span class="cent">.00</span>
-                                    <span class="month">/MON</span>
+                                    <span class="month">/MO&#42;</span>
                                 </span>
                             </div>
                             <!--//PRICE END-->
@@ -278,7 +278,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -313,7 +313,7 @@
                                     <span class="sign">$</span>
                                     <span class="currency">249</span>
                                     <span class="cent">.00</span>
-                                    <span class="month">/MON</span>
+                                    <span class="month">/MO&#42;</span>
                                 </span>
                             </div>
                             <!--//PRICE END-->
@@ -332,7 +332,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Sign up</a>
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
