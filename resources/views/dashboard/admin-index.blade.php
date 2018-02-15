@@ -24,15 +24,15 @@
                                         </div>
                                     </td>
                                     <td><div style="font-weight: bold"> REQUESTS APPROVED : </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $approvedNumber }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($approvedNumber) }}</div></td>
                                 </tr>
                                 <tr>
                                     <td><div style="font-weight: bold;"> REQUESTS REJECTED : </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $rejectedNumber }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($rejectedNumber) }}</div></td>
 
                                 </tr>
                                 <td><div style="font-weight: bold;"> REQUESTS PENDING : </div></td>
-                                <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $pendingNumber }}</div></td>
+                                <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($pendingNumber) }}</div></td>
                             </table>
                         </div>
                     </div>
@@ -51,15 +51,15 @@
                                         </div>
                                     </td>
                                     <td><div style="font-weight: bold">AVG AMOUNT DONATED : </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">${{ $avgAmountDonated }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">${{ number_format($avgAmountDonated, 2)}}</div></td>
                                 </tr>
                                 <tr>
                                     <td><div style="font-weight: bold;"> ACTIVE CUSTOMERS :</div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $userCount }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($userCount) }}</div></td>
 
                                 </tr>
                                     <td><div style="font-weight: bold;"> ACTIVE LOCATIONS :</div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $numActiveLocations }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($numActiveLocations) }}</div></td>
 
 
                                 </table>
@@ -79,14 +79,14 @@
                                             </div>
                                         </td>
                                         <td><div style="font-weight: bold"> NEW BUSINESSES THIS WEEK : </div></td>
-                                        <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $userThisWeek }}</div></td>
+                                        <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($userThisWeek) }}</div></td>
                                     </tr>
                                     <tr>
                                         <td><div style="font-weight: bold;"> NEW BUSINESSES THIS MONTH : </div></td>
-                                        <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $userThisMonth }}</div></td>
+                                        <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($userThisMonth) }}</div></td>
                                     </tr>
                                     <td><div style="font-weight: bold;"> NEW BUSINESSES THIS YEAR : </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $userThisYear }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format ($userThisYear) }}</div></td>
                                 </table>
                             </div>
                         </div>
@@ -124,8 +124,8 @@
                                             @endif
                                             <tr>
                                                 <td style="vertical-align: middle">{{ $organization->org_name }}</td>
-                                                <td style="vertical-align: middle">${{ $organization->approvedDonationRequest->sum('dollar_amount') }}</td>
-                                                <td style="vertical-align: middle">${{ $organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount') }} </td>
+                                                <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->sum('dollar_amount'), 2) }}</td>
+                                                <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount'), 2)}} </td>
                                                 <td style="vertical-align: middle">{{ $organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->count() }}</td>
                                                 <td style="vertical-align: middle">{{ $organization->trial_ends_at->gte(\Carbon\Carbon::now()) ? 'Active' : 'Inactive' }}</td>
 

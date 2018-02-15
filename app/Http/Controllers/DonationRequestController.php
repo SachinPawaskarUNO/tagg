@@ -58,7 +58,8 @@ class DonationRequestController extends Controller
 
     public function create(Request $request)
     {
-        $organization = Organization::active()->where('id', $request->orgId)->get();
+        $id = decrypt($request->orgId);
+        $organization = Organization::active()->where('id', $id)->get();
         if (!($organization->isEmpty())) {
             $expireDate = $organization[0]->trial_ends_at;
 
@@ -113,8 +114,9 @@ class DonationRequestController extends Controller
 
     public function store(Request $request)
     {
+        $id = decrypt($request->orgId);
         $donationRequest = new DonationRequest;
-        $donationRequest->organization_id = $request->orgId;
+        $donationRequest->organization_id = $id;
         $donationRequest->requester = $request->requester;
         $donationRequest->requester_type = $request->requester_type;
         $donationRequest->first_name = $request->firstname;
@@ -228,7 +230,7 @@ class DonationRequestController extends Controller
         $ids_string = (string)$donation->id;
         $names = $donation->first_name.' '.$donation->last_name;
         $firstNames = $donation->first_name;
-        // $lastNames =$donation->last_name;
+        $lastNames =$donation->last_name;
         $emails = $donation->email;
         $backPageFlag = $request->fromPage;
 
@@ -243,16 +245,22 @@ class DonationRequestController extends Controller
                 $approved_amount = $request->approved_amount;
                 $donation->update(['approved_dollar_amount' => $approved_amount]);
             }
-            $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $organizationId)->get()->toArray();
-            // $email_template = $email_template[0]; //convert collection into an array
+            // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $organizationId)->get();
+            $email_template = EmailTemplate::where([
+                ['template_type_id', Constant::REQUEST_APPROVED],
+            ])->get();
+            $email_template = $email_template[0]; //convert collection into an array
 
-            return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'ids_string', 'page_from', 'backPageFlag'));
+            return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from', 'backPageFlag'));
 
         } elseif ($request->input('reject') == 'Reject') {
-            $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $organizationId)->get()->toArray();
-            // $email_template = $email_template[0]; //convert collection into an array
+            // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $organizationId)->get();
+            $email_template = EmailTemplate::where([
+                ['template_type_id', Constant::REQUEST_REJECTED],
+            ])->get();
+            $email_template = $email_template[0]; //convert collection into an array
 
-            return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'ids_string', 'page_from', '$backPageFlag'));
+            return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from', '$backPageFlag'));
 
         }
 

@@ -19,7 +19,7 @@ class CreateEmailTemplatesTable extends Migration
             $table->integer('template_type_id')->unsigned()->index();
             $table->foreign('template_type_id')->references('id')->on('email_template_types')->onDelete('cascade');
             $table->string('email_subject')->default('');
-            $table->string('email_message')->default('');
+            $table->text('email_message');
             $table->timestamps();
         });
     }

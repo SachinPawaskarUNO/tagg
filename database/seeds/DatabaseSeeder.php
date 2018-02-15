@@ -185,11 +185,29 @@ class CqAppSeeder extends Seeder {
             'city' => 'Omaha',
             'zipcode' => '68130',
             'state' => $ne->state_code,
-            'phone_number' => '(402) 715-5230'));
+			'phone_number' => '(402) 715-5230'));
+			// business user
+			$nfmusr = User::create(array(
+				'first_name' => 'Admin',
+				'last_name' => 'Nfm',
+				'user_name' => 'admin@nfm.com',
+				'email' => 'admin@nfm.com',
+				'password' => bcrypt('secret'),
+				'organization_id' => $buser->id,
+				'street_address1' => '17117 Oak Drive',
+				'street_address2' => 'Ste. A',
+				'city' => 'Omaha',
+				'zipcode' => '68130',
+				'state' => $ne->state_code,
+				'phone_number' => '(402) 715-5230'));
 		// assign role 
 		RoleUser::create(array(
             'role_id' => $ru->id,
             'user_id' => $rootuser->id
+		));
+		RoleUser::create(array(
+            'role_id' => $bau->id,
+            'user_id' => $nfmusr->id
         ));
 			$this->command->info('Root user done ! ');
 

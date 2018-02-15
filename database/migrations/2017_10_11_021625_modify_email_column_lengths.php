@@ -14,7 +14,7 @@ class ModifyEmailColumnLengths extends Migration
     public function up()
     {
         Schema::table('email_templates', function (Blueprint $table) {
-            $table->string('email_message', 18000)->change();
+            $table->text('email_message', 18000)->change();
             $table->string('email_subject', 250)->change();
         });
     }

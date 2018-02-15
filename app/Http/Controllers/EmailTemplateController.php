@@ -78,7 +78,7 @@ class EmailTemplateController extends Controller
 
             //get first and last names in string
             $firstNames = DonationRequest::whereIn('id', $ids_array)->pluck('first_name');
-            // $lastNames = DonationRequest::whereIn('id', $ids_array)->pluck('last_name');
+            $lastNames = DonationRequest::whereIn('id', $ids_array)->pluck('last_name');
             //if current organization is a child location get parent's email template
             $organizationId = ParentChildOrganizations::where('child_org_id', $org_id)->value('parent_org_id');
             if ($organizationId){
@@ -89,16 +89,22 @@ class EmailTemplateController extends Controller
             if ($change_status == 'Approve') {
 
                 //get email template for Approve id value = 3
-                $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
+                // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
+                $email_template = EmailTemplate::where([
+                    ['template_type_id', Constant::REQUEST_APPROVED],
+                ])->get();
                 $email_template = $email_template[0]; //convert collection into an array
-
-                return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'ids_string', 'page_from'));
+                
+                return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
             } else {
 
                 //get email template for Reject id value = 4
-                $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $org_id)->get();
+                // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $org_id)->get();
+                $email_template = EmailTemplate::where([
+                    ['template_type_id', Constant::REQUEST_REJECTED],
+                ])->get();
                 $email_template = $email_template[0]; //convert collection into an array
-                return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'ids_string', 'page_from'));
+                return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
             }
         } else {
             //do not redirect to email editor if no request is selected

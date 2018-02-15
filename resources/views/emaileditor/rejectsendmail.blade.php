@@ -73,7 +73,7 @@
                             <div class="col-lg-9" align="center">
                                 {!! Form::text('To', $emails, ['class'=>'col-md-9 control-label' , 'readonly'] ) !!}
                                 {!! Form::hidden('firstNames', $firstNames) !!}
-                                {{--  {!! Form::hidden('lastNames', $lastNames) !!}  --}}
+                                {!! Form::hidden('lastNames', $lastNames) !!}
                                 {!! Form::hidden('status', 'Reject') !!}
                                 {!! Form::hidden('ids_string', $ids_string) !!}
                                 {!! Form::hidden('page_from', $page_from) !!}
