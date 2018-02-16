@@ -37,14 +37,23 @@ git config --global user.email johndoe@example.com
 
 if you are using wamp stack, run below git command within www folder created inside wamp dir -
 ```bash
-git clone --recursive https://github.com/SachinPawaskarUNO/tagg.git
+git clone -b development --single-branch https://github.com/akhampariya/tagg.git
 cd tagg
-git checkout -b development origin/development
 git pull
 ```
 `checkout -b option will create development branch and switch to it and pull command will fetch latest code from github.`
 
 `All changes are supplied to development branch from other feature branches and later merged to master.`
+
+pull/push code for sprint 1 as below - 
+
+```bash
+git clone -b sprint1 --single-branch https://github.com/akhampariya/tagg.git
+cd tagg
+git pull
+```
+
+## `for debugging the app use` [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
 
 #### Update project dependencies
 We supply the environment variable through .env file. Sample setting are provided in [.env.example](.env.example).

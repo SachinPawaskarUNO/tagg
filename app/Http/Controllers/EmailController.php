@@ -43,7 +43,8 @@ class EmailController extends Controller
         // Storing the existing template that was populated in the editor
         $default_template = $request->email_message;
         foreach($emails as $index => $email) {
-            $request->email_message = str_replace('{Addressee}', $firstNames[$index] . ' ' . $lastNames[$index], $request->email_message);
+            // $request->email_message = str_replace('{Addressee}', $firstNames[$index] . ' ' . $lastNames[$index], $request->email_message);
+            $request->email_message = str_replace('{Addressee}', $firstNames[$index], $request->email_message);
             $request->email_message = str_replace('{My Business Name}', Auth::user()->organization->org_name, $request->email_message);
 
             $donation_id = $ids_array[$index];
