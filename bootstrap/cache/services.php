@@ -31,7 +31,6 @@
     27 => 'Laravel\\Tinker\\TinkerServiceProvider',
     28 => 'Collective\\Html\\HtmlServiceProvider',
     29 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-<<<<<<< HEAD
     30 => 'Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider',
     31 => 'Collective\\Html\\HtmlServiceProvider',
     32 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
@@ -41,15 +40,6 @@
     36 => 'App\\Providers\\EventServiceProvider',
     37 => 'App\\Providers\\RouteServiceProvider',
     38 => 'Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider',
-=======
-    30 => 'Collective\\Html\\HtmlServiceProvider',
-    31 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    32 => 'Laravel\\Cashier\\CashierServiceProvider',
-    33 => 'App\\Providers\\AppServiceProvider',
-    34 => 'App\\Providers\\AuthServiceProvider',
-    35 => 'App\\Providers\\EventServiceProvider',
-    36 => 'App\\Providers\\RouteServiceProvider',
->>>>>>> c0805128beaffeff464d35ac8abd6722bba2aee1
   ),
   'eager' => 
   array (
@@ -68,7 +58,6 @@
     12 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     13 => 'Laravel\\Cashier\\CashierServiceProvider',
     14 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-<<<<<<< HEAD
     15 => 'Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider',
     16 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     17 => 'Laravel\\Cashier\\CashierServiceProvider',
@@ -77,14 +66,6 @@
     20 => 'App\\Providers\\EventServiceProvider',
     21 => 'App\\Providers\\RouteServiceProvider',
     22 => 'Rap2hpoutre\\LaravelLogViewer\\LaravelLogViewerServiceProvider',
-=======
-    15 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
-    16 => 'Laravel\\Cashier\\CashierServiceProvider',
-    17 => 'App\\Providers\\AppServiceProvider',
-    18 => 'App\\Providers\\AuthServiceProvider',
-    19 => 'App\\Providers\\EventServiceProvider',
-    20 => 'App\\Providers\\RouteServiceProvider',
->>>>>>> c0805128beaffeff464d35ac8abd6722bba2aee1
   ),
   'deferred' => 
   array (
