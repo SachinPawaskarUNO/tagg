@@ -7,13 +7,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"> <h1 style="text-align: left;font-weight: bold;">Create A User</h1></div>
                     <div class="panel-body">
-<<<<<<< HEAD
-{{$roles}}
-
-                        {{--{!!     {{ Form::open(['url' => 'users']) !!}--}}
-=======
-                        {{--{!! Form::open(['url' => 'users']) !!}--}}
->>>>>>> c25175cc3d25f946c5e3c5d1cf403045e73d851c
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
