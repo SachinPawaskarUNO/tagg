@@ -32,7 +32,7 @@ git config --global user.email johndoe@example.com
 
 if you are using wamp stack, run below git command within www folder created inside wamp dir -
 ```bash
-git clone -b development --single-branch https://github.com/SachinPawaskarUNO/tagg.git
+git clone -b development --single-branch https://github.com/akhampariya/tagg.git
 cd tagg
 git pull
 ```
@@ -41,7 +41,7 @@ git pull
 pull/push code for sprint 1 as below - 
 
 ```bash
-git clone -b sprint1 --single-branch https://github.com/SachinPawaskarUNO/tagg.git
+git clone -b sprint1 --single-branch https://github.com/akhampariya/tagg.git
 cd tagg
 git pull
 ```
