@@ -46,14 +46,14 @@ class OrganizationController extends Controller
         }
 
     }
-    public function invitecode(Request $request, $id)
+    public function donationurl(Request $request, $id)
     {
         $id = decrypt($id);
          if (in_array($id, $this->getAllMyOrganizationIds())) {
             $organization = Organization::find($id);
             $states = State::pluck('state_name', 'state_code');
             $Organization_types = Organization_type::pluck('type_name', 'id');
-            return view('organizations.invitecode', compact('organization', 'states', 'Organization_types'));
+            return view('organizations.donationurl', compact('organization', 'states', 'Organization_types'));
         } else {
             return redirect('/home')->withErrors(array('0' => 'You do not have access to view this Business!!'));
         }
