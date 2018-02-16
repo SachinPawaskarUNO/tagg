@@ -409,8 +409,8 @@
                             <li><a href="{{ url('/dashboard')}}" class="w3-bar-item w3-button current"
                                    style="font-weight:bold; right:10px">Dashboard</a>
                             </li>
-                            <li><a href="{{url('/organizations/invitecode',encrypt(Auth::user()->organization_id) )}}" class="w3-bar-item w3-button current"
-                                   style="font-weight:bold; right:10px">Invite Code</a>
+                            <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" class="w3-bar-item w3-button current"
+                                   style="font-weight:bold; right:10px">My Donation Form</a>
                             @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
                                 <li><a href="{{ route('donationrequests.index')}}" class="w3-bar-item w3-button "
                                        style="font-weight:bold; right:10px">Search
