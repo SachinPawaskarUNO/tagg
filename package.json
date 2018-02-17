@@ -19,6 +19,7 @@
     "vue": "^2.5.13"
   },
   "dependencies": {
+    "class-utils": "^0.3.6",
     "jQuery-QueryBuilder": "^2.4.5"
   }
 }
