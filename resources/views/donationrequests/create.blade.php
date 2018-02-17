@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="divRequestForm" class="panel panel-default">
-                    <div class="panel-heading">Please complete the form</div>
+                    <div class="panel-heading">Please complete the following information to submit your donation request</div>
 
                     <div class="panel-body">
                     {!! Form::open(['url' => 'attachment', 'class' => 'form-horizontal', 'id' => 'donationRequestForm', 'files' => true]) !!}
@@ -451,7 +451,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-5">
-                                <button type="button" id="btnSubmit" class="btn btn-success">
+                                <button type="button" id="btnSubmit" class="btn btn-basic">
                                     Send Request
                                 </button>
 

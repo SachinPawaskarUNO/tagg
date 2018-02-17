@@ -36,7 +36,7 @@
                             <thead>
                             <tr class="bg-info">
                                 <th class="text-center">Organization Name</th>
-                                <th class="text-center">Request Amount</th>
+                                <th class="text-center">Requested Amount</th>
                                 <th class="text-center">Type of Donation</th>
                                 <th class="text-center">Location</th>
                                 {{--<th class="text-center">Event Name</th>--}}
