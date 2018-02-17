@@ -1,10 +1,21 @@
 <p align="center">
     <img src="./public/img/CharityQ.png" alt="CharityQ Logo"/>
+    
 </p>
 
 <p align="center">CharityQ helps caring business managers in streamlining contributions to their community, charities, non-profits, and other organizations. This allows our business partners to operate more efficiently and successfully within their community.</p>
 
-# [CharityQ](https://tagg-uno.herokuapp.com/)
+# [CharityQ](https://tagg-uno.herokuapp.com/) 
+**Build status**
+
+master: 
+[![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=master)](https://travis-ci.org/akhampariya/tagg)
+dev:
+[![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=development)](https://travis-ci.org/akhampariya/tagg)
+sprint 1: [![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=sprint1)](https://travis-ci.org/akhampariya/tagg)
+sprint 2:
+[![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=sprint2)](https://travis-ci.org/akhampariya/tagg)
+
 
 ### Executive Summary
 
@@ -45,7 +56,9 @@ git pull
 
 `All changes are supplied to development branch from other feature branches and later merged to master.`
 
-pull/push code for sprint 1 as below - 
+pull/push code for any sprint  as below -
+
+e.g. for sprint1 
 
 ```bash
 git clone -b sprint1 --single-branch https://github.com/akhampariya/tagg.git
@@ -53,7 +66,8 @@ cd tagg
 git pull
 ```
 
-## `for debugging the app use` [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
+## `for debugging the app use we are using` [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar)
+## `for logging we are using` [Log-viewer](https://github.com/rap2hpoutre/laravel-log-viewer)
 
 #### Update project dependencies
 We supply the environment variable through .env file. Sample setting are provided in [.env.example](.env.example).
@@ -79,6 +93,8 @@ Once you have created database, run below php commands to create and load initia
 php artisan migrate --seed
 ```
 `the migrate command along with --seed tells the system to create the database table based on migration definations and seed intial data defined in seeder files immediatly.`
+
+*Don't seed data while connected to production site.*
 
 #### Run the app 
 
