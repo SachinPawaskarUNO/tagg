@@ -327,7 +327,6 @@
 <div id="content">
     {{--@include('layouts.partials._status')--}}
     @yield('content')
-    <p>test stuff</p>
 
 </div>
 
