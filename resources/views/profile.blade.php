@@ -3,8 +3,9 @@
 <head>
     <title> Profile Management Page</title>
 
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
-<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+{{--  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />  --}}
+<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <a href="#myModal" role="button" class="btn" data-toggle="modal">Open</a>
 

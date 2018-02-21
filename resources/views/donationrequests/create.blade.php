@@ -1,7 +1,8 @@
 
 @extends('layouts.app')
 @section('content')
-    <br>
+<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript"
@@ -32,7 +33,7 @@
     </script>
     {{ csrf_field() }}
 
-    <div class="container">
+    <div class="container donationrequest">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="divRequestForm" class="panel panel-default">
