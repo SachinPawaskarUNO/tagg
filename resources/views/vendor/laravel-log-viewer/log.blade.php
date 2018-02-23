@@ -7,7 +7,7 @@
   <title>Laravel log viewer</title>
 
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
   <link rel="stylesheet"
         href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.css">
 

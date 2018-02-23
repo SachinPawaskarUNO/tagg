@@ -58,8 +58,6 @@
                                 {!! Form::label('Role', 'Role') !!}
                                 <span style="color: red; font-size: 20px; vertical-align:middle;">*</span>
                                 {!! Form::select('role_id', $roles, null, ['class' => 'form-control', 'id' => 'locations-drop-down-parent']) !!}
-
-                                {!! Form::select('role_id', array('4' => $roles[4]), null, ['class' => 'form-control', 'id' => 'locations-drop-down-child']) !!}
                             </div>
                         </div>
 
