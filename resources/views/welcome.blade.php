@@ -113,15 +113,28 @@
                 <div class="col-md-12">
                     <!--PRICE HEADING START-->
                     <div class="price-heading clearfix">
-                        <h2>Pricing</h2>
                     </div>
                     <!--//PRICE HEADING END-->
                 </div>
             </div>
+        
+        <div class="well well-sm text-center">
+            <h1>Choose you plan</h1>        
+                <div class="plan" data-toggle="buttons"> 
+                        <label class="btn btn-lg">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                        <i class="fa fa-toggle-on fa-2x">Monthy</i>
+                    </label>
+                    <label class="btn btn-lg active">
+                        <input type="radio" name="options" id="option2" autocomplete="off">
+                        <i class="fa fa-toggle-off fa-2x">Yearly</i>
+                    </label>          
+                </div>
         </div>
-        <div class="container">
+    </div>
+        <div id='plan1' class="container">
             
-            <!--BLOCK ROW START-->
+            <!--BLOCK ROW START Monthy-->
             <div class="row">
                 <div class="col-md-3">
                 
@@ -342,17 +355,248 @@
                 </div>
             </div>	
             <!--//BLOCK ROW END-->
-            
+    
         </div>
-    </section>
+        <div id='plan2' style="display: none" class="container">
+            
+            <!--BLOCK ROW START Monthy-->
+            <div class="row">
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Small</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">45</span>
+                                    <span class="cent">.60</span>
+                                    <span class="month">/YR&#42;</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                            	<li><span>Up to 5</span> Locations</li>
+                                <li><span>Per</span> Yearly</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content active clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Medium</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">117</span>
+                                    <span class="cent">.60</span>
+                                    <span class="month">/YR&#42;</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                                <li><span>Up to 25</span> Locations</li>
+                                <li><span>Per</span> Yearly</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Large</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">477</span>
+                                    <span class="cent">.60</span>
+                                    <span class="month">/YR&#42;</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                                <li><span>Up to 100 </span>Locations</li>
+                                <li><span>Per</span> Yearly</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+                <div class="col-md-3">
+                
+                	<!--PRICE CONTENT START-->
+                    <div class="generic_content clearfix">
+                        
+                        <!--HEAD PRICE DETAIL START-->
+                        <div class="generic_head_price clearfix">
+                        
+                            <!--HEAD CONTENT START-->
+                            <div class="generic_head_content clearfix">
+                            
+                            	<!--HEAD START-->
+                                <div class="head_bg"></div>
+                                <div class="head">
+                                    <span>Unlimited</span>
+                                </div>
+                                <!--//HEAD END-->
+                                
+                            </div>
+                            <!--//HEAD CONTENT END-->
+                            
+                            <!--PRICE START-->
+                            <div class="generic_price_tag clearfix">	
+                                <span class="price">
+                                    <span class="sign">$</span>
+                                    <span class="currency">597</span>
+                                    <span class="cent">.60</span>
+                                    <span class="month">/YR&#42;</span>
+                                </span>
+                            </div>
+                            <!--//PRICE END-->
+                            
+                        </div>                            
+                        <!--//HEAD PRICE DETAIL END-->
+                        
+                        <!--FEATURE LIST START-->
+                        <div class="generic_feature_list">
+                        	<ul>
+                                <li><span>Unlimited</span> Locations</li>
+                                <li><span>Per</span> Yearly</li>
+                            </ul>
+                        </div>
+                        <!--//FEATURE LIST END-->
+                        
+                        <!--BUTTON START-->
+                        <div class="generic_price_btn clearfix">
+                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        </div>
+                        <!--//BUTTON END-->
+                        
+                    </div>
+                    <!--//PRICE CONTENT END-->
+                        
+                </div>
+            </div>	
+            <!--//BLOCK ROW END-->
+    
+        </div>
+        <script>
+                $( "label" ).click(function() {
+                  $( "#plan1" ).toggle();
+                  $( "#plan2" ).toggle();
+                });
+        </script>
+</section>
     <div class="row">
         <div class="alert alert-dark text-center" role="alert">
             <p>&#42 Save 20&#37 by paying annually.</p> 
           </div>
       </div>            
-	<footer>
+	{{--  <footer>
     	<a class="bottom_btn" href="#">&copy; CharityQ</a>
-    </footer>
+    </footer>  --}}
 </div>
-    </body>
+</body>
 @endsection

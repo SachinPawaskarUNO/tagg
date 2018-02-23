@@ -1,7 +1,6 @@
 /* pricing table */
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
 body{background-color:#ffffff;}
 
 /* Master layout CSS */
@@ -260,9 +259,9 @@ img {
 	padding: 10px 16px 16px;
 }
 
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
+/* body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Lato", sans-serif;
+} */
 
 body, html {
 	/*height: 100%;*/
@@ -728,3 +727,73 @@ th,td{
 .donationrequest{
 	color:#000000;
 }
+
+/* Toggle */
+.plan > .btn {
+	color: #ffffff; 
+	background-color: #8e24aa; 
+	border-color: #130269; 
+}
+.btn.active {                
+	display: none;	
+}
+
+.btn span:nth-of-type(1)  {            	
+	display: none;
+}
+.btn span:last-child  {            	
+	display: block;		
+}
+
+.btn.active  span:nth-of-type(1)  {            	
+	display: block;		
+}
+.btn.active span:last-child  {            	
+	display: none;			
+}
+
+/* .btn-plan { 
+	color: #ffffff; 
+	background-color: #611BBD; 
+	border-color: #130269; 
+  } 
+   
+  .btn-plan:hover, 
+  .btn-plan:focus, 
+  .btn-plan:active, 
+  .btn-plan.active, 
+  .open .dropdown-toggle.btn-plan { 
+	color: #ffffff; 
+	background-color: #49247A; 
+	border-color: #130269; 
+  } 
+   
+  .btn-plan:active, 
+  .btn-plan.active, 
+  .open .dropdown-toggle.btn-plan { 
+	background-image: none; 
+  } 
+   
+  .btn-plan.disabled, 
+  .btn-plan[disabled], 
+  fieldset[disabled] .btn-plan, 
+  .btn-plan.disabled:hover, 
+  .btn-plan[disabled]:hover, 
+  fieldset[disabled] .btn-plan:hover, 
+  .btn-plan.disabled:focus, 
+  .btn-plan[disabled]:focus, 
+  fieldset[disabled] .btn-plan:focus, 
+  .btn-plan.disabled:active, 
+  .btn-plan[disabled]:active, 
+  fieldset[disabled] .btn-plan:active, 
+  .btn-plan.disabled.active, 
+  .btn-plan[disabled].active, 
+  fieldset[disabled] .btn-plan.active { 
+	background-color: #611BBD; 
+	border-color: #130269; 
+  } 
+   
+  .btn-plan .badge { 
+	color: #611BBD; 
+	background-color: #ffffff; 
+  } */
