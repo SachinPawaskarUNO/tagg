@@ -44,7 +44,7 @@ class UserController extends Controller
         $organizationsIds = ParentChildOrganizations::active()->where('parent_org_id', $authOrganizationId)->pluck('child_org_id')->toArray();
 
         array_push($organizationsIds, $authOrganizationId);
-
+        // dd($authOrganizationId);
 
         $organizationStatusArray = [];
 
@@ -58,7 +58,7 @@ class UserController extends Controller
             }
 
         }
-
+        
         return view('users.show', compact('roles', 'organizationStatusArray'));
 
     }
@@ -355,10 +355,15 @@ class UserController extends Controller
     protected function getRoles()
     {
         $authUser = Auth::user();
-        if ($authUser->hasRole(Constant::TAGG_ADMIN) OR $authUser->hasRole(Constant::ROOT_USER)) {
+        // Check for root
+        if ($authUser->hasRole(Constant::ROOT_USER)) {
             return Role::where('id', '<>', Constant::ROOT_USER)->pluck('name', 'id');
-        } else {
-            return Role::whereIn('id', [Constant::BUSINESS_ADMIN, Constant::BUSINESS_USER])->pluck('name', 'id');
+        } 
+        // if not root it must be CQ Admin or User
+        if ($authUser->hasRole(Constant::TAGG_ADMIN)) {
+            return Role::whereIn('id', [Constant::TAGG_ADMIN, Constant::TAGG_USER])->pluck('name', 'id');
         }
+        // If not both they must be business admins or users
+            return Role::whereIn('id', [Constant::BUSINESS_ADMIN, Constant::BUSINESS_USER])->pluck('name', 'id');
     }
 }
