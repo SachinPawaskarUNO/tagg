@@ -14,6 +14,8 @@ use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Subscription;
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function index(Request $request)
@@ -41,7 +43,9 @@ class DashboardController extends Controller
             $rejectedNumber = DonationRequest::where('approval_status_id', Constant::REJECTED)->count();
             $approvedNumber = DonationRequest::where('approval_status_id', Constant::APPROVED)->count();
             $pendingNumber = DonationRequest::whereIn('approval_status_id', [Constant::PENDING_REJECTION, Constant::PENDING_APPROVAL])->count();
-            return view('dashboard.admin-index', compact('organizations', 'avgAmountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber', 'numActiveLocations', 'userCount', 'userThisWeek', 'userThisMonth', 'userThisYear'));
+            $subscriptions = DB::table('subscriptions')->whereNotNull('organization_id')->get();
+
+            return view('dashboard.admin-index', compact('organizations', 'avgAmountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber', 'numActiveLocations', 'userCount', 'userThisWeek', 'userThisMonth', 'userThisYear','subscriptions'));
         } else {
             $organizationId = Auth::user()->organization_id;
             $organization = Organization::findOrFail($organizationId);

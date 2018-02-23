@@ -119,16 +119,30 @@
 
                                     <tbody  style="text-align: center">
                                         @foreach ($organizations as $organization)
-                                            @if(is_null($organization->trial_ends_at))
+                                            @if(is_null($organization->created_at))
                                                 @continue;
                                             @endif
+                                            @foreach ($subscriptions as $subscription)
+                                                @if($subscription->organization_id == $organization->id)
+                                                    <?php $cancelled = is_null($subscription->ends_at) ? false : true ?>
+                                                    @endif
+                                                @endforeach
                                             <tr>
                                                 <td style="vertical-align: middle">{{ $organization->org_name }}</td>
                                                 <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->sum('dollar_amount'), 2) }}</td>
                                                 <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount'), 2)}} </td>
                                                 <td style="vertical-align: middle">{{ $organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->count() }}</td>
-                                                <td style="vertical-align: middle">{{ $organization->trial_ends_at->gte(\Carbon\Carbon::now()) ? 'Active' : 'Inactive' }}</td>
-
+                                                    @if(is_null($organization->stripe_id))
+                                                         <?php $status = 'Incomplete' ?>
+                                                    @elseif(!is_null($organization->stripe_id) && $organization->trial_ends_at->gte(\Carbon\Carbon::now()))
+                                                        <?php $status = 'Active' ?>
+                                                    @else
+                                                        <?php $status = 'Declined' ?>
+                                                    @endif
+                                                    @if($cancelled)
+                                                        <?php $status = 'Cancelled' ?>
+                                                    @endif
+                                                <td style="vertical-align: middle">{{$status}}</td>
                                                 <td>
                                                     <a href="{{ url('/organizationdonations', encrypt($organization->id))}}"
                                                        class="btn btn-info" title="Detail">
