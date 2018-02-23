@@ -47,8 +47,6 @@
 <div class="closePostDonation">
     <h2 style="text-align:center;font-size:250%;">Donation Request Successfully Submitted </h2>
 
-    <h4 style="text-align:center;font-size:150%;">Thank You</h4>
-
 </div>
 </body>
 </html>
