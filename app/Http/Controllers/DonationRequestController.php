@@ -58,7 +58,8 @@ class DonationRequestController extends Controller
 
     public function create(Request $request)
     {
-        $organization = Organization::active()->where('id', $request->orgId)->get();
+        $id = decrypt($request->orgId);
+        $organization = Organization::active()->where('id', $id)->get();
         if (!($organization->isEmpty())) {
             $expireDate = $organization[0]->trial_ends_at;
 
@@ -113,8 +114,9 @@ class DonationRequestController extends Controller
 
     public function store(Request $request)
     {
+        $id = decrypt($request->orgId);
         $donationRequest = new DonationRequest;
-        $donationRequest->organization_id = $request->orgId;
+        $donationRequest->organization_id = $id;
         $donationRequest->requester = $request->requester;
         $donationRequest->requester_type = $request->requester_type;
         $donationRequest->first_name = $request->firstname;
@@ -131,12 +133,14 @@ class DonationRequestController extends Controller
         if ($request->hasFile('attachment') && $request->tax_exempt==1) {
             $imageName = time() . '.' . $request->attachment->getClientOriginalExtension();
             $imageName = Storage::disk('s3')->url($imageName);
+            $imageName = Storage::disk('s3')->url($imageName);
             $donationRequest->file_url = $imageName;
         }
         $donationRequest->item_requested = $request->item_requested;
         $donationRequest->other_item_requested = $request->item_requested_explain;
         $donationRequest->dollar_amount = $request->dollar_amount;
         $donationRequest->approved_dollar_amount = $request->dollar_amount;
+        $donationRequest->approved_organization_id = $id;
         $donationRequest->item_purpose = $request->item_purpose;
         $donationRequest->other_item_purpose = $request->item_purpose_explain;
         $donationRequest->needed_by_date = $request->needed_by_date;
@@ -243,13 +247,19 @@ class DonationRequestController extends Controller
                 $approved_amount = $request->approved_amount;
                 $donation->update(['approved_dollar_amount' => $approved_amount]);
             }
-            $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $organizationId)->get();
+            // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $organizationId)->get();
+            $email_template = EmailTemplate::where([
+                ['template_type_id', Constant::REQUEST_APPROVED],
+            ])->get();
             $email_template = $email_template[0]; //convert collection into an array
 
             return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from', 'backPageFlag'));
 
         } elseif ($request->input('reject') == 'Reject') {
-            $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $organizationId)->get();
+            // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $organizationId)->get();
+            $email_template = EmailTemplate::where([
+                ['template_type_id', Constant::REQUEST_REJECTED],
+            ])->get();
             $email_template = $email_template[0]; //convert collection into an array
 
             return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from', '$backPageFlag'));

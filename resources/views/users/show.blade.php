@@ -7,8 +7,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"> <h1 style="text-align: left;font-weight: bold;">Create A User</h1></div>
                     <div class="panel-body">
-
-                        {{--{!! Form::open(['url' => 'users']) !!}--}}
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -61,7 +59,7 @@
                                 <span style="color: red; font-size: 20px; vertical-align:middle;">*</span>
                                 {!! Form::select('role_id', $roles, null, ['class' => 'form-control', 'id' => 'locations-drop-down-parent']) !!}
 
-                                {!! Form::select('role_id', array('5' => $roles[5]), null, ['class' => 'form-control', 'id' => 'locations-drop-down-child']) !!}
+                                {!! Form::select('role_id', array('4' => $roles[4]), null, ['class' => 'form-control', 'id' => 'locations-drop-down-child']) !!}
                             </div>
                         </div>
 

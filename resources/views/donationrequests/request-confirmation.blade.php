@@ -49,16 +49,6 @@
 
     <h4 style="text-align:center;font-size:150%;">Thank You</h4>
 
-    <div align="center"  >
-        @if ( ! Auth::guest())
-            <button id="clsbtn" class="closeDonationBtn" onclick="self.close()">Close</button>
-        @endif
-
-    </div>
-    <script>
-
-
-    </script>
 </div>
 </body>
 </html>

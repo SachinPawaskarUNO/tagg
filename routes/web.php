@@ -47,9 +47,8 @@ Route::resource('attachment', 'DonationRequestController');
 Route::resource('/users', 'UserController')->middleware('auth');
 
 Route::get('organizations/createOrganization', 'OrganizationController@createOrganization')->middleware('auth');
-
+Route::get('organizations/donationurl/{id}', 'OrganizationController@donationurl')->middleware('auth');
 Route::delete('organizations', 'OrganizationController@destroy')->middleware('auth');
-
 Route::resource('organizations', 'OrganizationController')->middleware('auth');
 
 Route::group(['prefix' => 'subscription'], function () {
@@ -145,3 +144,6 @@ Route::get('compose-email', 'EmailTemplateController@send')->middleware('auth');
 
 //Route::get('/dashboard-taggadmin', 'DashboardController@indexTaggAdmin') ->name('dashboardindex-taggadmin');
 Route::get('/organizationdonations/{id}', 'DonationRequestController@showAllDonationRequests')->name('show-donation')->middleware('auth');
+
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

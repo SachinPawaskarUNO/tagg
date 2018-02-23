@@ -1,21 +1,12 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-  "keywords": [
-    "framework",
-    "laravel"
-  ],
+    "name": "SachinPawaskarUNO/tagg",
+    "description": "CharityQ Project.",
+    "keywords": ["framework", "laravel","CharityQ", "tagg"],
     "license": "MIT",
     "type": "project",
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/timgws/QueryBuilderParser"
-    }
-  ],
     "require": {
         "php": ">=7.0.0",
-      "barryvdh/laravel-cors": "^0.10.0",
+        "barryvdh/laravel-cors": "^0.10.0",
         "doctrine/dbal": "^2.5",
         "fideloper/proxy": "~3.3",
         "illuminate/mail": "^5.5",
@@ -25,13 +16,15 @@
         "laravelcollective/html": "^5.5",
         "league/flysystem-aws-s3-v3": "~1.0",
         "maatwebsite/excel": "~2.1.0",
-        "timgws/query-builder-parser": "dev-master"
+        "rap2hpoutre/laravel-log-viewer": "^0.11.0",
+        "timgws/query-builder-parser": "^1.4"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.1",
         "barryvdh/laravel-ide-helper": "^2.4",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "illuminate/html": "~5.0",
+        "laravelcollective/html": "~5.5",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~6.0"
     },
@@ -65,6 +58,18 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "clear-all": [
+            "composer dumpautoload -o",
+            "@php artisan optimize",
+            "@php artisan clear-compiled",
+            "@php artisan cache:clear",
+            "@php artisan route:clear",
+            "@php artisan view:clear",
+            "@php artisan config:clear"
+        ],
+        "phpunit": [
+            "phpunit > output.txt -d memory_limit=2048M"
         ]
     },
     "config": {

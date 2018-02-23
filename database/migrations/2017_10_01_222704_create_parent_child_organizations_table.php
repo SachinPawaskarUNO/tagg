@@ -14,6 +14,7 @@ class CreateParentChildOrganizationsTable extends Migration
     public function up()
     {
         Schema::create('parent_child_organizations', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('parent_org_id')->unsigned()->index();
             $table->foreign('parent_org_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->integer('child_org_id')->unsigned()->index();

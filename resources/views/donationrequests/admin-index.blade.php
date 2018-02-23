@@ -69,7 +69,7 @@
                                 <tr>
                                     <td style="vertical-align: middle">{{ $donationrequest->requester }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->donationRequestTypes->type_name }}</td>
-                                    <td style="vertical-align: middle">${{ $donationrequest->dollar_amount }}</td>
+                                    <td style="vertical-align: middle">${{ number_format($donationrequest->dollar_amount, 2) }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->donationRequestType->item_name }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->organization->org_name }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->event_name }}</td>
@@ -103,10 +103,6 @@
                                 <div>No Donation Requests are in the system yet.</div>
                             @endif
                         </table>
-
-                        <input type="button" class="btn btn-info" style="background-color: #0099CC "
-                               value="Manual Donation Request"
-                               onClick="window.open('{{ url('/donationrequests/create') }}?orgId={{Auth::user()->organization_id}}', '_bank') ;"/>
                 </div>
             </div>
         </div>

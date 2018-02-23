@@ -1,0 +1,30 @@
+version: '2'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file: .env
+    working_dir: /app
+    command: bash -c 'php artisan migrate && php artisan serve --host 0.0.0.0'
+    depends_on:
+      - db
+    links:
+      - db
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./data/:/var/lib/pgsql
+    ports:
+      - 5432:5432
+    env_file: .env
+    environment:
+      LC_ALL: C.UTF-8
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

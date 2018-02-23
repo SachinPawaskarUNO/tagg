@@ -1130,7 +1130,7 @@ cli-usage@^0.1.1:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/cli-usage/-/cli-usage-0.1.4.tgz#7c01e0dc706c234b39c933838c8e20b2175776e2"
   dependencies:
-    marked "^0.3.6"
+    marked "^0.3.9"
     marked-terminal "^1.6.2"
 
 cliui@^2.1.0:
@@ -3667,9 +3667,9 @@ marked-terminal@^1.6.2:
     lodash.assign "^4.2.0"
     node-emoji "^1.4.1"
 
-marked@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
+marked@^0.3.9:
+  version "0.3.9"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.9.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"
 
 math-expression-evaluator@^1.2.14:
   version "1.2.17"

@@ -54,7 +54,7 @@
 
     <div class="col-md-6">
         <input id="org_description" type="text" class="form-control" name="org_description"
-               value="{{ old('org_description') }}" placeholder="Describe Your Business" autofocus>
+               value="{{ old('org_description') }}" placeholder="Describe Your Business" >
 
         @if ($errors->has('org_description'))
             <span class="help-block">
@@ -84,7 +84,7 @@
 
     <div class="col-md-6">
         <input id="street_address1" type="text" class="form-control" name="street_address1"
-               value="{{ old('street_address1') }}" placeholder="Street Address, Company Name" required autofocus>
+               value="{{ old('street_address1') }}" placeholder="Street Address, Company Name" required >
 
         @if ($errors->has('street_address1'))
             <span class="help-block">
@@ -99,7 +99,7 @@
 
     <div class="col-md-6">
         <input id="street_address2" type="text" class="form-control" name="street_address2"
-               value="{{ old('street_address2') }}" placeholder="Building, Apartment, Floor" autofocus>
+               value="{{ old('street_address2') }}" placeholder="Building, Apartment, Floor" >
 
         @if ($errors->has('street_address2'))
             <span class="help-block">
@@ -114,7 +114,7 @@
 
     <div class="col-md-6">
         <input id="city" type="text" class="form-control" name="city" value="{{ old('city') }}"
-               placeholder="Enter Your City" required autofocus>
+               placeholder="Enter Your City" required >
 
         @if ($errors->has('city'))
             <span class="help-block">
@@ -147,7 +147,7 @@
                oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                maxlength="5" class="form-control" name="zipcode"
                value="{{ old('zipcode') }}"
-               placeholder="Zip Code" required autofocus>
+               placeholder="Zip Code" required >
 
         @if ($errors->has('zipcode'))
             <span class="help-block">
@@ -162,8 +162,7 @@
 
     <div class="col-md-6">
         <input id="phone_number" type="text" class="form-control"
-               name="phone_number" value="{{ old('phone_number') }}" required
-               autofocus>
+               name="phone_number" value="{{ old('phone_number') }}" required >
 
         @if ($errors->has('phone_number'))
             <span class="help-block">

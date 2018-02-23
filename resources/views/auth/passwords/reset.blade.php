@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h1 style="text-align: left;font-weight: bold;">Reset Password<h1></div>
+                <div class="panel-heading"><h1 style="text-align: left;font-weight: bold;">Reset/Create Password<h1></div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn savebtn" style="background-color: #0099CC;">
-                                    Reset Password
+                                    Submit
                                 </button>
                             </div>
                         </div>
