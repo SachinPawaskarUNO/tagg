@@ -176,6 +176,12 @@ input {
   line-height: normal;
 }
 
+input[type = "text"],
+input[type = "textarea"] {
+  margin-bottom: 30px;
+}
+
+
 input[type="checkbox"],
 input[type="radio"] {
   -webkit-box-sizing: border-box;
