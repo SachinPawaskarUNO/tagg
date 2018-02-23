@@ -148,7 +148,7 @@
 
                             <li>
 
-                                <a href="#" class="dropdown-toggle" style="font-weight:bold;right:10px;"
+                                <a href="#" id ='username' class="dropdown-toggle" style="font-weight:bold;right:10px;"
                                    data-toggle="dropdown"
                                    role="button"
                                    aria-expanded="false">
@@ -273,7 +273,7 @@
 
             <li class="dropdown">
                 <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    <a href="#" id ='username' class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-expanded="false">
                         {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}<span
                                 class="caret"></span>
