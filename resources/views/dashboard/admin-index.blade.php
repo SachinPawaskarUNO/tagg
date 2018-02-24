@@ -144,7 +144,7 @@
                                                     @endif
                                                 <td style="vertical-align: middle">{{$status}}</td>
                                                 <td>
-                                                    <a href="{{ url('/organizationdonations', encrypt($organization->id))}}"
+                                                    <a id='details' href="{{ url('/organizationdonations', encrypt($organization->id))}}"
                                                        class="btn btn-info" title="Detail">
                                                         <span class="glyphicon glyphicon-list-alt"></span></a>
                                                 </td>

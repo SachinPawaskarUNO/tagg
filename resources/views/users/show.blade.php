@@ -23,13 +23,13 @@
                         <div class="form-group">
                             {!! Form::label('First Name', 'First Name')!!}
                             <span style="color: red; font-size: 20px; vertical-align:middle;">*</span>
-                            {!! Form::text('first_name',null,['class'=>'form-control', 'placeholder'=>'Enter First Name', 'required'])!!}
+                            {!! Form::text('first_name',null,['class'=>'form-control', 'id' => 'first_name','placeholder'=>'Enter First Name', 'required'])!!}
                         </div>
 
                         <div class="form-group">
                             {!! Form::label('Last Name', 'Last Name') !!}
                             <span style="color: red; font-size: 20px; vertical-align:middle;">*</span>
-                            {!! Form::text('last_name',null,['class'=>'form-control', 'placeholder'=>'Enter Last Name','required']) !!}
+                            {!! Form::text('last_name',null,['class'=>'form-control', 'id' => 'last_name','placeholder'=>'Enter Last Name','required']) !!}
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

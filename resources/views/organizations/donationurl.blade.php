@@ -27,7 +27,7 @@
 
                         </script>
                         <div>
-                            <input type="button" class="btn btn-info"
+                            <input id = 'create_URL' type="button" class="btn btn-info"
                                     style="cursor: help;background-color: #0099CC;" value="Create URL"
                                     title="For use for promotions or on social media." onclick="Copy();"/><br />
                             <small>
@@ -35,7 +35,7 @@
                             </small><br />
                             <input type="text"  id="urlCopied" size="80"/><br />
 
-                            <input type="button" class="btn btn-info"
+                            <input id = 'createForm' type="button" class="btn btn-info"
                                     style="cursor: help;background-color: #0099CC;" value="Create Embedded Form Code"
                                     title="Insert this HTML code in your business website to allow outside organizations to fill out a donation request form.."
                                     onclick="GenerateDRForm();" /><br />
@@ -54,7 +54,7 @@
                     <button id="SetDonationPref" class="btn savebtn" style="background-color: #0099CC;"
                             type="button" onClick = location.href='{{ url('/rules?rule=1')}}';>Set Donation Preferences
                         </button>
-                    <input class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>
+                    <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>
                     </div>
                 </center>
         </div>

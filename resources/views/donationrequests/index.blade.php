@@ -66,7 +66,7 @@
                                             <div>
                                                 {!! Form::open(['method'=> 'POST', 'action' => 'DonationRequestController@changeDonationStatus']) !!}
                                                 {{ csrf_field() }}
-                                                {!! Form::hidden('fromPage','searchdonations',['class'=>'form-control', 'readonly']) !!}
+                                                {!! Form::hidden('fromPage','searchdonations',['class'=>'form-control', 'id' => 'searchDonations', 'readonly']) !!}
                                                 {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
                                                 {{Form::button('<i class="glyphicon glyphicon-ok"></i>', ['type' => 'submit', 'class' => 'btn btn-success', 'name' => 'approve', 'value' => 'Approve'])}}
                                                 <a href="{{route('donationrequests.show',encrypt($donationrequest->id))}}"
@@ -134,6 +134,7 @@
                     {
                         extend: 'pdf',
                         title: '{{ $organizationName }}',
+                        id: 'pdf',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';
@@ -145,6 +146,7 @@
                     {
                         extend: 'csv',
                         title: '{{ $organizationName }}',
+                        id: 'csv',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';
@@ -158,6 +160,7 @@
                     {
                         extend: 'excel',
                         title: '{{ $organizationName }}',
+                        id: 'excel',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';

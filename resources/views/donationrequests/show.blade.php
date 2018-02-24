@@ -199,11 +199,11 @@
                                 @endif
 
 
-                                <input class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
+                                <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
                                 {{--<a href="{{ route('donationrequests.index')}} " class="btn savebtn">Return to Donation--}}
                                 {{--Request</a>--}}
                             @else
-                                <input class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
+                                <input id = 'cancel1' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
                             @endif
                         </div>
                     {!! Form::close() !!}

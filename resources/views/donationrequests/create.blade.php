@@ -70,7 +70,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                {!! Form::select('requester_type', array(null => 'Select...') + $requester_types->all(), null, ['class'=>'form-control', 'required']) !!}
+                                {!! Form::select('requester_type', array(null => 'Select...') + $requester_types->all(), null, ['class'=>'form-control', 'id' => 'Org_type', 'required']) !!}
                                 @if ($errors->has('requester_type'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('requester_type') }}</strong>
@@ -192,7 +192,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span> </label>
 
                             <div class="col-md-6">
-                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control', 'required']) !!}
+                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control', 'id' => 'state', 'required']) !!}
                                 @if ($errors->has('state'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('state') }}</strong>
@@ -386,7 +386,7 @@
                             <label for="event_type" class="col-md-4 control-label">Purpose of The Event <span
                                         style="color: red; font-size: 20px; vertical-align:middle;"></span></label>
                             <div class="col-md-6">
-                                {!! Form::select('event_type', array(null => 'Select...') + $request_event_type->all(), null, ['class'=>'form-control']) !!}
+                                {!! Form::select('event_type', array(null => 'Select...') + $request_event_type->all(), null, ['class'=>'form-control', 'id' => 'event_type']) !!}
                                 @if ($errors->has('event_type'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('event_type') }}</strong>

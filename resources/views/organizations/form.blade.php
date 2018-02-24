@@ -129,7 +129,7 @@
     <label for="state" class="col-md-4 control-label">State <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
     <div class="col-md-6">
-        {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control']) !!}
+        {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control', 'id' => 'state']) !!}
         @if ($errors->has('state'))
             <span class="help-block">
                 <strong>{{ $errors->first('state') }}</strong>
@@ -174,8 +174,8 @@
 
 <div class="form-group">
     <div class="col-md-6 col-md-offset-4">
-        {!! Form::submit($submitButtonText, ['class' => 'btn savebtn']) !!}
-        <a href="{{ route('organizations.index')}}" class="btn backbtn">Cancel</a>
+        {!! Form::submit($submitButtonText, ['class' => 'btn savebtn', 'id' => 'Submit']) !!}
+        <a href="{{ route('organizations.index')}}" id = 'cancel' class="btn backbtn">Cancel</a>
         <span style="color: red"> <h5>Fields Marked With (<span style="color: red; font-size: 20px; vertical-align:middle;">*</span>) Are Mandatory</h5></span>
     </div>
 </div>

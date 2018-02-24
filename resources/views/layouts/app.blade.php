@@ -89,17 +89,17 @@
                     @elseif ((Auth::user()->organization->trial_ends_at >= \Carbon\Carbon::now())
                     OR ( Auth::user()->organization->parentOrganization->isNotEmpty() AND  Auth::user()->organization->parentOrganization[0]->parentOrganization->trial_ends_at >= \Carbon\Carbon::now()))
                         <ul class="nav navbar-nav navbar-right visible-md-block visible-lg-block">
-                            <li><a href="{{ url('/dashboard')}}" class="w3-bar-item w3-button current"
+                            <li><a href="{{ url('/dashboard')}}" id = 'Dashboard' class="w3-bar-item w3-button current"
                                    style="font-weight:bold; right:10px">Dashboard</a>
                             </li>
-                            <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" class="w3-bar-item w3-button current"
+                            <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" id = 'MyDonationForm' class="w3-bar-item w3-button current"
                                    style="font-weight:bold; right:10px">My Donation Form</a>
                             @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                                <li><a href="{{ route('donationrequests.index')}}" class="w3-bar-item w3-button "
+                                <li><a href="{{ route('donationrequests.index')}}" id = 'searchDonations' class="w3-bar-item w3-button "
                                        style="font-weight:bold; right:10px">Search
                                         Donations</a></li>
                             @elseif(Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_USER OR Auth::user()->roles[0]->id == \App\Custom\Constant::ROOT_USER)
-                                <li><a href="{{ URL('donationrequests/admin')}}" class="w3-bar-item w3-button "
+                                <li><a href="{{ URL('donationrequests/admin')}}" id = 'searchDonations'   class="w3-bar-item w3-button "
                                        style="font-weight:bold; right:10px">Search
                                         Donations</a></li>
                             @endif

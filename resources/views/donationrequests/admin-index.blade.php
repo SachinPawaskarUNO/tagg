@@ -162,7 +162,7 @@
 
             $('#example tfoot th').each( function () {
                 var title = $(this).text();
-                $(this).html('<input type="text"  class="freetextsearch"  placeholder="Search ' + title + '" />');
+                $(this).html('<input id="Search_box" type="text"  class="freetextsearch"  placeholder="Search ' + title + '" />');
             } );
 
             var table = $('#example').DataTable({
@@ -174,6 +174,7 @@
                 buttons: [
                     {
                         extend: 'pdf',
+                        id: 'pdf',
                         title: '{{ $organizationName }}',
                         filename: function () {
                             var d = new Date();
@@ -186,6 +187,7 @@
                     {
                         extend: 'csv',
                         title: '{{ $organizationName }}',
+                        id: 'csv',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';
@@ -198,6 +200,7 @@
                     {
                         extend: 'excel',
                         title: '{{ $organizationName }}',
+                        id: 'excel',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';
