@@ -3,10 +3,13 @@
 
 <head>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Barlow:100,600" rel="stylesheet" type="text/css">
+
     <style>
         body  {
             background-image: url("http://www.allwhitebackground.com/images/2/2270.jpg");
             background-color: #cccccc;
+            font-family: 'Barlow', sans-serif;
         }
         .closePostDonation{
 

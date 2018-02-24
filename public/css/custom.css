@@ -1,6 +1,6 @@
 /* pricing table */
 @import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
+@import url(https://fonts.googleapis.com/css?family=Barlow:400,100,200,300,500,600,700,800,900);
 body{background-color:#ffffff;}
 
 /* Master layout CSS */
@@ -391,7 +391,7 @@ th,td{
 } 
 #generic_price_table{
 	margin: 50px 0 50px 0;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Barlow', sans-serif;
 }
 .row .table{
     padding: 28px 0;
@@ -426,7 +426,7 @@ th,td{
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_head_content .head span{
-    font-family: "Raleway",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 28px;
     font-weight: 400;
     letter-spacing: 2px;
@@ -563,7 +563,7 @@ th,td{
 @media (min-width: 1200px) {
 }
 #generic_price_table_home{
-	 font-family: 'Raleway', sans-serif;
+	 font-family: 'Barlow', sans-serif;
 }
 
 .text-center h1,

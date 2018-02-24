@@ -159,6 +159,7 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   cursor: pointer;
+  position: relative;
 }
 
 button[disabled],
@@ -323,6 +324,7 @@ th {
     border: 1px solid #ddd !important;
   }
 }
+
 
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -1408,7 +1410,7 @@ html {
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: "Barlow", sans-serif;
   font-size: 14px;
   line-height: 1.6;
   color: #636b6f;
@@ -7505,7 +7507,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Raleway", sans-serif;
+  font-family: "Barlow", sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -7639,7 +7641,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Raleway", sans-serif;
+  font-family: "Barlow", sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
