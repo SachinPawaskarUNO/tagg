@@ -123,11 +123,11 @@
                 <div class="plan" data-toggle="buttons"> 
                         <label class="btn btn-lg">
                         <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                        <i class="fa fa-toggle-on fa-2x">Monthly</i>
+                        <i id = 'monthly' class="fa fa-toggle-on fa-2x">Monthly</i>
                     </label>
                     <label class="btn btn-lg active">
                         <input type="radio" name="options" id="option2" autocomplete="off">
-                        <i class="fa fa-toggle-off fa-2x">Yearly</i>
+                        <i id = 'yearly' class="fa fa-toggle-off fa-2x">Yearly</i>
                     </label>          
                 </div>
         </div>
@@ -407,7 +407,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='small' class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='small1' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -570,7 +570,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='unlimited' class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='unlimited1' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
