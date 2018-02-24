@@ -123,7 +123,7 @@
                 <div class="plan" data-toggle="buttons"> 
                         <label class="btn btn-lg">
                         <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                        <i class="fa fa-toggle-on fa-2x">Monthy</i>
+                        <i class="fa fa-toggle-on fa-2x">Monthly</i>
                     </label>
                     <label class="btn btn-lg active">
                         <input type="radio" name="options" id="option2" autocomplete="off">
@@ -182,7 +182,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='small' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -237,7 +237,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='medium' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -291,7 +291,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='large' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -345,7 +345,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='unlimited' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -407,7 +407,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='small' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -462,7 +462,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='medium' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -516,7 +516,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='large' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -570,7 +570,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a class="" href="{{ route('register') }}">Start Your Free Trial</a>
+                        	<a id='unlimited' class="" href="{{ route('register') }}">Start Your Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
