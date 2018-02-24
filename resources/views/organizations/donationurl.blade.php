@@ -1,12 +1,14 @@
 @extends('layouts.app')
 @section('content')
 
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="col-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1 style="text-align: left;font-weight: bold;">URL for Donations</h1></div>
+                    <div class="panel-heading"><h1 style="text-align: left;font-weight: bold;">There are two ways to utilize your CharityQ  Donation Form.</h1></div>
                     <div class="panel-body">
                         <script type="text/javascript">
                             function Copy() {
@@ -27,20 +29,19 @@
                         <div>
                             <input type="button" class="btn btn-info"
                                     style="cursor: help;background-color: #0099CC;" value="Create URL"
-                                    title="For use for promotions or on social media." onclick="Copy();"/>
-                            <input type="text" placeholder="Click the button to display the URL and copy it to your clipboard" id="urlCopied" size="80"/><br />
+                                    title="For use for promotions or on social media." onclick="Copy();"/><br />
                             <small>
-                                Click the button to display the URL and copy it to your clipboard. Share your
-                                business’ donation request form on social media sites.  The URL can be embedded on
-                                your business website.  Outside organizations can submit requests online that will
-                                automatically be filtered by your donation preferences.
+                                This will provide you with a website link to your donation form.
                             </small><br />
+                            <input type="text" placeholder="This will provide you with a website link to your donation form." id="urlCopied" size="80"/><br />
+
                             <input type="button" class="btn btn-info"
                                     style="cursor: help;background-color: #0099CC;" value="Create Embedded Form Code"
                                     title="Insert this HTML code in your business website to allow outside organizations to fill out a donation request form.."
                                     onclick="GenerateDRForm();" /><br />
+                            <small>This provides you with code to copy onto your website (into an iframe).</small><br />
                             <textarea type="textarea"
-                                        style="width:680px; height: 70px"  placeholder="Click the button to display the embed code and copy it to your clipboard" id="embeddedCode" size="80"></textarea><br />
+                                        style="width:680px; height: 70px"  placeholder="This provides you with code to copy onto your website (into an iframe)." id="embeddedCode" size="80"></textarea><br />
                         </div>
                     </div>
                 </div>
