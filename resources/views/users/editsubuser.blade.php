@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label id = 'first_name'for="first_name" class="col-md-4 control-label"> First Name <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
-                                {!! Form::text('first_name',null,['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('first_name',null,['class' => 'form-control', 'id' => 'first_name', 'required']) !!}
                             </div>
                         </div>
 
