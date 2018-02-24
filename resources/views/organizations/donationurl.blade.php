@@ -33,7 +33,7 @@
                             <small>
                                 This will provide you with a website link to your donation form.
                             </small><br />
-                            <input type="text" placeholder="This will provide you with a website link to your donation form." id="urlCopied" size="80"/><br />
+                            <input type="text"  id="urlCopied" size="80"/><br />
 
                             <input type="button" class="btn btn-info"
                                     style="cursor: help;background-color: #0099CC;" value="Create Embedded Form Code"
@@ -41,17 +41,23 @@
                                     onclick="GenerateDRForm();" /><br />
                             <small>This provides you with code to copy onto your website (into an iframe).</small><br />
                             <textarea type="textarea"
-                                        style="width:680px; height: 70px"  placeholder="This provides you with code to copy onto your website (into an iframe)." id="embeddedCode" size="80"></textarea><br />
+                                        style="width:680px; height: 70px"  id="embeddedCode" size="80"></textarea><br />
                         </div>
                     </div>
-                </div>
+
+                    </div>
+
             </div>
+            <div class="form-group">
+                <center>
+                <div class="text-center">
+                    <button id="SetDonationPref" class="btn savebtn" style="background-color: #0099CC;"
+                            type="button" onClick = location.href='{{ url('/rules?rule=1')}}';>Set Donation Preferences
+                        </button>
+                    <input class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>
+                    </div>
+                </center>
         </div>
     </div>
 </div>
 
-<center>
-        <a href="{{ url('/rules?rule=1')}}" title="Set Donation Preferences" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Set preferences</a>
-        <a href="{{ url('/dashboard')}}" title="Navigate to Dashboard" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Cancel</a>
-
-</center>
