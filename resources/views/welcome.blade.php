@@ -194,7 +194,7 @@
                 <div class="col-md-3">
                 
                 	<!--PRICE CONTENT START-->
-                    <div class="generic_content active clearfix">
+                    <div class="generic_content clearfix">
                         
                         <!--HEAD PRICE DETAIL START-->
                         <div class="generic_head_price clearfix">
@@ -419,7 +419,7 @@
                 <div class="col-md-3">
                 
                 	<!--PRICE CONTENT START-->
-                    <div class="generic_content active clearfix">
+                    <div class="generic_content clearfix">
                         
                         <!--HEAD PRICE DETAIL START-->
                         <div class="generic_head_price clearfix">
