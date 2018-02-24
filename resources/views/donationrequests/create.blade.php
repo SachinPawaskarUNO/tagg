@@ -137,8 +137,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-md-6">
                                 <input id="phone_number" type="tel" class="form-control"
-                                       name="phone_number" value="{{ old('phone_number') }}" required
-                                >
+                                       name="phone_number" value="{{ old('phone_number') }}" placeholder="Enter Your Phone Number" required >
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
