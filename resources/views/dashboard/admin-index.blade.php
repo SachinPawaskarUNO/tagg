@@ -137,12 +137,15 @@
                                                     @elseif(!is_null($organization->trial_ends_at) && !is_null($organization->stripe_id) && $organization->trial_ends_at>=(\Carbon\Carbon::now()))
                                                         <?php $status = 'Active' ?>
                                                     @else
-                                                        <?php $status = 'Declined' ?>
-                                                    @endif
-                                                    @if($cancelled)
-                                                        <?php $status = 'Cancelled' ?>
-                                                    @endif
-                                                <td style="vertical-align: middle">{{$status}}</td>
+                                                    <?php $status = 'Unknown' ?>
+                                                @endif
+                                                @if(strpos($organization->error_message, 'declined') !== false)
+                                                    <?php $status = 'Declined' ?>
+                                                @endif
+                                                @if($cancelled)
+                                                    <?php $status = 'Cancelled' ?>
+                                                @endif
+                                                <td style="vertical-align: middle">{{$status }}</td>
                                                 <td>
                                                     @if($status != 'Incomplete' && !is_null($organization->trial_ends_at))
                                                     <a id='details' href="{{ url('/organizationdonations', encrypt($organization->id))}}"
