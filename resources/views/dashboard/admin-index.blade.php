@@ -144,9 +144,11 @@
                                                     @endif
                                                 <td style="vertical-align: middle">{{$status}}</td>
                                                 <td>
+                                                    @if($status == 'Incomplete' && !is_null($organization->trial_ends_at))
                                                     <a id='details' href="{{ url('/organizationdonations', encrypt($organization->id))}}"
                                                        class="btn btn-info" title="Detail">
                                                         <span class="glyphicon glyphicon-list-alt"></span></a>
+                                                    @endif
                                                 </td>
                                                 {{--<td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn savebtn"> Detail </a>--}}
                                                 {{--                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn savebtn"> Edit </a>--}}
