@@ -106,7 +106,7 @@
 
                             <div class="col-md-6">
 
-                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control']) !!}
+                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control', 'id' => 'state']) !!}
 
                                 @if ($errors->has('state'))
                                     <span class="help-block">
