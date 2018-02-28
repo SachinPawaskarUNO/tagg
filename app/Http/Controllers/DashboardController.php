@@ -21,7 +21,8 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->roleuser->role_id == Constant::ROOT_USER OR $request->user()->roleuser->role_id == Constant::TAGG_ADMIN OR $request->user()->roleuser->role_id == Constant::TAGG_USER) {
-            $organizations = Organization::all();
+            // $organizations = Organization::all();
+            $organizations = Organization::where('id', '!=', Constant::CHARITYQ_ID)->get(); // non CharityQ user selection
             $activeParent = Organization::active()->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())->pluck('id')->toArray();
             $activeOrgIds = ParentChildOrganizations::active()->whereIn('parent_org_id', $activeParent)->pluck('child_org_id')->toArray();
             $idCount = count($activeOrgIds);
@@ -44,7 +45,6 @@ class DashboardController extends Controller
             $approvedNumber = DonationRequest::where('approval_status_id', Constant::APPROVED)->count();
             $pendingNumber = DonationRequest::whereIn('approval_status_id', [Constant::PENDING_REJECTION, Constant::PENDING_APPROVAL])->count();
             $subscriptions = DB::table('subscriptions')->whereNotNull('organization_id')->get();
-
             return view('dashboard.admin-index', compact('organizations', 'avgAmountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber', 'numActiveLocations', 'userCount', 'userThisWeek', 'userThisMonth', 'userThisYear','subscriptions'));
         } else {
             $organizationId = Auth::user()->organization_id;
