@@ -123,11 +123,11 @@
                 <div class="plan" data-toggle="buttons"> 
                         <label class="btn btn-lg">
                         <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                        <i id = 'monthly' class="fa fa-toggle-on fa-2x">Monthly</i>
+                        <i id = 'monthly' class="fa fa-toggle-on fa-2x toggle-font">Monthly</i>
                     </label>
                     <label class="btn btn-lg active">
                         <input type="radio" name="options" id="option2" autocomplete="off">
-                        <i id = 'yearly' class="fa fa-toggle-off fa-2x">Yearly</i>
+                        <i id = 'yearly' class="fa fa-toggle-off fa-2x toggle-font">Yearly</i>
                     </label>          
                 </div>
         </div>

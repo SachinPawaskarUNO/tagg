@@ -1,5 +1,5 @@
 /* pricing table */
-@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
+@import url(https://fonts.googleapis.com/css?family=Barlow:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
 @import url(https://fonts.googleapis.com/css?family=Barlow:400,100,200,300,500,600,700,800,900);
 body{background-color:#ffffff;}
 
@@ -260,7 +260,7 @@ img {
 }
 
 /* body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Lato", sans-serif;
+	font-family: "Barlow", sans-serif;
 } */
 
 body, html {
@@ -318,6 +318,10 @@ div {
 th,td{
 	min-width:20px;
 }
+.toggle-font{
+	font-family: "Barlow", sans-serif;
+ }
+
 /* Pricing table */
 #generic_price_table{
 	background-color: #ffffff;
@@ -445,14 +449,14 @@ th,td{
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .sign{
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 28px;
     font-weight: 400;
     vertical-align: middle;
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .currency{
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 60px;
     font-weight: 300;
     letter-spacing: -2px;
@@ -463,14 +467,14 @@ th,td{
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .cent{
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 24px;
     font-weight: 400;
     vertical-align: bottom;
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .month{
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 18px;
     font-weight: 400;
     letter-spacing: 3px;
@@ -484,7 +488,7 @@ th,td{
 }
 
 #generic_price_table .generic_content .generic_feature_list ul li{
-	font-family: "Lato",sans-serif;
+	font-family: "Barlow",sans-serif;
 	font-size: 18px;
 	padding: 15px 0;
 	transition: all 0.3s ease-in-out 0s;
@@ -511,7 +515,7 @@ th,td{
 	-o-border-radius: 50px;
 	-webkit-border-radius: 50px;
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 18px;
     outline: medium none;
     padding: 12px 30px;
