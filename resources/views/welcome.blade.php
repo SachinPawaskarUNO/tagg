@@ -120,14 +120,14 @@
         
         <div class="well well-sm text-center">
             <h1>Choose you plan</h1>        
-                <div class="plan" data-toggle="buttons"> 
+                <div id='pln' class="plan" data-toggle="buttons"> 
                         <label class="btn btn-lg">
                         <input type="radio" name="options" id="option1" autocomplete="off" checked>
-                        <i id = 'monthly' class="fa fa-toggle-on fa-2x toggle-font">Monthly</i>
+                        <i class="fa fa-toggle-on fa-2x"><i class='toggle-font'>Monthly</i></i>
                     </label>
                     <label class="btn btn-lg active">
                         <input type="radio" name="options" id="option2" autocomplete="off">
-                        <i id = 'yearly' class="fa fa-toggle-off fa-2x toggle-font">Yearly</i>
+                        <i id ='yearly' class="fa fa-toggle-off fa-2x"><i class='toggle-font'>Yearly</i></i>
                     </label>          
                 </div>
         </div>
