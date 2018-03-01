@@ -119,7 +119,7 @@
             </div>
         
         <div class="well well-sm text-center">
-            <h1>Choose you plan</h1>        
+            <h1 class="toggle-font">Choose you plan</h1>        
                 <div id='pln' class="plan toggle-font" data-toggle="buttons"> 
                         
                         <input type="radio" class="toggle-font" name="options" id="option1">

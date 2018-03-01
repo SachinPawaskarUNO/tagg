@@ -321,6 +321,7 @@ th,td{
 .toggle-font{
 	font-family: "Barlow", sans-serif;
 	font-style: normal;
+	color: black;
  }
 
 /* Pricing table */
@@ -369,8 +370,8 @@ th,td{
 	color: #414141;
 }
 #generic_price_table .generic_content .generic_feature_list ul li:hover{
-	background-color: #E4E4E4;
-	border-left: 5px solid #8e24aa;
+	background-color: transparent;
+	/* border-left: 5px solid #8e24aa; */
 }
 
 #generic_price_table .generic_content .generic_price_btn a{
@@ -573,7 +574,7 @@ th,td{
 
 .text-center h1,
 .text-center h1 a{
-	color: #7885CB;
+	color: black;
 	font-size: 30px;
 	font-weight: 300;
 	text-decoration: none;
