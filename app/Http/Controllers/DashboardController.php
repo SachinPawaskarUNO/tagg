@@ -21,10 +21,13 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->roleuser->role_id == Constant::ROOT_USER OR $request->user()->roleuser->role_id == Constant::TAGG_ADMIN OR $request->user()->roleuser->role_id == Constant::TAGG_USER) {
-            // $organizations = Organization::all();
             $organizations = Organization::where('id', '!=', Constant::CHARITYQ_ID)->get(); // non CharityQ user selection
-            $activeParent = Organization::active()->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())->pluck('id')->toArray();
+            $activeParent = Organization::active()
+                            ->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())
+                            ->where('id', '!=', Constant::CHARITYQ_ID)
+                            ->pluck('id')->toArray(); // select non CQ businesses
             $activeOrgIds = ParentChildOrganizations::active()->whereIn('parent_org_id', $activeParent)->pluck('child_org_id')->toArray();
+            // dd($activeOrgIds);
             $idCount = count($activeOrgIds);
             foreach ($activeParent as $key => $activeID) {
                 $test = [$idCount => $activeID];
@@ -32,14 +35,28 @@ class DashboardController extends Controller
                 $idCount+= 1;
             }
             $activeLocations = Organization::whereIn('id', $activeOrgIds)->get();
+            // dd($activeOrgIds);
             $numActiveLocations = count($activeLocations);
             // Only parent organizations have 'trial_ends_at' field in the Organizations table
-            $organizationsArray = Organization::active()->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())->pluck('id')->toArray();
+            // $organizationsArray = Organization::active()->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())->pluck('id')->toArray();
+            $organizationsArray = Organization::active()
+                                ->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())
+                                ->where('id', '!=', Constant::CHARITYQ_ID)
+                                ->pluck('id')->toArray(); // select non CQ businesses
             // Counting the number of parent organizations
             $userCount = count($organizationsArray);
-            $userThisWeek = Organization::active()->where('created_at', '>=', Carbon::now()->startOfWeek())->whereNotNull('trial_ends_at')->count();
-            $userThisMonth = Organization::active()->where('created_at', '>=', Carbon::now()->startOfMonth())->whereNotNull('trial_ends_at')->count();
-            $userThisYear = Organization::active()->where('created_at', '>=', Carbon::now()->startOfYear())->whereNotNull('trial_ends_at')->count();
+            $userThisWeek = Organization::active()
+                            ->where('created_at', '>=', Carbon::now()->startOfWeek())
+                            ->where('id', '!=', Constant::CHARITYQ_ID)
+                            ->whereNotNull('trial_ends_at')->count();
+            $userThisMonth = Organization::active()
+                            ->where('created_at', '>=', Carbon::now()->startOfMonth())
+                            ->where('id', '!=', Constant::CHARITYQ_ID)
+                            ->whereNotNull('trial_ends_at')->count();
+            $userThisYear = Organization::active()
+                            ->where('created_at', '>=', Carbon::now()->startOfYear())
+                            ->where('id', '!=', Constant::CHARITYQ_ID)
+                            ->whereNotNull('trial_ends_at')->count();
             $avgAmountDonated = sprintf("%.2f", (DonationRequest::where('approval_status_id', Constant::APPROVED)->avg('approved_dollar_amount')));
             $rejectedNumber = DonationRequest::where('approval_status_id', Constant::REJECTED)->count();
             $approvedNumber = DonationRequest::where('approval_status_id', Constant::APPROVED)->count();
