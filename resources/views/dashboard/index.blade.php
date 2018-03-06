@@ -169,7 +169,11 @@
         <script>
 
             $(document).ready(function() {
-                $('#example').DataTable();
+                $('#example').DataTable(
+                    {
+                        responsive: true
+                    } 
+                );
                 // Storing the number of all the checkboxes
                 // of donation requests
                 var totalCheckboxes = $('.myCheckbox').length;

@@ -1,11 +1,332 @@
 /* pricing table */
-@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900);
-body{background-color:#eee;}
+@import url(https://fonts.googleapis.com/css?family=Barlow:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
+@import url(https://fonts.googleapis.com/css?family=Barlow:400,100,200,300,500,600,700,800,900);
+body{background-color:#ffffff;}
 
+/* Master layout CSS */
+
+.flex-center {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.content {
+	text-align: center;
+}
+
+.title {
+	font-size: 40px;
+}
+
+.m-b-md {
+	margin-bottom: 30px;
+}
+
+.full-height {
+	height: 80vh;
+}
+
+body {
+	/* font: 16px Montserrat, sans-serif; */
+	font-size: small;
+	line-height: 2.0;
+	color: #0077aa;
+	margin-bottom: 100px;
+	min-height: 100%;
+	clear: both;
+	margin-top: 20px;
+	padding: 25px 0 0;
+	overflow-x: hidden;
+
+}
+
+@media screen and (max-width: 600px) {
+	ul.topnav li.right,
+	ul.topnav li {
+		float: none;
+	}
+}
+
+h2 {
+	font-size: 30px;
+	color: #66512c;
+	position: relative;
+	float: bottom;
+	top: 75%;
+	left: 55%;
+	transform: translate(-60%, 30%);
+}
+
+h4 {
+	font-size: 30px;
+	color: red;
+	position: relative;
+	float: bottom;
+	top: 75%;
+	left: 55%;
+	transform: translate(-60%, 30%);
+	text-decoration-line: underline;
+}
+
+h3 {
+	font-size: 30px;
+	color: #ffffff;
+	position: relative;
+	float: bottom;
+	top: 75%;
+	left: 55%;
+	transform: translate(-60%, 30%);
+}
+
+p {
+	font-size: 20px;
+	color: black;
+	position: relative;
+	float: bottom;
+	top: 75%;
+	left: 53%;
+	transform: translate(-55%, 30%);
+	vertical-align: middle;
+	text-align: center;
+}
+
+h1 {
+	font-size: 16px;
+	color: #3a87ad;
+	position: relative;
+	float: bottom;
+	top: 75%;
+	left: 55%;
+	transform: translate(-55%, 30%);
+}
+
+.margin {
+	margin-bottom: 45px;
+}
+
+.bg-1 {
+
+	background-color: #90a4ae;
+	color: #ffffff;
+}
+
+img {
+	background-size: cover;
+	display: block;
+	vertical-align: middle;
+
+}
+
+.imgalign {
+	margin-left: auto;
+	margin-right: auto;
+	background-size: cover;
+	display: block;
+	vertical-align: middle;
+}
+
+.txtalign {
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	width: 8em
+}
+
+.bg-2 {
+	background-color: #ffffff; /* Dark Blue */
+	color: #ffffff;
+}
+
+.bg-3 {
+	background-color: #f1f8e9; /* White */
+	color: #555555;
+}
+
+.bg-4 {
+	background-color: #0097a7; /* Black Gray */
+	color: #fff;
+}
+
+.container-fluid {
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.navbar-fixed-top {
+	box-shadow: 1px 1px 5px 2px mediumpurple;
+	max-height: 7%;
+}
+
+.navbar-nav li a:hover {
+	color: #1abc9c !important;
+}
+
+.navbar-nav li a:active {
+	background-color: #e1bee7 !important;
+}
+
+.btn {
+	align: center;
+	border: none;
+	padding: 5px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+}
+
+.savebtn {
+	background-color: #0099CC;
+	color: white;
+	padding: 5px 12px;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+}
+
+.updatebtn {
+	background-color: #00C851;
+	color: white;
+	padding: 5px 12px;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+}
+
+.backbtn {
+	background-color: #ffbb33;
+	color: white;
+}
+
+.col-sm-6 {
+	display: block;
+	padding: 5px;
+
+}
+
+.containerimg {
+	width: 100%;
+	height: 40%;
+	background: purple;
+	margin: 0 auto;
+	padding-top: 0px;
+}
+
+.containerimg img.wide {
+	max-width: 100%;
+	max-height: 100%;
+	height: auto;
+}
+
+.containerimg img.tall {
+	max-height: 100%;
+	max-width: 100%;
+	width: auto;
+}
+
+​
+.footer {
+	position: fixed;
+	right: 0;
+	bottom: 0px;
+	left: 0;
+	top: inherit;
+	padding-top: -200px;
+	text-align: center;
+}
+
+.navbar-nav > li > a {
+	color: white;
+	style: bold;
+	font-size: 15px;
+	vertical-align: middle;
+
+}
+
+.main-navigation ul li a {
+
+	padding-left: 25px !important;
+	padding-top: 25px;
+!important;
+	padding-bottom: 25px;
+!important;
+	color: white;
+}
+
+.w3-bar .w3-button {
+	padding: 10px 16px 16px;
+}
+
+/* body, h1, h2, h3, h4, h5, h6 {
+	font-family: "Barlow", sans-serif;
+} */
+
+body, html {
+	/*height: 100%;*/
+	line-height: 1.8;
+}
+
+.divsmall {
+	padding: 25px -5px 5px 100px;
+
+}
+
+div {
+	padding: 1px;
+}
+
+.dropdown-menu a {
+	background-color: #9c27b0;
+	padding: 2px 3px;
+	color: white;
+	text-decoration: none;
+	display: block;
+	border: 1px solid #e1bee7;
+	box-shadow: 1px 1px 5px 1px grey;
+	float: none;
+	overflow: hidden;
+
+}
+
+.dropdown-menu li > a {
+	color: white;
+	padding-right: 3px;
+	padding-bottom: 0px;
+	padding-left: 3px;
+	float:none;
+	overflow: hidden;
+}
+.dropdown-menu {
+
+	padding: 0;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	text-align: left;
+	float:none;
+	overflow: hidden;
+	font-weight: bold;
+}
+.dropdown-menu > li{
+
+	text-align:left;
+}
+.panel-body{
+	overflow-x: auto;
+			}
+th,td{
+	min-width:20px;
+}
+.toggle-font{
+	font-family: "Barlow", sans-serif;
+	font-style: normal;
+	color: black;
+ }
+
+/* Pricing table */
 #generic_price_table{
-	background-color: #f0eded;
+	background-color: #ffffff;
 }
 
 /*PRICE COLOR CODE START*/
@@ -42,15 +363,15 @@ body{background-color:#eee;}
 }
 
 #generic_price_table .generic_content .generic_feature_list ul li{	
-	color: #a7a7a7;
+	color:black;
 }
 
 #generic_price_table .generic_content .generic_feature_list ul li span{
 	color: #414141;
 }
 #generic_price_table .generic_content .generic_feature_list ul li:hover{
-	background-color: #E4E4E4;
-	border-left: 5px solid #8e24aa;
+	background-color: transparent;
+	/* border-left: 5px solid #8e24aa; */
 }
 
 #generic_price_table .generic_content .generic_price_btn a{
@@ -76,7 +397,7 @@ body{background-color:#eee;}
 } 
 #generic_price_table{
 	margin: 50px 0 50px 0;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Barlow', sans-serif;
 }
 .row .table{
     padding: 28px 0;
@@ -111,7 +432,7 @@ body{background-color:#eee;}
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_head_content .head span{
-    font-family: "Raleway",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 28px;
     font-weight: 400;
     letter-spacing: 2px;
@@ -130,14 +451,14 @@ body{background-color:#eee;}
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .sign{
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 28px;
     font-weight: 400;
     vertical-align: middle;
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .currency{
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 60px;
     font-weight: 300;
     letter-spacing: -2px;
@@ -148,14 +469,14 @@ body{background-color:#eee;}
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .cent{
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 24px;
     font-weight: 400;
     vertical-align: bottom;
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .month{
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 18px;
     font-weight: 400;
     letter-spacing: 3px;
@@ -169,7 +490,7 @@ body{background-color:#eee;}
 }
 
 #generic_price_table .generic_content .generic_feature_list ul li{
-	font-family: "Lato",sans-serif;
+	font-family: "Barlow",sans-serif;
 	font-size: 18px;
 	padding: 15px 0;
 	transition: all 0.3s ease-in-out 0s;
@@ -196,7 +517,7 @@ body{background-color:#eee;}
 	-o-border-radius: 50px;
 	-webkit-border-radius: 50px;
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 18px;
     outline: medium none;
     padding: 12px 30px;
@@ -248,12 +569,12 @@ body{background-color:#eee;}
 @media (min-width: 1200px) {
 }
 #generic_price_table_home{
-	 font-family: 'Raleway', sans-serif;
+	 font-family: 'Barlow', sans-serif;
 }
 
 .text-center h1,
 .text-center h1 a{
-	color: #7885CB;
+	color: black;
 	font-size: 30px;
 	font-weight: 300;
 	text-decoration: none;
@@ -409,3 +730,33 @@ body{background-color:#eee;}
 	color: #FFF;
 	text-decoration:none;
 }
+.donationrequest{
+	color:#000000;
+}
+
+/* Toggle */
+.plan > .btn {
+	color: #ffffff; 
+	background-color: #8e24aa; 
+	border-color: #130269; 
+}
+.btn.active {                
+	display: none;	
+}
+
+.btn span:nth-of-type(1)  {            	
+	display: none;
+}
+.btn span:last-child  {            	
+	display: block;		
+}
+
+.btn.active  span:nth-of-type(1)  {            	
+	display: block;		
+}
+.btn.active span:last-child  {            	
+	display: none;			
+}
+#monthly{
+	font-family: "Barlow", sans-serif;
+ }

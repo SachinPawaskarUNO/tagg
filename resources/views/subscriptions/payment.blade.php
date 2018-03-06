@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <br>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{asset('js/stripe.js')}}"></script>
@@ -23,7 +22,7 @@
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
                 <div class="panel panel-default" style="padding-left: 5px;padding-right: 5px;">
-                    <div class="panel-heading"><h1> Choose Your Plan</h1></div>
+                    <div class="panel-heading"><h1> Add Payment Information</h1></div>
                     <h2 style="text-align:center;"></h2>
 
                 {{ Form::open(['method'=> 'POST', 'action' => 'SubscriptionController@getIndex','id'=>'subscription-form']) }}
@@ -44,7 +43,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
 
-                                        <div class="panel-heading"><h1 style="text-align: center;"> Plan Selection</h1>
+                                        <div class="panel-heading"><h1 style="text-align: center;"> Choose Your Plan</h1>
                                         </div>
                                     </div>
                                 </div>

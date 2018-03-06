@@ -55,7 +55,11 @@
                                                                       class="btn savebtn"
                                                                       style="background-color: #0099CC;"> Edit </a>
                                 </td>
-                            </tr>
+                                <!--<td style="vertical-align: middle">
+                                    <input type="submit" value="Delete" class='btn backbtn'
+                                           onClick="return confirm('Are you sure you want to delete this user?');">
+                                </td>
+                            </tr> -->
                             @endforeach
                             </tbody>
                         </table>

@@ -36,7 +36,7 @@
                             <thead>
                             <tr class="bg-info">
                                 <th class="text-center">Organization Name</th>
-                                <th class="text-center">Request Amount</th>
+                                <th class="text-center">Requested Amount</th>
                                 <th class="text-center">Type of Donation</th>
                                 <th class="text-center">Location</th>
                                 {{--<th class="text-center">Event Name</th>--}}
@@ -66,7 +66,7 @@
                                             <div>
                                                 {!! Form::open(['method'=> 'POST', 'action' => 'DonationRequestController@changeDonationStatus']) !!}
                                                 {{ csrf_field() }}
-                                                {!! Form::hidden('fromPage','searchdonations',['class'=>'form-control', 'readonly']) !!}
+                                                {!! Form::hidden('fromPage','searchdonations',['class'=>'form-control', 'id' => 'searchDonations', 'readonly']) !!}
                                                 {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
                                                 {{Form::button('<i class="glyphicon glyphicon-ok"></i>', ['type' => 'submit', 'class' => 'btn btn-success', 'name' => 'approve', 'value' => 'Approve'])}}
                                                 <a href="{{route('donationrequests.show',encrypt($donationrequest->id))}}"
@@ -128,11 +128,13 @@
 
         $(document).ready(function () {
             var table = $('#example').DataTable({
+                responsive: true,
                 dom: 'Bfrtip',
                 buttons: [
                     {
                         extend: 'pdf',
                         title: '{{ $organizationName }}',
+                        id: 'pdf',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';
@@ -144,6 +146,7 @@
                     {
                         extend: 'csv',
                         title: '{{ $organizationName }}',
+                        id: 'csv',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';
@@ -157,6 +160,7 @@
                     {
                         extend: 'excel',
                         title: '{{ $organizationName }}',
+                        id: 'excel',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';

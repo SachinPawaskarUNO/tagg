@@ -34,7 +34,9 @@ class RegistrationSuccessful extends Mailable
      */
     public function build()
     {
-        $this->userName = $this->user->first_name.' '.$this->user->last_name;
+        // $this->userName = $this->user->first_name.' '.$this->user->last_name;
+        // Adding first name only in email template.
+        $this->userName = $this->user->first_name;
         $this->emailTemplate->email_message = str_replace('{Addressee}', $this->userName, $this->emailTemplate->email_message);
         $this->emailTemplate->email_message = str_replace('{My Business}', getenv('APP_NAME'), $this->emailTemplate->email_message);
         return $this ->from('noreply@charityq.com')

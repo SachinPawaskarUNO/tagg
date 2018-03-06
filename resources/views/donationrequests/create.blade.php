@@ -1,7 +1,8 @@
 
 @extends('layouts.app')
 @section('content')
-    <br>
+<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript"
@@ -32,11 +33,11 @@
     </script>
     {{ csrf_field() }}
 
-    <div class="container">
+    <div class="container donationrequest">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="divRequestForm" class="panel panel-default">
-                    <div class="panel-heading">Please complete the form</div>
+                    <div class="panel-heading">Please complete the following information to submit your donation request</div>
 
                     <div class="panel-body">
                     {!! Form::open(['url' => 'attachment', 'class' => 'form-horizontal', 'id' => 'donationRequestForm', 'files' => true]) !!}
@@ -69,7 +70,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                {!! Form::select('requester_type', array(null => 'Select...') + $requester_types->all(), null, ['class'=>'form-control', 'required']) !!}
+                                {!! Form::select('requester_type', array(null => 'Select...') + $requester_types->all(), null, ['class'=>'form-control', 'id' => 'Org_type', 'required']) !!}
                                 @if ($errors->has('requester_type'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('requester_type') }}</strong>
@@ -136,8 +137,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-md-6">
                                 <input id="phone_number" type="tel" class="form-control"
-                                       name="phone_number" value="{{ old('phone_number') }}" required
-                                >
+                                       name="phone_number" value="{{ old('phone_number') }}" placeholder="Enter Your Phone Number" required >
                                 @if ($errors->has('phone_number'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone_number') }}</strong>
@@ -192,7 +192,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span> </label>
 
                             <div class="col-md-6">
-                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control', 'required']) !!}
+                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control', 'id' => 'state', 'required']) !!}
                                 @if ($errors->has('state'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('state') }}</strong>
@@ -386,7 +386,7 @@
                             <label for="event_type" class="col-md-4 control-label">Purpose of The Event <span
                                         style="color: red; font-size: 20px; vertical-align:middle;"></span></label>
                             <div class="col-md-6">
-                                {!! Form::select('event_type', array(null => 'Select...') + $request_event_type->all(), null, ['class'=>'form-control']) !!}
+                                {!! Form::select('event_type', array(null => 'Select...') + $request_event_type->all(), null, ['class'=>'form-control', 'id' => 'event_type']) !!}
                                 @if ($errors->has('event_type'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('event_type') }}</strong>
@@ -451,7 +451,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-5">
-                                <button type="button" id="btnSubmit" class="btn btn-success">
+                                <button type="button" id="btnSubmit" class="btn btn-basic">
                                     Send Request
                                 </button>
 

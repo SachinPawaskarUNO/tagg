@@ -120,7 +120,7 @@
                                     <td style="vertical-align: middle">{{'$'}}{{ $loggedOnUserOrganization[0]->monthly_budget}}</td>
                                     <td style="vertical-align: middle"><a
                                                 href="{{route('organizations.edit',encrypt($loggedOnUserOrganization[0]->id))}}"
-                                                class="btn savebtn" style="background-color: #0099CC;">Edit</a></td>
+                                                id = 'edit_location' class="btn savebtn" style="background-color: #0099CC;">Edit</a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -134,7 +134,7 @@
                                     <td align="right"
                                         style="padding-right: 10px;padding-top: 0px"> @if ($subscriptionQuantity=='101' || ($count < $subscription))
                                             <a href="{{action('OrganizationController@createOrganization')}}"
-                                               class="btn savebtn">[+] Add Business Location </a>
+                                               id = 'Add_locations' class="btn savebtn">[+] Add Business Location </a>
                                         @endif</td>
                                 </tr>
 
@@ -178,7 +178,7 @@
                                                             'method' => 'DELETE',
                                                             'action' => ['OrganizationController@destroy', $organization->id]
                                                           ]) }}
-                                            <input type="submit" value="Inactivate" class='btn backbtn'
+                                            <input id = 'submit' type="submit" value="Inactivate" class='btn backbtn'
                                                    onClick="return confirm('Are you sure you want to inactivate the Business Location? \n\nALL users for this Location will be inactivated as well!\nIf you wish to keep these users, please press cancel and move them to a new location from the Users management page before removing the location.');">
                                             {{ Form::close() }}
                                         </td>
