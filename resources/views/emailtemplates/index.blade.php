@@ -38,8 +38,7 @@
                                     <td style="vertical-align: middle">{{ $email_template->email_subject }}</td>
                                    
                                     <td style="vertical-align: middle"><a href="
-                                    {{action('EmailTemplateController@edit', ['id' => encrypt($email_template->id)])}}
-                                                " class="btn savebtn" style="background-color: #0099CC;">Edit</a></td>
+                                    {{action('EmailTemplateController@edit', ['id' => encrypt($email_template->id)])}}" id = "EditEmailTemp" class="btn savebtn" style="background-color: #0099CC;">Edit</a></td>
                                 </tr>
                                 @endforeach
 

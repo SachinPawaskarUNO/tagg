@@ -66,7 +66,7 @@
                             <label for="first_name" class="col-md-4 control-label"> First Name <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
-                                {!! Form::text('first_name',null,['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('first_name',null,['class' => 'form-control', 'id' => 'first_name', 'required']) !!}
                             </div>
                         </div>
 
@@ -74,30 +74,30 @@
                             <label for="last_name" class="col-md-4 control-label"> Last Name <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
-                                {!! Form::text('last_name', null,['class' => 'form-control', 'required']) !!}</div>
+                                {!! Form::text('last_name', null,['class' => 'form-control', 'id' => 'last_name', 'required']) !!}</div>
                         </div>
 
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">E-Mail Address <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
-                            <div class="col-lg-6">{!! Form::text('email',null,['class' => 'form-control', 'required']) !!}</div>
+                            <div class="col-lg-6">{!! Form::text('email',null,['class' => 'form-control', 'id' => 'email_address','required']) !!}</div>
                         </div>
 
                         <div class="form-group">
                             <label for="street_address1" class="col-md-4 control-label">Address 1 <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
-                            <div class="col-lg-6">{!! Form::text('street_address1',null,['class' => 'form-control', 'required']) !!}</div>
+                            <div class="col-lg-6">{!! Form::text('street_address1',null,['class' => 'form-control', 'id' => 'Address1','required']) !!}</div>
                         </div>
 
                         <div class="form-group">
                             <label for="street_address2" class="col-md-4 control-label"> Address 2 </label>
-                            <div class="col-lg-6">   {!! Form::text('street_address2', null,['class'=>'form-control']) !!}</div>
+                            <div class="col-lg-6">   {!! Form::text('street_address2', null,['class'=>'form-control', 'id' => 'Address2']) !!}</div>
                         </div>
 
                         <div class="form-group">
                             <label for="city" class="col-md-4 control-label">City <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
-                            <div class="col-lg-6">{!! Form::text('city',null,['class' => 'form-control', 'required']) !!}</div>
+                            <div class="col-lg-6">{!! Form::text('city',null,['class' => 'form-control', 'id' => 'City','required']) !!}</div>
                         </div>
 
                         <div class="form-group">
@@ -106,7 +106,7 @@
 
                             <div class="col-md-6">
 
-                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control']) !!}
+                                {!! Form::select('state', array(null => 'Select...') + $states->all(), null, ['class'=>'form-control', 'id' => 'state']) !!}
 
                                 @if ($errors->has('state'))
                                     <span class="help-block">
@@ -140,7 +140,7 @@
                                 <button id="btnEdit" class="btn savebtn" style="background-color: #0099CC;"
                                         type="button">Edit
                                 </button>
-                                <input class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
+                                <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
                                 <span style="color: red"> <h5>Fields Marked With (<span
                                                 style="color: red; font-size: 20px; vertical-align:middle;">*</span>) Are Mandatory</h5></span>
                             </div>

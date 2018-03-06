@@ -31,7 +31,7 @@
                         </div>
 
 
-                        <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="example" class="table-responsive table-striped table-bordered" width="100%">
                             <thead>
 
                             <tr class="bg-info">
@@ -162,10 +162,11 @@
 
             $('#example tfoot th').each( function () {
                 var title = $(this).text();
-                $(this).html('<input type="text"  class="freetextsearch"  placeholder="Search ' + title + '" />');
+                $(this).html('<input id="Search_box" type="text"  class="freetextsearch"  placeholder="Search ' + title + '" />');
             } );
 
             var table = $('#example').DataTable({
+                responsive: true,
                 dom: 'Bfrtip',
 
                 scrollX : true,
@@ -173,6 +174,7 @@
                 buttons: [
                     {
                         extend: 'pdf',
+                        id: 'pdf',
                         title: '{{ $organizationName }}',
                         filename: function () {
                             var d = new Date();
@@ -185,6 +187,7 @@
                     {
                         extend: 'csv',
                         title: '{{ $organizationName }}',
+                        id: 'csv',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';
@@ -197,6 +200,7 @@
                     {
                         extend: 'excel',
                         title: '{{ $organizationName }}',
+                        id: 'excel',
                         filename: function () {
                             var d = new Date();
                             return '{{ $organizationName }}' + '{{$today}}';

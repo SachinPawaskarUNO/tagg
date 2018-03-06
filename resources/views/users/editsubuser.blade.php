@@ -27,32 +27,32 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="first_name" class="col-md-4 control-label"> First Name <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label id = 'first_name'for="first_name" class="col-md-4 control-label"> First Name <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
-                                {!! Form::text('first_name',null,['class' => 'form-control', 'required']) !!}
+                                {!! Form::text('first_name',null,['class' => 'form-control', 'id' => 'first_name', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="last_name" class="col-md-4 control-label"> Last Name <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label id = 'last_name' for="last_name" class="col-md-4 control-label"> Last Name <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
-                                {!! Form::text('last_name', null,['class' => 'form-control', 'required']) !!}</div>
+                                {!! Form::text('last_name', null,['class' => 'form-control', 'id' => 'last_name', 'required']) !!}</div>
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
-                            <div class="col-lg-6">{!! Form::text('email', null, ['class' => 'form-control', 'required']) !!}</div>
+                            <label id = 'email'for="email" class="col-md-4 control-label">E-Mail Address <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <div class="col-lg-6">{!! Form::text('email', null, ['class' => 'form-control', 'id' => 'email','required']) !!}</div>
                         </div>
 
                         <div class="form-group">
-                            <label for="organization_id" class="col-md-4 control-label">Business Location <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label id = 'organization' for="organization_id" class="col-md-4 control-label">Business Location <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
-                                {!! Form::select('organization_id', $organizationStatusArray, $currentOrg, ['class' => 'form-control', 'id' => 'loc-drop-down', 'required']) !!}
+                                {!! Form::select('organization_id', $organizationStatusArray, $currentOrg, ['class' => 'form-control', 'id' => 'organization', 'id' => 'loc-drop-down', 'required']) !!}
                             </div>
                         </div>
 
                         <div class="form-group" id="role-group" style="display:block">
-                            <label for="Role" class="col-md-4 control-label"> Role: <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <label id = 'role' for="Role" class="col-md-4 control-label"> Role: <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
                                 @if(App\ParentChildOrganizations::active()->where('parent_org_id', $user->organization->id)->count() > 0)
                                     {!! Form::select('role_id', $roles, $user->roles->first()->id, ['class' => 'form-control', 'id' => 'locations-drop-down-parent', 'style' => 'display:block']) !!}
