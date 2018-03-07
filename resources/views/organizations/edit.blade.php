@@ -148,7 +148,7 @@
                             <div class="col-md-6 col-md-offset-5">
                                 {!! Form::submit('Save', ['class' => 'btn savebtn', 'id' => 'btnSave']) !!}
                                 <button id="btnEdit" class="btn savebtn hidden" type="button">Edit</button>
-                                <input id = 'Cancel' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
+                                <input id = 'Cancel' class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>
                                 <span style="color: red"> <h5>Fields Marked With (<span
                                                 style="color: red; font-size: 20px; align:middle;">*</span>) Are Mandatory</h5></span>
                             </div>

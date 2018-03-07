@@ -1,5 +1,5 @@
 /* pricing table */
-@import url(https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
+@import url(https://fonts.googleapis.com/css?family=Barlow:400,100,100italic,300,300italic,400italic,700italic,700,900italic,900);
 @import url(https://fonts.googleapis.com/css?family=Barlow:400,100,200,300,500,600,700,800,900);
 body{background-color:#ffffff;}
 
@@ -260,7 +260,7 @@ img {
 }
 
 /* body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Lato", sans-serif;
+	font-family: "Barlow", sans-serif;
 } */
 
 body, html {
@@ -318,6 +318,12 @@ div {
 th,td{
 	min-width:20px;
 }
+.toggle-font{
+	font-family: "Barlow", sans-serif;
+	font-style: normal;
+	color: black;
+ }
+
 /* Pricing table */
 #generic_price_table{
 	background-color: #ffffff;
@@ -357,15 +363,15 @@ th,td{
 }
 
 #generic_price_table .generic_content .generic_feature_list ul li{	
-	color: #a7a7a7;
+	color:black;
 }
 
 #generic_price_table .generic_content .generic_feature_list ul li span{
 	color: #414141;
 }
 #generic_price_table .generic_content .generic_feature_list ul li:hover{
-	background-color: #E4E4E4;
-	border-left: 5px solid #8e24aa;
+	background-color: transparent;
+	/* border-left: 5px solid #8e24aa; */
 }
 
 #generic_price_table .generic_content .generic_price_btn a{
@@ -445,14 +451,14 @@ th,td{
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .sign{
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 28px;
     font-weight: 400;
     vertical-align: middle;
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .currency{
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 60px;
     font-weight: 300;
     letter-spacing: -2px;
@@ -463,14 +469,14 @@ th,td{
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .price .cent{
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 24px;
     font-weight: 400;
     vertical-align: bottom;
 }
 
 #generic_price_table .generic_content .generic_head_price .generic_price_tag .month{
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 18px;
     font-weight: 400;
     letter-spacing: 3px;
@@ -484,7 +490,7 @@ th,td{
 }
 
 #generic_price_table .generic_content .generic_feature_list ul li{
-	font-family: "Lato",sans-serif;
+	font-family: "Barlow",sans-serif;
 	font-size: 18px;
 	padding: 15px 0;
 	transition: all 0.3s ease-in-out 0s;
@@ -511,7 +517,7 @@ th,td{
 	-o-border-radius: 50px;
 	-webkit-border-radius: 50px;
     display: inline-block;
-    font-family: "Lato",sans-serif;
+    font-family: "Barlow",sans-serif;
     font-size: 18px;
     outline: medium none;
     padding: 12px 30px;
@@ -568,7 +574,7 @@ th,td{
 
 .text-center h1,
 .text-center h1 a{
-	color: #7885CB;
+	color: black;
 	font-size: 30px;
 	font-weight: 300;
 	text-decoration: none;
@@ -751,49 +757,6 @@ th,td{
 .btn.active span:last-child  {            	
 	display: none;			
 }
-
-/* .btn-plan { 
-	color: #ffffff; 
-	background-color: #611BBD; 
-	border-color: #130269; 
-  } 
-   
-  .btn-plan:hover, 
-  .btn-plan:focus, 
-  .btn-plan:active, 
-  .btn-plan.active, 
-  .open .dropdown-toggle.btn-plan { 
-	color: #ffffff; 
-	background-color: #49247A; 
-	border-color: #130269; 
-  } 
-   
-  .btn-plan:active, 
-  .btn-plan.active, 
-  .open .dropdown-toggle.btn-plan { 
-	background-image: none; 
-  } 
-   
-  .btn-plan.disabled, 
-  .btn-plan[disabled], 
-  fieldset[disabled] .btn-plan, 
-  .btn-plan.disabled:hover, 
-  .btn-plan[disabled]:hover, 
-  fieldset[disabled] .btn-plan:hover, 
-  .btn-plan.disabled:focus, 
-  .btn-plan[disabled]:focus, 
-  fieldset[disabled] .btn-plan:focus, 
-  .btn-plan.disabled:active, 
-  .btn-plan[disabled]:active, 
-  fieldset[disabled] .btn-plan:active, 
-  .btn-plan.disabled.active, 
-  .btn-plan[disabled].active, 
-  fieldset[disabled] .btn-plan.active { 
-	background-color: #611BBD; 
-	border-color: #130269; 
-  } 
-   
-  .btn-plan .badge { 
-	color: #611BBD; 
-	background-color: #ffffff; 
-  } */
+#monthly{
+	font-family: "Barlow", sans-serif;
+ }
