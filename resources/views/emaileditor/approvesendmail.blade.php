@@ -77,12 +77,6 @@
                                 {!! Form::hidden('status', 'Approve') !!}
                                 {!! Form::hidden('ids_string', $ids_string) !!}
                                 {!! Form::hidden('page_from', $page_from) !!}
-
-
-
-
-
-
                                 {{--{!! Form::text('email_subject', null, ['required'], ['class' => 'form-control']) !!}--}}
                             </div>
                         </div>

@@ -56,10 +56,10 @@
                             <div class="col-lg-6">
                                 @if(App\ParentChildOrganizations::active()->where('parent_org_id', $user->organization->id)->count() > 0)
                                     {!! Form::select('role_id', $roles, $user->roles->first()->id, ['class' => 'form-control', 'id' => 'locations-drop-down-parent', 'style' => 'display:block']) !!}
-                                    {!! Form::select('role_id', array('5' => $roles[5]), $user->roles->first()->id, ['class' => 'form-control', 'id' => 'locations-drop-down-child', 'style' => 'display:none']) !!}
+                                    {{--  {!! Form::select('role_id', array('5' => $roles[5]), $user->roles->first()->id, ['class' => 'form-control', 'id' => 'locations-drop-down-child', 'style' => 'display:none']) !!}  --}}
                                 @else
                                     {!! Form::select('role_id', $roles, $user->roles->first()->id, ['class' => 'form-control', 'id' => 'locations-drop-down-parent']) !!}
-                                    {!! Form::select('role_id', array('5' => $roles[5]), $user->roles->first()->id, ['class' => 'form-control', 'id' => 'locations-drop-down-child', 'style' => 'display:none']) !!}
+                                    {{--  {!! Form::select('role_id', array('5' => $roles[5]), $user->roles->first()->id, ['class' => 'form-control', 'id' => 'locations-drop-down-child', 'style' => 'display:none']) !!}  --}}
                                 @endif
                             </div>
                         </div>
