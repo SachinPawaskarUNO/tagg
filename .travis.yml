@@ -15,10 +15,3 @@ services:
 
 script:
 - vendor/bin/phpunit
-
-notifications:
-  slack:
-    rooms:
-      - spring2018tagg:7KfoXx23t9mqDO2wUERxlhxB
-    on_success: :change
-    on_failure: :change
