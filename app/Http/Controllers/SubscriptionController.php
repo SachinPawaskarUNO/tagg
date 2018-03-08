@@ -49,6 +49,9 @@ class SubscriptionController extends Controller
             return redirect('subscription')->with('message', 'Plan Already Submitted!');
         } else {
             try{
+
+                $organization->error_message = "";
+                $organization->update();
                 if ($request->input('plan') == "Annually") {
 
                     if (isset($coupon)) {
@@ -127,7 +130,7 @@ class SubscriptionController extends Controller
         if ($organization->subscription('main')->onGracePeriod()) {
             $organization->subscription('main')->resume();
 
-            return redirect('organizations')->with('message', 'resumed');
+            return redirect('organizations')->with('message', 'Subscription Resumed');
         }
 
     }

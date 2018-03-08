@@ -137,7 +137,7 @@
                                                     @elseif(!is_null($organization->trial_ends_at) && !is_null($organization->stripe_id) && $organization->trial_ends_at>=(\Carbon\Carbon::now()))
                                                         <?php $status = 'Active' ?>
                                                     @else
-                                                    <?php $status = 'Unknown' ?>
+                                                    <?php $status = 'Subscription Expired' ?>
                                                 @endif
                                                 @if(strpos($organization->error_message, 'declined') !== false)
                                                     <?php $status = 'Declined' ?>
