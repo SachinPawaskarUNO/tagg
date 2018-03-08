@@ -34,7 +34,8 @@ class GotDonationRequest extends Mailable
      */
     public function build()
     {
-        return $this->subject('Your donation request is received.')
+        return $this->from('noreply@charityq.com')
+            ->subject('Your donation request is received.')
             ->markdown('emails.donationrequestmail');
     }
 }

@@ -90,10 +90,10 @@
                             <li><a href="{{ url('/dashboard')}}" id = 'Dashboard' class="w3-bar-item w3-button current"
                                    style="font-weight:bold; right:10px">Dashboard</a>
                             </li>
-                            @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
                             <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" id = 'MyDonationForm' class="w3-bar-item w3-button current"
-                                style="font-weight:bold; right:10px">My Donation Form</a></li>    
-                            <li><a href="{{ route('donationrequests.index')}}" id = 'searchDonations' class="w3-bar-item w3-button "
+                                   style="font-weight:bold; right:10px">My Donation Form</a>
+                            @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
+                                <li><a href="{{ route('donationrequests.index')}}" id = 'searchDonations' class="w3-bar-item w3-button "
                                        style="font-weight:bold; right:10px">Search
                                         Donations</a></li>
                             @elseif(Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_USER OR Auth::user()->roles[0]->id == \App\Custom\Constant::ROOT_USER)
