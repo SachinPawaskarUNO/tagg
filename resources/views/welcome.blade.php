@@ -2,22 +2,17 @@
 
 @section('content')
 
-    <body>
-
-    <div id="image1" class="container-fluid" style='text-align:center; background-image: url("http://citadelnyc.com/wp-content/uploads/2015/04/background-outer-wrapper2.png");background-repeat:repeat;height:155px;' align="center" >
-
-    </div>
 
         <div class="containerimg" >
-            <img src="{{ asset('img/cover.jpg') }}" style="overflow: hidden ; height: 100%; width: 100% ; position:static;  "/>
-<script>
-    $(window).load(function(){
-        $('.containerimg').find('img').each(function(){
-            var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
-            $(this).addClass(imgClass);
-        })
-    })
-</script>
+            <img src="{{ asset('img/home-page-image.jpg') }}" class="wide img-responsive" />
+                <script>
+                    $(window).load(function(){
+                        $('.containerimg').find('img').each(function(){
+                            var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
+                            $(this).addClass(imgClass);
+                        })
+                    })
+                </script>
         </div>
 
     <link href="{!! asset('css/custom.css') !!}" media="all" rel="stylesheet" type="text/css" />
@@ -588,5 +583,5 @@
     	<a class="bottom_btn" href="#">&copy; CharityQ</a>
     </footer>  --}}
 </div>
-</body>
+
 @endsection
