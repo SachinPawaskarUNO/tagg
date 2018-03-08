@@ -446,6 +446,7 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
+
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
@@ -499,6 +500,7 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
+
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
@@ -552,6 +554,7 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
+
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
@@ -580,5 +583,5 @@
     	<a class="bottom_btn" href="#">&copy; CharityQ</a>
     </footer>  --}}
 </div>
-</body>
+
 @endsection
