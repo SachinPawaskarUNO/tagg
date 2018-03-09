@@ -130,7 +130,7 @@
                                                 <td style="vertical-align: middle">{{ App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->count() }}</td>
                                                 <td style="vertical-align: middle">{{ App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::REJECTED)->count() }}</td>
                                                 <td style="vertical-align: middle">${{ number_format(App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount'), 2)  }} </td>
-                                                <td style="vertical-align: middle"> {{ $organization->is_active }}</td>
+                                                <td style="vertical-align: middle"> {{ $organization->trial_ends_at>=(\Carbon\Carbon::now())? 'Active' : 'Cancelled' }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
