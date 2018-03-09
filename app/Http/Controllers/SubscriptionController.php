@@ -97,8 +97,13 @@ class SubscriptionController extends Controller
                     }
                 }
             }catch (\Exception $e){
-                $organization->error_message = $e->getMessage();
-                $organization->update();
+                if( !is_null($organization->trial_ends_at)) {
+                    $organization->error_message = $e->getMessage();
+                    $organization->update();
+                } else if(is_null($organization->trial_ends_at)&& !is_null( $organization->stripe_id )){
+                    $organization->stripe_id = "";
+                    $organization->update();
+                }
                 return redirect('/dashboard')->with('status', $e->getMessage());
 
             }
