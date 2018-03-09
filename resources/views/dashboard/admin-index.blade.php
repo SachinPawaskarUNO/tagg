@@ -124,7 +124,7 @@
                                             @endif
                                             @foreach ($subscriptions as $subscription)
                                                 @if($subscription->organization_id == $organization->id)
-                                                    <?php $cancelled = is_null($subscription->ends_at) ? false : true ?>
+                                                    <?php $cancelled = is_null($subscription->ends_at) ? false : true && $subscription->ends_at>=(\Carbon\Carbon::now()) ?>
                                                     @endif
                                                 @endforeach
                                             <tr>
@@ -137,13 +137,13 @@
                                                     @elseif(!is_null($organization->trial_ends_at) && !is_null($organization->stripe_id) && $organization->trial_ends_at>=(\Carbon\Carbon::now()))
                                                         <?php $status = 'Active' ?>
                                                     @else
-                                                    <?php $status = '' ?>
+                                                    <?php $status = 'Cancelled' ?>
                                                 @endif
                                                 @if(strpos($organization->error_message, 'declined') !== false)
                                                     <?php $status = 'Declined' ?>
                                                 @endif
                                                 @if($cancelled)
-                                                    <?php $status = 'Cancelled' ?>
+                                                    <?php $status = 'Active' ?>
                                                 @endif
                                                 <td style="vertical-align: middle">{{$status }}</td>
                                                 <td>
