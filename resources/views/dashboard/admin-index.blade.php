@@ -125,8 +125,7 @@
                                             @foreach ($subscriptions as $subscription)
                                                 @if($subscription->organization_id == $organization->id)
                                                     <?php $cancelled = is_null($subscription->ends_at) ? false : true && $subscription->ends_at>=(\Carbon\Carbon::now()) ?>
-                                                @else
-                                                    <?php $status = 'Incomplete' ?>
+
                                                 @endif
                                             @endforeach
                                             <tr>
@@ -134,10 +133,12 @@
                                                 <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->sum('dollar_amount'), 2) }}</td>
                                                 <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount'), 2)}} </td>
                                                 <td style="vertical-align: middle">{{ $organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->count() }}</td>
-                                                    @if(is_null($organization->stripe_id) || $organization->stripe_id == "" )
+                                                    @if(is_null($organization->trial_ends_at) )
                                                          <?php $status = 'Incomplete' ?>
                                                     @elseif(!is_null($organization->trial_ends_at) && !is_null($organization->stripe_id) && $organization->trial_ends_at>=(\Carbon\Carbon::now()))
                                                         <?php $status = 'Active' ?>
+                                                    @else
+                                                    <?php $status = 'Cancelled' ?>
                                                     @endif
                                                     @if(strpos($organization->error_message, 'declined') !== false)
                                                         <?php $status = 'Declined' ?>
