@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "class-utils": "^0.3.6",
-    "jQuery-QueryBuilder": "^2.4.5"
+    "jQuery-QueryBuilder": "^2.4.5",
+    "npm": "^5.7.1"
   }
 }
