@@ -8,6 +8,7 @@ use App\ParentChildOrganizations;
 use App\Rule;
 use App\Rule_type;
 use App\Requester_type;
+use App\Request_item_type;
 use Auth;
 use App\Events\SendAutoRejectEmail;
 use Carbon\Carbon;
@@ -39,8 +40,9 @@ class RuleEngineController extends Controller
         $organization = Organization::findOrFail($orgId);
         $monthlyBudget = $organization->monthly_budget;
         $daysNotice = $organization->required_days_notice;
+        // dd($daysNotice);
         $ruleType = $request->rule ?? Constant::AUTO_REJECT_RULE;
-        $requesterTypes = $this->getRequesterType();
+        // $requesterTypes = $this->getRequesterType();
         $ruleRow = Rule::query()->where([['rule_owner_id', '=', $orgId], ['rule_type_id', '=', $ruleType], ['active', '=', true]])->first();
 
         if ($ruleRow) {
@@ -48,8 +50,12 @@ class RuleEngineController extends Controller
         } else {
             $queryBuilderJSON = ''; //'{"condition": "AND", "rules": [{}], "not": false, "valid": true }';
         }
+        // send organization type and dontaion type fields 
+        $reqTypes = Requester_type::all();
+        $reqItemTypes = Request_item_type::all();
         return view('rules.rules')->with('rule', $queryBuilderJSON)->with('rule_types', $rule_types)->with('ruleType', $ruleType)
-            ->with('monthlyBudget', $monthlyBudget)->with('daysNotice', $daysNotice)->with('requesterTypes', $requesterTypes);
+            ->with('monthlyBudget', $monthlyBudget)->with('daysNotice', $daysNotice)->with('rs', $reqTypes)
+            ->with('reqItemTypes', $reqItemTypes);
     }
 
     public function loadRule($request)  // Redundant with index.. Remove or rebuild to be used by index?
