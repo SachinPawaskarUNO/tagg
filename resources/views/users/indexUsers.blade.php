@@ -54,6 +54,8 @@
 
                                                                       class="btn savebtn"
                                                                       style="background-color: #0099CC;"> Edit </a>
+                                    <a href="/user/destroy/{{$user->id}}/{{$user->active}}" onclick="return confirm('Are you sure you want to deactivate this user account')" class="btn btn-danger">Delete</a>
+
                                 </td>
                                 <!--<td style="vertical-align: middle">
                                     <input type="submit" value="Delete" class='btn backbtn'

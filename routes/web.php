@@ -84,6 +84,10 @@ Route::get('user/manageusers/edit/{id}', 'UserController@editSubUser')->name('ed
 
 Route::post('user/manageusers', 'UserController@updateSubUser')->name('updatesubuser')->middleware('auth');
 
+Route::get('/user/destroy/{id}/{active}', 'UserController@destroy');
+
+Route::get('/user/deactivate/{id}', 'UserprofileController@deactivate');
+
 Route::get('/user/editprofile', 'UserController@editProfile')->name('editprofile')->middleware('auth');
 Route::patch('/user/updateprofile', 'UserController@updateProfile')->name('updateprofile')->middleware('auth');
 

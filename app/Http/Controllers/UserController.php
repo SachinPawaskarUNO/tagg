@@ -346,10 +346,29 @@ class UserController extends Controller
         return view('users.indexUsers', compact('users', 'admin'));
     }
 
-    public function destroy($id)
+//    public function destroy($id)
+//    {
+//        User::find($id)->update(['active' => Constant::INACTIVE]);
+//        return redirect('users.indexUsers');
+//    }
+
+    public function destroy($id, $active)
     {
-        User::find($id)->update(['active' => Constant::INACTIVE]);
-        return redirect('users.indexUsers');
+        //
+        $user = User::findOrFail($id);
+        if ($active == 1) {
+            $active = 0;
+        }else {
+            $active = 1;
+        }
+        \DB::table('users')->where('id', 'LIKE', $user->id)->update(['active' => $active]);
+        Return redirect('user/manageusers');
+    }
+
+    public function deactivate ($id) {
+        $user = Auth::user();
+        \DB::table('users')->where('id', 'LIKE', $user->id)->update(['active' => 0]);
+        Auth::logout();
     }
 
     protected function getRoles()

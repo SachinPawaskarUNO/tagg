@@ -114,12 +114,12 @@
             </div>
         
         <div class="well well-sm text-center">
-            <h1 class="toggle-font">Choose you plan</h1>        
-                <div id='pln' class="plan toggle-font" data-toggle="buttons"> 
+            <h1 class="toggle-font">Choose your plan</h1>
+                <div id='pln' class="plan toggle-font ">
                         
-                        <input type="radio" class="toggle-font" name="options" id="option1">
+                        <input type="radio" class="toggle-font" value= "monthly" name="options" id="option1" >
                         Monthly                    
-                        <input type="radio" class="toggle-font" name="options" id="option2">
+                        <input type="radio" class="toggle-font" value= "yearly"name="options" id="option2">
                         Yearly (Save upto 20%)
                               
                 </div>
@@ -577,6 +577,7 @@
                   $( "#plan2" ).toggle();
                 });
         </script>
+
 </section>
            
 	{{--  <footer>
