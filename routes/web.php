@@ -129,6 +129,7 @@ Route::get('/dashboard', 'DashboardController@index') ->name('dashboardindex')->
 Route::post('/donation/change-status', 'DonationRequestController@changeDonationStatus')->middleware('auth');
 
 // Rules stuff
+Route::post('rules', 'RuleEngineController@store');
 Route::get('help', 'RuleEngineController@rulesHelp');
 Route::get('runRule', 'RuleEngineController@manualRunRule')->middleware('auth');
 Route::get('runBudgetCheckRule', 'RuleEngineController@runBudgetCheckRule')->middleware('auth');
@@ -138,6 +139,7 @@ Route::get('saveBudgetNotice', 'RuleEngineController@saveBudgetNotice')->middlew
 Route::get('loadRule', 'RuleEngineController@loadRule')->middleware('auth');
 //Route::get('/rules', 'RuleEngineController@rules');
 Route::resource('/rules', 'RuleEngineController')->middleware('auth');
+
 // Rules stuff// Rules stuff
 //Route::get('rules', 'RuleEngineController@rulesGUI');
 Route::get('/webhook/chargeSuccess', 'SubscriptionController@chargeSuccess');
