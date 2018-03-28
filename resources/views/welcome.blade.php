@@ -396,7 +396,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='small1' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Small' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -451,7 +451,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='medium' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Medium' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -505,7 +505,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='large' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Large' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -559,7 +559,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='unlimited1' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Unlimited' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         

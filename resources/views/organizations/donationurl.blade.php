@@ -52,7 +52,7 @@
                 <center>
                 <div class="text-center">
                     <button id="SetDonationPref" class="btn savebtn" style="background-color: #0099CC;"
-                            type="button" onClick = location.href='{{ url('/rules?rule=1')}}';>Set Donation Preferences
+                            type="button" onClick = location.href='{{ url('/rules')}}';>Set Donation Preferences
                         </button>
                     <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>
                     </div>

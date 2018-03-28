@@ -282,7 +282,7 @@ class DonationRequestController extends Controller
         $organizations = \DB::table('organizations as c')->leftJoin('parent_child_organizations as pc', 'c.id', '=', 'pc.child_org_id')
             ->leftJoin('organizations as p', 'pc.parent_org_id', '=', 'p.id')
             ->whereIn('c.id', $orgIds)
-            ->select(\DB::raw("c.*, CASE WHEN (p.active = 0 OR p.trial_ends_at <= now()) THEN 'Inactive' WHEN (c.active = 0 OR c.trial_ends_at <= now()) THEN 'Inactive' ELSE 'Active' END as is_active"))->get();
+            ->select(\DB::raw("c.*, CASE WHEN (p.active = 0 OR p.trial_ends_at <= now()) THEN 'Cancelled' WHEN (c.active = 0 OR c.trial_ends_at <= now()) THEN 'Cancelled' ELSE 'Active' END as is_active"))->get();
 
         $organizationsArray = $this->getAllMyOrganizationIds($id, true);
 

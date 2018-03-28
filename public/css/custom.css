@@ -60,7 +60,7 @@ h2 {
 
 h4 {
 	font-size: 30px;
-	color: red;
+	color:inherit;
 	position: relative;
 	float: bottom;
 	top: 75%;

@@ -20,24 +20,30 @@ $("body").on('change', '#plan,#user_locations', function () {
                 } else if (user == '25') {
                 totalamount = 49;
             } else if (user == '100') {
-                totalamount = 99;
+                totalamount = 199;
             }
             else {
                 totalamount = 249;
             }
         } else {
             if (user == '5') {
-                yearly_charge = (19 * 12);
+                // yearly_charge = (19 * 12);
+                yearly_charge = 180;
             } else if (user == '25') {
-                yearly_charge = (49 * 12);
+                // yearly_charge = (49 * 12);
+                yearly_charge = 470;
             } else if (user == '100') {
-                yearly_charge = (99 * 12);
+                // yearly_charge = (99 * 12);
+                yearly_charge = 1900;
             }
             else {
-                yearly_charge = (249 * 12);
+                // yearly_charge = (249 * 12);
+                yearly_charge = 2390;
             }
-            var discount = (yearly_charge * 20) / 100;
-            totalamount = yearly_charge - discount;
+            // var discount = (yearly_charge * 20) / 100;
+            // totalamount = yearly_charge - discount;
+            // var discount = (yearly_charge * 20) / 100;
+            totalamount = yearly_charge;
 
         }
         totalamountshow="$"+totalamount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");

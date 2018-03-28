@@ -42,6 +42,9 @@ class DonationRequest extends Model
         'approval_status_reason',
         'email_sent'
     ];
+    protected $casts = [
+        'tax_exempt' => 'boolean' // compare true false on incoming donation request 
+    ];
 
 //     protected $table = 'donation_requests';
 

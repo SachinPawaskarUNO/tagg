@@ -50,7 +50,7 @@
                         <a href="{{ url('/dashboard') }}">
                             <img src="{{ asset('img/New-Logo.jpg') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
                                  id="logo" class="img-responsive"
-                                 width="60%" style='background-size: inherit'/>
+                                 width="40%" style='background-size: inherit'/>
                         </a>
 
                     @else
@@ -113,7 +113,7 @@
                                     <div class="w3-dropdown-content w3-card-4 w3-bar-block">
                                         @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
                                             <li>
-                                                <a href="{{ url('/rules?rule=1')}}">Donation Preferences</a>
+                                                <a href="{{ url('/rules')}}">Donation Preferences</a>
                                             </li>
                                             <li>
                                                 <a href="{{ url('/donationrequests/create') }}?orgId={{encrypt(Auth::user()->organization_id)}}" target="_blank">Manual Donation Request</a>
