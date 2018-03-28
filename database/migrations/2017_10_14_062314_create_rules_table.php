@@ -21,9 +21,9 @@ class CreateRulesTable extends Migration
             $table->integer('rule_owner_id')->unsigned()->index();
             $table->foreign('rule_owner_id')->references('id')->on('organizations')->onDelete('cascade');
             
-            $table->json('orgtype')->nullable(); // preferred organization types
-            $table->json('dntype')->nullable(); // preferred donation request types
-            $table->json('amtreq')->nullable(); // preferred request donation amount 
+            $table->text('orgtype')->nullable(); // preferred organization types
+            $table->text('dntype')->nullable(); // preferred donation request types
+            $table->text('amtreq')->nullable(); // preferred request donation amount 
             $table->boolean('taxex')->default(true);
             $table->boolean('active')->default(true);
             

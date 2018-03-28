@@ -125,10 +125,8 @@ class RuleEngineController extends Controller
         if ($ruleRow) {
             // $dreq = DB::table('donation_requests')->where(id);
             $dreq = DB::table('donation_requests')->where('id', $donationRequest->id)->first();
-            // dd($donationRequest);
-            // dd($ruleRow);
-            if (in_array($donationRequest->requester_type, $ruleRow->orgtype) && 
-                in_array($donationRequest->item_requested, $ruleRow->dntype) && 
+            if (in_array($donationRequest->requester_type, json_decode($ruleRow->orgtype)) && 
+                in_array($donationRequest->item_requested, json_decode($ruleRow->dntype)) && 
                 $donationRequest->tax_exempt == $ruleRow->taxex &&
                 $donationRequest->dollar_amount <= $ruleRow->amtreq ) {
                 
@@ -140,12 +138,13 @@ class RuleEngineController extends Controller
                           'rule_process_date' => Carbon::now(),
                           'updated_at' => Carbon::now()
                           ]);
-                    // $chk = " yes match";
-                return $chk;
+                
+                // $chk = " yes match";
+                // return $chk;
             } else {
                     $ex = (
-                    (!in_array($donationRequest->requester_type, $ruleRow->orgtype)) ? "Pending Rejection - Org Type." :
-                        ((!in_array($donationRequest->item_requested, $ruleRow->dntype)) ? "Pending rejection - Donation Type" :
+                    (!in_array($donationRequest->requester_type, json_decode($ruleRow->orgtype))) ? "Pending Rejection - Org Type." :
+                        ((!in_array($donationRequest->item_requested, json_decode($ruleRow->dntype))) ? "Pending rejection - Donation Type" :
                             (($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" :
                                 (($donationRequest->dollar_amount > $ruleRow->amtreq) ? "Pending Rejection - Exceeded Amount" : "Others")))
                     );
@@ -155,8 +154,9 @@ class RuleEngineController extends Controller
                           'rule_process_date' => Carbon::now(),
                           'updated_at' => Carbon::now()
                           ]);
-                    // $chk = " yes match";
-                // return $chk;            }
+                // $chk = "no match";
+                // return $chk;            
+            }
             // $queryBuilderJSON = $ruleRow->rule;
             // $json = json_decode($queryBuilderJSON, true);
             // $arr = $this->filteredQueryBuilderJsonArray($json, $donationRequest->id, false);
@@ -170,8 +170,7 @@ class RuleEngineController extends Controller
             //     $query->update(['approval_status_id' => Constant::REJECTED, 'approval_status_reason' => $ruleRow->ruleType->type_name . ' Rule',
             //         'approved_organization_id' => $ruleOwner, 'rule_process_date' => Carbon::now(), 'updated_at' => Carbon::now()]);
             }
-        } 
-    }
+        }
 
         protected function runPendingApprovalOnSubmit(DonationRequest $donationRequest, $ruleOwner)
         {
@@ -210,11 +209,10 @@ class RuleEngineController extends Controller
         $orgId = Auth::user()->organization_id;
         $rl = Rule::where([['rule_owner_id', '=', $orgId]])->first();
         // dd($request->taxex);
-        $rl->orgtype = $request->orgTypeId;
-        $rl->dntype = $request->dtypeId;
+        $rl->orgtype = json_encode($request->orgTypeId);
+        $rl->dntype = json_encode($request->dtypeId);
         $rl->taxex = $request->taxex;
         $rl->amtreq = $request->amtReq;
-        // dd($rl);
         $rl->update($request->all());
         
         // save budget and notice days

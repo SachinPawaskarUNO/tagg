@@ -109,9 +109,8 @@ class UserController extends Controller
         $user->zipcode = $request->zipcode;
         $user->phone_number = $request->phone_number;
         $user->organization_id = $orgId;
-        // save default rule 
+        // save default rule to accept all
         $rl = new Ruls;
-        // $rl = Rule::find($orgId);
         $rl->rule_type_id = 1;
         $rl->rule_owner_id = $orgId;
         $rl->taxex = false;
