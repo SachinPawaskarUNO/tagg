@@ -124,11 +124,15 @@ class RuleEngineController extends Controller
         $ruleRow = Rule::query()->where([['rule_owner_id', '=',  $donationRequest->organization_id], ['active', '=', Constant::ACTIVE]])->first();
         if ($ruleRow) {
             // $dreq = DB::table('donation_requests')->where(id);
+            if ($ruleRow->amtreq == 0) {
+                // return $ruleRow->amtreq;
+                $ruleRow->amtreq = $donationRequest->dollar_amount;
+            }
             $dreq = DB::table('donation_requests')->where('id', $donationRequest->id)->first();
             if (in_array($donationRequest->requester_type, json_decode($ruleRow->orgtype)) && 
                 in_array($donationRequest->item_requested, json_decode($ruleRow->dntype)) && 
                 $donationRequest->tax_exempt == $ruleRow->taxex &&
-                $donationRequest->dollar_amount <= $ruleRow->amtreq ) {
+                $donationRequest->dollar_amount <= $ruleRow->amtreq) {
                 
                 // update to auto approved.
 
@@ -210,6 +214,7 @@ class RuleEngineController extends Controller
         $rl = Rule::where([['rule_owner_id', '=', $orgId]])->first();
         // dd($request->taxex);
         $rl->orgtype = json_encode($request->orgTypeId);
+        // dd($rl->orgtype);
         $rl->dntype = json_encode($request->dtypeId);
         $rl->taxex = $request->taxex;
         $rl->amtreq = $request->amtReq;

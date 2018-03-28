@@ -23,7 +23,7 @@ class CreateRulesTable extends Migration
             
             $table->text('orgtype')->nullable(); // preferred organization types
             $table->text('dntype')->nullable(); // preferred donation request types
-            $table->text('amtreq')->nullable(); // preferred request donation amount 
+            $table->integer('amtreq')->default(0); // preferred request donation amount 
             $table->boolean('taxex')->default(true);
             $table->boolean('active')->default(true);
             
