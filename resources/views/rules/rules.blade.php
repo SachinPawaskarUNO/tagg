@@ -41,7 +41,7 @@
         <div>
             By setting a monthly budget, any requests that come in after your budget is reached will be flagged as "Pending Rejection".
         </div>
-        {!! Form::text('monthlyBudget', $monthlyBudget, ['id' => 'monthlyBudget','class' => 'form-control col-xs-4' ]) !!}
+        {!! Form::text('monthlyBudget', round($monthlyBudget), ['id' => 'monthlyBudget','class' => 'form-control col-xs-4' ]) !!}
         </div>
         <!-- Notice Days -->
         <div class="form-group">
@@ -101,7 +101,7 @@
                 {!! Form::label('amtReq', 'Amount requested', ['class' => 'lead']) !!}
                 <div>If an amount is entered, any request that exceed this dollar amount will be flagged as "Pending Rejection - Exceeded Amount".</div>
         
-                {!! Form::text('amtReq', $ruleRow->amtreq, ['id' => 'amtReq','class' => 'form-control']) !!}
+                {!! Form::text('amtReq', round($ruleRow->amtreq), ['id' => 'amtReq','class' => 'form-control']) !!}
                 </div>
 
         <button class="btn btn-success" type="submit">save</button>
