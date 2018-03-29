@@ -462,6 +462,37 @@ class CqAppSeeder extends Seeder {
 		<p>Sincerely,</p>
 		<p>- CharityQ Team</p>'
 		));
+		EmailTemplate::create(array(
+			'id' => '6',
+			'template_type_id' => $eaprv->id, 
+			'organization_id' => $oroot->id, 
+			'email_subject' => 'Approval Decision 2', 
+			'email_message' => 'Decision 2'
+			));
+
+			EmailTemplate::create(array(
+				'id' => '7',
+				'template_type_id' => $eaprv->id, 
+				'organization_id' => $oroot->id, 
+				'email_subject' => 'Custom Approval email', 
+				'email_message' => 'Custom Email'
+				));
+
+				EmailTemplate::create(array(
+					'id' => '8',
+					'template_type_id' => $erjct->id, 
+					'organization_id' => $oroot->id, 
+					'email_subject' => 'Rejection Decision 2', 
+					'email_message' => 'Decision 2'
+					));
+		
+					EmailTemplate::create(array(
+						'id' => '9',
+						'template_type_id' => $erjct->id, 
+						'organization_id' => $oroot->id, 
+						'email_subject' => 'Custom Rejection email', 
+						'email_message' => 'Custom Email'
+						));
 			$this->command->info('email stuff done ! ');
 	}
 }
