@@ -9,8 +9,8 @@ class Rule extends Model
     protected $casts = [
         'rule_type_id' => 'int',
         'rule_owner_id' => 'int',
-        'orgtype' => 'json', // casting to array for storing donation request preferences in json format
-        'dntype' => 'json', // casting to array for storing donation request preferences in json format
+        'orgtype' => 'array', // casting to array for storing donation request preferences in json format
+        'dntype' => 'array', // casting to array for storing donation request preferences in json format
         'taxex' => 'boolean',
         'active' => 'boolean',
     ];

@@ -229,18 +229,19 @@ class CqAppSeeder extends Seeder {
 			'rule_type_id' => $preacpt->id, 
 			'rule_owner_id' => $oroot->id, 
 			'active' => true,
-			'orgtype' => "[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\"]",
+			// 'orgtype' => "["1","2","3","4","5","6","7","8","9","10","11","12","13"]",
 			'taxex' => false,
-			'dntype' => "[\"1\",\"2\",\"3\",\"4\",\"5\"]"		        ));
+			// 'dntype' => "["1","2","3","4","5"]"	
+			        ));
 		Rule::create(array(
 			'id' => '2',
 			'rule_type_id' => $preacpt->id, 
 			'rule_owner_id' => $buser->id, 
 			'active' => true,
-			'orgtype' => "[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\"]",
+			// 'orgtype' => "["1","2","3","4","5","6","7","8","9","10","11","12","13"]",
 			'taxex' => false,
-			'dntype' => "[\"1\",\"2\",\"3\",\"4\",\"5\"]"
-        ));
+			// 'dntype' => "["1","2","3","4","5"]"	
+		 ));
 			$this->command->info('Rules done  ! ');
 		// Request_event_typesTableSeeder
 		Request_event_type::create(array(

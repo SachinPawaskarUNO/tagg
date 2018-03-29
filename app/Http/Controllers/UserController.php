@@ -113,8 +113,8 @@ class UserController extends Controller
         $rl = new Ruls;
         $rl->rule_type_id = 1;
         $rl->rule_owner_id = $orgId;
-        $rl->orgtype = "[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\",\"13\"]";
-        $rl->dntype = "[\"1\",\"2\",\"3\",\"4\",\"5\"]";
+        // $rl->orgtype = "["1","2","3","4","5","6","7","8","9","10","11","12","13"]";
+        // $rl->dntype = "["1","2","3","4","5"]";
         $rl->taxex = false;
         $rl->save();
 

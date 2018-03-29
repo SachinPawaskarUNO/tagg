@@ -128,10 +128,11 @@ class RuleEngineController extends Controller
                 // return $ruleRow->amtreq;
                 $ruleRow->amtreq = $donationRequest->dollar_amount;
             }
+            $donationRequest->tax_exempt = true;
             $dreq = DB::table('donation_requests')->where('id', $donationRequest->id)->first();
-            if (in_array($donationRequest->requester_type, json_decode($ruleRow->orgtype)) && 
-                in_array($donationRequest->item_requested, json_decode($ruleRow->dntype)) && 
-                $donationRequest->tax_exempt == $ruleRow->taxex &&
+            if (in_array($donationRequest->requester_type, $ruleRow->orgtype) && 
+                in_array($donationRequest->item_requested, $ruleRow->dntype) && 
+                ($donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) &&
                 $donationRequest->dollar_amount <= $ruleRow->amtreq) {
                 
                 // update to auto approved.
@@ -147,8 +148,8 @@ class RuleEngineController extends Controller
                 // return $chk;
             } else {
                     $ex = (
-                    (!in_array($donationRequest->requester_type, json_decode($ruleRow->orgtype))) ? "Pending Rejection - Org Type." :
-                        ((!in_array($donationRequest->item_requested, json_decode($ruleRow->dntype))) ? "Pending rejection - Donation Type" :
+                    (!in_array($donationRequest->requester_type,$ruleRow->orgtype)) ? "Pending Rejection - Organization Type" :
+                        ((!in_array($donationRequest->item_requested, $ruleRow->dntype)) ? "Pending rejection - Donation Type" :
                             (($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" :
                                 (($donationRequest->dollar_amount > $ruleRow->amtreq) ? "Pending Rejection - Exceeded Amount" : "Others")))
                     );
@@ -213,9 +214,10 @@ class RuleEngineController extends Controller
         $orgId = Auth::user()->organization_id;
         $rl = Rule::where([['rule_owner_id', '=', $orgId]])->first();
         // dd($request->taxex);
-        $rl->orgtype = json_encode($request->orgTypeId);
-        // dd($rl->orgtype);
-        $rl->dntype = json_encode($request->dtypeId);
+        // $rl->orgtype = json_encode($request->orgTypeId);
+        $rl->orgtype = $request->orgTypeId;
+        $rl->dntype = $request->dtypeId;
+        // $rl->dntype = json_encode($request->dtypeId);
         $rl->taxex = $request->taxex;
         $rl->amtreq = $request->amtReq;
         $rl->update($request->all());
@@ -225,7 +227,8 @@ class RuleEngineController extends Controller
         $orgrow->monthly_budget = $request->monthlyBudget;
         $orgrow->required_days_notice = $request->noticeDays;
         $orgrow->update();
-        return redirect('rules/');
+        // return redirect('rules/');
+        return redirect()->back()->with('message', 'Donation preferences have been saved successfully !');
     }
 
     //////////  CATEGORIZATION OF ALL Constant::SUBMITTED REQUESTS ON REQUEST (manual process)  //////////
