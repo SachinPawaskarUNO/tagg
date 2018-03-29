@@ -100,7 +100,7 @@
 
                             <tr>
                                 <td>Requested Dollar Amount</td>
-                                <td>$<?php echo ($donationrequest['dollar_amount']); ?></td>
+                                <td>$<?php echo (number_format($donationrequest['dollar_amount'])); ?></td>
                             </tr>
                             <tr>
                                 <td>Donation Purpose</td>
@@ -144,7 +144,7 @@
                             @if($donationrequest->est_attendee_count)
                                 <tr>
                                     <td>Estimated Number of Attendes</td>
-                                    <td><?php echo ($donationrequest['est_attendee_count']); ?></td>
+                                    <td><?php echo (number_format($donationrequest['est_attendee_count'])); ?></td>
                                 </tr>
                             @endif
                             <tr>
