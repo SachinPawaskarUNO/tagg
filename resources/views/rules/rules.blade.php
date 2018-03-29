@@ -87,7 +87,7 @@
                 <div>By selecting the type(s) of donation requests you are willing to approve, any other requests will be flagged as "Pending Rejection - Donation type".</div>
                 @foreach ($reqItemTypes as $reqItemType)
                 <div class=""> 
-                @if(($ruleRow->orgtype !== null) && in_array($reqItemType->id,$ruleRow->dntype))
+                @if(($ruleRow->dntype !== null) && in_array($reqItemType->id,$ruleRow->dntype))
                     {{ Form::checkbox('dtypeId[]', $reqItemType->id, null, ['id' => $reqItemType->item_name, 'checked' => 'checked'] ) }} {{$reqItemType->item_name}} </div>
                 @else
                     {{ Form::checkbox('dtypeId[]', $reqItemType->id, null, ['id' => $reqItemType->item_name] ) }} {{$reqItemType->item_name}} </div>
