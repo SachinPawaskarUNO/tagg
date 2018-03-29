@@ -131,7 +131,7 @@
                                             <tr>
                                                 <td style="vertical-align: middle">{{ $organization->org_name }}</td>
                                                 <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->sum('dollar_amount')) }}</td>
-                                                <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount'), 2)}} </td>
+                                                <td style="vertical-align: middle">${{ number_format($organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount'))}} </td>
                                                 <td style="vertical-align: middle">{{ $organization->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->count() }}</td>
                                                     @if(is_null($organization->trial_ends_at) )
                                                          <?php $status = 'Incomplete' ?>
