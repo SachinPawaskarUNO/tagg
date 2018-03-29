@@ -128,10 +128,19 @@ class RuleEngineController extends Controller
                 // return $ruleRow->amtreq;
                 $ruleRow->amtreq = $donationRequest->dollar_amount;
             }
+            if ($ruleRow->orgtype == null) {
+                // return $ruleRow->amtreq;
+                $ruleRow->amtreq = $donationRequest->dollar_amount;
+            }
             $donationRequest->tax_exempt = true;
             $dreq = DB::table('donation_requests')->where('id', $donationRequest->id)->first();
-            if (in_array($donationRequest->requester_type, $ruleRow->orgtype) && 
-                in_array($donationRequest->item_requested, $ruleRow->dntype) && 
+            if (
+                ($ruleRow->orgtype == null || in_array($donationRequest->requester_type, $ruleRow->orgtype)
+                ) 
+            && 
+                (
+                $ruleRow->dntype == null || in_array($donationRequest->item_requested, $ruleRow->dntype)
+                ) && 
                 ($donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) &&
                 $donationRequest->dollar_amount <= $ruleRow->amtreq) {
                 
