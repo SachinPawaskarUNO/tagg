@@ -121,6 +121,7 @@ Route::resource('emailtemplates', 'EmailTemplateController')->middleware('auth')
 
 Route::get('/sendingemail', 'EmailController@manualRequestMail') ->name('approveandsendmail')->middleware('auth');
 Route::get('/emaileditor/editsendmail','EmailTemplateController@send');
+Route::get('/emaileditor/editsendmail','EmailTemplateController@sendemail');
 
 //Dashboard
 
