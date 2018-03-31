@@ -112,11 +112,13 @@
 
         <!-- Amount requested -->
         <div class="form-group">
-                {!! Form::label('amtReq', 'Amount requested', ['class' => 'lb-lg']) !!}
+                {!! Form::label('amtReq', 'Maximum Amount Per Request', ['class' => 'lb-lg']) !!}
                 <div>If an amount is entered, any request that exceed this dollar amount will be flagged as "Pending Rejection - Exceeded Amount".</div>
-        
-                {!! Form::number('amtReq', round($ruleRow->amtreq), ['id' => 'amtReq','class' => 'form-control', 'min' => '0']) !!}
+                <div class="input-group"> 
+                    <span class="input-group-addon">$</span>
+                    {!! Form::number('amtReq', round($ruleRow->amtreq), ['id' => 'amtReq','class' => 'form-control', 'min' => '0']) !!}
                 </div>
+        </div>
 
         <button class="btn btn-success" type="submit">Save</button>
         {!! Form::close() !!} 
