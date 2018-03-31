@@ -31,7 +31,7 @@ body {
 	/* font: 16px Montserrat, sans-serif; */
 	font-size: small;
 	line-height: 2.0;
-	color: #0077aa;
+	color: #18B1C1; 	/* across website color */
 	margin-bottom: 100px;
 	min-height: 100%;
 	clear: both;
@@ -93,7 +93,7 @@ p {
 
 h1 {
 	font-size: 16px;
-	color: #3a87ad;
+	color: #18B1C1;
 	position: relative;
 	float: bottom;
 	top: 75%;
@@ -778,4 +778,29 @@ th,td{
  nav.navbar-findcond ul.dropdown-menu > li > a:hover { background: #000; color: #fff; }
  nav.navbar-findcond span.badge { background: #000; font-weight: normal; font-size: 11px; margin: 0 4px; }
  nav.navbar-findcond span.badge.new { background: rgba(255, 0, 0, 0.8); color: #fff; }
- 
+ .lb-sm {
+	font-size: 12px;
+  }
+  
+  .lb-md {
+	font-size: 16px;
+  }
+  
+  .lb-lg {
+	font-size: 20px;
+  }
+
+  .panel1 {
+	background-color:#18B1C1;
+  }
+  
+  .panel2 {
+	background-color:#c691f9;
+}
+  
+  .panel3 {
+	background-color:#9F59E2;
+}
+  .panel4 {
+	background-color:#8823ea;
+}

@@ -24,8 +24,8 @@
         <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading"><p class="lead"> Donation Preferences</p>
-                        <div class="">CharitQ allows you to optionally select criteria based on your donation preferences. Donation not meeting you selected
-                            criteria or that would be overbudget will be flagged as "Pending rejection". to guide when reviewing requests.
+                        <div class="">CharityQ allows you to optionally select criteria based on your donation preferences. Request not meeting your selected
+                            criteria or that would be over budget will be flagged as "Pending Rejection" to guide when reviewing requests.
                         </div>
                     </div>
                 </div>
@@ -35,24 +35,33 @@
                 {{ session()->get('message') }}
             </div>
         @endif
+        </div>
         {!! Form::model($ruleRow, ['action' => 'RuleEngineController@store']) !!}
         <div class="form-group">
-        {!! Form::label('monthlyBudget', 'Budget $', ['class' => 'lead']) !!} 
-        <div>
-            By setting a monthly budget, any requests that come in after your budget is reached will be flagged as "Pending Rejection".
-        </div>
-        {!! Form::text('monthlyBudget', round($monthlyBudget), ['id' => 'monthlyBudget','class' => 'form-control col-xs-4' ]) !!}
+            {!! Form::label('monthlyBudget', 'Monthly Budget', ['class' => 'lb-lg']) !!} 
+            <div>
+                By setting a monthly budget, any requests that come in after your budget is reached will be flagged as "Pending Rejection - Budget".
+            </div>
+            <div class="input-group"> 
+                <span class="input-group-addon">$</span>
+                {!! Form::number('monthlyBudget', round($monthlyBudget), ['id' => 'monthlyBudget', 'class' => 'form-control col-xs-3', 'min' => '0']) !!}
+            </div>                
         </div>
         <!-- Notice Days -->
         <div class="form-group">
-        {!! Form::label('noticeDays', 'Notice', ['class' => 'lead']) !!}
+        {!! Form::label('noticeDays', 'Notice Needed', ['class' => 'lb-lg']) !!}
         <div>By setting a number of days notice you need before the donation is due, any requests that do not meet or exceed the days notice required will be flagged as "Pending rejection - Not Enough Notice".        
         </div>
-         {!! Form::text('noticeDays', $daysNotice, ['id' => 'noticeDays','class' => 'form-control']) !!}
-        <!-- Organization Type -->
+        
+         <div class="input-group">
+                {!! Form::number('noticeDays', $daysNotice, ['id' => 'noticeDays','class' => 'form-control', 'min' => '0']) !!}
+                <span class="input-group-addon" id="basic-addon2">Days</span>
+        </div>
+        
+         <!-- Organization Type -->
         <div class="form-group">
-            {!! Form::label('orgType', 'Organization Type', ['class' => 'lead']) !!}
-            <div>If organization types are selected, any donation requests from organization that fall in non-selected categories will be flagged as "Pending rejection - Org Type".</div>
+            {!! Form::label('orgType', 'Organization Type Not Supported', ['class' => 'lb-lg']) !!}
+            <div>If organization types are selected, any donation requests from organization that fall in selected categories will be flagged as "Pending Rejection - Org Type".</div>
             @foreach ($rs as $r)
                 <div class="">
                 @if(($ruleRow->orgtype !== null) && in_array($r->id,$ruleRow->orgtype))
@@ -66,31 +75,36 @@
         
         <!-- Tax Exempt -->
         <div class="form-group">
-                {!! Form::label('taxEx', 'Tax Exempt', ['class' => 'lead']) !!}
-                <div>If checked, any donation requests from organizations without 501c3 status will be flagged as "Pending Rejection - Not 501c3".</div>
+                {!! Form::label('taxEx', 'Tax Exempt Only', ['class' => 'lb-lg']) !!}
+                <div>If Yes is selected, any donation requests from organizations without 501c3 status will be flagged as "Pending Rejection - Not 501c3".</div>
                 <div class="">
                 @if ($ruleRow->taxex == '1')
-                {{ Form::radio('taxex', '1', true, ['id' => 'tax','checked' => 'checked']) }} Yes
+                {{ Form::radio('taxex', '1', true, ['id' => 'tax','checked' => 'checked']) }} Yes, Must be tax exempt. 
                 <br />
                 {{ Form::radio('taxex', '0', false, ['id' => 'tax']) }} No
                 @else
-                {{ Form::radio('taxex', '1', false, ['id' => 'tax']) }} Yes
+                {{ Form::radio('taxex', '1', false, ['id' => 'tax']) }} Yes, Must be tax exempt.
                 <br />
                 {{ Form::radio('taxex', '0', true, ['id' => 'tax','checked' => 'checked']) }} No
                 @endif                
                 </div>
         
-
         <!-- Donation Type -->
         <div class="form-group">
-                {!! Form::label('dtype', 'Donation Type', ['class' => 'lead']) !!}
-                <div>By selecting the type(s) of donation requests you are willing to approve, any other requests will be flagged as "Pending Rejection - Donation type".</div>
+                {!! Form::label('dtype', 'Donation Type(s) Accepted', ['class' => 'lb-lg']) !!}
+                <div>
+                    By selecting the type(s) of donation requests you are willing to approve, any other requests will be flagged as "Pending Rejection - Donation Type".
+                </div>
                 @foreach ($reqItemTypes as $reqItemType)
-                <div class=""> 
+                 
                 @if(($ruleRow->dntype !== null) && in_array($reqItemType->id,$ruleRow->dntype))
-                    {{ Form::checkbox('dtypeId[]', $reqItemType->id, null, ['id' => $reqItemType->item_name, 'checked' => 'checked'] ) }} {{$reqItemType->item_name}} </div>
+                <div class="">
+                {{ Form::checkbox('dtypeId[]', $reqItemType->id, null, ['id' => $reqItemType->item_name, 'checked' => 'checked'] ) }} {{$reqItemType->item_name}} 
+                </div>
                 @else
-                    {{ Form::checkbox('dtypeId[]', $reqItemType->id, null, ['id' => $reqItemType->item_name] ) }} {{$reqItemType->item_name}} </div>
+                <div class="">
+                {{ Form::checkbox('dtypeId[]', $reqItemType->id, null, ['id' => $reqItemType->item_name] ) }} {{$reqItemType->item_name}} 
+                </div>
                 @endif
                 @endforeach 
         </div>
@@ -98,17 +112,16 @@
 
         <!-- Amount requested -->
         <div class="form-group">
-                {!! Form::label('amtReq', 'Amount requested', ['class' => 'lead']) !!}
+                {!! Form::label('amtReq', 'Amount requested', ['class' => 'lb-lg']) !!}
                 <div>If an amount is entered, any request that exceed this dollar amount will be flagged as "Pending Rejection - Exceeded Amount".</div>
         
-                {!! Form::text('amtReq', round($ruleRow->amtreq), ['id' => 'amtReq','class' => 'form-control']) !!}
+                {!! Form::number('amtReq', round($ruleRow->amtreq), ['id' => 'amtReq','class' => 'form-control', 'min' => '0']) !!}
                 </div>
 
-        <button class="btn btn-success" type="submit">save</button>
+        <button class="btn btn-success" type="submit">Save</button>
         {!! Form::close() !!} 
     </div>
         </div>
     </div>
 </div>
-
 @endsection

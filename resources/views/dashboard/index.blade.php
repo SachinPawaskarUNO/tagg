@@ -9,7 +9,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Request Management
+                    <h1 class="page-header text-center" style="font-size:26px;">Request Management
                         Dashboard</h1>
 
                 </div>
@@ -18,8 +18,8 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading" style="background-color: #56ba94 ;">
+                    <div class="panel panel1">
+                        <div class="panel-heading" style="background-color: #18B1C1;">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-money fa-5x" style="color: white"></i>
@@ -37,8 +37,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading" style="background-color: #9f8cb9;">
+                    <div class="panel panel2">
+                        <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-check-square-o fa-5x" style="color: white"></i>
@@ -53,8 +53,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading" style="background-color: #6c6ba4;">
+                    <div class="panel panel3">
+                        <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-clock-o fa-5x" style="color: white;"></i>
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading" style="background-color: #332f52;">
+                    <div class="panel panel4">
+                        <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-window-close-o fa-5x" style="color: white"></i>
@@ -92,8 +92,8 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-12">
                     <div class="panel panel-default text-left">
-                        <div class="panel-heading text-center" style="color:#0077aa;font-size:15px;">
-                            <b>Pending Requests</b>
+                        <div class="panel-heading text-center" style="color:#18B1C1;font-size:18px;">
+                            Pending Requests
                         </div>
 
                         <!-- Donation request -->

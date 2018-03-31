@@ -99,7 +99,7 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-12">
                     <div class="panel panel-default text-left">
-                        <div class="panel-heading text-center" style="color:#0077aa;font-size:15px;">
+                        <div class="panel-heading text-center" style="color:#18B1C1;font-size:15px;">
                             <b>DONATIONS SUMMARY (CUSTOMERS)</b>
                         </div>
 
