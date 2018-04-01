@@ -117,7 +117,7 @@
             <h1 class="toggle-font">Choose your plan</h1>
                 <div id='pln' class="plan toggle-font ">
                         
-                        <input type="radio" class="toggle-font" value= "monthly" name="options" id="option1" >
+                        <input type="radio" class="toggle-font" value= "monthly" name="options" id="option1" checked="checked">
                         Monthly                    
                         <input type="radio" class="toggle-font" value= "yearly"name="options" id="option2">
                         Yearly (Save upto 20%)
@@ -572,10 +572,15 @@
     
         </div>
         <script>
-                $('input:radio[name=options]').click(function() {
-                  $( "#plan1" ).toggle();
-                  $( "#plan2" ).toggle();
-                });
+                // $('input:radio[name=options]').click(function() {
+                //   $( "#plan1" ).toggle();
+                //   $( "#plan2" ).toggle();
+                // });
+
+    $("input[name='options']:radio")
+    .change(function() {
+      $("#plan1").toggle($(this).val() == "monthly");
+      $("#plan2").toggle($(this).val() == "yearly"); });
         </script>
 
 </section>
