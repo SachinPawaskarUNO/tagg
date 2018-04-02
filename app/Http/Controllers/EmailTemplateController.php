@@ -142,7 +142,7 @@ class EmailTemplateController extends Controller
             }
         } else {
             //do not redirect to email editor if no request is selected
-            return redirect('/dashboard')->with('message', 'select something');
+            return redirect('/dashboard')->with('message', 'Please select one or multiple donation request(s).');
         }
     }
 

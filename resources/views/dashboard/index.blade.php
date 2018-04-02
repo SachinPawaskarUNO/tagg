@@ -95,7 +95,12 @@
                         <div class="panel-heading text-center" style="color:#18B1C1;font-size:18px;">
                             Pending Requests
                         </div>
-
+                        @if(session()->has('message'))
+                        <div class="alert alert-warning alert-dismissible text-center center-block" style="width: 30%;" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                         {{ session()->get('message') }}
+                        </div>
+                        @endif
                         <!-- Donation request -->
                         <!-- /.panel-heading -->
                         <div class="panel-body">
