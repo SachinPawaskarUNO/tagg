@@ -123,66 +123,82 @@ class RuleEngineController extends Controller
         
         $ruleRow = Rule::query()->where([['rule_owner_id', '=',  $donationRequest->organization_id], ['active', '=', Constant::ACTIVE]])->first();
         if ($ruleRow) {
-            // $dreq = DB::table('donation_requests')->where(id);
-            if ($ruleRow->amtreq == 0) {
-                // return $ruleRow->amtreq;
+            //
+            if ($ruleRow->amtreq == 0) { 
+                // if maximum amount is not set we assign the requested amount
+                // to make it through conditions.
                 $ruleRow->amtreq = $donationRequest->dollar_amount;
             }
-            if ($ruleRow->orgtype == null) {
-                // return $ruleRow->amtreq;
-                $ruleRow->amtreq = $donationRequest->dollar_amount;
+            // calculate days for donation request deadline 
+            $noticedays = Organization::where('id', $donationRequest->organization_id)->pluck('required_days_notice')->first();
+            $now = time(); 
+            $daydiff = round((strtotime($donationRequest->needed_by_date) - $now) / (60 * 60 * 24) ); // no of days from current date
+
+            if ($noticedays == 0) { 
+                // if notice days count is not set we assign the needed date as notice 
+                // to make it through conditions.
+                $noticedays = $daydiff;
             }
-            $donationRequest->tax_exempt = true;
-            $dreq = DB::table('donation_requests')->where('id', $donationRequest->id)->first();
+
+            // calculate remaining budget for current month  
+            $totaldonatedamt = DonationRequest::where('approval_status_id', Constant::APPROVED)
+                                ->where('approved_organization_id', $donationRequest->organization_id)
+                                ->whereMonth('created_at', Carbon::now()->month) 
+                                ->sum('approved_dollar_amount');
+            
+            $monthlyBudget = Organization::where('id', $donationRequest->organization_id)->pluck('monthly_budget')->first();
+            $remainingBudget = $monthlyBudget - $totaldonatedamt;
+
+            if ($monthlyBudget == 0) { 
+                // if monthly budget is not set we assign the total donated amount that month as budget  
+                // to make it through conditions.
+                $monthlyBudget = $totaldonatedamt;
+            }
+
+            
+            // $dreq = DB::table('donation_requests')->where('id', $donationRequest->id)->first();
+            // dd(round($donationRequest->dollar_amount));
+            // dd(round($ruleRow->amtreq));
+
             if (
-                ($ruleRow->orgtype == null || in_array($donationRequest->requester_type, $ruleRow->orgtype)
-                ) 
-            && 
-                (
-                $ruleRow->dntype == null || in_array($donationRequest->item_requested, $ruleRow->dntype)
-                ) && 
-                ($donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) &&
-                $donationRequest->dollar_amount <= $ruleRow->amtreq) {
+                ( is_null($ruleRow->orgtype) || in_array($donationRequest->requester_type, $ruleRow->orgtype) ) && // org type check   
+                ( is_null($ruleRow->dntype) || in_array($donationRequest->item_requested, $ruleRow->dntype) ) && // donation type check
+                ( $donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) && // tax exempt check
+                ( $donationRequest->dollar_amount <= $ruleRow->amtreq ) && // amount requested check    
+                ( $donationRequest->approved_dollar_amount <= $remainingBudget) && // budget check 
+                ( $daydiff >= $noticedays) // notice days check 
+            ) {
                 
                 // update to auto approved.
 
-                $chk = DB::table('donation_requests')->where('id', $donationRequest->id)
-                ->update(['approval_status_id' => Constant::PENDING_APPROVAL,
-                          'approval_status_reason' => 'Pending Approval',
+                $chk = DB::table('donation_requests')
+                        ->where('id', $donationRequest->id)
+                        ->update(['approval_status_id' => Constant::PENDING_APPROVAL,
+                          'approval_status_reason' => Constant::STATUS_REASON_DEFAULT,
                           'rule_process_date' => Carbon::now(),
                           'updated_at' => Carbon::now()
                           ]);
                 
-                // $chk = " yes match";
-                // return $chk;
             } else {
                     $ex = (
-                    (!in_array($donationRequest->requester_type,$ruleRow->orgtype)) ? "Pending Rejection - Organization Type" :
-                        ((!in_array($donationRequest->item_requested, $ruleRow->dntype)) ? "Pending rejection - Donation Type" :
-                            (($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" :
-                                (($donationRequest->dollar_amount > $ruleRow->amtreq) ? "Pending Rejection - Exceeded Amount" : "Others")))
-                    );
+                            ((!is_null($ruleRow->orgtype) && (!in_array($donationRequest->requester_type,$ruleRow->orgtype)) ? "Pending Rejection - Organization Type" :
+                                (( (!is_null($ruleRow->dntype) && (!in_array($donationRequest->item_requested, $ruleRow->dntype))) ? "Pending rejection - Donation Type" :
+                                    (($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" :
+                                        (($donationRequest->dollar_amount > $ruleRow->amtreq) ? "Pending Rejection - Exceeded Amount" : 
+                                            (($donationRequest->approved_dollar_amount > $remainingBudget) ? "Pending Rejection - Budget" : 
+                                                (( $daydiff < $noticedays ) ? "Pending Rejection - Not Enough Notice" : "Others"
+                                        ))
+                                    ))
+                                ))
+                            ))
+                        );
                 $chk = DB::table('donation_requests')->where('id', $donationRequest->id)
                 ->update(['approval_status_id' => Constant::PENDING_REJECTION,
                           'approval_status_reason' => $ex,
                           'rule_process_date' => Carbon::now(),
                           'updated_at' => Carbon::now()
                           ]);
-                // $chk = "no match";
-                // return $chk;            
-            }
-            // $queryBuilderJSON = $ruleRow->rule;
-            // $json = json_decode($queryBuilderJSON, true);
-            // $arr = $this->filteredQueryBuilderJsonArray($json, $donationRequest->id, false);
-            // $qbp = new QueryBuilderParser(
-            //     ['id', 'organization_id', 'requester', 'requester_type', 'needed_by_date', 'tax_exempt', 'dollar_amount', 'approved_organization_id', 'approval_status_id']
-            // );
-            // $query = $qbp->parse(json_encode($arr), $table);
-            // $exists = $query->get(['id']);
-            // if ($exists->isNotEmpty()) {
-            //     // Apply Rule
-            //     $query->update(['approval_status_id' => Constant::REJECTED, 'approval_status_reason' => $ruleRow->ruleType->type_name . ' Rule',
-            //         'approved_organization_id' => $ruleOwner, 'rule_process_date' => Carbon::now(), 'updated_at' => Carbon::now()]);
+                }
             }
         }
 
