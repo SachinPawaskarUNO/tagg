@@ -24,12 +24,12 @@ class EmailTemplateController extends Controller
 
         if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) {
 
-            $email_templates = EmailTemplate::where('organization_id', $org_id)->get();
-
+            $approval_email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
+            $rejection_email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $org_id)->get();
 
         }
 
-        return view('emailtemplates.index', compact('email_templates'));
+        return view('emailtemplates.index', compact('approval_email_templates', 'rejection_email_templates'));
     }
 
     public function update(Request $request, $id)
