@@ -164,18 +164,18 @@ class CqAppSeeder extends Seeder {
 		'trial_ends_at' => '2038-01-16'
 		));
 
-		// $buser = Organization::create(array(
-		// 'org_name' => 'NFM',
-		// 'organization_type_id' => $ortl->id,
-		// 'org_description' => 'NFM',
-		// 'street_address1' => 'NFM St',
-		// 'street_address2' => 'Ste. A',
-		// 'city' => 'Omaha',
-		// 'zipcode' => '68130',
-		// 'state' => $ne->state_code,
-		// 'phone_number' => '(402) 715-5230',
-		// 'trial_ends_at' => '2019-01-16'
-		// ));
+		$buser = Organization::create(array(
+		'org_name' => 'NFM',
+		'organization_type_id' => $ortl->id,
+		'org_description' => 'NFM',
+		'street_address1' => 'NFM St',
+		'street_address2' => 'Ste. A',
+		'city' => 'Omaha',
+		'zipcode' => '68130',
+		'state' => $ne->state_code,
+		'phone_number' => '(402) 715-5230',
+		'trial_ends_at' => '2019-01-16'
+		));
 			$this->command->info('Orgs done ! ');
 
 		// create user
@@ -194,29 +194,29 @@ class CqAppSeeder extends Seeder {
             'state' => $ne->state_code,
 			'phone_number' => '(402) 715-5230'));
 			// business user
-			// $nfmusr = User::create(array(
-			// 	'first_name' => 'Admin',
-			// 	'last_name' => 'Nfm',
-			// 	'user_name' => 'admin@nfm.com',
-			// 	'email' => 'admin@nfm.com',
-			// 	'password' => bcrypt('secret'),
-			// 	'organization_id' => $buser->id,
-			// 	'street_address1' => '17117 Oak Drive',
-			// 	'street_address2' => 'Ste. A',
-			// 	'city' => 'Omaha',
-			// 	'zipcode' => '68130',
-			// 	'state' => $ne->state_code,
-			// 	'phone_number' => '(402) 715-5230'));
+			$nfmusr = User::create(array(
+				'first_name' => 'Admin',
+				'last_name' => 'Nfm',
+				'user_name' => 'admin@nfm.com',
+				'email' => 'admin@nfm.com',
+				'password' => bcrypt('secret'),
+				'organization_id' => $buser->id,
+				'street_address1' => '17117 Oak Drive',
+				'street_address2' => 'Ste. A',
+				'city' => 'Omaha',
+				'zipcode' => '68130',
+				'state' => $ne->state_code,
+				'phone_number' => '(402) 715-5230'));
 		// assign role 
 		RoleUser::create(array(
 			'id' => '1',
             'role_id' => $ru->id,
             'user_id' => $rootuser->id
 		));
-		// RoleUser::create(array(
-        //     'role_id' => $bau->id,
-        //     'user_id' => $nfmusr->id
-        // ));
+		RoleUser::create(array(
+            'role_id' => $bau->id,
+            'user_id' => $nfmusr->id
+        ));
 			$this->command->info('Root user done ! ');
 
 		// create rule 
@@ -224,69 +224,34 @@ class CqAppSeeder extends Seeder {
 		$preacpt = Rule_type::create(array( 'id' => '2' ,'type_name' => 'Pre-Accept', 'type_description' => 'Donation Requests that match the criteria of this rule will be flagged as ready for acceptance by the user.', 'active' => true));
 		
 		// Rule
-		 Rule::create(array('id' => '1', 'rule_type_id' => $preacpt->id, 'rule_owner_id' => $oroot->id, 'active' => true,
-            'rule' => '{
-                        "condition": "OR",
-                        "rules": [
-                            {
-                            "id": "requester",
-                            "field": "requester",
-                            "type": "string",
-                            "input": "text",
-                            "operator": "contains",
-                            "value": "tool"
-                            },
-                            {
-                            "id": "needed_by_date",
-                            "field": "needed_by_date",
-                            "type": "date",
-                            "input": "text",
-                            "operator": "less_or_equal",
-                            "value": "10/22/2017"
-                            }
-                        ],
-                        "not": false,
-                        "valid": true
-                        }'
-        ));
-		Rule::create(array('id' => '2', 'rule_type_id' => $acpt->id, 'rule_owner_id' => $oroot->id, 'active' => true,
-            'rule' => '{
-            "condition": "AND",
-            "rules": [
-                {
-                "id": "dollar_amount",
-                "field": "dollar_amount",
-                "type": "double",
-                "input": "number",
-                "operator": "less",
-                "value": "300"
-                },
-                {
-                "id": "requester_type",
-                "field": "requester_type",
-                "type": "integer",
-                "input": "checkbox",
-                "operator": "in",
-                "value": [
-                    "1",
-                    "4",
-                    "8"
-                ]
-                }
-            ],
-            "not": false,
-            "valid": true
-            }'
-        ));
+		 Rule::create(array(
+			'id' => '1',
+			'rule_type_id' => $preacpt->id, 
+			'rule_owner_id' => $oroot->id, 
+			'active' => true,
+			// 'orgtype' => "["1","2","3","4","5","6","7","8","9","10","11","12","13"]",
+			'taxex' => false,
+			// 'dntype' => "["1","2","3","4","5"]"	
+			        ));
+		Rule::create(array(
+			'id' => '2',
+			'rule_type_id' => $preacpt->id, 
+			'rule_owner_id' => $buser->id, 
+			'active' => true,
+			// 'orgtype' => "["1","2","3","4","5","6","7","8","9","10","11","12","13"]",
+			'taxex' => false,
+			// 'dntype' => "["1","2","3","4","5"]"	
+		 ));
 			$this->command->info('Rules done  ! ');
 		// Request_event_typesTableSeeder
 		Request_event_type::create(array(
-			'id' => '1',
+		'id' => '1',
 		'type_name' => 'Fundraiser/Gala', 
 		'type_description' => 'Fundraiser'
 		));
+
 		Request_event_type::create(array(
-			'id' => '2',
+		'id' => '2',
 		'type_name' => 'Walk/Run/Ride Event',
 		'type_description' => 'Walk/Run/Ride Event'
 		));
@@ -497,6 +462,37 @@ class CqAppSeeder extends Seeder {
 		<p>Sincerely,</p>
 		<p>- CharityQ Team</p>'
 		));
+		EmailTemplate::create(array(
+			'id' => '6',
+			'template_type_id' => $eaprv->id, 
+			'organization_id' => $oroot->id, 
+			'email_subject' => 'Approval Decision 2', 
+			'email_message' => 'Decision 2'
+			));
+
+			EmailTemplate::create(array(
+				'id' => '7',
+				'template_type_id' => $eaprv->id, 
+				'organization_id' => $oroot->id, 
+				'email_subject' => 'Custom Approval email', 
+				'email_message' => 'Custom Email'
+				));
+
+				EmailTemplate::create(array(
+					'id' => '8',
+					'template_type_id' => $erjct->id, 
+					'organization_id' => $oroot->id, 
+					'email_subject' => 'Rejection Decision 2', 
+					'email_message' => 'Decision 2'
+					));
+		
+					EmailTemplate::create(array(
+						'id' => '9',
+						'template_type_id' => $erjct->id, 
+						'organization_id' => $oroot->id, 
+						'email_subject' => 'Custom Rejection email', 
+						'email_message' => 'Custom Email'
+						));
 			$this->command->info('email stuff done ! ');
 	}
 }

@@ -37,6 +37,7 @@
                             <tr class="bg-info">
                                 <th class="text-center">Organization Name</th>
                                 <th class="text-center">Requested Amount</th>
+                                <th class="text-center">Approved Amount</th>
                                 <th class="text-center">Type of Donation</th>
                                 <th class="text-center">Location</th>
                                 {{--<th class="text-center">Event Name</th>--}}
@@ -50,7 +51,8 @@
                             @foreach ($donationrequests as $donationrequest)
                                 <tr>
                                     <td style="vertical-align: middle">{{ $donationrequest->requester }}</td>
-                                    <td style="vertical-align: middle">${{ number_format($donationrequest->approved_dollar_amount, 2) }}</td>
+                                    <td style="vertical-align: middle">${{ number_format($donationrequest->dollar_amount) }}</td>
+                                    <td style="vertical-align: middle">${{ number_format($donationrequest->approved_dollar_amount) }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->donationRequestType->item_name }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->organization->org_name }}</td>
                                     {{--<td style="vertical-align: middle">{{ $donationrequest->event_name }}</td>--}}

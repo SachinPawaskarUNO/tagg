@@ -26,7 +26,7 @@ class Constant
     const CHARITYQ_ID = 1;
 
     //APPROVAL STATUS REASON
-    CONST STATUS_REASON_DEFAULT = 'Business Rules failed to run on request.';
+    CONST STATUS_REASON_DEFAULT = 'Pending Approval';
 
     // RULE TYPES
     const AUTO_REJECT_RULE = 1;

@@ -90,26 +90,105 @@ class EmailTemplateController extends Controller
 
                 //get email template for Approve id value = 3
                 // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
-                $email_template = EmailTemplate::where([
-                    ['template_type_id', Constant::REQUEST_APPROVED],
-                ])->get();
-                $email_template = $email_template[0]; //convert collection into an array
-                
-                return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+                // $email_template = EmailTemplate::where([
+                //     ['template_type_id', Constant::REQUEST_APPROVED],
+                // ])->get();
+                // $email_template = $email_template[0]; //convert collection into an array
+
+                $email_templates = [];
+                $org_id = Auth::user()->organization_id;
+                $user_id = Auth::id();
+                $user_role = RoleUser::where('user_id', $user_id)->value('role_id'); //get user role of current user
+
+                if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) {
+
+                    // $email_templates = EmailTemplate::where('organization_id', $org_id)->get();
+                    $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
+                    // $email_template = EmailTemplate::where([
+                    // ['template_type_id', Constant::REQUEST_APPROVED],
+                    // ])->get();
+                    // $email_template = $email_template[0]; //convert collection into an array
+                }
+
+                return view('emailtemplates.emailtype', compact('email_templates', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+
+                // return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+                // return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
             } else {
 
                 //get email template for Reject id value = 4
                 // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $org_id)->get();
-                $email_template = EmailTemplate::where([
-                    ['template_type_id', Constant::REQUEST_REJECTED],
-                ])->get();
-                $email_template = $email_template[0]; //convert collection into an array
-                return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+                // $email_template = EmailTemplate::where([
+                //     ['template_type_id', Constant::REQUEST_REJECTED],
+                // ])->get();
+                // $email_template = $email_template[0]; //convert collection into an array
+                // return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+                $email_templates = [];
+                $org_id = Auth::user()->organization_id;
+                $user_id = Auth::id();
+                $user_role = RoleUser::where('user_id', $user_id)->value('role_id'); //get user role of current user
+
+                if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) {
+
+                    // $email_templates = EmailTemplate::where('organization_id', $org_id)->get();
+                    $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $org_id)->get();
+                    // $email_template = EmailTemplate::where([
+                    // ['template_type_id', Constant::REQUEST_APPROVED],
+                    // ])->get();
+                    // $email_template = $email_template[0]; //convert collection into an array
+                }
+
+                return view('emailtemplates.emailtype', compact('email_templates', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
             }
         } else {
             //do not redirect to email editor if no request is selected
             return redirect('/dashboard')->with('message', 'select something');
         }
     }
-}
 
+    public function sendemail(Request $request)
+    {
+        dd($request);
+        $org_id = Auth::user()->organization_id;
+        $ids_array = [];
+        $ids_array = explode(',', $ids_string); //split string into array seperated by ', '
+
+        //get email ids
+        $emails = DonationRequest::whereIn('id', $ids_array)->pluck('email');
+        $emails = str_replace(array("[", "]", '"'), "", ($emails));
+
+            //get first and last names in string
+        $firstNames = DonationRequest::whereIn('id', $ids_array)->pluck('first_name');
+        $lastNames = DonationRequest::whereIn('id', $ids_array)->pluck('last_name');
+            //if current organization is a child location get parent's email template
+        $organizationId = ParentChildOrganizations::where('child_org_id', $org_id)->value('parent_org_id');
+            if ($organizationId){
+                $org_id = $organizationId;
+            }
+        // $email_template = EmailTemplate::find('id', $request->id)->get();
+        $email_template = EmailTemplate::findOrFail($request->id);
+        // dd($email_template->template_type_id);
+        if ($email_template->template_type_id == Constant::REQUEST_APPROVED) {
+            //get email template for Approve id value = 3
+            // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
+            // $email_template = EmailTemplate::where([
+            //     ['template_type_id', Constant::REQUEST_APPROVED],
+            // ])->get();
+            // $email_template = $email_template[0]; //convert collection into an array
+            // dd($email_template);
+            return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+            // return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+        } elseif ($email_template->template_type_id == REQUEST_REJECTED) {
+
+            //get email template for Reject id value = 4
+            // $email_template = EmailTemplate::where('id', $)->where('organization_id', $org_id)->get();
+            // $email_template = EmailTemplate::where([
+                // ['template_type_id', Constant::REQUEST_REJECTED],
+            // ])->get();
+            $email_template = $email_template[0]; //convert collection into an array
+            return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+           
+        }
+    
+}
+}

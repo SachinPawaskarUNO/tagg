@@ -84,6 +84,10 @@ Route::get('user/manageusers/edit/{id}', 'UserController@editSubUser')->name('ed
 
 Route::post('user/manageusers', 'UserController@updateSubUser')->name('updatesubuser')->middleware('auth');
 
+Route::get('/user/destroy/{id}/{active}', 'UserController@destroy');
+
+Route::get('/user/deactivate/{id}', 'UserprofileController@deactivate');
+
 Route::get('/user/editprofile', 'UserController@editProfile')->name('editprofile')->middleware('auth');
 Route::patch('/user/updateprofile', 'UserController@updateProfile')->name('updateprofile')->middleware('auth');
 
@@ -117,6 +121,7 @@ Route::resource('emailtemplates', 'EmailTemplateController')->middleware('auth')
 
 Route::get('/sendingemail', 'EmailController@manualRequestMail') ->name('approveandsendmail')->middleware('auth');
 Route::get('/emaileditor/editsendmail','EmailTemplateController@send');
+Route::get('/emaileditor/editsendmail','EmailTemplateController@sendemail');
 
 //Dashboard
 
@@ -125,6 +130,7 @@ Route::get('/dashboard', 'DashboardController@index') ->name('dashboardindex')->
 Route::post('/donation/change-status', 'DonationRequestController@changeDonationStatus')->middleware('auth');
 
 // Rules stuff
+Route::post('rules', 'RuleEngineController@store');
 Route::get('help', 'RuleEngineController@rulesHelp');
 Route::get('runRule', 'RuleEngineController@manualRunRule')->middleware('auth');
 Route::get('runBudgetCheckRule', 'RuleEngineController@runBudgetCheckRule')->middleware('auth');
@@ -134,6 +140,7 @@ Route::get('saveBudgetNotice', 'RuleEngineController@saveBudgetNotice')->middlew
 Route::get('loadRule', 'RuleEngineController@loadRule')->middleware('auth');
 //Route::get('/rules', 'RuleEngineController@rules');
 Route::resource('/rules', 'RuleEngineController')->middleware('auth');
+
 // Rules stuff// Rules stuff
 //Route::get('rules', 'RuleEngineController@rulesGUI');
 Route::get('/webhook/chargeSuccess', 'SubscriptionController@chargeSuccess');

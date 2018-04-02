@@ -48,51 +48,62 @@ class SubscriptionController extends Controller
         if ($organization->subscribed('main')) {
             return redirect('subscription')->with('message', 'Plan Already Submitted!');
         } else {
-            if ($request->input('plan') == "Annually") {
+            try{
 
-                if (isset($coupon)) {
-                    $organization->newSubscription('main', $plan)->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
-                        'email' => $organization->org_name
-
-                    ]);
-
-                } else {
-
-                    $organization->newSubscription('main', $plan)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
-                        'email' => $organization->org_name
-
-                    ]);
-
-
-                }
-                Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
-
-                $organization->trial_ends_at = Carbon::now()->addYear(1);
-
-                $organization->save();
-
-
-            } else {
-                if ($request->input('plan') == "Monthly") {
+                $organization->error_message = "";
+                $organization->update();
+                if ($request->input('plan') == "Annually") {
 
                     if (isset($coupon)) {
-
                         $organization->newSubscription('main', $plan)->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
                             'email' => $organization->org_name
+
                         ]);
 
                     } else {
+
                         $organization->newSubscription('main', $plan)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
                             'email' => $organization->org_name
+
                         ]);
+
 
                     }
                     Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
-                    $organization->trial_ends_at = Carbon::now()->addMonth(1);
-                    $organization->save();
-                }
-            }
 
+                    $organization->trial_ends_at = Carbon::now()->addYear(1);
+
+                    $organization->save();
+
+
+                } else {
+                    if ($request->input('plan') == "Monthly") {
+
+                        if (isset($coupon)) {
+
+                            $organization->newSubscription('main', $plan)->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
+                                'email' => $organization->org_name
+                            ]);
+
+                        } else {
+                                $organization->newSubscription('main', $plan)
+                                    ->withMetadata(array('organization_id' => $organization->id))
+                                    ->create($request->input('token'), ['email' => $organization->org_name
+                                    ]);
+                        }
+                        Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
+                        $organization->trial_ends_at = Carbon::now()->addMonth(1);
+                        $organization->save();
+                    }
+                }
+            }catch (\Exception $e){
+                if( !is_null($organization->trial_ends_at)) {
+                    $organization->error_message = $e->getMessage();
+                    $organization->update();
+                }
+                return redirect('/dashboard')->with('status', $e->getMessage());
+
+            }
             return redirect('/dashboard')->with('status', 'Successfully Submitted!');
 
         }
@@ -121,7 +132,7 @@ class SubscriptionController extends Controller
         if ($organization->subscription('main')->onGracePeriod()) {
             $organization->subscription('main')->resume();
 
-            return redirect('organizations')->with('message', 'resumed');
+            return redirect('organizations')->with('message', 'Subscription Resumed');
         }
 
     }

@@ -60,7 +60,7 @@
                         <input name="userId" type="hidden" id="userId" value="{{ $user->id }}" />
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">Role</label>
-                            <div class="col-lg-6"><p>&nbsp;&nbsp;{!! $user->roles[0]->name !!}</p></div>
+                            <div class="col-lg-6"><h5>{!! $user->roles[0]->name !!}</h5></div>
                         </div>
                         <div class="form-group">
                             <label for="first_name" class="col-md-4 control-label"> First Name <span

@@ -33,31 +33,29 @@
 <div id="app">
 
 
-    <nav class="navbar-toggleable-md navbar-toggleable-xs navbar-light navbar-fixed-top"
-         style="background-color: #8e24aa;padding-bottom: .5px;margin-bottom: 10px">
+    <nav class="navbar-toggleable-md navbar-toggleable-xs navbar-findcond navbar-fixed-top bg-light">
 
         <div class="container-fluid">
 
             <div class="row">
-                <div class="col-sm-3"
-                     style='padding-left: 0px;padding-top: .5px;padding-bottom: -5px;padding-right:10px;margin-top: -2px;margin-bottom: -0.5px'>
+                <div class="col-sm-3 bg-light">
                     @if (Auth::guest())
                         <a href="{{ url('/') }}">
-                            <img src="{{ asset('img/CharityQ_Logo.png') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
+                            <img src="{{ asset('img/New-Logo.jpg') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
                                  id="logo" class="img-responsive"
                                  width="60%" style='background-size: inherit'/>
                         </a>
                     @elseif ((Auth::user()->organization->trial_ends_at >= \Carbon\Carbon::now())
                     OR ( Auth::user()->organization->parentOrganization->isNotEmpty() AND  Auth::user()->organization->parentOrganization[0]->parentOrganization->trial_ends_at >= \Carbon\Carbon::now()))
                         <a href="{{ url('/dashboard') }}">
-                            <img src="{{ asset('img/CharityQ_Logo.png') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
+                            <img src="{{ asset('img/New-Logo.jpg') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
                                  id="logo" class="img-responsive"
-                                 width="60%" style='background-size: inherit'/>
+                                 width="40%" style='background-size: inherit'/>
                         </a>
 
                     @else
                         <a href="{{ url('/') }}">
-                            <img src="{{ asset('img/CharityQ_Logo.png') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
+                            <img src="{{ asset('img/New-Logo.jpg') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
                                  id="logo" class="img-responsive"
                                  width="60%" style='background-size: inherit'/>
                         </a>
@@ -92,10 +90,10 @@
                             <li><a href="{{ url('/dashboard')}}" id = 'Dashboard' class="w3-bar-item w3-button current"
                                    style="font-weight:bold; right:10px">Dashboard</a>
                             </li>
-                            <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" id = 'MyDonationForm' class="w3-bar-item w3-button current"
-                                   style="font-weight:bold; right:10px">My Donation Form</a>
                             @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                                <li><a href="{{ route('donationrequests.index')}}" id = 'searchDonations' class="w3-bar-item w3-button "
+                            <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" id = 'MyDonationForm' class="w3-bar-item w3-button current"
+                                style="font-weight:bold; right:10px">My Donation Form</a></li>    
+                            <li><a href="{{ route('donationrequests.index')}}" id = 'searchDonations' class="w3-bar-item w3-button "
                                        style="font-weight:bold; right:10px">Search
                                         Donations</a></li>
                             @elseif(Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_USER OR Auth::user()->roles[0]->id == \App\Custom\Constant::ROOT_USER)
@@ -115,7 +113,7 @@
                                     <div class="w3-dropdown-content w3-card-4 w3-bar-block">
                                         @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
                                             <li>
-                                                <a href="{{ url('/rules?rule=1')}}">Donation Preferences</a>
+                                                <a href="{{ url('/rules')}}">Donation Preferences</a>
                                             </li>
                                             <li>
                                                 <a href="{{ url('/donationrequests/create') }}?orgId={{encrypt(Auth::user()->organization_id)}}" target="_blank">Manual Donation Request</a>

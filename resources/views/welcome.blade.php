@@ -2,22 +2,17 @@
 
 @section('content')
 
-    <body>
-
-    <div id="image1" class="container-fluid" style='text-align:center; background-image: url("http://citadelnyc.com/wp-content/uploads/2015/04/background-outer-wrapper2.png");background-repeat:repeat;height:155px;' align="center" >
-
-    </div>
 
         <div class="containerimg" >
-            <img src="{{ asset('img/cover.jpg') }}" style="overflow: hidden ; height: 100%; width: 100% ; position:static;  "/>
-<script>
-    $(window).load(function(){
-        $('.containerimg').find('img').each(function(){
-            var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
-            $(this).addClass(imgClass);
-        })
-    })
-</script>
+            <img src="{{ asset('img/home-page-image.jpg') }}" class="wide img-responsive" />
+                <script>
+                    $(window).load(function(){
+                        $('.containerimg').find('img').each(function(){
+                            var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
+                            $(this).addClass(imgClass);
+                        })
+                    })
+                </script>
         </div>
 
     <link href="{!! asset('css/custom.css') !!}" media="all" rel="stylesheet" type="text/css" />
@@ -119,12 +114,12 @@
             </div>
         
         <div class="well well-sm text-center">
-            <h1 class="toggle-font">Choose you plan</h1>        
-                <div id='pln' class="plan toggle-font" data-toggle="buttons"> 
+            <h1 class="toggle-font">Choose your plan</h1>
+                <div id='pln' class="plan toggle-font ">
                         
-                        <input type="radio" class="toggle-font" name="options" id="option1">
+                        <input type="radio" class="toggle-font" value= "monthly" name="options" id="option1" checked="checked">
                         Monthly                    
-                        <input type="radio" class="toggle-font" name="options" id="option2">
+                        <input type="radio" class="toggle-font" value= "yearly"name="options" id="option2">
                         Yearly (Save upto 20%)
                               
                 </div>
@@ -401,7 +396,7 @@
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='small1' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Small' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -451,11 +446,12 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
+
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='medium' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Medium' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -504,11 +500,12 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
+
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='large' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Large' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -557,11 +554,12 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
+
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                        	<a id='unlimited1' class="" href="{{ route('register') }}">Start Free Trial</a>
+                        	<a id='Unlimited' class="" href="{{ route('register') }}">Start Free Trial</a>
                         </div>
                         <!--//BUTTON END-->
                         
@@ -574,16 +572,22 @@
     
         </div>
         <script>
-                $('input:radio[name=options]').click(function() {
-                  $( "#plan1" ).toggle();
-                  $( "#plan2" ).toggle();
-                });
+                // $('input:radio[name=options]').click(function() {
+                //   $( "#plan1" ).toggle();
+                //   $( "#plan2" ).toggle();
+                // });
+
+    $("input[name='options']:radio")
+    .change(function() {
+      $("#plan1").toggle($(this).val() == "monthly");
+      $("#plan2").toggle($(this).val() == "yearly"); });
         </script>
+
 </section>
            
 	{{--  <footer>
     	<a class="bottom_btn" href="#">&copy; CharityQ</a>
     </footer>  --}}
 </div>
-</body>
+
 @endsection

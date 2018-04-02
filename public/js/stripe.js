@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    Stripe.setPublishableKey('pk_test_VI93Q5aXznENjA73W8S5xY8Y');
+    // Stripe.setPublishableKey('pk_test_VI93Q5aXznENjA73W8S5xY8Y');
+    Stripe.setPublishableKey('pk_test_kx1WITwOGJFDq8Vi7zdRI7qQ');
 
     $("#buttonPay").click(function () {
         var form = $('#subscription-form');
