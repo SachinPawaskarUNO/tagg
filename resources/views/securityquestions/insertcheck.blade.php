@@ -32,7 +32,7 @@
                             <br>
 
                             <div class="form-group col-md-4 col-md-offset-4">
-                                {!! Form::submit('Check Answer', ['class' => 'btn savebtn form-control']) !!}
+                                {!! Form::submit('Check Answer', ['class' => 'btn btn-basic form-control']) !!}
                             </div>
                             {!! Form::close() !!}
                     </div>

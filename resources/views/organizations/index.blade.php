@@ -4,7 +4,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Business Locations</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">Business Locations</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -41,7 +41,7 @@
                                     @else
 
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn savebtn pull-right" style="" id="resume">
+                                           class="btn btn-basic pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
@@ -57,7 +57,7 @@
                                         </a>
                                     @else
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn savebtn pull-right" style="" id="resume">
+                                           class="btn btn-basic pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
@@ -79,7 +79,7 @@
                                         </a>
                                     @else
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn savebtn pull-right" style="" id="resume">
+                                           class="btn btn-basic pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
@@ -120,7 +120,7 @@
                                     <td style="vertical-align: middle">{{'$'}}{{ $loggedOnUserOrganization[0]->monthly_budget}}</td>
                                     <td style="vertical-align: middle"><a
                                                 href="{{route('organizations.edit',encrypt($loggedOnUserOrganization[0]->id))}}"
-                                                id = 'edit_location' class="btn savebtn" style="background-color: #0099CC;">Edit</a></td>
+                                                id = 'edit_location' class="btn btn-basic">Edit</a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -134,7 +134,7 @@
                                     <td align="right"
                                         style="padding-right: 10px;padding-top: 0px"> @if ($subscriptionQuantity=='101' || ($count < $subscription))
                                             <a href="{{action('OrganizationController@createOrganization')}}"
-                                               id = 'Add_locations' class="btn savebtn">[+] Add Business Location </a>
+                                               id = 'Add_locations' class="btn btn-basic">[+] Add Business Location </a>
                                         @endif</td>
                                 </tr>
 
@@ -171,7 +171,7 @@
                                         <td style="vertical-align: middle">{{'$'}}{{ $organization['monthly_budget']}}</td>
                                         <td style="vertical-align: middle"><a
                                                     href="{{route('organizations.edit',encrypt($organization->id))}}"
-                                                    class="btn savebtn">Edit</a>
+                                                    class="btn btn-basic">Edit</a>
                                         </td>
                                         <td style="vertical-align: middle">
                                             {{ Form::open([

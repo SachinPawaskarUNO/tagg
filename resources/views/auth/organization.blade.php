@@ -203,7 +203,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn savebtn">
+                                    <button type="submit" class="btn btn-basic">
                                         Register
                                     </button>
                                     <span style="color: red"> <h5>Fields Marked With (<span

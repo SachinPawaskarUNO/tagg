@@ -86,7 +86,7 @@
             <br>
             <br>
             <br>
-            <a href="{{ route('register') }}" class="btn savebtn " title="Signup"><span class="glyphicon glyphicon-user"></span>&nbsp;Sign Up !</a>
+            <a href="{{ route('register') }}" class="btn btn-basic " title="Signup"><span class="glyphicon glyphicon-user"></span>&nbsp;Sign Up !</a>
         </div>
         <div class="col-sm-6" style="padding: 2%">
             <h2>Save Time = Save Money</h2>

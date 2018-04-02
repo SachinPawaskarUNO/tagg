@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="divRequestForm" class="panel panel-default">
-                    <div class="panel-heading">Please complete the following information to submit your donation request</div>
+                    <div class="panel-heading"><h1>Please complete the following information to submit your donation request</h1></div>
 
                     <div class="panel-body">
                     {!! Form::open(['url' => 'attachment', 'class' => 'form-horizontal', 'id' => 'donationRequestForm', 'files' => true]) !!}
@@ -455,7 +455,7 @@
                                     Send Request
                                 </button>
 
-                                <input id="hiddenSubmit" type="submit" class="btn btn-success" style="display: none">
+                                <input id="hiddenSubmit" type="submit" class="btn btn-basic" style="display: none">
                             <span style="color: red"> <h5> Fields Marked With (*) Are Mandatory </h5></span>
                             </div>
                         </div>

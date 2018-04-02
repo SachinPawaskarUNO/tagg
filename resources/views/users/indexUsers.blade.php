@@ -3,7 +3,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Users</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">Users</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -19,8 +19,8 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1 style="text-align: left;font-weight: bold;"> Active Users </h1>
-                        <a href="{{route('users.show', encrypt($admin->id))}}" class="btn savebtn"
+                        <h1 style="text-align: left;"> Active Users </h1>
+                        <a href="{{route('users.show', encrypt($admin->id))}}" class="btn btn-basic"
                            style="position: absolute; top: 26px; right:32px;background-color: #0099CC;">[+] Add
                             User </a>
                     </div>
@@ -52,7 +52,7 @@
 
                                 <td style="vertical-align: middle"><a href="{{route('edituser',encrypt($user->id))}}"
 
-                                                                      class="btn savebtn"
+                                                                      class="btn btn-basic"
                                                                       style="background-color: #0099CC;"> Edit </a>
                                     <a href="/user/destroy/{{$user->id}}/{{$user->active}}" onclick="return confirm('Are you sure you want to deactivate this user account')" class="btn btn-danger">Delete</a>
 

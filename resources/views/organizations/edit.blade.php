@@ -3,7 +3,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Business Profile</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">Business Profile</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -35,7 +35,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h1
-                                style="text-align: left;font-weight: bold;">Update Location</h1></div>
+                                style="text-align: left;">Update Location</h1></div>
 
                     <div class="panel-body">
 
@@ -146,8 +146,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-5">
-                                {!! Form::submit('Save', ['class' => 'btn savebtn', 'id' => 'btnSave']) !!}
-                                <button id="btnEdit" class="btn savebtn hidden" type="button">Edit</button>
+                                {!! Form::submit('Save', ['class' => 'btn btn-basic', 'id' => 'btnSave']) !!}
+                                <button id="btnEdit" class="btn btn-basic hidden" type="button">Edit</button>
                                 <input id = 'Cancel' class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>
                                 <span style="color: red"> <h5>Fields Marked With (<span
                                                 style="color: red; font-size: 20px; align:middle;">*</span>) Are Mandatory</h5></span>

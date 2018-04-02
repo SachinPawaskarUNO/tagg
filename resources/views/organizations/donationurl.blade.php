@@ -8,7 +8,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="col-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1 style="text-align: left;font-weight: bold;">There are two ways to utilize your CharityQ  Donation Form.</h1></div>
+                    <div class="panel-heading"><h1 style="text-align: left;">There are two ways to utilize your CharityQ  Donation Form.</h1></div>
                     <div class="panel-body">
                         <script type="text/javascript">
                             function Copy() {
@@ -28,7 +28,7 @@
                         </script>
                         <div>
                             <input id = 'create_URL' type="button" class="btn btn-info"
-                                    style="cursor: help;background-color: #0099CC;" value="Create URL"
+                                    style="cursor: help;background-color: #18B1C1;" value="Create URL"
                                     title="For use for promotions or on social media." onclick="Copy();"/><br />
                             <small>
                                 This will provide you with a website link to your donation form.
@@ -36,7 +36,7 @@
                             <input type="text"  id="urlCopied" size="80"/><br />
 
                             <input id = 'createForm' type="button" class="btn btn-info"
-                                    style="cursor: help;background-color: #0099CC;" value="Create Embedded Form Code"
+                                    style="cursor: help;background-color: #18B1C1;" value="Create Embedded Form Code"
                                     title="Insert this HTML code in your business website to allow outside organizations to fill out a donation request form.."
                                     onclick="GenerateDRForm();" /><br />
                             <small>This provides you with code to copy onto your website (into an iframe).</small><br />
@@ -51,7 +51,7 @@
             <div class="form-group">
                 <center>
                 <div class="text-center">
-                    <button id="SetDonationPref" class="btn savebtn" style="background-color: #0099CC;"
+                    <button id="SetDonationPref" class="btn btn-basic"
                             type="button" onClick = location.href='{{ url('/rules')}}';>Set Donation Preferences
                         </button>
                     <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>

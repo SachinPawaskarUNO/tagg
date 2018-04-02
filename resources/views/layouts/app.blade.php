@@ -69,16 +69,12 @@
                         <ul class="nav navbar-nav navbar-right visible-md-block visible-lg-block">
 
                             @if (Auth::guest())
-                                <li><a href="{{ url('/') }}#about" class="w3-bar-item w3-button">About Us&nbsp;<span
-                                                class="glyphicon glyphicon-info-sign"></span></a></li>
-                                <li><a href="{{ url('/') }}#how" class="w3-bar-item w3-button">How This Works&nbsp;<span
-                                                class="glyphicon glyphicon-question-sign"></span></a></li>
-                                <li><a href="{{ url('/') }}#generic_price_table" class="w3-bar-item w3-button">Pricing&nbsp;<span
-                                                class="glyphicon glyphicon-question-sign"></span></a></li>
+                                <li><a href="{{ url('/') }}#about" >About Us</a></li>
+                                <li><a href="{{ url('/') }}#how" >How This Works</a></li>
+                                <li><a href="{{ url('/') }}#generic_price_table" >Pricing</span></a></li>
     
-                                <li><a href="{{ route('register') }}" class="w3-bar-item w3-button">Sign Up <span
-                                                class="glyphicon glyphicon-user"></span></a></li>
-                                <li><a href="{{ route('login') }}" class="w3-bar-item w3-button ">Login&nbsp;<span
+                                <li><a href="{{ route('register') }}" >Sign Up</a></li>
+                                <li><a href="{{ route('login') }}" >Login&nbsp;<span
                                                 class="glyphicon glyphicon-log-in"></span></a></li>
 
 
@@ -87,17 +83,17 @@
                     @elseif ((Auth::user()->organization->trial_ends_at >= \Carbon\Carbon::now())
                     OR ( Auth::user()->organization->parentOrganization->isNotEmpty() AND  Auth::user()->organization->parentOrganization[0]->parentOrganization->trial_ends_at >= \Carbon\Carbon::now()))
                         <ul class="nav navbar-nav navbar-right visible-md-block visible-lg-block">
-                            <li><a href="{{ url('/dashboard')}}" id = 'Dashboard' class="w3-bar-item w3-button current"
+                            <li><a href="{{ url('/dashboard')}}" id = 'Dashboard' 
                                    style="font-weight:bold; right:10px">Dashboard</a>
                             </li>
                             @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                            <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" id = 'MyDonationForm' class="w3-bar-item w3-button current"
+                            <li><a href="{{url('/organizations/donationurl',encrypt(Auth::user()->organization_id) )}}" id = 'MyDonationForm' 
                                 style="font-weight:bold; right:10px">My Donation Form</a></li>    
-                            <li><a href="{{ route('donationrequests.index')}}" id = 'searchDonations' class="w3-bar-item w3-button "
+                            <li><a href="{{ route('donationrequests.index')}}" id = 'searchDonations' 
                                        style="font-weight:bold; right:10px">Search
                                         Donations</a></li>
                             @elseif(Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_USER OR Auth::user()->roles[0]->id == \App\Custom\Constant::ROOT_USER)
-                                <li><a href="{{ URL('donationrequests/admin')}}" id = 'searchDonations'   class="w3-bar-item w3-button "
+                                <li><a href="{{ URL('donationrequests/admin')}}" id = 'searchDonations'   
                                        style="font-weight:bold; right:10px">Search
                                         Donations</a></li>
                             @endif
@@ -184,7 +180,7 @@
                     @else
                         <ul class="nav navbar-nav navbar-right visible-md-block visible-lg-block">
                             <li><a href="{{ url('/subscription')}}"
-                                   class="w3-bar-item w3-button current">Subscription</a>
+                                   >Subscription</a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
@@ -211,25 +207,25 @@
     @if (Auth::guest())
 
         <ul>
-            <li><a href="{{ url('/') }}#about" class="w3-bar-item w3-button">About Us&nbsp;<span
+            <li><a href="{{ url('/') }}#about" >About Us&nbsp;<span
                             class="glyphicon glyphicon-info-sign"></span></a></li>
-            <li><a href="{{ url('/') }}#how" class="w3-bar-item w3-button">How This Works&nbsp;<span
+            <li><a href="{{ url('/') }}#how" >How This Works&nbsp;<span
                             class="glyphicon glyphicon-question-sign"></span></a></li>
-            <li><a href="{{ route('register') }}" class="w3-bar-item w3-button">Sign Up <span
+            <li><a href="{{ route('register') }}" >Sign Up <span
                             class="glyphicon glyphicon-user"></span></a></li>
-            <li><a href="{{ route('login') }}" class="w3-bar-item w3-button ">Login&nbsp;<span
+            <li><a href="{{ route('login') }}" >Login&nbsp;<span
                             class="glyphicon glyphicon-log-in"></span></a></li>
         </ul>
     @elseif ((Auth::user()->organization->trial_ends_at >= \Carbon\Carbon::now())
                    OR ( Auth::user()->organization->parentOrganization->isNotEmpty() AND  Auth::user()->organization->parentOrganization[0]->parentOrganization->trial_ends_at >= \Carbon\Carbon::now()))
 
               <ul class="divsmall visible-xs-block visible-sm-block">
-            <li><a href="{{ url('/dashboard')}}" class="w3-bar-item w3-button current">Dashboard</a></li>
+            <li><a href="{{ url('/dashboard')}}" >Dashboard</a></li>
             @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                <li><a href="{{ route('donationrequests.index')}}" class="w3-bar-item w3-button">Search
+                <li><a href="{{ route('donationrequests.index')}}" >Search
                         Donations</a></li>
             @elseif(Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::TAGG_USER)
-                <li><a href="{{ URL('donationrequests/admin')}}" class="w3-bar-item w3-button">Search
+                <li><a href="{{ URL('donationrequests/admin')}}" >Search
                         Donations</a></li>
             @endif
             <li class="dropdown">
@@ -305,7 +301,7 @@
     @else
         <ul class="nav navbar-nav navbar-right visible-md-block visible-lg-block">
             <li><a href="{{ url('/subscription')}}"
-                   class="w3-bar-item w3-button current">Subscription</a>
+                   >Subscription</a>
             </li>
             <li>
                 <a href="{{ route('logout') }}"
@@ -332,9 +328,3 @@
 {{--<script src="{{ asset('js/app.js') }}">--}}
 
 </body>
-<!-- <footer class="footer bg-4">
-
-    <img src="{{ asset('img/icon-partner.png') }}" class="imgalign"  style="width:100px;height:50px;"  >
-
-    <h5>A {{ env('APP_NAME', 'CharityQ')  }} Intiative</h5>
- </footer> -->

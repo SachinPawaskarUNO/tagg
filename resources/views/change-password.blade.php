@@ -9,7 +9,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1 style="text-align: left;font-weight: bold;">Change Password</h1>
+                        <h1 style="text-align: left;">Change Password</h1>
                     </div>
                     <div class="panel-body">
                         @if (Session::has('success'))
@@ -68,7 +68,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-3 col-md-offset-5">
-                                    <button type="submit" class="btn savebtn form-control">Submit</button>
+                                    <button type="submit" class="btn btn-basic form-control">Submit</button>
                                 </div><br><br>
                                   <div class="col-md-5 col-md-offset-5">
                                 <span style="color: red"> <h5> Fields Marked With (*) Are Mandatory </h5></span>

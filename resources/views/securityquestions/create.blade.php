@@ -91,7 +91,7 @@
 
 
                         <div class="form-group col-md-4 col-md-offset-4">
-                            {!! Form::submit('Save', ['class' => 'btn savebtn form-control']) !!}
+                            {!! Form::submit('Save', ['class' => 'btn btn-basic form-control']) !!}
                         </div>
                         {!! Form::close() !!}
                         {{--</form>--}}

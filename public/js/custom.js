@@ -1,4 +1,4 @@
-$("body").on('change', '#plan,#user_locations', function () {
+$("body").on('change', '#plan,#user_locations', function() {
     $("#cart").removeClass("hide");
     document.getElementById("cart_table").rows[2].cells.namedItem("discounted_price").innerHTML = 0;
     document.getElementById("coupon-message").innerHTML = '';
@@ -12,17 +12,16 @@ $("body").on('change', '#plan,#user_locations', function () {
 
     var yearly_charge = '';
     var totalamount = '';
-    var totalamountshow='';
+    var totalamountshow = '';
     if ((plan != '') && (user != '')) {
         if (plan == 'Monthly') {
             if (user == '5') {
                 totalamount = 19;
-                } else if (user == '25') {
+            } else if (user == '25') {
                 totalamount = 49;
             } else if (user == '100') {
                 totalamount = 199;
-            }
-            else {
+            } else {
                 totalamount = 249;
             }
         } else {
@@ -35,8 +34,7 @@ $("body").on('change', '#plan,#user_locations', function () {
             } else if (user == '100') {
                 // yearly_charge = (99 * 12);
                 yearly_charge = 1900;
-            }
-            else {
+            } else {
                 // yearly_charge = (249 * 12);
                 yearly_charge = 2390;
             }
@@ -46,7 +44,7 @@ $("body").on('change', '#plan,#user_locations', function () {
             totalamount = yearly_charge;
 
         }
-        totalamountshow="$"+totalamount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
+        totalamountshow = "$" + totalamount.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");
         if (totalamount != '') {
             $('#total_price').html(totalamountshow);
             $('#balance_price').html(totalamountshow);
@@ -56,7 +54,7 @@ $("body").on('change', '#plan,#user_locations', function () {
 });
 
 
-$("body").on('keyup', '#cardNumber', function () {
+$("body").on('keyup', '#cardNumber', function() {
     var regexp1 = new RegExp("[^0-9]");
     if (regexp1.test(document.getElementById("cardNumber").value)) {
         $('#card_error').show();
@@ -69,7 +67,7 @@ $("body").on('keyup', '#cardNumber', function () {
 
 });
 
-$("body").on('keyup', '#expiryMonth', function () {
+$("body").on('keyup', '#expiryMonth', function() {
     var regexp1 = new RegExp("[^0-9]");
     if (regexp1.test(document.getElementById("expiryMonth").value)) {
         $('#expiry_error').show();
@@ -81,7 +79,7 @@ $("body").on('keyup', '#expiryMonth', function () {
     }
 
 });
-$("body").on('keyup', '#expiryYear', function () {
+$("body").on('keyup', '#expiryYear', function() {
     var regexp1 = new RegExp("[^0-9]");
     if (regexp1.test(document.getElementById("expiryYear").value)) {
         $('#expiry_error').show();
@@ -93,7 +91,7 @@ $("body").on('keyup', '#expiryYear', function () {
     }
 
 });
-$("body").on('keyup', '#cvCode', function () {
+$("body").on('keyup', '#cvCode', function() {
     var regexp1 = new RegExp("[^0-9]");
     if (regexp1.test(document.getElementById("cvCode").value)) {
         $('#expiry_error').show();
@@ -105,7 +103,7 @@ $("body").on('keyup', '#cvCode', function () {
     }
 
 });
-$("body").on('change', '#coupon', function () {
+$("body").on('change', '#coupon', function() {
     var coupon = $('#coupon').val();
     if (coupon == '') {
         document.getElementById("cart_table").rows[2].cells.namedItem("discounted_price").innerHTML = 0;
@@ -114,6 +112,3 @@ $("body").on('change', '#coupon', function () {
     }
 
 });
-
-
-

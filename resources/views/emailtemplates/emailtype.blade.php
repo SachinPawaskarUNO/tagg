@@ -5,7 +5,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Available Email Templates</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">Available Email Templates</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -19,7 +19,7 @@
                 <div class="panel panel-default">
                     {{ csrf_field() }}
                     <div class="panel-heading">
-                        <h1 style="text-align: left;font-weight: bold;">Select Email Templates</h1>
+                        <h1 style="text-align: left;">Select Email Templates</h1>
                     </div>
 
                     <div class="panel-body">
@@ -40,9 +40,9 @@
                                     <td style="vertical-align: middle">{{ $email_template->email_subject }}</td>
                                    
                                     <td style="vertical-align: middle">
-                                        {{--  <a href="{{action('EmailTemplateController@sendemail', ['id' => $email_template->id])}}" id = "EditEmailTemp" class="btn savebtn">Choose</a></td>  --}}
-                                        <a href="" id = "EditEmailTemp" class="btn savebtn">Choose</a></td>
-                                        {{--  {!! Form::submit( 'Choose', ['class' => 'btn savebtn', 'name' => 'submitbutton', 'value' => $email_template->id])!!}  --}}
+                                        {{--  <a href="{{action('EmailTemplateController@sendemail', ['id' => $email_template->id])}}" id = "EditEmailTemp" class="btn btn-basic">Choose</a></td>  --}}
+                                        <a href="" id = "EditEmailTemp" class="btn btn-basic">Choose</a></td>
+                                        {{--  {!! Form::submit( 'Choose', ['class' => 'btn btn-basic', 'name' => 'submitbutton', 'value' => $email_template->id])!!}  --}}
                                     </tr>
                                 @endforeach
                         </table>
