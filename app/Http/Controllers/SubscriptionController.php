@@ -101,7 +101,7 @@ class SubscriptionController extends Controller
                     $organization->error_message = $e->getMessage();
                     $organization->update();
                 }
-                return redirect('/dashboard')->with('status', $e->getMessage());
+                return redirect('subscription')->with('message', 'Your payment cannot be processed at this time. Please try again later.');
 
             }
             return redirect('/dashboard')->with('status', 'Successfully Submitted!');
