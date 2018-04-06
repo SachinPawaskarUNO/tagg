@@ -308,19 +308,19 @@ class CqAppSeeder extends Seeder {
 		// Request_item_type::create(array('id' => '5','item_name' => 'Other (please explain)', 'item_description' => 'Other Types of Requests'));
 
 		// Requester_type
-		Requester_type::create(array('type_name' => 'Animal Welfare', 'type_description' => 'This is an Animal Welfare'));
-		Requester_type::create(array('type_name' => 'Arts, Culture & Humanities', 'type_description' => 'These are Arts, Culture & Humanities'));
-		Requester_type::create(array('type_name' => 'Civil Rights, Social Action & Advocacy', 'type_description' => 'These are Civil Rights, Social Action & Advocacy'));
-		Requester_type::create(array('type_name' => 'Community Improvement', 'type_description' => 'This is Community Improvement'));
-		Requester_type::create(array('type_name' => 'Corporate Giving', 'type_description' => 'This is Corporate Giving'));
-		Requester_type::create(array('type_name' => 'Education K-12', 'type_description' => 'This is an Education K-12'));
-		Requester_type::create(array('type_name' => 'Environment', 'type_description' => 'This is an Environment'));
-		Requester_type::create(array('type_name' => 'Faith/Religious', 'type_description' => 'This is a Faith/Religious'));
-		Requester_type::create(array('type_name' => 'Food, Agriculture & Nutrition', 'type_description' => 'This is a Food, Agriculture & Nutrition'));
-		Requester_type::create(array('type_name' => 'Health Care', 'type_description' => 'This is for Health Care'));
-		Requester_type::create(array('type_name' => 'Human Services', 'type_description' => 'This is for Human Services'));
-		Requester_type::create(array('type_name' => 'Youth Sports/Activities', 'type_description' => 'This is for Youth Sports/Activities'));
-		Requester_type::create(array('type_name' => 'Others', 'type_description' => 'Other Types of Requesters'));
+		Requester_type::create(array('seq_id' => 1 ,'type_name' => 'Education K-12', 'type_description' => 'This is an Education K-12'));
+		Requester_type::create(array('seq_id' => 2 ,'type_name' => 'Youth Sports/Activities', 'type_description' => 'This is for Youth Sports/Activities'));
+		Requester_type::create(array('seq_id' => 3 ,'type_name' => 'Faith/Religious', 'type_description' => 'This is a Faith/Religious'));
+		Requester_type::create(array('seq_id' => 4 ,'type_name' => 'Corporate Giving', 'type_description' => 'This is Corporate Giving'));
+		Requester_type::create(array('seq_id' => 6 ,'type_name' => 'Animal Welfare', 'type_description' => 'This is an Animal Welfare'));
+		Requester_type::create(array('seq_id' => 7 ,'type_name' => 'Arts, Culture & Humanities', 'type_description' => 'These are Arts, Culture & Humanities'));
+		Requester_type::create(array('seq_id' => 8 ,'type_name' => 'Civil Rights, Social Action & Advocacy', 'type_description' => 'These are Civil Rights, Social Action & Advocacy'));
+		Requester_type::create(array('seq_id' => 9 ,'type_name' => 'Community Improvement', 'type_description' => 'This is Community Improvement'));
+		Requester_type::create(array('seq_id' => 10,'type_name' => 'Environment', 'type_description' => 'This is an Environment'));
+		Requester_type::create(array('seq_id' => 11,'type_name' => 'Food, Agriculture & Nutrition', 'type_description' => 'This is a Food, Agriculture & Nutrition'));
+		Requester_type::create(array('seq_id' => 12,'type_name' => 'Health Care', 'type_description' => 'This is for Health Care'));
+		Requester_type::create(array('seq_id' => 13,'type_name' => 'Human Services', 'type_description' => 'This is for Human Services'));
+		Requester_type::create(array('seq_id' => 14,'type_name' => 'Other', 'type_description' => 'Other Types of Requesters'));
 
 		// Security questions
 		Security_question::create(array('question' => 'What was the name of your elementary / primary school?'));

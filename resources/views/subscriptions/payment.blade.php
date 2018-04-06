@@ -18,9 +18,7 @@
                         </ul>
                     </div>
                 @endif
-                @if(Session::has('message'))
-                    <div class="alert alert-info">{{ Session::get('message') }}</div>
-                @endif
+
                 <div class="panel panel-default" style="padding-left: 5px;padding-right: 5px;">
                     <div class="panel-heading"><h1> Add Payment Information</h1></div>
                     <h2 style="text-align:center;"></h2>
@@ -198,6 +196,9 @@
                 </fieldset>
 
             </div>
+                @if(Session::has('message'))
+                    <div class="alert alert-danger">{{ Session::get('message') }}</div>
+                @endif
             {{form::token()}}
             {{ Form::close() }}
         </div>
