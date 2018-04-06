@@ -104,7 +104,7 @@ class SubscriptionController extends Controller
                 return redirect('subscription')->with('message', 'Your payment cannot be processed at this time. Please try again later.');
 
             }
-            return redirect('/dashboard')->with('status', 'Successfully Submitted!');
+            return redirect('/dashboard')->with('message', 'Successfully  Subscribed!');
 
         }
     }
