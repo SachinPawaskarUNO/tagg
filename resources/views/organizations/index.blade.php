@@ -52,7 +52,7 @@
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
-                                           class="btn backbtn pull-right" style="" id="cancel">
+                                           class="btn backbtnsubs pull-right" style="" id="cancel">
                                             Cancel Subscription
                                         </a>
                                     @else
@@ -61,7 +61,7 @@
                                             Resume Subscription
                                         </a>
                                     @endif
-                                    <h1 style="text-align: left;">Your account allows
+                                    <h1 style="text-align: left;font-size:22px;">Your account allows
                                         for {{$subscriptionQuantity}} locations. You have used {{$count + 1}}.</h1>
 
                                 </div>

@@ -92,7 +92,7 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-12">
                     <div class="panel panel-default text-left">
-                        <div class="panel-heading text-center" style="color:#18B1C1;font-size:18px;">
+                        <div class="panel-heading text-center" style="color:#18B1C1;font-size:22px;">
                             Pending Requests
                         </div>
                         @if(session()->has('message'))

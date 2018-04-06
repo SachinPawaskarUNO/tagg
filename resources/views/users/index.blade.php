@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1 style="text-align: left;">  View & Update Profile </h1></div>
+                    <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">  View & Update Profile </h1></div>
 
                     <div class="panel-body">
                         <table class="table table-striped table-bordered table-hover">

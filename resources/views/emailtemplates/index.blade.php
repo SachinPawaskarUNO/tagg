@@ -18,7 +18,7 @@
                 <div class="panel panel-default">
                     {{ csrf_field() }}
                     <div class="panel-heading">
-                        <h1 style="text-align: left;">Edit Approval Email Templates</h1>
+                        <h1 style="text-align: left;font-size:22px;">Edit Approval Email Templates</h1>
                     </div>
 
                     <div class="panel-body">
@@ -48,12 +48,11 @@
         </div>
 
         <!--  Rejected emails templates-->
-                <div class="row">
+        <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    {{ csrf_field() }}
                     <div class="panel-heading">
-                        <h1 style="text-align: left;">Edit Rejection Email Templates</h1>
+                        <h1 style="text-align: left;font-size:22px;">Edit Rejection Email Templates</h1>
                     </div>
 
                     <div class="panel-body">

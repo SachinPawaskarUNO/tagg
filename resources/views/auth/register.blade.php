@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1 style="text-align: left;">Register Your Business</h1></div>
+                    <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">Register Your Business</h1></div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="post" action="{{ action('UserController@create') }}">
