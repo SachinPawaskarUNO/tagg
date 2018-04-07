@@ -176,6 +176,7 @@
         <script>
 
             $(document).ready(function() {
+                $('input').prop('checked', false);
                 $('#example').DataTable(
                     {
                         responsive: true

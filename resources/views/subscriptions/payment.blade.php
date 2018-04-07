@@ -205,13 +205,5 @@
 
         </div>
     </div>
-    </body>
-
-
 
 @endsection
-{{--@section('scripts')--}}
-
-{{--@endsection--}}
-
-

@@ -456,7 +456,7 @@
                                 </button>
 
                                 <input id="hiddenSubmit" type="submit" class="btn btn-basic" style="display: none">
-                            <span style="color: red"> <h5> Fields Marked With (*) Are Mandatory </h5></span>
+                            <div><span style="color: red">Fields Marked With (*) Are Mandatory </span></div>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -472,8 +472,7 @@
         $('#explain').hide();
         $('#explain_purpose').hide();
         @endif
-    </script>
-    <script type="text/javascript">
+    
         $('#attachment').removeProp('required');
 
         function yesnoCheck() {
@@ -486,8 +485,6 @@
                 $('#attachment').removeProp('required');
             }
         }
-    </script>
-    <script>
         $('#item_requested').change(function () {
             if ($(this).val() == 5) {
                 $('#explain').show();

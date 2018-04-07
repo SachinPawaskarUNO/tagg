@@ -43,7 +43,7 @@
                         <a href="{{ url('/') }}">
                             <img src="{{ asset('img/New-Logo.jpg') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
                                  id="logo" class="img-responsive"
-                                 width="60%" style='background-size: inherit'/>
+                                 width="40%" style='background-size: inherit'/>
                         </a>
                     @elseif ((Auth::user()->organization->trial_ends_at >= \Carbon\Carbon::now())
                     OR ( Auth::user()->organization->parentOrganization->isNotEmpty() AND  Auth::user()->organization->parentOrganization[0]->parentOrganization->trial_ends_at >= \Carbon\Carbon::now()))
@@ -200,10 +200,7 @@
             </div>
         </div>
     </nav>
-</div>
-
-
-<div id="navDemo" class="divsmall visible-xs-block visible-sm-block">
+    <div id="navDemo" class="divsmall visible-xs-block visible-sm-block">
     @if (Auth::guest())
 
         <ul>
@@ -318,13 +315,13 @@
         </ul>
     @endif
 </div>
-<div id="content">
-    {{--@include('layouts.partials._status')--}}
-    @yield('content')
-
 </div>
 
 
-{{--<script src="{{ asset('js/app.js') }}">--}}
 
+<div id="content">
+    
+    @yield('content')
+
+</div>
 </body>
