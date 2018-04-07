@@ -194,8 +194,8 @@
 
                             @if ($donationrequest->approval_status_id == \App\Custom\Constant::SUBMITTED OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_REJECTION OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_APPROVAL)
                                 @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                                    <input class="btn active btn-success" type="submit" name="approve" value="Approve">
-                                    <input class="btn active btn-danger" type="submit" name="reject" value="Reject">
+                                    <input class="btn btn-display-block active btn-success" type="submit" name="approve" value="Approve">
+                                    <input class="btn btn-display-block active btn-danger" type="submit" name="reject" value="Reject">
                                 @endif
 
 
