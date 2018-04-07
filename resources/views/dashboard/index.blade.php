@@ -143,7 +143,7 @@
                                 <div>No pending donation requests to show.</div>
                             @endif
                                 </table>
-                                {!! Form::open(['action' =>  'EmailTemplateController@send', 'method' => 'GET']) !!}
+                                {!! Form::open(['action' => 'EmailTemplateController@send', 'method' => 'GET']) !!}
                                 {{ csrf_field() }}
                                 {{ Form::hidden('ids_string','' , array('id' => 'selected-ids-hidden')) }}
                                 {{ Form::hidden('page_from', '/dashboard') }}
@@ -152,6 +152,8 @@
                                   <div class="col-md-6 col-md-offset-5">
                                     {!! Form::submit( 'Approve', ['class' => 'btn btn-success', 'name' => 'submitbutton', 'value' => 'approve'])!!}
                                     {!! Form::submit( 'Reject', ['class' => 'btn btn-danger', 'name' => 'submitbutton', 'value' => 'reject']) !!}
+                                    {!! Form::submit( 'Approve Default', ['class' => 'btn btn-success', 'name' => 'submitbutton', 'value' => 'approvedef'])!!}
+                                    {!! Form::submit( 'Reject Default', ['class' => 'btn btn-danger', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
                                   </div>
                                 @endif
                                 {!! Form::close() !!}

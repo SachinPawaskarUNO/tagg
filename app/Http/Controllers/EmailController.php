@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Mail;
 
 
+
 class EmailController extends Controller
 {
     /**
@@ -28,8 +29,7 @@ class EmailController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function manualRequestMail(Request $request) {
-
+     public function manualRequestMail(Request $request) {
         //get donation request ids by converting string to array
         $ids_array = explode(',', $request->ids_string); //split string into array separated by ', '
 
@@ -79,5 +79,47 @@ class EmailController extends Controller
 
         $redirect_to = $request->page_from;
         return redirect($redirect_to);
+    }
+    public function email($email_templates,$ids_array,$firstNames,$lastNames,$change_status) {
+        // This is called by EmailTemplateController to send default approval and rejection emails.
+        // Get email ids
+        $emails = DonationRequest::whereIn('id', $ids_array)->pluck('email');
+              
+        // Storing the existing template that was populated in the editor
+        $default_template = $email_templates->email_message;
+        // dd($email_templates->email_message);
+        foreach($emails as $index => $email) {          
+            $email_templates->email_message = str_replace("{Addressee}", $firstNames[$index], $email_templates->email_message);
+            $email_templates->email_message = str_replace("{My Business Name}", Auth::user()->organization->org_name, $email_templates->email_message);
+            
+            $donation_id = $ids_array[$index];
+            $donation = DonationRequest::where('id', $donation_id)->get();
+            $userName = Auth::user()->first_name . ' ' . Auth::user()->last_name;
+            $userId = Auth::id();
+            $organizationId = Auth::user()->organization_id;
+
+            if($change_status == 'Approve Default'){
+                //update donation request status in database
+                $donation[0]->update([
+                    'approval_status_id' => Constant::APPROVED,
+                    'approval_status_reason' => 'Approved by '.$userName,
+                    'approved_organization_id' => $organizationId,
+                    'approved_user_id' => $userId,
+                    'email_sent' => true
+                ]);
+            } elseif($change_status == 'Reject Default'){
+                $donation[0]->update([
+                    'approved_dollar_amount' => 0.00,
+                    'approval_status_id' => Constant::REJECTED,
+                    'approval_status_reason' => 'Rejected by '.$userName,
+                    'approved_organization_id' => $organizationId,
+                    'approved_user_id' => $userId,
+                    'email_sent' => true
+                ]);
+            }
+            Mail::to($email)->send(new SendManualRequest($email_templates));
+            $email_templates->email_message = $default_template;
+        }
+        return redirect('/');
     }
 }

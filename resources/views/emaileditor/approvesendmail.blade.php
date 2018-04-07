@@ -77,7 +77,7 @@
                                 {!! Form::hidden('status', 'Approve') !!}
                                 {!! Form::hidden('ids_string', $ids_string) !!}
                                 {!! Form::hidden('page_from', $page_from) !!}
-                                {{--{!! Form::text('email_subject', null, ['required'], ['class' => 'form-control']) !!}--}}
+                                {!! Form::hidden('organization_id', $email_template->organization_id) !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -91,7 +91,7 @@
                             <!--div class="col-lg-6"-->
                             {!! Form::textarea('email_message', null, ['class' => 'col-md-4 control-label']) !!}
                         </div>
-
+                        
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 {!! Form::submit('Approve and Send', ['class' => 'btn btn-basic']) !!}

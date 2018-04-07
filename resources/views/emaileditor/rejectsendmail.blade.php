@@ -77,7 +77,7 @@
                                 {!! Form::hidden('status', 'Reject') !!}
                                 {!! Form::hidden('ids_string', $ids_string) !!}
                                 {!! Form::hidden('page_from', $page_from) !!}
-                                {{--{!! Form::text('email_subject', null, ['required'], ['class' => 'form-control']) !!}--}}
+                                {!! Form::hidden('organization_id', $email_template->organization_id) !!}
                             </div>
                         </div>
                         <div class="form-group">
