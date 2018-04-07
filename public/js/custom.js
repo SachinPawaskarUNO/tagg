@@ -5,33 +5,38 @@ $("body").on('change', '#plan,#user_locations', function() {
     document.getElementById("coupon").value = '';
     var plan = $('#plan').val();
     var user = $('#user_locations').val();
-    var location_selected = document.getElementById("user_locations").options[document.getElementById("user_locations").selectedIndex].text;
-    var plan_selected = document.getElementById("plan").options[document.getElementById("plan").selectedIndex].text;
+    // var location_selected = document.getElementById("user_locations").options[document.getElementById("user_locations").selectedIndex].text;
+    // var plan_selected = document.getElementById("plan").options[document.getElementById("plan").selectedIndex].text;
+
+    var location_selected = $('input[name="user_locations"]:checked').val();
+    var plan_selected = $('input[name="plan"]:checked').val();
+
     $('#plan_selected').html(plan_selected);
     $('#location_selected').html(location_selected);
+
 
     var yearly_charge = '';
     var totalamount = '';
     var totalamountshow = '';
-    if ((plan != '') && (user != '')) {
-        if (plan == 'Monthly') {
-            if (user == '5') {
+    if ((plan_selected != '') && (location_selected != '')) {
+        if (plan_selected == 'Monthly') {
+            if (location_selected == '5') {
                 totalamount = 19;
-            } else if (user == '25') {
+            } else if (location_selected == '25') {
                 totalamount = 49;
-            } else if (user == '100') {
+            } else if (location_selected == '100') {
                 totalamount = 199;
             } else {
                 totalamount = 249;
             }
         } else {
-            if (user == '5') {
+            if (location_selected == '5') {
                 // yearly_charge = (19 * 12);
                 yearly_charge = 180;
-            } else if (user == '25') {
+            } else if (location_selected == '25') {
                 // yearly_charge = (49 * 12);
                 yearly_charge = 470;
-            } else if (user == '100') {
+            } else if (location_selected == '100') {
                 // yearly_charge = (99 * 12);
                 yearly_charge = 1900;
             } else {
