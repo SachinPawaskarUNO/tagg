@@ -909,6 +909,10 @@ nav.navbar-findcond span.badge.new {
     background-color: #9F59E2;
 }
 
+.btn-display-block{
+    display: inline-block!important;
+}
+
 .panel4 {
     background-color: #8823ea;
 }
@@ -917,3 +921,4 @@ nav.navbar-findcond span.badge.new {
     color: #333;
     background-color: #f5f5f5;
     border-color: #d3e0e9;
+    
