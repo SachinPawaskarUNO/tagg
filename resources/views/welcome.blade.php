@@ -572,15 +572,11 @@
     
         </div>
         <script>
-                // $('input:radio[name=options]').click(function() {
-                //   $( "#plan1" ).toggle();
-                //   $( "#plan2" ).toggle();
-                // });
 
-    $("input[name='options']:radio")
-    .change(function() {
-      $("#plan1").toggle($(this).val() == "monthly");
-      $("#plan2").toggle($(this).val() == "yearly"); });
+        $("input[name='options']:radio").change(function() {
+                $("#plan1").toggle($(this).val() == "monthly");
+                $("#plan2").toggle($(this).val() == "yearly"); 
+                });
         </script>
 
 </section>
