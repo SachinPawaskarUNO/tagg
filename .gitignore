@@ -10,7 +10,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-
 .DS_Store
 .env.*.php
 .env.php
@@ -18,7 +17,6 @@ yarn-error.log
 _ide_helper.php
 # Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
 .rocketeer/
-
 # Sensitive or high-churn files:
 .idea/**/dataSources/
 .idea/**/dataSources.ids
@@ -35,5 +33,5 @@ bootstrap/cache/services.php
 public/2018_02_08_234329_all.php
 log.txt
 composer.lock
-composer.lock
+package-lock.json
 bootstrap/cache/services.php
