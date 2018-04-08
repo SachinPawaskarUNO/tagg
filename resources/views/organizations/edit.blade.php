@@ -29,7 +29,7 @@
         });
 
     </script>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -39,7 +39,7 @@
 
                     <div class="panel-body">
 
-                        {!! Form::model($organization, ['method' => 'PATCH','route'=>['organizations.update', $organization->id], 'class' => 'form-horizontal']) !!}
+                        {!! Form::model($organization, ['method' => 'PATCH','route'=>['organizations.update', $organization->id], 'class' => 'form-horizontal', 'id' => 'update-form']) !!}
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -47,6 +47,13 @@
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (Session::has('success'))
+                            <div class="alert alert-success">
+                                <ul>
+                                    {{ Session::get('success') }}
                                 </ul>
                             </div>
                         @endif
@@ -75,18 +82,18 @@
                         </div>
 
                         {{--<div class="form-group">--}}
-                            {{--<label for="org_description" class="col-md-4 control-label">Business Type <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>--}}
+                        {{--<label for="org_description" class="col-md-4 control-label">Business Type <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>--}}
 
-                            {{--<div class="col-md-6">--}}
+                        {{--<div class="col-md-6">--}}
 
-                                {{--{!! Form::select('organization_type_id', array(null => 'Select...') + $Organization_types->all(), null, ['class'=>'form-control','required', 'disabled']) !!}--}}
+                        {{--{!! Form::select('organization_type_id', array(null => 'Select...') + $Organization_types->all(), null, ['class'=>'form-control','required', 'disabled']) !!}--}}
 
-                                {{--@if ($errors->has('organization_type_id'))--}}
-                                    {{--<span class="help-block">--}}
-                                        {{--<strong>{{ $errors->first('organization_type_id') }}</strong>--}}
-                                    {{--</span>--}}
-                                {{--@endif--}}
-                            {{--</div>--}}
+                        {{--@if ($errors->has('organization_type_id'))--}}
+                        {{--<span class="help-block">--}}
+                        {{--<strong>{{ $errors->first('organization_type_id') }}</strong>--}}
+                        {{--</span>--}}
+                        {{--@endif--}}
+                        {{--</div>--}}
                         {{--</div>--}}
 
                         <div class="form-group">
@@ -154,34 +161,92 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
+                        @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN)
+                        {!! Form::model($organization, ['method' => 'PATCH','route'=>['organizations.update', $organization->id], 'class' => 'form-horizontal', 'id' => 'new-card-form']) !!}
+                        <div class="stripe-errors panel" style="color:red;"></div>
+                        <div class="form-group">
+                            <label for="cardNumber" class="col-md-4 control-label">
+                                CARD NUMBER</label>
+                            <div class="col-lg-6">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="cardNumber" maxlength="16"
+                                           data-stripe="number"
+                                           placeholder="Valid Card Number"
+                                           required autofocus/>
+                                    <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-lock"></span></span>
+                                </div>
+                            </div>
+                            <span id="card_error" style="color: red; display: none;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="expityMonth" class="col-md-4 control-label">EXPIRY DATE</label>
+                            <div class="col-lg-6">
+                                <div class="row">
+                                    <div class="col-xs-6" style="padding-right: 5px;">
+                                        <input type="text" class="form-control" data-stripe="exp-month"
+                                               id="expiryMonth" placeholder="MM" maxlength="2" size="2"
+                                               required/>
+                                    </div>
+                                    <div class="col-xs-6" style="padding-left:5px;">
+                                        <input type="text" class="form-control" data-stripe="exp-year"
+                                               id="expiryYear" placeholder="YY" maxlength="2" size="2"
+                                               required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="expiry_error" style="color: red; display: none;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvCode" class="col-md-4 control-label">
+                                CVV</label>
+                            <div class="col-lg-6">
+                                <input type="password" class="form-control" data-stripe="cvc"
+                                       maxlength="3" size="3"
+                                       id="cvCode"
+                                       placeholder="CVV" required/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-5">
+                                <button type="button" class="btn btn-basic" id="update-default-card">Update card details</button>
+                                {{--{!! Form::submit('Update card details', ['class' => 'btn btn-basic', 'id' => 'buttonPay']) !!}--}}
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                            @endif
                     </div>
                 </div>
             </div>
         </div>
         @if (Auth::user()->organization_id == $organization->id)
-<script>
-    @if (! $errors->any())
-    $(window).load(function() {
-        $("input").attr("readonly", true);
-        $("select").attr("disabled", true);
-        $("#btnSave").addClass("hidden");
-        $("#btnCancel").addClass("hidden");
-        $('#btnEdit').removeClass('hidden');
-    });
-    @endif
-    $('#btnEdit').on('click', function () {
-        $('input').removeAttr('readonly');
-        $('select').removeAttr('disabled');
-        $('#btnSave').removeClass('hidden');
-        $('#btnEdit').addClass('hidden');
-    });
-    $("#zip_code").on('keypress', function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-            //display error message
-            return false;
-        }
-    });
-</script>
+            <script src="https://js.stripe.com/v2/"></script>
+            <script src="{{asset('js/stripe.js')}}"></script>
+            <script>
+                @if (! $errors->any())
+                $(window).load(function() {
+                    $("#update-form input").attr("readonly", true);
+                    $("#update-form select").attr("disabled", true);
+                    $("#update-form #btnSave").addClass("hidden");
+                    $("#update-form #btnCancel").addClass("hidden");
+                    $('#update-form #btnEdit').removeClass('hidden');
+                });
+                @endif
+                $('#btnEdit').on('click', function () {
+                    $('input').removeAttr('readonly');
+                    $('select').removeAttr('disabled');
+                    $('#btnSave').removeClass('hidden');
+                    $('#btnEdit').addClass('hidden');
+                });
+                $("#zip_code").on('keypress', function (e) {
+                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                        //display error message
+                        return false;
+                    }
+                });
+            </script>
         @endif
     </div>
 @endsection
+
+

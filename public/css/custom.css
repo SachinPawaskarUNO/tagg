@@ -930,3 +930,13 @@ nav.navbar-findcond span.badge.new {
     background-color: #f5f5f5;
     border-color: #d3e0e9;}
 
+.choose-plan-error{
+    color: #f00;
+    margin-top: -25px;
+    margin-bottom: 10px;
+    display: none;
+}
+.choose-plan-error-show{
+    display: block;
+}
+

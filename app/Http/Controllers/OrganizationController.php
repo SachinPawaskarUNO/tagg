@@ -62,17 +62,55 @@ class OrganizationController extends Controller
 
     public function update(Request $request, $id)
     {
+
         if (in_array($id, $this->getAllMyOrganizationIds())) {
-            $validator = Validator::make($request->all(), [
-                'phone_number' => 'required|regex:/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/',
-                'zip_code' => 'required|regex:/[0-9]{5}/',
-                'state' => 'required',
-            ]);
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
+            if (!$request->input('token')) {
+                $validator = Validator::make($request->all(), [
+                    'phone_number' => 'required|regex:/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/',
+                    'zip_code' => 'required|regex:/[0-9]{5}/',
+                    'state' => 'required',
+                ]);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput();
+                }
             }
 
             $organization = Organization::find($id);
+
+            if ($request->input('token')) {
+
+                \Stripe\Stripe::setApiKey("sk_test_JCvbZAQM8DJUxfP5e9Ru2ihT");
+
+                try {
+                    $cu = \Stripe\Customer::retrieve($organization->stripe_id);
+                    $cu->source = $request->input('token');
+                    $cu->save();
+
+                    $cu = \Stripe\Customer::Retrieve(
+                        array("id" => $organization->stripe_id, "expand" => array("default_source"))
+                    );
+
+                    $organization->card_last_four = $cu->default_source->last4;
+                    $organization->card_brand = $cu->default_source->brand;
+                    $organization->save();
+
+                    return redirect()->route('organizations.edit', encrypt($id))->withSuccess('Card is updated');
+
+                }
+                catch(\Stripe\Error\Card $e) {
+
+                    // Use the variable $error to save any errors
+                    // To be displayed to the customer later in the page
+                    $body = $e->getJsonBody();
+                    $err  = $body['error'];
+                    $error = $err['message'];
+
+                    return redirect()->route('organizations.edit', encrypt($id))->withErrors(array('0' => $err['message']));
+
+                }
+
+            }
+
             $organization->org_name = $request->org_name;
             $organization->org_description = $request->org_description;
             $organization->street_address1 = $request->street_address1;
@@ -189,3 +227,4 @@ class OrganizationController extends Controller
         return $arr;
     }
 }
+
