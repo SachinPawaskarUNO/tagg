@@ -57,14 +57,14 @@
 
             // Populating array with the list of checkboxes with
             // checked ids
+            $("input[name='emailtype']:radio").first().prop( "checked", true );
             $("input[name='emailtype']:radio").change(function() {
-            //$('.myCheckbox:input[ids]').change(function () {
                 var id = $(this).attr('ids');
                 if(this.checked) {
-                    idsArray = id;
-               // } else {
-                 //   idsArray.splice(idsArray.indexOf(id), 1);
-                }//
+                    idsArray = id;    
+                } else {
+                    idsArray = $("input[name='emailtype']:radio").first().attr('ids');
+                }
                 $('#selected-ids-hidden').val(idsArray);
             });
     </script>
