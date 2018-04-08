@@ -32,13 +32,13 @@
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
-                                           class="btn backbtn pull-right" style="" id="cancel">
+                                           class="btn backbtnsubs pull-right" style="" id="cancel">
                                             Cancel Subscription
                                         </a>
                                     @else
 
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn btn-basic pull-right" style="" id="resume">
+                                           class="btn backbtnsubs pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
@@ -54,7 +54,7 @@
                                         </a>
                                     @else
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn btn-basic pull-right" style="" id="resume">
+                                           class="btn backbtnsubs pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
@@ -71,12 +71,12 @@
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
-                                           class="btn backbtn pull-right" style="" id="cancel">
+                                           class="btn backbtnsubs pull-right" style="" id="cancel">
                                             Cancel Subscription
                                         </a>
                                     @else
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn btn-basic pull-right" style="" id="resume">
+                                           class="btn backbtnsubs pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
