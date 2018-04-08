@@ -69,7 +69,8 @@
                                 <div style="padding-top: 12px;">
                                     <div class="col-md-6" >
                                         <fieldset class="form-group" name="plan" id="plan" required>
-                                            <label class="control-label" for="plan">Plan</label><br/>
+                                            <label class="control-label" for="plan">Plan <span
+                                                        style="color: red; font-size: 20px; vertical-align:middle;">*</span></label><br/>
                                             <input type="radio" name="plan" value="Monthly" ><label>&nbsp; Monthly</label><br />
                                             <input type="radio" name="plan" value="Annually"><label>&nbsp; Annually</label><br />
                                         </fieldset>
@@ -77,6 +78,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6" style="padding-bottom: 12px;">
+                                </div>
+                                <div class="col-md-12">
+                                    <span class="choose-plan-error">Please choose a plan.</span>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="coupon" class="control-label">PROMO CODE</label>
@@ -192,7 +196,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-success btn-lg btn-block" type="submit" id="buttonPay">Pay</button>
+                                <button class="btn btn-success btn-lg btn-block" type="button" id="buttonPay">Pay</button>
                             </div>
                         </div>
 
@@ -205,5 +209,13 @@
 
         </div>
     </div>
+    </body>
+
+
 
 @endsection
+{{--@section('scripts')--}}
+
+{{--@endsection--}}
+
+
