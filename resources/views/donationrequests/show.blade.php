@@ -5,7 +5,7 @@
         <div class="row">
                 
                 <div class="panel panel-default">
-                    <div class="panel-heading">Donation Request Detail</div>
+                     <div class="panel-heading"><h1  style="font-size:22px";>Donation Request Detail</h1></div>
 
                     <table class="table table-striped table-bordered table-hover">
                         <div>
@@ -176,17 +176,9 @@
                                     <div class="col-lg-6">
 
                                         {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
-                                        {!! Form::number('approved_amount', $donationrequest['dollar_amount'], ['id' => 'approved_amount', 'class' => 'form-control', 'min'=>'0.00', 'step'=>'0.01', 'pattern'=>'\d+(\.\d{2})', 'required', 'onblur' => 'setEmptyToZero(this)'] )!!}
+                                        {!! Form::text('approved_amount', round($donationrequest['dollar_amount']), ['onblur' => 'zro(this)', 'id' => 'approved_amount', 'class' => 'form-control', 'min'=>'0', 'step'=>'1', 'pattern'=>'\d+(\.\d{2})', 'required'] )!!}
                                     </div>
                                 </div>
-                        <script type="text/javascript">
-                            function setEmptyToZero(e) {
-                                if (e.value == null || e.value == '')
-                                {
-                                    e.value = '0.00';
-                                }
-                            }
-                        </script>
                                 <br><br>
                             @endif
                         @endif
@@ -212,4 +204,13 @@
             </div>
         </div>
     </div>
+    <script>
+   function zro(e) {
+            if(e.value == 0) {
+                e.value =0;
+            }
+    }
+    $('#approved_amount').number(true,0);
+        
+    </script>
 @stop

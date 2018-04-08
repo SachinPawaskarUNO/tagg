@@ -31,6 +31,7 @@
 
 
     </script>
+    <script src="{{asset('js/jquery.number.min.js')}}"></script>
     {{ csrf_field() }}
 
     <div class="container donationrequest">
@@ -206,7 +207,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="zipcode" type="number"
+                                <input id="zipcode" type="number" min ='0'
                                        oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                        maxlength="5" class="form-control" name="zipcode"
                                        value="{{ old('zipcode') }}" placeholder="Zip Code" required>
@@ -287,12 +288,12 @@
                             <label for="dollar_amount" class="col-md-4 control-label">Dollar Amount<span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span> </label>
                             <div class="col-md-6">
-                                <input id="dollar_amount" type="number" min="0.00" step="0.01" pattern="\d+(\.\d{2})"
+                                <input id="dollar_amount" type="text" min="0" step="1" 
                                        required
-                                       title="Please use the format $.$$ for this field. " class="form-control"
+                                       title="Please use the format $ for this field. " class="form-control"
                                        name="dollar_amount" value="{{ old('dollar_amount') }}"
                                        onblur="setTwoNumberDecimal(this)"
-                                       placeholder="0.00" required>
+                                       placeholder="0" required>
 
                                 @if ($errors->has('dollar_amount'))
                                     <span class="help-block">
@@ -503,7 +504,9 @@
         });
 
         function setTwoNumberDecimal(e) {
-            e.value = parseFloat(e.value).toFixed(2);
+                if(e.value == 0) {
+                e.value =0;
+            }
         }
 
         $('#btnSubmit').on('click', function () {
@@ -522,5 +525,14 @@
                 $('#hiddenSubmit').click();
             }
         });
+    
+    $('#dollar_amount').number(true);
+        $("#zipcode").on('keypress', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            //display error message
+            return false;
+        }
+        
+    });
     </script>
 @endsection

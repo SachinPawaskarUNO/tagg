@@ -117,3 +117,7 @@ $("body").on('change', '#coupon', function() {
     }
 
 });
+
+function setTwoNumberDecimal(e) {
+    e.value = parseFloat(e.value).toFixed();
+}

@@ -8,10 +8,6 @@
 @endsection
 @section('header')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.3.0/bootbox.min.js"></script>
-    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--}}
-    {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
-
-
 @endsection
 @section('content')
 
@@ -34,13 +30,14 @@
             @endif
             {!! Form::model($ruleRow, ['action' => 'RuleEngineController@store']) !!}
             <div class="form-group">
+                
                 {!! Form::label('monthlyBudget', 'Monthly Budget', ['class' => 'lb-lg']) !!} 
                 <div>
                     By setting a monthly budget, any requests that come in after your budget is reached will be flagged as "Pending Rejection - Budget".
                 </div>
                 <div class="input-group col-xs-2"> 
                     <span class="input-group-addon">$</span>
-                    {!! Form::number('monthlyBudget', round($monthlyBudget), ['id' => 'monthlyBudget', 'class' => 'form-control col-xs-3', 'min' => '0']) !!}
+                    {!! Form::text('monthlyBudget', round($monthlyBudget), ['onblur' => 'zro(this)','id' => 'monthlyBudget', 'class' => 'form-control col-xs-3', 'min' => '0', 'placeholder' => '0']) !!}
                 </div>                
             </div>
             <!-- Notice Days -->
@@ -49,7 +46,7 @@
                 <div>By setting a number of days notice you need before the donation is due, any requests that do not meet or exceed the days notice required will be flagged as "Pending rejection - Not Enough Notice".        
                 </div>
                 <div class="input-group col-xs-2">
-                        {!! Form::number('noticeDays', $daysNotice, ['id' => 'noticeDays','class' => 'form-control', 'min' => '0']) !!}
+                        {!! Form::text('noticeDays', $daysNotice, ['onblur' => 'zro(this)', 'id' => 'noticeDays','class' => 'form-control', 'min' => '0', 'placeholder' => '0']) !!}
                         <span class="input-group-addon" id="basic-addon2">Days</span>
                 </div>
             </div>
@@ -111,7 +108,7 @@
                     <div>If an amount is entered, any request that exceed this dollar amount will be flagged as "Pending Rejection - Exceeded Amount".</div>
                     <div class="input-group col-xs-2"> 
                         <span class="input-group-addon">$</span>
-                        {!! Form::number('amtReq', round($ruleRow->amtreq), ['id' => 'amtReq','class' => 'form-control', 'min' => '0']) !!}
+                        {!! Form::text('amtReq', round($ruleRow->amtreq), ['onblur' => 'zro(this)', 'id' => 'amtReq','class' => 'form-control', 'min' => '0', 'placeholder' => '0']) !!}
                     </div>
             </div>
 
@@ -121,4 +118,15 @@
         </div>
     </div>
 </div>
+   <script>
+   function zro(e) {
+            if(e.value == 0) {
+                e.value =0;
+            }
+    }
+    $('#monthlyBudget').number(true,0);
+    $('#amtReq').number(true,0);
+    $('#noticeDays').number(true,0);
+        
+    </script>
 @endsection
