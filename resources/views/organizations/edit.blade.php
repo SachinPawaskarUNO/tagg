@@ -171,7 +171,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" id="cardNumber" maxlength="16"
                                            data-stripe="number"
-                                           placeholder="Valid Card Number"
+                                           placeholder="**** **** **** {{ $organization->card_last_four }}"
                                            required autofocus/>
                                     <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-lock"></span></span>
