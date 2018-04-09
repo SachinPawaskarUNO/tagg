@@ -71,13 +71,13 @@
                     <div>If Yes is selected, any donation requests from organizations without 501c3 status will be flagged as "Pending Rejection - Not a 501c3".</div>
                     <div class="">
                     @if ($ruleRow->taxex == '1')
-                    {{ Form::radio('taxex', '1', true, ['id' => 'tax','checked' => 'checked']) }} Yes, Must be tax exempt. 
+                    {{ Form::radio('taxex', '1', true, ['id' => 'yes','checked' => 'checked']) }} Yes, Must be tax exempt. 
                     <br />
-                    {{ Form::radio('taxex', '0', false, ['id' => 'tax']) }} No
+                    {{ Form::radio('taxex', '0', false, ['id' => 'no']) }} No
                     @else
-                    {{ Form::radio('taxex', '1', false, ['id' => 'tax']) }} Yes, Must be tax exempt.
+                    {{ Form::radio('taxex', '1', false, ['id' => 'yes']) }} Yes, Must be tax exempt.
                     <br />
-                    {{ Form::radio('taxex', '0', true, ['id' => 'tax','checked' => 'checked']) }} No
+                    {{ Form::radio('taxex', '0', true, ['id' => 'no','checked' => 'checked']) }} No
                     @endif                
                     </div>
             
