@@ -118,15 +118,4 @@
         </div>
     </div>
 </div>
-   <script>
-   function zro(e) {
-            if(e.value == 0) {
-                e.value =0;
-            }
-    }
-    $('#monthlyBudget').number(true,0);
-    $('#amtReq').number(true,0);
-    $('#noticeDays').number(true,0);
-        
-    </script>
 @endsection
