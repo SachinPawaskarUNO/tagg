@@ -161,12 +161,12 @@ class RuleEngineController extends Controller
             // dd(round($ruleRow->amtreq));
 
             if (
-                ( is_null($ruleRow->orgtype) || in_array($donationRequest->requester_type, $ruleRow->orgtype) ) && // org type check   
-                ( is_null($ruleRow->dntype) || in_array($donationRequest->item_requested, $ruleRow->dntype) ) && // donation type check
-                ( $donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) && // tax exempt check
-                ( $donationRequest->dollar_amount <= $ruleRow->amtreq ) && // amount requested check    
-                ( $donationRequest->approved_dollar_amount <= $remainingBudget) && // budget check 
-                ( $daydiff >= $noticedays) // notice days check 
+                ( $donationRequest->approved_dollar_amount <= $remainingBudget) && // 1 Monthly budget check 
+                ( $daydiff >= $noticedays) && // 2 notice days check 
+                ( is_null($ruleRow->orgtype) || in_array($donationRequest->requester_type, $ruleRow->orgtype) ) && // 3 org type check   
+                ( $donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) && // 4 tax exempt check
+                ( is_null($ruleRow->dntype) || in_array($donationRequest->item_requested, $ruleRow->dntype) ) && //  5 donation type check
+                ( $donationRequest->dollar_amount <= $ruleRow->amtreq ) // 6 amount requested check    
             ) {
                 
                 // update to auto approved.
@@ -181,17 +181,21 @@ class RuleEngineController extends Controller
                 
             } else {
                     $ex = (
-                            ((!is_null($ruleRow->orgtype) && (!in_array($donationRequest->requester_type,$ruleRow->orgtype)) ? "Pending Rejection - Organization Type" :
-                                (( (!is_null($ruleRow->dntype) && (!in_array($donationRequest->item_requested, $ruleRow->dntype))) ? "Pending rejection - Donation Type" :
-                                    (($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" :
-                                        (($donationRequest->dollar_amount > $ruleRow->amtreq) ? "Pending Rejection - Exceeded Amount" : 
-                                            (($donationRequest->approved_dollar_amount > $remainingBudget) ? "Pending Rejection - Budget" : 
-                                                (( $daydiff < $noticedays ) ? "Pending Rejection - Not Enough Notice" : "Others"
-                                        ))
-                                    ))
-                                ))
-                            ))
-                        );
+                    (   
+                        ( ($donationRequest->approved_dollar_amount > $remainingBudget) ? "Pending Rejection - Budget" : //1 
+                            ( ($daydiff < $noticedays ) ? "Pending Rejection - Not Enough Notice" : //2
+                                ( (!is_null($ruleRow->orgtype) && (!in_array($donationRequest->requester_type,$ruleRow->orgtype))) ? "Pending Rejection - Organization Type" : //3 
+                                    (   ($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" ://4 
+                                        (   (!is_null($ruleRow->dntype) && (!in_array($donationRequest->item_requested, $ruleRow->dntype))) ? "Pending rejection - Donation Type" : //5 
+                                            (   ($donationRequest->dollar_amount > $ruleRow->amtreq) ? "Pending Rejection - Exceeded Amount" : "Others"
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
                 $chk = DB::table('donation_requests')->where('id', $donationRequest->id)
                 ->update(['approval_status_id' => Constant::PENDING_REJECTION,
                           'approval_status_reason' => $ex,
