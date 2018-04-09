@@ -18,8 +18,8 @@
                     <div class="panel-heading">
                     <h1 class=" text-center" style="font-size:26px;">Donation Preferences</h1>
                     </div>
-                        <div class="panel-body">CharityQ allows you to optionally select criteria based on your donation preferences. Request not meeting your selected
-                            criteria or that would be over budget will be flagged as "Pending Rejection" to guide when reviewing requests.
+                        <div class="panel-body">CharityQ allows you to optionally select criteria based on your donation preferences. Requests not meeting your selected
+                            criteria or that would be over budget will be flagged as "Pending Rejection" to guide you when reviewing requests.
                     </div>
                 </div>
         <div class="panel-body">
@@ -43,7 +43,7 @@
             <!-- Notice Days -->
             <div class="form-group">
                 {!! Form::label('noticeDays', 'Notice Needed', ['class' => 'lb-lg']) !!}
-                <div>By setting a number of days notice you need before the donation is due, any requests that do not meet or exceed the days notice required will be flagged as "Pending rejection - Not Enough Notice".        
+                <div>By setting a number of days notice you need before the donation is due, any requests that do not meet the days notice required will be flagged as "Pending Rejection - Not Enough Notice".        
                 </div>
                 <div class="input-group col-xs-2">
                         {!! Form::text('noticeDays', $daysNotice, ['onblur' => 'zro(this)', 'id' => 'noticeDays','class' => 'form-control', 'min' => '0', 'placeholder' => '0']) !!}
@@ -52,8 +52,8 @@
             </div>
             <!-- Organization Type -->
             <div class="form-group">
-                {!! Form::label('orgType', 'Organization Type Not Supported', ['class' => 'lb-lg']) !!}
-                <div>If organization types are selected, any donation requests from organization that fall in selected categories will be flagged as "Pending Rejection - Org Type".</div>
+                {!! Form::label('orgType', 'Organization Type(s) Not Supported', ['class' => 'lb-lg']) !!}
+                <div>If organization types are selected, any donation requests from organizations that fall in selected categories will be flagged as "Pending Rejection - Org Type".</div>
                 @foreach ($rs as $r)
                     <div class="">
                     @if(($ruleRow->orgtype !== null) && in_array($r->id,$ruleRow->orgtype))
@@ -68,7 +68,7 @@
             <!-- Tax Exempt -->
             <div class="form-group">
                     {!! Form::label('taxEx', 'Tax Exempt Only', ['class' => 'lb-lg']) !!}
-                    <div>If Yes is selected, any donation requests from organizations without 501c3 status will be flagged as "Pending Rejection - Not 501c3".</div>
+                    <div>If Yes is selected, any donation requests from organizations without 501c3 status will be flagged as "Pending Rejection - Not a 501c3".</div>
                     <div class="">
                     @if ($ruleRow->taxex == '1')
                     {{ Form::radio('taxex', '1', true, ['id' => 'tax','checked' => 'checked']) }} Yes, Must be tax exempt. 
