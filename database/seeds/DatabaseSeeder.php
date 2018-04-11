@@ -416,6 +416,7 @@ class CqAppSeeder extends Seeder {
 			'template_type_id' => $eadmin->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
+			'email_desc' => 'Welcome Email - CharityQ!', 
 			'email_message' => '<p>Thank you &nbsp;<strong>{Addressee}</strong>&nbsp;&nbsp;for registering your business on CharityQ. We look forward to helping your business save time and make it easy to support the charities you truly care about.</p>
 		<p>You can log in any time to your account by using your email address as your user name.</p>
 		<p>Thank you again for using CharityQ.</p>'
@@ -426,6 +427,7 @@ class CqAppSeeder extends Seeder {
 			'template_type_id' => $euser->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
+			'email_desc' => 'Welcome Email - CharityQ!', 
 			'email_message' => '<p>Hello &nbsp;<strong>{Addressee}</strong>&nbsp;,</p>
 		<p>You have been added as a new user to CharityQ for &nbsp;<strong>{My Business Name}.&nbsp;</strong>&nbsp;Please follow the link below to set up your new account.</p>
 		<p>Thank you!</p>
@@ -437,6 +439,7 @@ class CqAppSeeder extends Seeder {
 			'template_type_id' => $eaprv->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Decision about your donation request', 
+			'email_desc' => 'Default approval email', 
 			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
 			<p>Thank you for entering a submitting a donation request through our website. We have reviewed your request and determined we are able to help you out with your request.</p>
 			<p>&nbsp;</p>
@@ -451,13 +454,17 @@ class CqAppSeeder extends Seeder {
 			'template_type_id' => $erjct->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Your donation request has been declined', 
+			'email_desc' => 'Default rejection email', 
 			'email_message' => '<p style="background: white;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">Dear &nbsp;<strong><span>{Addressee},&nbsp;</span></strong></span></p>
 		<p style="background: white;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">Thank you for entering a request for donation on our website. Unfortunately, at this time we are not able to help out with your event.&nbsp;All of our Omaha locations have partnered with TAGG (Together a Greater Good) so that we can support as many local organizations as possible. In lieu of donating to specific raffles, auctions and galas, and sponsorships, we donate 5% of a guest&rsquo;s tab to an organization of their choosing. &nbsp;&nbsp;</span></p>
 		<p style="font-family: Calibri, sans-serif;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">This is done through the TAGG mobile app, which is available for download on iPhones and Androids. Just search &ldquo;Together a Greater Good&rdquo; and you should find it!</span></p>'));
 		
 		EmailTemplate::create(array(
 		'id' => '5',
-		'template_type_id' => $efpwd->id, 'organization_id' => $oroot->id, 'email_subject' => 'Password Change Request', 'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
+		'template_type_id' => $efpwd->id, 'organization_id' => $oroot->id, 
+		'email_subject' => 'Password Change Request', 
+		'email_desc' => 'Default Email - Password Change', 
+		'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
 		<p>You have changed your password for CharityQ application. If it is not you that changed password please contact your admin as soon as possible.</p>
 		<p>Sincerely,</p>
 		<p>- CharityQ Team</p>'
@@ -467,6 +474,7 @@ class CqAppSeeder extends Seeder {
 			'template_type_id' => $eaprv->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Approval Decision 2', 
+			'email_desc' => 'Approval Email 2', 
 			'email_message' => 'Decision 2'
 			));
 
@@ -475,7 +483,8 @@ class CqAppSeeder extends Seeder {
 				'template_type_id' => $eaprv->id, 
 				'organization_id' => $oroot->id, 
 				'email_subject' => 'Custom Approval email', 
-				'email_message' => 'Custom Email'
+				'email_desc' => 'Blank Email Template', 
+				'email_message' => 'Write your own custom email'
 				));
 
 				EmailTemplate::create(array(
@@ -483,6 +492,7 @@ class CqAppSeeder extends Seeder {
 					'template_type_id' => $erjct->id, 
 					'organization_id' => $oroot->id, 
 					'email_subject' => 'Rejection Decision 2', 
+					'email_desc' => 'Rejection Email 2', 
 					'email_message' => 'Decision 2'
 					));
 		
@@ -491,7 +501,8 @@ class CqAppSeeder extends Seeder {
 						'template_type_id' => $erjct->id, 
 						'organization_id' => $oroot->id, 
 						'email_subject' => 'Custom Rejection email', 
-						'email_message' => 'Custom Email'
+						'email_desc' => 'Blank Email Template', 
+						'email_message' => 'Write your own email'
 						));
 			$this->command->info('email stuff done ! ');
 	}
