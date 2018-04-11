@@ -70,7 +70,7 @@
 
                             @if (Auth::guest())
                                 <li><a href="{{ url('/') }}#about" >About Us</a></li>
-                                <li><a href="{{ url('/') }}#how" >How This Works</a></li>
+                                <li><a href="{{ url('/') }}#how" >Contact us</a></li>
                                 <li><a href="{{ url('/') }}#generic_price_table" >Pricing</span></a></li>
     
                                 <li><a href="{{ route('register') }}" >Sign Up</a></li>
@@ -206,7 +206,7 @@
         <ul>
             <li><a href="{{ url('/') }}#about" >About Us&nbsp;<span
                             class="glyphicon glyphicon-info-sign"></span></a></li>
-            <li><a href="{{ url('/') }}#how" >How This Works&nbsp;<span
+            <li><a href="{{ url('/') }}#how" >Contact us&nbsp;<span
                             class="glyphicon glyphicon-question-sign"></span></a></li>
             <li><a href="{{ route('register') }}" >Sign Up <span
                             class="glyphicon glyphicon-user"></span></a></li>

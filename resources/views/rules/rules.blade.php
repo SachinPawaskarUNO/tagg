@@ -11,14 +11,22 @@
 @endsection
 @section('content')
 
+<div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center" style="font-size:26px;">Donation Preferences</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                    <h1 class=" text-center" style="font-size:26px;">Donation Preferences</h1>
-                    </div>
-                        <div class="panel-body">CharityQ allows you to optionally select criteria based on your donation preferences. Requests not meeting your selected
+                    
+                        CharityQ allows you to optionally select criteria based on your donation preferences. Requests not meeting your selected
                             criteria or that would be over budget will be flagged as "Pending Rejection" to guide you when reviewing requests.
                     </div>
                 </div>

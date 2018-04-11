@@ -34,6 +34,14 @@
     <script src="{{asset('js/jquery.number.min.js')}}"></script>
     {{ csrf_field() }}
 
+    <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header text-center" style="font-size:26px;">Donation Request</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
     <div class="container donationrequest">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -457,7 +465,9 @@
                                 </button>
 
                                 <input id="hiddenSubmit" type="submit" class="btn btn-basic" style="display: none">
-                            <div><span style="color: red">Fields Marked With (*) Are Mandatory </span></div>
+                            <div><span style="color: red"> <h5>Fields Marked With (<span
+                                style="color: red; font-size: 20px; align:middle;">*</span>) Are Mandatory</h5></span>
+                                </div>
                             </div>
                         </div>
                         {!! Form::close() !!}

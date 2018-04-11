@@ -18,7 +18,7 @@
                 <div class="col-md-6 col-md-offset-3">
                     <div class="col-10">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">There are two ways to utilize your Charity<span style="color: #9F59E2">Q</span> donation form.</h1></div>
+                            <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">There are two ways to utilize your CharityQ donation form.</h1></div>
                             <div class="panel-body">
                                 <script type="text/javascript">
                                     function Copy() {

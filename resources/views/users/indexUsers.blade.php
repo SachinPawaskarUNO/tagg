@@ -19,9 +19,9 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1 style="text-align: left;font-size:22px;"> Active Users </h1>
-                        <a href="{{route('users.show', encrypt($admin->id))}}" class="btn btn-basic"
-                           style="position: absolute; top: 26px; right:32px;background-color: #0099CC;">[+] Add
+                        <h1 style="text-align: left;font-size:22px;"> Active Users </h1> 
+                        <a href="{{route('users.show', encrypt($admin->id))}}" class="btn btn-basic pull-right"
+                           style="position: absolute; top: 26px; right:32px;">[+] Add
                             User </a>
                     </div>
 
@@ -53,8 +53,8 @@
                                 <td style="vertical-align: middle"><a href="{{route('edituser',encrypt($user->id))}}"
 
                                                                       class="btn btn-basic"
-                                                                      style="background-color: #0099CC;"> Edit </a>
-                                    <a href="/user/destroy/{{$user->id}}/{{$user->active}}" onclick="return confirm('Are you sure you want to deactivate this user account')" class="btn btn-danger">Delete</a>
+                                                                      style="background-color: #18B1C1;"> Edit </a>
+                                    <a href="/user/destroy/{{$user->id}}/{{$user->active}}" onclick="return confirm('Are you sure you want to deactivate this user account')" class="btn backbtnsubs">Delete</a>
 
                                 </td>
                                 <!--<td style="vertical-align: middle">
