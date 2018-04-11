@@ -45,7 +45,7 @@
                 </div>
                 <div class="input-group col-xs-2"> 
                     <span class="input-group-addon">$</span>
-                    {!! Form::text('monthlyBudget', round($monthlyBudget), ['onblur' => 'zro(this)','id' => 'monthlyBudget', 'class' => 'form-control col-xs-3', 'min' => '0', 'placeholder' => '0',  'maxlength' => '6' ]) !!}
+                    {!! Form::text('monthlyBudget', number_format(round($monthlyBudget)), ['onblur' => 'zro(this)','id' => 'monthlyBudget', 'class' => 'form-control col-xs-3', 'min' => '0', 'placeholder' => '0',  'maxlength' => '6' ]) !!}
                 </div>                
             </div>
             <!-- Notice Days -->
@@ -126,4 +126,24 @@
         </div>
     </div>
 </div>
+ <script>
+    $('#monthlyBudget').number();
+            $("#monthlyBudget").keyup(function () {
+                new_val = $("#monthlyBudget").val().replace(/[^0-9\.]/g, '');
+                new_val = parseInt(new_val);
+                new_val_formatted = new_val.toLocaleString("en");
+                if (new_val_formatted != 'NaN') {
+                    $('#monthlyBudget').val(new_val_formatted);
+                }
+                else {
+                    $('#monthlyBudget').val('');
+                }
+            })
+
+        $('button').on("click", function() {
+        var m = $('#monthlyBudget').val();
+        m = m.replace(/,/g, "");
+        $('#monthlyBudget').val(m);
+        });
+   </script>
 @endsection
