@@ -301,7 +301,8 @@
                                        title="Please use the format $ for this field. " class="form-control"
                                        name="dollar_amount" value="{{ old('dollar_amount') }}"
                                        onblur="setTwoNumberDecimal(this)"
-                                       placeholder="0" required>
+                                       placeholder="0" 
+                                       maxlength="6">
 
                                 @if ($errors->has('dollar_amount'))
                                     <span class="help-block">
@@ -536,7 +537,6 @@
             }
         });
     
-    $('#dollar_amount').number(true);
         $("#zipcode").on('keypress', function (e) {
         if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
             //display error message

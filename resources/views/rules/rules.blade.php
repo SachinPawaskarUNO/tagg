@@ -45,7 +45,7 @@
                 </div>
                 <div class="input-group col-xs-2"> 
                     <span class="input-group-addon">$</span>
-                    {!! Form::text('monthlyBudget', round($monthlyBudget), ['onblur' => 'zro(this)','id' => 'monthlyBudget', 'class' => 'form-control col-xs-3', 'min' => '0', 'placeholder' => '0']) !!}
+                    {!! Form::text('monthlyBudget', round($monthlyBudget), ['onblur' => 'zro(this)','id' => 'monthlyBudget', 'class' => 'form-control col-xs-3', 'min' => '0', 'placeholder' => '0',  'maxlength' => '6' ]) !!}
                 </div>                
             </div>
             <!-- Notice Days -->
@@ -54,7 +54,7 @@
                 <div>By setting a number of days notice you need before the donation is due, any requests that do not meet the days notice required will be flagged as "Pending Rejection - Not Enough Notice".        
                 </div>
                 <div class="input-group col-xs-2">
-                        {!! Form::text('noticeDays', $daysNotice, ['onblur' => 'zro(this)', 'id' => 'noticeDays','class' => 'form-control', 'min' => '0', 'placeholder' => '0']) !!}
+                        {!! Form::number('noticeDays', $daysNotice, ['id' => 'noticeDays', 'class' => 'form-control', 'min' => '0', 'max' => '365', 'placeholder' => '0',  'maxlength' => '3' ]) !!}
                         <span class="input-group-addon" id="basic-addon2">Days</span>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                     <div>If an amount is entered, any request that exceed this dollar amount will be flagged as "Pending Rejection - Exceeded Amount".</div>
                     <div class="input-group col-xs-2"> 
                         <span class="input-group-addon">$</span>
-                        {!! Form::text('amtReq', round($ruleRow->amtreq), ['onblur' => 'zro(this)', 'id' => 'amtReq','class' => 'form-control', 'min' => '0', 'placeholder' => '0']) !!}
+                        {!! Form::text('amtReq', round($ruleRow->amtreq), ['onblur' => 'zro(this)', 'id' => 'amtReq','class' => 'form-control', 'min' => '0', 'placeholder' => '0', 'maxlength' => '6' ]) !!}
                     </div>
             </div>
 

@@ -6,6 +6,15 @@
     <script src="{{asset('js/stripe.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
     <script src="https://js.stripe.com/v2/"></script>
+    
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header text-center" style="font-size:26px;">Subscription</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
