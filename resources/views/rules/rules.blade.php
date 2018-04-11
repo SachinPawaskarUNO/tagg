@@ -162,7 +162,6 @@
     var a = $('#amtReq').val();
     a = a.replace(/,/g, "");
     $('#amtReq').val(a);
-    console.log(m ,a );
     });
    </script>
 @endsection
