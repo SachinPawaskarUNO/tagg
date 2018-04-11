@@ -33,7 +33,7 @@
                                     <td style="vertical-align: middle">{{ $email_template->emailTemplateTypes->template_type }}</td>
                                     <td style="vertical-align: middle">{{ $email_template->email_subject }}</td>
                                     <td style="vertical-align: middle"> 
-                                    <input type="radio" class="myCheckbox" name="emailtype" id ="EditEmailTemp" ids="{{$email_template->id}}"/>Choose</td>
+                                    <input type="radio" class="myCheckbox" name="emailtype" id ="EditEmailTemp" ids="{{$email_template->id}}" required/>Choose</td>
                             </tr>
                             @endforeach
                         </table>
@@ -46,7 +46,7 @@
                     {!! Form::hidden('firstNames', $firstNames) !!}
                     {!! Form::hidden('page_from', '/dashboard') !!}
                     {!! Form::submit('Proceed', ['class' => 'btn btn-basic', 'name' => 'submitbutton', 'value' => 'approve']) !!}                    
-                    {!! Form::close() !!}            
+                    {!! Form::close() !!}          
                 </div>
             </div>
         </div>
@@ -54,16 +54,11 @@
 
     <script>
     var idsArray;
-
-            // Populating array with the list of checkboxes with
-            // checked ids
-            $("input[name='emailtype']:radio").first().prop( "checked", true );
+            // Populating array with the list of checkboxes with checked ids
             $("input[name='emailtype']:radio").change(function() {
                 var id = $(this).attr('ids');
                 if(this.checked) {
-                    idsArray = id;    
-                } else {
-                    idsArray = $("input[name='emailtype']:radio").first().attr('ids');
+                    idsArray = id;
                 }
                 $('#selected-ids-hidden').val(idsArray);
             });
