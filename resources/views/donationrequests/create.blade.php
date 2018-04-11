@@ -302,7 +302,7 @@
                                        name="dollar_amount" value="{{ old('dollar_amount') }}"
                                        onblur="setTwoNumberDecimal(this)"
                                        placeholder="0" 
-                                       maxlength="6">
+                                       maxlength="7">
 
                                 @if ($errors->has('dollar_amount'))
                                     <span class="help-block">
@@ -484,7 +484,23 @@
         $('#explain').hide();
         $('#explain_purpose').hide();
         @endif
-    
+        var da = $('#dollar_amount');
+        da.number();
+        //$("#monthlyBudget").keyup(function () {
+        da.number().keyup(function () {
+            new_val = $(this).val().replace(/[^0-9\.]/g, '');
+            new_val = parseInt(new_val);
+            new_val_formatted = new_val.toLocaleString("en");
+            if (new_val_formatted != 'NaN') {
+                $(this).val(new_val_formatted);
+            }
+            else {
+                $(this).val('');
+            }
+        });
+        $('button').on("click", function() {  
+            da.val().replace(/,/g, "");
+        });
         $('#attachment').removeProp('required');
 
         function yesnoCheck() {
@@ -544,5 +560,6 @@
         }
         
     });
+
     </script>
 @endsection
