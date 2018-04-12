@@ -37,16 +37,19 @@
                             </tr>
                             @endforeach
                         </table>
-                    </div>
-                    {!! Form::hidden('organization_id', $email_template->organization_id) !!}
+                        {!! Form::hidden('organization_id', $email_template->organization_id) !!}
                     {!! Form::hidden('emailid','' , array('id' => 'selected-ids-hidden')) !!}
                     {!! Form::hidden('ids_string',$ids_string) !!}
                     {!! Form::hidden('lastNames', $lastNames) !!}
                     {!! Form::hidden('emails', $emails) !!}
                     {!! Form::hidden('firstNames', $firstNames) !!}
                     {!! Form::hidden('page_from', '/dashboard') !!}
-                    {!! Form::submit('Proceed', ['class' => 'btn btn-basic', 'name' => 'submitbutton', 'value' => 'approve']) !!}                    
-                    {!! Form::close() !!}          
+                    <div class="col-md-6 col-md-offset-5">
+                        {!! Form::submit('Proceed', ['class' => 'btn btn-basic', 'name' => 'submitbutton', 'value' => 'approve']) !!}
+                    </div>
+                    {!! Form::close() !!}        
+                    </div>
+                      
                 </div>
             </div>
         </div>
