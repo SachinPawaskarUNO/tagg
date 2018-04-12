@@ -104,7 +104,6 @@ class EmailTemplateController extends Controller
                     if($change_status == 'Approve & send default email') 
                     {   // Approve default case - Send default email
                         $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED_DEFAULT)->where('organization_id', $org_id)->first();
-                        dd($email_templates);
                         $e = $this->defaultemail->email($email_templates,$ids_array ,$firstNames,$lastNames,$change_status);
                         return redirect($page_from)->with('message', $e);
                     } else 

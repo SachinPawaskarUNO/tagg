@@ -53,7 +53,7 @@ class EmailController extends Controller
             $userId = Auth::id();
             $organizationId = Auth::user()->organization_id;
 
-            if($request->status == 'Approve'){
+            if($request->status == 'Approve & customize response'){
                 //update donation request status in database
                 $donation[0]->update([
                     'approval_status_id' => Constant::APPROVED,
@@ -62,7 +62,7 @@ class EmailController extends Controller
                     'approved_user_id' => $userId,
                     'email_sent' => true
                 ]);
-            } elseif($request->status == 'Reject'){
+            } elseif($request->status == 'Reject & customize response'){
                 $donation[0]->update([
                     'approved_dollar_amount' => 0.00,
                     'approval_status_id' => Constant::REJECTED,
@@ -98,7 +98,7 @@ class EmailController extends Controller
             $userId = Auth::id();
             $organizationId = Auth::user()->organization_id;
 
-            if($change_status == 'Approve Default'){
+            if($change_status == 'Approve & send default email'){
                 //update donation request status in database
                 $donation[0]->update([
                     'approval_status_id' => Constant::APPROVED,
@@ -107,7 +107,7 @@ class EmailController extends Controller
                     'approved_user_id' => $userId,
                     'email_sent' => true
                 ]);
-            } elseif($change_status == 'Reject Default'){
+            } elseif($change_status == 'Reject & send default email'){
                 $donation[0]->update([
                     'approved_dollar_amount' => 0.00,
                     'approval_status_id' => Constant::REJECTED,
