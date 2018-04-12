@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">Update Template</h1></div>
+                    <div class="panel-heading"><h1 style="text-align: left;font-size:22px;"> {{$email_template->emailTemplateTypes->template_type}}</h1></div>
 
                     <div class="panel-body">
 
@@ -64,7 +64,12 @@
                         @endif
 
                         {{ csrf_field() }}
-
+                        <div class="form-group">
+                            <label for="Email Description" class="col-md-3 control-label">Email Description <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <div class="col-lg-9">
+                                {!! Form::text('email_desc', null, ['class' => 'form-control' , 'width'=> '1000px']) !!}
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="Email Subject" class="col-md-3 control-label">Email Subject <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-9">
