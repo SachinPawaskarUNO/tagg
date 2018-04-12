@@ -28,7 +28,7 @@ class AddDefaultTemplatesListener
     {
 
         //get default templates for Accept and Reject donations email templates from TAGG.
-        $emailtemplates = EmailTemplate::where('organization_id', 1)->whereIn('template_type_id', [Constant::REQUEST_APPROVED, Constant::REQUEST_REJECTED])->get();
+        $emailtemplates = EmailTemplate::where('organization_id', 1)->whereIn('template_type_id', [Constant::REQUEST_APPROVED,Constant::REQUEST_APPROVED_DEFAULT, Constant::REQUEST_REJECTED,Constant::REQUEST_REJECTED_DEFAULT])->get();
 
         foreach ($emailtemplates as $emailtemplate) {
 
