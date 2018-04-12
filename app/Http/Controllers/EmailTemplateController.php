@@ -30,8 +30,8 @@ class EmailTemplateController extends Controller
 
         if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) {
             //find approval and rejection emails templates 
-            $approval_email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
-            $rejection_email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $org_id)->get();
+            $approval_email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_APPROVED, Constant::REQUEST_APPROVED_DEFAULT])->where('organization_id', $org_id)->get();
+            $rejection_email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_REJECTED, Constant::REQUEST_REJECTED_DEFAULT])->where('organization_id', $org_id)->get();
 
         }
 
@@ -41,8 +41,10 @@ class EmailTemplateController extends Controller
     public function update(Request $request, $id)
     {
         // update existing email templates
+        
         $email_template = EmailTemplate::findOrFail($id);
         $email_template->update($request->all());
+        $email_template->email_desc = $request->email_desc;
         $email_template->save();
 
         return redirect('emailtemplates');
@@ -97,25 +99,32 @@ class EmailTemplateController extends Controller
 
             //returns to different views based on button clicked by user 'Approve' or 'Reject'
             if ($change_status == 'Approve' || $change_status == 'Approve Default') { // enters in this loop for any approval type 
-                if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) {
-                    if($change_status == 'Approve Default') { // Approve default case - Send default email
-                        $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->first();
+                if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) 
+                {
+                    if($change_status == 'Approve Default') 
+                    {   // Approve default case - Send default email
+                        $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED_DEFAULT)->where('organization_id', $org_id)->first();
                         $e = $this->defaultemail->email($email_templates,$ids_array ,$firstNames,$lastNames,$change_status);
-                        return redirect($page_from)->with('message', 'Email send with default approval email.');
-                    } else { // Approve case - proceed to choose from approval templates
-                    $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->get();
+                        return redirect($page_from)->with('message', $e);
+                    } else 
+                    {   // Approve case - proceed to choose from approval templates
+                        $email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_APPROVED, Constant::REQUEST_APPROVED_DEFAULT])->where('organization_id', $org_id)->get();
                     }   
                 }
                 return view('emailtemplates.emailtype', compact('email_templates', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
             } else {
                 //get email template for Reject id value = 4
-                if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) {
-                    if($change_status == 'Reject Default') { // Reject default case - Send default rejection email
-                        $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $org_id)->first();
+                if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) 
+                {
+                    if($change_status == 'Reject Default') 
+                    {   // Reject default case - Send default rejection email
+                        $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED_DEFAULT)->where('organization_id', $org_id)->first();
                         $e = $this->defaultemail->email($email_templates,$ids_array ,$firstNames,$lastNames,$change_status);
-                        return redirect($page_from)->with('message', 'Email send with default rejection email.');
-                    } else { // Approve case - proceed to choose from rejection templates
-                        $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $org_id)->get();
+                        return redirect($page_from)->with('message', $e);
+                    } else 
+                    { 
+                        // Approve case - proceed to choose from rejection templates
+                        $email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_REJECTED,Constant::REQUEST_REJECTED_DEFAULT])->where('organization_id', $org_id)->get();
                     }                   
                 }
                 return view('emailtemplates.emailtype', compact('email_templates', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
@@ -145,9 +154,9 @@ class EmailTemplateController extends Controller
         
         $email_template = EmailTemplate::findOrFail($request->emailid);
 
-        if ($email_template->template_type_id == Constant::REQUEST_APPROVED) { // for approval email
+        if ($email_template->template_type_id == Constant::REQUEST_APPROVED || $email_template->template_type_id == Constant::REQUEST_APPROVED_DEFAULT) { // for approval email
                 return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
-           } elseif ($email_template->template_type_id ==  Constant::REQUEST_REJECTED) { // for rejection email
+           } elseif ($email_template->template_type_id ==  Constant::REQUEST_REJECTED || $email_template->template_type_id ==  Constant::REQUEST_REJECTED_DEFAULT) { // for rejection email
                return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));       
         }
     }

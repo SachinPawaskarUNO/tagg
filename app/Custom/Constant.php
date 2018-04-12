@@ -39,9 +39,11 @@ class Constant
     //EMAIL TEMPLATE TYPES
     const NEW_BUSINESS = 1;
     const NEW_USER = 2;
-    const REQUEST_APPROVED = 3;
-    const REQUEST_REJECTED = 4;
-    const RESET_PASSWORD = 5;
+    const REQUEST_APPROVED_DEFAULT = 3;
+    const REQUEST_APPROVED = 4;
+    const REQUEST_REJECTED_DEFAULT = 5;
+    const REQUEST_REJECTED = 6;
+    const RESET_PASSWORD = 6;
 
     //USER_ROLES
     const ROOT_USER = 1;
