@@ -187,13 +187,13 @@
                             @if ($donationrequest->approval_status_id == \App\Custom\Constant::SUBMITTED OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_REJECTION OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_APPROVAL)
                                 @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
                                  <div class="row">
-                                  <div class="col-xs-3 col-md-offset-3">
-                                    {!! Form::submit( 'Approve', ['class' => 'btn btn-success', 'style' => 'background-color: #18B1C1;', 'name' => 'submitbutton', 'value' => 'approve'])!!}
-                                    {!! Form::submit( 'Approve Default', ['class' => 'btn btn-success',  'style' => 'background-color: #18B1C1;','name' => 'submitbutton', 'value' => 'approvedef'])!!}
+                                  <div class="col-md-6">
+                                    {!! Form::submit( 'Approve & customize response', ['class' => 'btn btn-success', 'style' => 'background-color: #18B1C1;', 'name' => 'submitbutton', 'value' => 'approve'])!!}
+                                    {!! Form::submit( 'Approve & send default email', ['class' => 'btn btn-success',  'style' => 'background-color: #18B1C1;','name' => 'submitbutton', 'value' => 'approvedef'])!!}
                                   </div>
-                                  <div class="col-xs-3">
-                                    {!! Form::submit( 'Reject', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'reject']) !!}
-                                    {!! Form::submit( 'Reject Default', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
+                                  <div class="col-md-6">
+                                    {!! Form::submit( 'Reject & customize response', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'reject']) !!}
+                                    {!! Form::submit( 'Reject & send default email', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
                                   </div>
                                   </div>
                                 @endif
