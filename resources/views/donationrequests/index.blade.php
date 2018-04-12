@@ -70,11 +70,11 @@
                                                 {{ csrf_field() }}
                                                 {!! Form::hidden('fromPage','searchdonations',['class'=>'form-control', 'id' => 'searchDonations', 'readonly']) !!}
                                                 {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
-                                                {{Form::button('<i class="glyphicon glyphicon-ok"></i>', ['type' => 'submit', 'class' => 'btn btn-success', 'name' => 'approve', 'value' => 'Approve'])}}
+                                                {{Form::button('<i class="glyphicon glyphicon-ok"></i>', ['type' => 'submit', 'style' => 'background-color: #18B1C1;', 'class' => 'btn btn-success', 'name' => 'approve', 'value' => 'Approve'])}}
                                                 <a href="{{route('donationrequests.show',encrypt($donationrequest->id))}}"
                                                    class="btn btn-info" title="Detail">
                                                     <span class="glyphicon glyphicon-list-alt"></span></a>
-                                                {{Form::button('<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'name' => 'reject', 'value' => 'Reject'])}}
+                                                {{Form::button('<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit', 'class' => 'btn backbtnsubs', 'name' => 'reject', 'value' => 'Reject'])}}
                                             {!! Form::close() !!}
                                             </div>
                                         @else
