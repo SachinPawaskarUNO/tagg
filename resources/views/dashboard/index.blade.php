@@ -151,11 +151,15 @@
                                 {{ Form::hidden('page_from', '/dashboard') }}
                                 {{--add if condition to show approve and reject buttons only if there are pending requests and atleast one is selected--}}
                                 @if(sizeOf($donationrequests) != 0)
-                                  <div class="col-md-6 col-md-offset-5">
-                                    {!! Form::submit( 'Approve', ['class' => 'btn btn-success', 'name' => 'submitbutton', 'value' => 'approve'])!!}
-                                    {!! Form::submit( 'Reject', ['class' => 'btn btn-danger', 'name' => 'submitbutton', 'value' => 'reject']) !!}
-                                    {!! Form::submit( 'Approve Default', ['class' => 'btn btn-success', 'name' => 'submitbutton', 'value' => 'approvedef'])!!}
-                                    {!! Form::submit( 'Reject Default', ['class' => 'btn btn-danger', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
+                                   <div class="row">
+                                  <div class="col-xs-4 col-md-offset-3">
+                                    {!! Form::submit( 'Approve', ['class' => 'btn btn-success', 'style' => 'background-color: #18B1C1;', 'name' => 'submitbutton', 'value' => 'approve'])!!}
+                                    {!! Form::submit( 'Approve Default', ['class' => 'btn btn-success',  'style' => 'background-color: #18B1C1;','name' => 'submitbutton', 'value' => 'approvedef'])!!}
+                                  </div>
+                                  <div class="col-xs-4">
+                                    {!! Form::submit( 'Reject', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'reject']) !!}
+                                    {!! Form::submit( 'Reject Default', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
+                                  </div>
                                   </div>
                                 @endif
                                 {!! Form::close() !!}
