@@ -32,7 +32,7 @@ class AddDefaultTemplatesListener
 
         foreach ($emailtemplates as $emailtemplate) {
 
-            EmailTemplate::create(['template_type_id' => $emailtemplate->template_type_id, 'organization_id' => $event->orgid, 'email_subject' => $emailtemplate->email_subject, 'email_message' => $emailtemplate->email_message]);
+            EmailTemplate::create(['template_type_id' => $emailtemplate->template_type_id, 'organization_id' => $event->orgid, 'email_desc' => $emailtemplate->email_desc,  'email_subject' => $emailtemplate->email_subject, 'email_message' => $emailtemplate->email_message]);
         }
     }
 }

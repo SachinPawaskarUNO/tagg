@@ -484,23 +484,7 @@
         $('#explain').hide();
         $('#explain_purpose').hide();
         @endif
-        var da = $('#dollar_amount');
-        da.number();
-        //$("#monthlyBudget").keyup(function () {
-        da.number().keyup(function () {
-            new_val = $(this).val().replace(/[^0-9\.]/g, '');
-            new_val = parseInt(new_val);
-            new_val_formatted = new_val.toLocaleString("en");
-            if (new_val_formatted != 'NaN') {
-                $(this).val(new_val_formatted);
-            }
-            else {
-                $(this).val('');
-            }
-        });
-        $('button').on("click", function() {  
-            da.val().replace(/,/g, "");
-        });
+
         $('#attachment').removeProp('required');
 
         function yesnoCheck() {

@@ -456,7 +456,7 @@ class CqAppSeeder extends Seeder {
 		EmailTemplate::create(array(
 			'id' => '3',
 			'template_type_id' => $eaprvdef->id, 
-			'organization_id' => $nfmusr->id, 
+			'organization_id' => $oroot->id, 
 			'email_desc' => 'Donation Approved - Default Message', 
 			'email_subject' => 'Your donation request has been approved', 
 			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
@@ -469,7 +469,7 @@ class CqAppSeeder extends Seeder {
 		EmailTemplate::create(array(
 			'id' => '4',
 			'template_type_id' => $erjctdef->id, 
-			'organization_id' => $nfmusr->id, 
+			'organization_id' => $oroot->id, 
 			'email_desc' => 'Donation Declined - Default Message', 
 			'email_subject' => 'Your donation request has been declined', 
 			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
@@ -492,7 +492,7 @@ class CqAppSeeder extends Seeder {
 		EmailTemplate::create(array(
 			'id' => '6',
 			'template_type_id' => $eaprv->id, 
-			'organization_id' => $nfmusr->id, 
+			'organization_id' => $oroot->id, 
 			'email_desc' => 'Donation Approved - Special Instructions', 
 			'email_subject' => 'Your donation request has been approved', 
 			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
@@ -508,7 +508,7 @@ class CqAppSeeder extends Seeder {
 			EmailTemplate::create(array(
 				'id' => '7',
 				'template_type_id' => $eaprv->id, 
-				'organization_id' => $nfmusr->id, 
+				'organization_id' => $oroot->id, 
 				'email_desc' => 'Donation Approved - Adjusted Donation Amount',
 				'email_subject' => 'Your donation request has been approved', 				 
 				'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
@@ -524,7 +524,7 @@ class CqAppSeeder extends Seeder {
 				EmailTemplate::create(array(
 					'id' => '8',
 					'template_type_id' => $erjct->id, 
-					'organization_id' => $nfmusr->id,  
+					'organization_id' => $oroot->id,  
 					'email_desc' => 'Donation Declined - Special Message', 
 					'email_subject' => 'Your donation request has been declined',
 					'email_message' => '<p> &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
@@ -537,7 +537,7 @@ class CqAppSeeder extends Seeder {
 					EmailTemplate::create(array(
 						'id' => '9',
 						'template_type_id' => $erjct->id, 
-						'organization_id' => $nfmusr->id, 
+						'organization_id' => $oroot->id, 
 						'email_desc' => 'Donation Declined - on TAGG',
 						'email_subject' => 'Your donation request has been declined',  
 						'email_message' => '<p> &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;<p>
