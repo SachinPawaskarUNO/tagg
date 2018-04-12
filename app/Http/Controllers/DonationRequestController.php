@@ -248,14 +248,14 @@ class DonationRequestController extends Controller
             $organizationId = $orgId;
         }
 
-        if ($request->submitbutton == 'Approve' || $request->submitbutton == 'Approve Default') {
+        if ($change_status == 'Approve & customize response' || $change_status == 'Approve & send default email') {
             if ($request->approved_amount) {
                 $approved_amount = $request->approved_amount;
                 $donation->update(['approved_dollar_amount' => $approved_amount]);
             }
             // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $organizationId)->get();
            
-            if($request->submitbutton == 'Approve Default') 
+            if($change_status == 'Approve & send default email') 
                 {   // Approve default case - Send default email
                     //$email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED_DEFAULT)->where('organization_id', $orgId)->first();
                     $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED_DEFAULT)->where('organization_id', $organizationId)->first();
@@ -269,7 +269,7 @@ class DonationRequestController extends Controller
             return view('emailtemplates.emailtype', compact('email_templates', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
 
         } else {
-                if($request->submitbutton == 'Reject Default')
+                if($change_status == 'Reject & send default email')
                     {   // Reject default case - Send default rejection email
                         $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED_DEFAULT)->where('organization_id', $organizationId)->first();
                         $e = $this->defaultemail->email($email_templates, $ids_array, $firstNames, $lastNames, $change_status);

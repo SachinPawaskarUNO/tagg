@@ -66,7 +66,7 @@ class EmailTemplateController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function send(Request $request)
-    {
+    { 
         $ids_string = $request->ids_string;
         if (!empty($ids_string)) {
             $page_from = $request->page_from;
@@ -96,14 +96,15 @@ class EmailTemplateController extends Controller
             $email_templates = [];           
             $user_id = Auth::id();
             $user_role = RoleUser::where('user_id', $user_id)->value('role_id'); //get user role of current user
-
+            
             //returns to different views based on button clicked by user 'Approve' or 'Reject'
-            if ($change_status == 'Approve' || $change_status == 'Approve Default') { // enters in this loop for any approval type 
+            if ($change_status == 'Approve & customize response' || $change_status == 'Approve & send default email') { // enters in this loop for any approval type 
                 if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) 
                 {
-                    if($change_status == 'Approve Default') 
+                    if($change_status == 'Approve & send default email') 
                     {   // Approve default case - Send default email
                         $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED_DEFAULT)->where('organization_id', $org_id)->first();
+                        dd($email_templates);
                         $e = $this->defaultemail->email($email_templates,$ids_array ,$firstNames,$lastNames,$change_status);
                         return redirect($page_from)->with('message', $e);
                     } else 
@@ -116,7 +117,7 @@ class EmailTemplateController extends Controller
                 //get email template for Reject id value = 4
                 if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) 
                 {
-                    if($change_status == 'Reject Default') 
+                    if($change_status == 'Reject & send default email') 
                     {   // Reject default case - Send default rejection email
                         $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED_DEFAULT)->where('organization_id', $org_id)->first();
                         $e = $this->defaultemail->email($email_templates,$ids_array ,$firstNames,$lastNames,$change_status);
