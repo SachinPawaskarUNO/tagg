@@ -34,7 +34,7 @@
                             <tr>
                                 @foreach($approval_email_templates as $email_template)
                                     <td style="vertical-align: middle">{{ $email_template->emailTemplateTypes->template_type }}</td>
-                                    <td style="vertical-align: middle">{{ $email_template->email_subject }}</td>
+                                    <td style="vertical-align: middle">{{ $email_template->email_desc }}</td>
                                    
                                     <td style="vertical-align: middle"><a href="
                                     {{action('EmailTemplateController@edit', ['id' => encrypt($email_template->id)])}}" id = "EditEmailTemp" class="btn btn-basic">Edit</a></td>
@@ -67,7 +67,7 @@
                             <tr>
                                 @foreach($rejection_email_templates as $email_template)
                                     <td style="vertical-align: middle">{{ $email_template->emailTemplateTypes->template_type }}</td>
-                                    <td style="vertical-align: middle">{{ $email_template->email_subject }}</td>                                   
+                                    <td style="vertical-align: middle">{{ $email_template->email_desc }}</td>                                   
                                     <td style="vertical-align: middle"><a href="
                                     {{action('EmailTemplateController@edit', ['id' => encrypt($email_template->id)])}}" id = "EditEmailTemp" class="btn btn-basic">Edit</a></td>
                                 </tr>
