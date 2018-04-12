@@ -176,7 +176,7 @@
                                     <div class="col-lg-6">
 
                                         {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
-                                        {!! Form::text('approved_amount', round($donationrequest['dollar_amount']), ['onblur' => 'zro(this)', 'id' => 'approved_amount', 'class' => 'form-control', 'min'=>'0', 'step'=>'1', 'pattern'=>'\d+(\.\d{2})', 'required'] )!!}
+                                        {!! Form::text('approved_amount',round($donationrequest->dollar_amount), ['id' => 'approved_amount', 'class' => 'form-control', 'min'=>'0', 'step'=>'1', 'required'] )!!}
                                     </div>
                                 </div>
                                 <br><br>
@@ -186,10 +186,17 @@
 
                             @if ($donationrequest->approval_status_id == \App\Custom\Constant::SUBMITTED OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_REJECTION OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_APPROVAL)
                                 @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                                    <input class="btn btn-display-block active btn-success" type="submit" name="approve" value="Approve">
-                                    <input class="btn btn-display-block active btn-danger" type="submit" name="reject" value="Reject">
+                                 <div class="row">
+                                  <div class="col-xs-3 col-md-offset-3">
+                                    {!! Form::submit( 'Approve', ['class' => 'btn btn-success', 'style' => 'background-color: #18B1C1;', 'name' => 'submitbutton', 'value' => 'approve'])!!}
+                                    {!! Form::submit( 'Approve Default', ['class' => 'btn btn-success',  'style' => 'background-color: #18B1C1;','name' => 'submitbutton', 'value' => 'approvedef'])!!}
+                                  </div>
+                                  <div class="col-xs-3">
+                                    {!! Form::submit( 'Reject', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'reject']) !!}
+                                    {!! Form::submit( 'Reject Default', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
+                                  </div>
+                                  </div>
                                 @endif
-
 
                                 <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
                                 {{--<a href="{{ route('donationrequests.index')}} " class="btn btn-basic">Return to Donation--}}
@@ -204,13 +211,5 @@
             </div>
         </div>
     </div>
-    <script>
-   function zro(e) {
-            if(e.value == 0) {
-                e.value =0;
-            }
-    }
-    $('#approved_amount').number(true,0);
-        
-    </script>
+ 
 @stop
