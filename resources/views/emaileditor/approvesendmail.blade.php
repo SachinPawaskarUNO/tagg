@@ -74,7 +74,7 @@
                                 {!! Form::text('To', $emails, ['class'=>'col-md-9', 'readonly'] ) !!}
                                 {!! Form::hidden('firstNames', $firstNames) !!}
                                 {!! Form::hidden('lastNames', $lastNames) !!}
-                                {!! Form::hidden('status', 'Approve') !!}
+                                {!! Form::hidden('status', 'Approve & customize response') !!}
                                 {!! Form::hidden('ids_string', $ids_string) !!}
                                 {!! Form::hidden('page_from', $page_from) !!}
                                 {!! Form::hidden('organization_id', $email_template->organization_id) !!}
