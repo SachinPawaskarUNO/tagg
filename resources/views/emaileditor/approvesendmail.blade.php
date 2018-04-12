@@ -71,7 +71,7 @@
                         <div class="form-group">
                             {!! Form::label('To', 'To:', ['class'=>'col-md-3 control-label' ]) !!}
                             <div class="col-lg-9" align="center">
-                                {!! Form::text('To', $emails, ['class'=>'col-md-9 control-label', 'readonly'] ) !!}
+                                {!! Form::text('To', $emails, ['class'=>'col-md-9', 'readonly'] ) !!}
                                 {!! Form::hidden('firstNames', $firstNames) !!}
                                 {!! Form::hidden('lastNames', $lastNames) !!}
                                 {!! Form::hidden('status', 'Approve') !!}
