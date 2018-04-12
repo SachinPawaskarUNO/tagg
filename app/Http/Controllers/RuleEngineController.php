@@ -142,9 +142,9 @@ class RuleEngineController extends Controller
 
             // calculate remaining budget for current month  
             $totaldonatedamt = DonationRequest::where('approval_status_id', Constant::APPROVED)
-                                ->where('approved_organization_id', $donationRequest->organization_id)
-                                ->whereMonth('created_at', Carbon::now()->month) 
-                                ->sum('approved_dollar_amount');
+                                                ->where('approved_organization_id', $donationRequest->organization_id)
+                                                ->whereMonth('created_at', Carbon::now()->month) 
+                                                ->sum('approved_dollar_amount');
             
             $monthlyBudget = Organization::where('id', $donationRequest->organization_id)->pluck('monthly_budget')->first();
             $remainingBudget = $monthlyBudget - $totaldonatedamt;
@@ -153,22 +153,17 @@ class RuleEngineController extends Controller
                 // if monthly budget is not set we assign the total donated amount that month as budget  
                 // to make it through conditions.
                 $monthlyBudget = $totaldonatedamt;
+                $remainingBudget = $donationRequest->dollar_amount;
             }
-
             
-            // $dreq = DB::table('donation_requests')->where('id', $donationRequest->id)->first();
-            // dd(round($donationRequest->dollar_amount));
-            // dd(round($ruleRow->amtreq));
-
             if (
                 ( $donationRequest->approved_dollar_amount <= $remainingBudget) && // 1 Monthly budget check 
-                ( $daydiff >= $noticedays) && // 2 notice days check 
-                ( is_null($ruleRow->orgtype) || in_array($donationRequest->requester_type, $ruleRow->orgtype) ) && // 3 org type check   
+                ( $daydiff >= $noticedays) && // 2 notice days check $daydiff is no of days till needed date  
+                ( is_null($ruleRow->orgtype) || !in_array($donationRequest->requester_type, $ruleRow->orgtype) ) && // 3 org type check   
                 ( $donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) && // 4 tax exempt check
-                ( is_null($ruleRow->dntype) || in_array($donationRequest->item_requested, $ruleRow->dntype) ) && //  5 donation type check
+                ( is_null($ruleRow->dntype) || !in_array($donationRequest->item_requested, $ruleRow->dntype) ) && //  5 donation type check
                 ( $donationRequest->dollar_amount <= $ruleRow->amtreq ) // 6 amount requested check    
-            ) {
-                
+            ) { 
                 // update to auto approved.
 
                 $chk = DB::table('donation_requests')
@@ -184,9 +179,9 @@ class RuleEngineController extends Controller
                     (   
                         ( ($donationRequest->approved_dollar_amount > $remainingBudget) ? "Pending Rejection - Budget" : //1 
                             ( ($daydiff < $noticedays ) ? "Pending Rejection - Not Enough Notice" : //2
-                                ( (!is_null($ruleRow->orgtype) && (!in_array($donationRequest->requester_type,$ruleRow->orgtype))) ? "Pending Rejection - Organization Type" : //3 
+                                ( (!is_null($ruleRow->orgtype) && (in_array($donationRequest->requester_type,$ruleRow->orgtype))) ? "Pending Rejection - Organization Type" : //3 
                                     (   ($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" ://4 
-                                        (   (!is_null($ruleRow->dntype) && (!in_array($donationRequest->item_requested, $ruleRow->dntype))) ? "Pending rejection - Donation Type" : //5 
+                                        (   (!is_null($ruleRow->dntype) && (in_array($donationRequest->item_requested, $ruleRow->dntype))) ? "Pending rejection - Donation Type" : //5 
                                             (   ($donationRequest->dollar_amount > $ruleRow->amtreq) ? "Pending Rejection - Exceeded Amount" : "Others"
                                             )
                                         )
