@@ -107,7 +107,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-                                        @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
+                                        {{-- @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER) --}}
+                                        {{-- only admin can see donation preferences --}}
+                                        @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN)
                                             <li>
                                                 <a href="{{ url('/rules')}}">Donation Preferences</a>
                                             </li>
