@@ -37,10 +37,16 @@ class OrganizationController extends Controller
     {
         $id = decrypt($id);
         if (in_array($id, $this->getAllMyOrganizationIds())) {
+            $parent = True; // by default parent business 
             $organization = Organization::find($id);
+            $child = ParentChildOrganizations::active()->where('child_org_id', $organization->id)->exists();
+            if($child == True ) {
+                $parent = False;
+                // if not parent than any of business location, wouldn't see card update
+            }
             $states = State::pluck('state_name', 'state_code');
             $Organization_types = Organization_type::pluck('type_name', 'id');
-            return view('organizations.edit', compact('organization', 'states', 'Organization_types'));
+            return view('organizations.edit', compact('organization', 'states', 'Organization_types', 'parent'));
         } else {
             return redirect('/home')->withErrors(array('0' => 'You do not have access to view this Business!!'));
         }
