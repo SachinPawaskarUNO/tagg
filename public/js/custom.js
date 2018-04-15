@@ -121,3 +121,13 @@ $("body").on('change', '#coupon', function() {
 function setTwoNumberDecimal(e) {
     e.value = parseFloat(e.value).toFixed();
 }
+
+$(document).ready(function() {
+    $('input[type="radio"]').on('change', function() {
+        if ($('input[name="plan"]').is(":checked") && $('input[name="user_locations"]').is(":checked")) {
+            $('#cart').show();
+        } else {
+            $('#cart').hide();
+        }
+    });
+});
