@@ -54,8 +54,20 @@
 
 
                     <!-- <form class="form-horizontal" method="POST" action="{{ action('DonationRequestController@store') }}">
-                            {{ csrf_field() }} -->
-                        <input type="hidden" name="orgId" value="{{ $_GET['orgId'] }}">
+                            {{ csrf_field() }} -->                       
+                        <div class="form-group{{ $errors->has('type_name') ? ' has-error' : '' }}">
+                            <label for="type_name" class="col-md-4 control-label">Select Business location <span
+                                        style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <div class="col-md-6">
+                                {!! Form::select('type_name', array(null => 'Select...') + $b_locs->all(), null, ['class'=>'form-control', 'id' => 'type_name', 'required']) !!}
+                                @if ($errors->has('type_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('type_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
                         <div class="form-group{{ $errors->has('requester') ? ' has-error' : '' }}">
                             <label for="requester" class="col-md-4 control-label ">Name of the Organization <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>

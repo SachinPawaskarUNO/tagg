@@ -71,12 +71,29 @@ class DonationRequestController extends Controller
                     AND $organization[0]->parentOrganization[0]->parentOrganization->trial_ends_at >= Carbon::now())
             ) {
                 $states = State::pluck('state_name', 'state_code');
+                $p_org = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $id)->pluck('parent_org_id')->first();
+                if(!is_null($p_org)){
+                    //get parent business id from child and list all locations under that business
+                    $c_orgids = ParentChildOrganizations::where('parent_org_id', $p_org)->pluck('child_org_id');
+                    $cnames = Organization::wherein('id', $c_orgids)->pluck('org_name', 'id');
+                    
+                } else {
+                    // if the create url is not from child business thn use parnet business id to list all child businesses
+                    $c_orgids = ParentChildOrganizations::where('parent_org_id', $id)->pluck('child_org_id');
+                    $cnames = Organization::wherein('id', $c_orgids)->pluck('org_name', 'id');
+                    
+                }
                 $requester_types = Requester_type::where('active', '=', Constant::ACTIVE)->pluck('type_name', 'id');
                 $request_item_types = Request_item_type::where('active', '=', Constant::ACTIVE)->pluck('item_name', 'id');
                 $request_item_purpose = Request_item_purpose::where('active', '=', Constant::ACTIVE)->pluck('purpose_name', 'id');
                 $request_event_type = Request_event_type::where('active', '=', Constant::ACTIVE)->pluck('type_name', 'id');
-                return view('donationrequests.create')->with('states', $states)->with('requester_types', $requester_types)->with('request_item_types', $request_item_types)
-                    ->with('request_item_purpose', $request_item_purpose)->with('request_event_type', $request_event_type);
+                return view('donationrequests.create')
+                        ->with('states', $states)
+                        ->with('requester_types', $requester_types)
+                        ->with('request_item_types', $request_item_types)
+                        ->with('request_item_purpose', $request_item_purpose)
+                        ->with('request_event_type', $request_event_type)
+                        ->with('b_locs', $cnames);
             } else {
                 return view('donationrequests.expired');
             }
@@ -118,7 +135,7 @@ class DonationRequestController extends Controller
 
     public function store(Request $request)
     {
-        $id = decrypt($request->orgId);
+        $id = $request->type_name;
         $donationRequest = new DonationRequest;
         $donationRequest->organization_id = $id;
         $donationRequest->requester = $request->requester;
