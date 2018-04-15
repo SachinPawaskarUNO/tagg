@@ -52,10 +52,10 @@
                                     <div class="col-md-12">
                                         <fieldset class="form-group" name = "user_locations" id="user_locations" required>
                                             <label class="control-label" for="user_locations">Locations</label><br/>
-                                            <input type="radio" value="Up to 5" name="user_locations" checked><label >&nbsp; Up to 5</label><br />
-                                            <input type="radio" value="Up to 25" name="user_locations"><label >&nbsp; Up to 25</label><br />
-                                            <input type="radio" value="Up to 100" name="user_locations"><label >&nbsp; Up to 100</label><br />
-                                            <input type="radio" value="Up to 101+" name="user_locations"><label >&nbsp; unlimited</label><br />
+                                            <input type="radio" value="5" name="user_locations" checked><label >&nbsp; Up to 5</label><br />
+                                            <input type="radio" value="25" name="user_locations"><label >&nbsp; Up to 25</label><br />
+                                            <input type="radio" value="100" name="user_locations"><label >&nbsp; Up to 100</label><br />
+                                            <input type="radio" value="101+" name="user_locations"><label >&nbsp; unlimited</label><br />
 
                                         </fieldset>
 
