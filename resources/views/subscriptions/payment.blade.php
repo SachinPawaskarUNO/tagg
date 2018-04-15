@@ -6,15 +6,6 @@
     <script src="{{asset('js/stripe.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
     <script src="https://js.stripe.com/v2/"></script>
-    
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header text-center" style="font-size:26px;">Subscription</h1>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -61,10 +52,10 @@
                                     <div class="col-md-12">
                                         <fieldset class="form-group" name = "user_locations" id="user_locations" required>
                                             <label class="control-label" for="user_locations">Locations</label><br/>
-                                            <input type="radio" value="5" name="user_locations" checked><label >&nbsp; Up to 5</label><br />
-                                            <input type="radio" value="25" name="user_locations"><label >&nbsp; Up to 25</label><br />
-                                            <input type="radio" value="100" name="user_locations"><label >&nbsp; Up to 100</label><br />
-                                            <input type="radio" value="101+" name="user_locations"><label >&nbsp; unlimited</label><br />
+                                            <input type="radio" value="Up to 5" name="user_locations" checked><label >&nbsp; Up to 5</label><br />
+                                            <input type="radio" value="Up to 25" name="user_locations"><label >&nbsp; Up to 25</label><br />
+                                            <input type="radio" value="Up to 100" name="user_locations"><label >&nbsp; Up to 100</label><br />
+                                            <input type="radio" value="Up to 101+" name="user_locations"><label >&nbsp; unlimited</label><br />
 
                                         </fieldset>
 
@@ -80,8 +71,8 @@
                                         <fieldset class="form-group" name="plan" id="plan" required>
                                             <label class="control-label" for="plan">Plan <span
                                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label><br/>
-                                            <input type="radio" name="plan" value="Monthly" ><label>&nbsp; Monthly</label><br />
-                                            <input type="radio" name="plan" value="Annually"><label>&nbsp; Annually</label><br />
+                                            <input id = "plan" type="radio" name="plan" value="Monthly" ><label>&nbsp; Monthly</label><br />
+                                            <input id = "plan" type="radio" name="plan" value="Annually"><label>&nbsp; Annually</label><br />
                                         </fieldset>
                                         </select>
                                     </div>
@@ -113,7 +104,7 @@
                                 </div>
                                 <div class="col-sm-12" style="max-height: 15px;font-size: 14px;" id="coupon-message"></div>
                             </div>
-                            <div class="col-xs-12 col-md-4 hide" id="cart">
+                            <div class="col-xs-12 col-md-4 hide" id="cart" style="display:none">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <div class="panel-heading">
@@ -159,7 +150,7 @@
                                         <div class="stripe-errors panel" style="color:red;"></div>
                                         <form role="form">
                                             <div class="form-group">
-                                                <label for="cardNumber">
+                                                <label id = cardNumber for="cardNumber">
                                                     CARD NUMBER</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" id="cardNumber" maxlength="16"
@@ -222,9 +213,12 @@
 
 
 
+
 @endsection
 {{--@section('scripts')--}}
 
 {{--@endsection--}}
+
+
 
 
