@@ -161,8 +161,7 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
-                        {{-- @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN) --}}
-                        @if($parent !== false)
+                        @if((Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN) && $parent == true )
                         {!! Form::model($organization, ['method' => 'PATCH','route'=>['organizations.update', $organization->id], 'class' => 'form-horizontal', 'id' => 'new-card-form']) !!}
                         <div class="stripe-errors panel" style="color:red;"></div>
                         <div class="form-group">
@@ -215,7 +214,7 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
-                            @endif
+                    @endif
                     </div>
                 </div>
             </div>
