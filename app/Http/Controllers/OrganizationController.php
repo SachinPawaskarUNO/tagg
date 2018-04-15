@@ -13,6 +13,7 @@ use Auth;
 use Billable;
 use Illuminate\Http\Request;
 use Validator;
+use App\Rule as Ruls;
 
 
 class OrganizationController extends Controller
@@ -56,10 +57,17 @@ class OrganizationController extends Controller
     {
         $id = decrypt($id);
          if (in_array($id, $this->getAllMyOrganizationIds())) {
+            $parent = True; // by default parent business 
+            $organization = Organization::find($id);
+            $child = ParentChildOrganizations::active()->where('child_org_id', $organization->id)->exists();
+            if($child == True ) {
+                $parent = False;
+                // if not parent than any of business location, wouldn't see card update
+            }
             $organization = Organization::find($id);
             $states = State::pluck('state_name', 'state_code');
             $Organization_types = Organization_type::pluck('type_name', 'id');
-            return view('organizations.donationurl', compact('organization', 'states', 'Organization_types'));
+            return view('organizations.donationurl', compact('organization', 'states', 'Organization_types','parent'));
         } else {
             return redirect('/home')->withErrors(array('0' => 'You do not have access to view this Business!!'));
         }
@@ -126,7 +134,7 @@ class OrganizationController extends Controller
             $organization->zipcode = $request->zip_code;
             $organization->phone_number = $request->phone_number;
             $organization->save();
-
+    
             // If user is editing their own organization then redirect back to their business profile page
             // If user is parent organization and try to edit a child organization then redirect to organizations page
             // else redirect users to home page with error that access is denied
@@ -201,6 +209,15 @@ class OrganizationController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $organization->save();
+
+        // add location based preferences 
+        $rl = new Ruls;
+        $rl->rule_type_id = 1;
+        $rl->rule_owner_id = $organization->id;
+        // $rl->orgtype = "["1","2","3","4","5","6","7","8","9","10","11","12","13"]";
+        // $rl->dntype = "["1","2","3","4","5"]";
+        $rl->taxex = false;
+        $rl->save();    
 
         // Inserting the relation between parent organization and child organization
         ParentChildOrganizations::create(['parent_org_id' => Auth::user()->organization_id, 'child_org_id' => $organization->id]);

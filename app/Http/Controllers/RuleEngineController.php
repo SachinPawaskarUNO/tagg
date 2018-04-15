@@ -237,11 +237,10 @@ class RuleEngineController extends Controller
         // dd($request);
         $orgId = Auth::user()->organization_id;
         $rl = Rule::where([['rule_owner_id', '=', $orgId]])->first();
-        // dd($request->taxex);
-        // $rl->orgtype = json_encode($request->orgTypeId);
+
         $rl->orgtype = $request->orgTypeId;
         $rl->dntype = $request->dtypeId;
-        // $rl->dntype = json_encode($request->dtypeId);
+        
         $rl->taxex = $request->taxex;
         $rl->amtreq = $request->amtReq;
         $rl->update($request->all());
