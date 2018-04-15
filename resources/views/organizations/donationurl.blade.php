@@ -58,6 +58,7 @@
                             </div>
 
                     </div>
+                    @if(((Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN) || $parent == true) && (Auth::user()->roles[0]->id !== \App\Custom\Constant::BUSINESS_USER) )
                     <div class="form-group">
                         <center>
                         <div class="text-center">
@@ -65,9 +66,10 @@
                                     type="button" onClick = location.href='{{ url('/rules')}}';>Set Donation Preferences
                                 </button>
                             <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick=location.href='{{ url('/dashboard')}}'>
-                            </div>
+                        </div>
                         </center>
-                </div>
+                    </div>
+                    @endif
             </div>
         </div>
 </div>
