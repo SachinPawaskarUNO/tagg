@@ -120,6 +120,7 @@ class EmailController extends Controller
             Mail::to($email)->send(new SendManualRequest($email_templates));
             $email_templates->email_message = $default_template;
         }
-        return redirect('/');
+        $e = "Email sent successfully";
+        return $e;
     }
 }
