@@ -57,7 +57,7 @@
                         <a href="{{ url('/') }}">
                             <img src="{{ asset('img/New-Logo.jpg') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
                                  id="logo" class="img-responsive"
-                                 width="60%" style='background-size: inherit'/>
+                                 width="40%" style='background-size: inherit'/>
                         </a>
                     @endif
 
