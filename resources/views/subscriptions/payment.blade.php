@@ -150,7 +150,7 @@
                                         <div class="stripe-errors panel" style="color:red;"></div>
                                         <form role="form">
                                             <div class="form-group">
-                                                <label id = cardNumber for="cardNumber">
+                                                <label id = cardNumberLabel for="cardNumber">
                                                     CARD NUMBER</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" id="cardNumber" maxlength="16"
