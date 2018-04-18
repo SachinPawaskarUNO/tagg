@@ -130,4 +130,7 @@ $(document).ready(function() {
             $('#cart').hide();
         }
     });
+    $('input[name="plan"]').on('change', function() {
+        $('.choose-plan-error').removeClass('choose-plan-error-show');
+    })
 });
