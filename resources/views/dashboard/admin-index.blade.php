@@ -144,7 +144,7 @@
                                                         <?php $status = 'Declined' ?>
                                                     @endif
                                                     @if($cancelled)
-                                                        <?php $status = 'Active' ?>
+                                                        <?php $status = 'Pending' ?>
                                                     @endif
 
                                                 @foreach ( $orgChildren as $orgChild)
