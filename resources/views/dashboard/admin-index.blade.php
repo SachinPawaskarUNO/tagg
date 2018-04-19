@@ -140,12 +140,18 @@
                                                     @else
                                                     <?php $status = 'Cancelled' ?>
                                                     @endif
-                                                    @if(strpos($organization->error_message, 'declined') !== false)
+                                                    @if(strpos($organization->error_message, 'declined') !== false)git
                                                         <?php $status = 'Declined' ?>
                                                     @endif
                                                     @if($cancelled)
                                                         <?php $status = 'Active' ?>
                                                     @endif
+
+                                                @foreach ( $orgChildren as $orgChild)
+                                                    @if($orgChild->id == $organization->id)
+                                                        {{  $status = $orgChild->is_active}}
+                                                    @endif
+                                                @endforeach
                                                 <td style="vertical-align: middle">{{$status }}</td>
                                                 <td>
                                                     @if($status != 'Incomplete' && !is_null($organization->trial_ends_at))
