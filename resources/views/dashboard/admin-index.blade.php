@@ -140,7 +140,7 @@
                                                     @else
                                                     <?php $status = 'Cancelled' ?>
                                                     @endif
-                                                    @if(strpos($organization->error_message, 'declined') !== false)git
+                                                    @if(strpos($organization->error_message, 'declined') !== false)
                                                         <?php $status = 'Declined' ?>
                                                     @endif
                                                     @if($cancelled)
@@ -149,7 +149,7 @@
 
                                                 @foreach ( $orgChildren as $orgChild)
                                                     @if($orgChild->id == $organization->id)
-                                                        {{  $status = $orgChild->is_active}}
+                                                        <?php $status = $orgChild->is_active ?>
                                                     @endif
                                                 @endforeach
                                                 <td style="vertical-align: middle">{{$status }}</td>
@@ -160,8 +160,7 @@
                                                         <span class="glyphicon glyphicon-list-alt"></span></a>
                                                     @endif
                                                 </td>
-                                                {{--  <td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn btn-basic"> Detail </a>
-                                                                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn btn-basic"> Edit </a>  --}}
+
                                             </tr>
                                         @endforeach
                                     </tbody>
