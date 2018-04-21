@@ -140,7 +140,7 @@
                                                     @else
                                                     <?php $status = 'Cancelled' ?>
                                                     @endif
-                                                    @if(strpos($organization->error_message, 'declined') !== false)
+                                                    @if(strpos($organization->error_message, ' ') !== false)
                                                         <?php $status = 'Declined' ?>
                                                     @endif
                                                     @if($cancelled)
