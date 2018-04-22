@@ -31,7 +31,6 @@
 
 
     </script>
-    <script src="{{asset('js/jquery.number.min.js')}}"></script>
     {{ csrf_field() }}
 
     <div id="page-wrapper">
