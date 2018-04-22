@@ -205,7 +205,7 @@
                                     <input id="zipcode" type="number"
                                            oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                            maxlength="5" class="form-control" name="zipcode"
-                                           value="{{ old('zipcode') }}" placeholder="Zip Code" required
+                                           value="{{ old('zipcode') }}" placeholder="Zip Code" required min="0"
                                            >
 
                                     @if ($errors->has('zipcode'))
