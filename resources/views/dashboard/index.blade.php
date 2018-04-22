@@ -178,7 +178,7 @@
 
         </div>
         <!-- /#wrapper -->
-
+    </div>
         <script>
 
             $(document).ready(function() {

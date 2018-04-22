@@ -157,7 +157,9 @@ img {
     padding-top: 0px;
     padding-bottom: 0px;
 }
-
+.navbar-nav {
+    font-weight: bold;
+}
 .navbar-fixed-top {
     box-shadow: 1px 1px 5px 2px white;
     max-height: 100%;
@@ -309,6 +311,7 @@ div {
     padding-left: 3px;
     float: none;
     overflow: hidden;
+    font-weight: bold;
 }
 
 .dropdown-menu {
@@ -844,7 +847,7 @@ nav.navbar-findcond ul.navbar-nav a:active {
 }
 
 nav.navbar-findcond ul.navbar-nav a:hover {
-    border-color: #000;
+    border-color: #fff;
 }
 
 nav.navbar-findcond li.divider {
@@ -852,7 +855,7 @@ nav.navbar-findcond li.divider {
 }
 
 nav.navbar-findcond button.navbar-toggle {
-    background: #000;
+    background: #fff;
     border-radius: 2px;
 }
 
@@ -870,6 +873,7 @@ nav.navbar-findcond ul.dropdown-menu {
     border-radius: 4px;
     margin: 4px 0;
     box-shadow: 0 0 4px 0 #ccc;
+    font-weight: bold;
 }
 
 nav.navbar-findcond ul.dropdown-menu>li>a {
@@ -877,7 +881,7 @@ nav.navbar-findcond ul.dropdown-menu>li>a {
 }
 
 nav.navbar-findcond ul.dropdown-menu>li>a:hover {
-    background: #000;
+    background: #fff;
     color: #fff;
 }
 
@@ -940,3 +944,7 @@ nav.navbar-findcond span.badge.new {
     display: block;
 }
 
+.navbar-brand>img {
+    padding: 1px;
+    max-width:35%;
+  }
