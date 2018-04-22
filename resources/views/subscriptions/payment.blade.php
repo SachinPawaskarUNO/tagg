@@ -7,6 +7,13 @@
     <script src="{{asset('js/custom.js')}}"></script>
     <script src="https://js.stripe.com/v2/"></script>
     <div class="container">
+            <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header text-center" style="font-size:26px;">Subscription</h1>
+    
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 @if ($errors->any())
@@ -21,7 +28,7 @@
                 @if(Session::has('message'))
                     <div class="alert alert-info">{{ Session::get('message') }}</div>
                 @endif
-                <div class="panel panel-default" style="padding-left: 5px;padding-right: 5px;">
+                <div class="panel panel-default">
                     <div class="panel-heading"><h1> Add Payment Information</h1></div>
                     <h2 style="text-align:center;"></h2>
 
@@ -209,11 +216,6 @@
 
         </div>
     </div>
-    </body>
-
-
-
-
 @endsection
 {{--@section('scripts')--}}
 
