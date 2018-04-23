@@ -160,7 +160,6 @@
                                                         <span class="glyphicon glyphicon-list-alt"></span></a>
                                                     @endif
                                                 </td>
-
                                             </tr>
                                         @endforeach
                                     </tbody>
