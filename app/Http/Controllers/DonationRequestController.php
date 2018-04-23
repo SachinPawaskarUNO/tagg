@@ -135,6 +135,7 @@ class DonationRequestController extends Controller
 
     public function store(Request $request)
     {
+        $request->approved_dollar_amount = 0;
         $id = $request->type_name;
         $donationRequest = new DonationRequest;
         $donationRequest->organization_id = $id;
@@ -160,7 +161,7 @@ class DonationRequestController extends Controller
         $donationRequest->item_requested = $request->item_requested;
         $donationRequest->other_item_requested = $request->item_requested_explain;
         $donationRequest->dollar_amount = $request->dollar_amount;
-        $donationRequest->approved_dollar_amount = $request->dollar_amount;
+        $donationRequest->approved_dollar_amount = $request->approved_dollar_amount;
         $donationRequest->approved_organization_id = $id;
         $donationRequest->item_purpose = $request->item_purpose;
         $donationRequest->other_item_purpose = $request->item_purpose_explain;
