@@ -25,11 +25,15 @@ use URL;
 
 
 class DonationRequestController extends Controller
-{
+{   
+    private $defaultemail;
+
     public function __construct()
     {
         $this->middleware('auth')->except('create','store','acknowledgeRequestReceived');
+        $this->defaultemail = new EmailController();
     }
+    
 
     public function index()
     {
@@ -67,12 +71,29 @@ class DonationRequestController extends Controller
                     AND $organization[0]->parentOrganization[0]->parentOrganization->trial_ends_at >= Carbon::now())
             ) {
                 $states = State::pluck('state_name', 'state_code');
+                $p_org = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $id)->pluck('parent_org_id')->first();
+                if(!is_null($p_org)){
+                    //get parent business id from child and list all locations under that business
+                    $c_orgids = ParentChildOrganizations::where('parent_org_id', $p_org)->pluck('child_org_id');
+                    $cnames = Organization::wherein('id', $c_orgids)->pluck('org_name', 'id');
+                    
+                } else {
+                    // if the create url is not from child business thn use parnet business id to list all child businesses
+                    $c_orgids = ParentChildOrganizations::where('parent_org_id', $id)->pluck('child_org_id');
+                    $cnames = Organization::wherein('id', $c_orgids)->pluck('org_name', 'id');
+                    
+                }
                 $requester_types = Requester_type::where('active', '=', Constant::ACTIVE)->pluck('type_name', 'id');
                 $request_item_types = Request_item_type::where('active', '=', Constant::ACTIVE)->pluck('item_name', 'id');
                 $request_item_purpose = Request_item_purpose::where('active', '=', Constant::ACTIVE)->pluck('purpose_name', 'id');
                 $request_event_type = Request_event_type::where('active', '=', Constant::ACTIVE)->pluck('type_name', 'id');
-                return view('donationrequests.create')->with('states', $states)->with('requester_types', $requester_types)->with('request_item_types', $request_item_types)
-                    ->with('request_item_purpose', $request_item_purpose)->with('request_event_type', $request_event_type);
+                return view('donationrequests.create')
+                        ->with('states', $states)
+                        ->with('requester_types', $requester_types)
+                        ->with('request_item_types', $request_item_types)
+                        ->with('request_item_purpose', $request_item_purpose)
+                        ->with('request_event_type', $request_event_type)
+                        ->with('b_locs', $cnames);
             } else {
                 return view('donationrequests.expired');
             }
@@ -114,7 +135,8 @@ class DonationRequestController extends Controller
 
     public function store(Request $request)
     {
-        $id = decrypt($request->orgId);
+        $request->approved_dollar_amount = 0;
+        $id = $request->type_name;
         $donationRequest = new DonationRequest;
         $donationRequest->organization_id = $id;
         $donationRequest->requester = $request->requester;
@@ -139,7 +161,7 @@ class DonationRequestController extends Controller
         $donationRequest->item_requested = $request->item_requested;
         $donationRequest->other_item_requested = $request->item_requested_explain;
         $donationRequest->dollar_amount = $request->dollar_amount;
-        $donationRequest->approved_dollar_amount = $request->dollar_amount;
+        $donationRequest->approved_dollar_amount = $request->approved_dollar_amount;
         $donationRequest->approved_organization_id = $id;
         $donationRequest->item_purpose = $request->item_purpose;
         $donationRequest->other_item_purpose = $request->item_purpose_explain;
@@ -223,50 +245,61 @@ class DonationRequestController extends Controller
     }
 
     public function changeDonationStatus(Request $request)
-    {
+    {      
         $organizationId = Auth::user()->organization_id;
         $donation_id = $request->id;
         $donation = DonationRequest::where('id', $donation_id)->get();
         $donation = $donation[0]; //convert collection into an array
         $page_from = 'donationrequests';
         $ids_string = (string)$donation->id;
+        $ids_array = [];
+        $ids_array = explode(',', $ids_string);
         $names = $donation->first_name.' '.$donation->last_name;
         $firstNames = $donation->first_name;
         $lastNames =$donation->last_name;
         $emails = $donation->email;
         $backPageFlag = $request->fromPage;
-
+        $change_status = $request->submitbutton;
         //if current organization is a child location get parent's email template
         $orgId = ParentChildOrganizations::where('child_org_id', $organizationId)->value('parent_org_id');
-        if ($orgId){
+        if($orgId){
             $organizationId = $orgId;
         }
 
-        if ($request->input('approve') == 'Approve') {
+        if ($change_status == 'Approve & customize response' || $change_status == 'Approve & send default email') {
             if ($request->approved_amount) {
                 $approved_amount = $request->approved_amount;
                 $donation->update(['approved_dollar_amount' => $approved_amount]);
             }
             // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED)->where('organization_id', $organizationId)->get();
-            $email_template = EmailTemplate::where([
-                ['template_type_id', Constant::REQUEST_APPROVED],
-            ])->get();
-            $email_template = $email_template[0]; //convert collection into an array
+           
+            if($change_status == 'Approve & send default email') 
+                {   // Approve default case - Send default email
+                    //$email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED_DEFAULT)->where('organization_id', $orgId)->first();
+                    $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_APPROVED_DEFAULT)->where('organization_id', $organizationId)->first();
+                    $e = $this->defaultemail->email($email_templates,$ids_array ,$firstNames,$lastNames,$change_status);
+                    return redirect($page_from)->with('message', $e);
+                } 
+            else 
+                {   // Approve case - proceed to choose from approval templates
+                    $email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_APPROVED, Constant::REQUEST_APPROVED_DEFAULT])->where('organization_id', $organizationId)->get();
+                }   
+            return view('emailtemplates.emailtype', compact('email_templates', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
 
-            return view('emaileditor.approvesendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from', 'backPageFlag'));
-
-        } elseif ($request->input('reject') == 'Reject') {
-            // $email_template = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED)->where('organization_id', $organizationId)->get();
-            $email_template = EmailTemplate::where([
-                ['template_type_id', Constant::REQUEST_REJECTED],
-            ])->get();
-            $email_template = $email_template[0]; //convert collection into an array
-
-            return view('emaileditor.rejectsendmail', compact('email_template', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from', '$backPageFlag'));
-
+        } else {
+                if($change_status == 'Reject & send default email')
+                    {   // Reject default case - Send default rejection email
+                        $email_templates = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED_DEFAULT)->where('organization_id', $organizationId)->first();
+                        $e = $this->defaultemail->email($email_templates, $ids_array, $firstNames, $lastNames, $change_status);
+                        return redirect($page_from)->with('message', $e);
+                    } else { 
+                        // Decline case - proceed to choose from rejection templates
+                        $email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_REJECTED,Constant::REQUEST_REJECTED_DEFAULT])->where('organization_id', $organizationId)->get();
+                    }                   
+                }
+                return view('emailtemplates.emailtype', compact('email_templates', 'emails', 'firstNames', 'lastNames', 'ids_string', 'page_from'));
+            
         }
-
-    }
 
     public function showAllDonationRequests($id)
     {

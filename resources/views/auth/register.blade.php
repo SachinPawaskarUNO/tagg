@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1 style="text-align: left;font-weight: bold;">Register Your Business</h1></div>
+                    <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">Start your Free Trial!</h1></div>
 
                     <div class="panel-body">
                         <form class="form-horizontal" method="post" action="{{ action('UserController@create') }}">
@@ -205,7 +205,7 @@
                                     <input id="zipcode" type="number"
                                            oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                            maxlength="5" class="form-control" name="zipcode"
-                                           value="{{ old('zipcode') }}" placeholder="Zip Code" required
+                                           value="{{ old('zipcode') }}" placeholder="Zip Code" required min="0"
                                            >
 
                                     @if ($errors->has('zipcode'))
@@ -235,7 +235,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn savebtn">
+                                    <button type="submit" class="btn btn-basic">
                                         Register
                                     </button>
                                     <span style="color: red"> <h5>Fields Marked With (<span

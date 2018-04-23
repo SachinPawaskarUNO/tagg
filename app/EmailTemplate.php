@@ -9,6 +9,7 @@ class EmailTemplate extends Model
     protected $fillable = [
         'template_type_id',
         'organization_id',
+        'email_desc',
         'email_subject',
         'email_message',
         'email_header',

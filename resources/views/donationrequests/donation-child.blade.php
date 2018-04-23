@@ -7,7 +7,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Dashboard
+                    <h1 class="page-header text-center" style="font-size:26px;">Dashboard
                         for {{ $parentOrgName }}</h1>
                 </div>
                 <!-- /.col-lg-12 -->

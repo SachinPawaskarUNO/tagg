@@ -62,7 +62,13 @@ class DashboardController extends Controller
             $approvedNumber = DonationRequest::where('approval_status_id', Constant::APPROVED)->count();
             $pendingNumber = DonationRequest::whereIn('approval_status_id', [Constant::PENDING_REJECTION, Constant::PENDING_APPROVAL])->count();
             $subscriptions = DB::table('subscriptions')->whereNotNull('organization_id')->get();
-            return view('dashboard.admin-index', compact('organizations', 'avgAmountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber', 'numActiveLocations', 'userCount', 'userThisWeek', 'userThisMonth', 'userThisYear','subscriptions'));
+
+            $orgChildren = \DB::table('organizations as c')->leftJoin('parent_child_organizations as pc', 'c.id', '=', 'pc.child_org_id')
+                ->leftJoin('organizations as p', 'pc.parent_org_id', '=', 'p.id')
+                ->whereNotNull('pc.child_org_id')
+                ->select(\DB::raw("c.*, CASE WHEN (p.active = 0 OR p.trial_ends_at <= now()) THEN 'Cancelled' WHEN (c.active = 0 OR c.trial_ends_at <= now()) THEN 'Cancelled' ELSE 'Active' END as is_active"))->get();
+
+            return view('dashboard.admin-index', compact('organizations', 'avgAmountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber', 'numActiveLocations', 'userCount', 'userThisWeek', 'userThisMonth', 'userThisYear','subscriptions','orgChildren'));
         } else {
             $organizationId = Auth::user()->organization_id;
             $organization = Organization::findOrFail($organizationId);

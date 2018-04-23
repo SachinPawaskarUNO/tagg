@@ -7,7 +7,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">CHARITYQ DASHBOARD (YTD)</h1>
+                    <h1 class="page-header text-center" style="font-size:26px;">CHARITYQ DASHBOARD (YTD)</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -140,12 +140,18 @@
                                                     @else
                                                     <?php $status = 'Cancelled' ?>
                                                     @endif
-                                                    @if(strpos($organization->error_message, 'declined') !== false)
+                                                    @if(strpos($organization->error_message, ' ') !== false)
                                                         <?php $status = 'Declined' ?>
                                                     @endif
                                                     @if($cancelled)
-                                                        <?php $status = 'Active' ?>
+                                                        <?php $status = 'Pending' ?>
                                                     @endif
+
+                                                @foreach ( $orgChildren as $orgChild)
+                                                    @if($orgChild->id == $organization->id)
+                                                        <?php $status = $orgChild->is_active ?>
+                                                    @endif
+                                                @endforeach
                                                 <td style="vertical-align: middle">{{$status }}</td>
                                                 <td>
                                                     @if($status != 'Incomplete' && !is_null($organization->trial_ends_at))
@@ -154,8 +160,6 @@
                                                         <span class="glyphicon glyphicon-list-alt"></span></a>
                                                     @endif
                                                 </td>
-                                                {{--  <td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn savebtn"> Detail </a>
-                                                                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn savebtn"> Edit </a>  --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

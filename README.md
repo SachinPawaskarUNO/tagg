@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./public/img/CharityQ.png" alt="CharityQ Logo"/>
+    <img src="./public/img/New-logo.jpg" alt="CharityQ Logo"/>
     
 </p>
 
@@ -15,6 +15,10 @@ dev:
 sprint 1: [![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=sprint1)](https://travis-ci.org/akhampariya/tagg)
 sprint 2:
 [![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=sprint2)](https://travis-ci.org/akhampariya/tagg)
+sprint 3:
+[![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=sprint3)](https://travis-ci.org/akhampariya/tagg)
+sprint 4:
+[![Build Status](https://travis-ci.org/akhampariya/tagg.svg?branch=sprint4)](https://travis-ci.org/akhampariya/tagg)
 
 
 ### Executive Summary

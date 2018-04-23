@@ -118,11 +118,10 @@ Route::get('/emailtemplates/edit/{id}', 'EmailTemplateController@edit')->middlew
 Route::resource('emailtemplates', 'EmailTemplateController')->middleware('auth');
 
 //Emails
-
-Route::get('/sendingemail', 'EmailController@manualRequestMail') ->name('approveandsendmail')->middleware('auth');
-Route::get('/emaileditor/editsendmail','EmailTemplateController@send');
-Route::get('/emaileditor/editsendmail','EmailTemplateController@sendemail');
-
+Route::get('/emaileditor/editsendmail','EmailTemplateController@send')->middleware('auth');
+Route::get('compose-email', 'EmailTemplateController@send')->middleware('auth');
+Route::get('send-mail','EmailTemplateController@sendemail');
+Route::get('sendingemail', 'EmailController@manualRequestMail')->name('approveandsendmail')->middleware('auth');
 //Dashboard
 
 Route::get('/dashboard', 'DashboardController@index') ->name('dashboardindex')->middleware('auth');
@@ -142,15 +141,12 @@ Route::get('loadRule', 'RuleEngineController@loadRule')->middleware('auth');
 Route::resource('/rules', 'RuleEngineController')->middleware('auth');
 
 // Rules stuff// Rules stuff
-//Route::get('rules', 'RuleEngineController@rulesGUI');
 Route::get('/webhook/chargeSuccess', 'SubscriptionController@chargeSuccess');
 
 Route::get('subscription/popup', 'SubscriptionController@subscribe');
-
-Route::get('compose-email', 'EmailTemplateController@send')->middleware('auth');
+Route::post('editprofile/card', 'SubscriptionController@updateCard');
 
 //Route::get('/dashboard-taggadmin', 'DashboardController@indexTaggAdmin') ->name('dashboardindex-taggadmin');
 Route::get('/organizationdonations/{id}', 'DonationRequestController@showAllDonationRequests')->name('show-donation')->middleware('auth');
-
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

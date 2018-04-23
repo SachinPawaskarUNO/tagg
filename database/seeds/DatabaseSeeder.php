@@ -308,19 +308,19 @@ class CqAppSeeder extends Seeder {
 		// Request_item_type::create(array('id' => '5','item_name' => 'Other (please explain)', 'item_description' => 'Other Types of Requests'));
 
 		// Requester_type
-		Requester_type::create(array('type_name' => 'Animal Welfare', 'type_description' => 'This is an Animal Welfare'));
-		Requester_type::create(array('type_name' => 'Arts, Culture & Humanities', 'type_description' => 'These are Arts, Culture & Humanities'));
-		Requester_type::create(array('type_name' => 'Civil Rights, Social Action & Advocacy', 'type_description' => 'These are Civil Rights, Social Action & Advocacy'));
-		Requester_type::create(array('type_name' => 'Community Improvement', 'type_description' => 'This is Community Improvement'));
-		Requester_type::create(array('type_name' => 'Corporate Giving', 'type_description' => 'This is Corporate Giving'));
-		Requester_type::create(array('type_name' => 'Education K-12', 'type_description' => 'This is an Education K-12'));
-		Requester_type::create(array('type_name' => 'Environment', 'type_description' => 'This is an Environment'));
-		Requester_type::create(array('type_name' => 'Faith/Religious', 'type_description' => 'This is a Faith/Religious'));
-		Requester_type::create(array('type_name' => 'Food, Agriculture & Nutrition', 'type_description' => 'This is a Food, Agriculture & Nutrition'));
-		Requester_type::create(array('type_name' => 'Health Care', 'type_description' => 'This is for Health Care'));
-		Requester_type::create(array('type_name' => 'Human Services', 'type_description' => 'This is for Human Services'));
-		Requester_type::create(array('type_name' => 'Youth Sports/Activities', 'type_description' => 'This is for Youth Sports/Activities'));
-		Requester_type::create(array('type_name' => 'Others', 'type_description' => 'Other Types of Requesters'));
+		Requester_type::create(array('seq_id' => 1 ,'type_name' => 'Education K-12', 'type_description' => 'This is an Education K-12'));
+		Requester_type::create(array('seq_id' => 2 ,'type_name' => 'Youth Sports/Activities', 'type_description' => 'This is for Youth Sports/Activities'));
+		Requester_type::create(array('seq_id' => 3 ,'type_name' => 'Faith/Religious', 'type_description' => 'This is a Faith/Religious'));
+		Requester_type::create(array('seq_id' => 4 ,'type_name' => 'Corporate Giving', 'type_description' => 'This is Corporate Giving'));
+		Requester_type::create(array('seq_id' => 6 ,'type_name' => 'Animal Welfare', 'type_description' => 'This is an Animal Welfare'));
+		Requester_type::create(array('seq_id' => 7 ,'type_name' => 'Arts, Culture & Humanities', 'type_description' => 'These are Arts, Culture & Humanities'));
+		Requester_type::create(array('seq_id' => 8 ,'type_name' => 'Civil Rights, Social Action & Advocacy', 'type_description' => 'These are Civil Rights, Social Action & Advocacy'));
+		Requester_type::create(array('seq_id' => 9 ,'type_name' => 'Community Improvement', 'type_description' => 'This is Community Improvement'));
+		Requester_type::create(array('seq_id' => 10,'type_name' => 'Environment', 'type_description' => 'This is an Environment'));
+		Requester_type::create(array('seq_id' => 11,'type_name' => 'Food, Agriculture & Nutrition', 'type_description' => 'This is a Food, Agriculture & Nutrition'));
+		Requester_type::create(array('seq_id' => 12,'type_name' => 'Health Care', 'type_description' => 'This is for Health Care'));
+		Requester_type::create(array('seq_id' => 13,'type_name' => 'Human Services', 'type_description' => 'This is for Human Services'));
+		Requester_type::create(array('seq_id' => 14,'type_name' => 'Other', 'type_description' => 'Other Types of Requesters'));
 
 		// Security questions
 		Security_question::create(array('question' => 'What was the name of your elementary / primary school?'));
@@ -384,6 +384,16 @@ class CqAppSeeder extends Seeder {
             'quantity' => 999999,
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
+		));
+		Subscription::create(array(
+			'id' => '2',
+            'organization_id' => $oroot->id,
+            'name' => 'main',
+            'stripe_id' => 'sub_CfA4BKNMmuEEDG',
+            'stripe_plan' => 'annually5',
+            'quantity' => 5,
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now()
         ));
 
 
@@ -395,27 +405,37 @@ class CqAppSeeder extends Seeder {
 		));
 		$euser = EmailTemplateTypes::create(array(
 			'id' => '2',
-			'template_type' => 'Business user'
+			'template_type' => 'Business User'
+		));
+		$eaprvdef = EmailTemplateTypes::create(array(
+			'id' => '3',
+			'template_type' => 'Donation Approved (default)'
 		));
 		$eaprv = EmailTemplateTypes::create(array(
-			'id' => '3',
-			'template_type' => 'Donation approved'
+			'id' => '4',
+			'template_type' => 'Donation Approved'
+		));
+		$erjctdef = EmailTemplateTypes::create(array(
+			'id' => '5',
+			'template_type' => 'Donation Declined (default)'
 		));
 		$erjct = EmailTemplateTypes::create(array(
-			'id' => '4',
-			'template_type' => 'Donation Rejected'
+			'id' => '6',
+			'template_type' => 'Donation Declined'
 		));
 		$efpwd = EmailTemplateTypes::create(array(
-			'id' => '5',
-			'template_type' => 'Forgot password'
+			'id' => '7',
+			'template_type' => 'Forgot Password'
 		));
 
-		// Email templates 
+		// Email templates
+		//chairtyq emails 
 		EmailTemplate::create(array(
 			'id' => '1',
 			'template_type_id' => $eadmin->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
+			'email_desc' => 'Welcome Email - CharityQ!', 
 			'email_message' => '<p>Thank you &nbsp;<strong>{Addressee}</strong>&nbsp;&nbsp;for registering your business on CharityQ. We look forward to helping your business save time and make it easy to support the charities you truly care about.</p>
 		<p>You can log in any time to your account by using your email address as your user name.</p>
 		<p>Thank you again for using CharityQ.</p>'
@@ -426,38 +446,45 @@ class CqAppSeeder extends Seeder {
 			'template_type_id' => $euser->id, 
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
+			'email_desc' => 'Welcome Email - CharityQ!', 
 			'email_message' => '<p>Hello &nbsp;<strong>{Addressee}</strong>&nbsp;,</p>
 		<p>You have been added as a new user to CharityQ for &nbsp;<strong>{My Business Name}.&nbsp;</strong>&nbsp;Please follow the link below to set up your new account.</p>
 		<p>Thank you!</p>
 		<p>&nbsp;- CharityQ Team</p>'
 		));
-		
+		// business emails
 		EmailTemplate::create(array(
 			'id' => '3',
-			'template_type_id' => $eaprv->id, 
+			'template_type_id' => $eaprvdef->id, 
 			'organization_id' => $oroot->id, 
-			'email_subject' => 'Decision about your donation request', 
+			'email_desc' => 'Donation Approved - Default Message', 
+			'email_subject' => 'Your donation request has been approved', 
 			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
-			<p>Thank you for entering a submitting a donation request through our website. We have reviewed your request and determined we are able to help you out with your request.</p>
-			<p>&nbsp;</p>
-			<p>Here are the instruction to pick up your donation:</p>
-			<p>&nbsp;</p>
+			<p>Thank you for submitting a donation request through our website. We have reviewed your request and wanted to let you know that we are able to fulfill your request. Your donation will be ready after 24 hours. Please stop by to pick up your donation during our business hours.</p>
+			<p>Best of luck with your event.</p>
 			<p>Thank you,</p>
 			<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
 			));
 		
 		EmailTemplate::create(array(
 			'id' => '4',
-			'template_type_id' => $erjct->id, 
+			'template_type_id' => $erjctdef->id, 
 			'organization_id' => $oroot->id, 
+			'email_desc' => 'Donation Declined - Default Message', 
 			'email_subject' => 'Your donation request has been declined', 
-			'email_message' => '<p style="background: white;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">Dear &nbsp;<strong><span>{Addressee},&nbsp;</span></strong></span></p>
-		<p style="background: white;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">Thank you for entering a request for donation on our website. Unfortunately, at this time we are not able to help out with your event.&nbsp;All of our Omaha locations have partnered with TAGG (Together a Greater Good) so that we can support as many local organizations as possible. In lieu of donating to specific raffles, auctions and galas, and sponsorships, we donate 5% of a guest&rsquo;s tab to an organization of their choosing. &nbsp;&nbsp;</span></p>
-		<p style="font-family: Calibri, sans-serif;"><span style="font-size: 10.5pt; font-family: Verdana; color: black;">This is done through the TAGG mobile app, which is available for download on iPhones and Androids. Just search &ldquo;Together a Greater Good&rdquo; and you should find it!</span></p>'));
+			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
+			<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us for your event, however we are unable to fulfill the request at this time. </p>
+			<p>Best of luck with your event.</p>
+			<p>Thank you,</p>
+			<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>
+			'));
 		
 		EmailTemplate::create(array(
 		'id' => '5',
-		'template_type_id' => $efpwd->id, 'organization_id' => $oroot->id, 'email_subject' => 'Password Change Request', 'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
+		'template_type_id' => $efpwd->id, 'organization_id' => $oroot->id, 
+		'email_subject' => 'Password Change Request', 
+		'email_desc' => 'Default Email - Password Change', 
+		'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
 		<p>You have changed your password for CharityQ application. If it is not you that changed password please contact your admin as soon as possible.</p>
 		<p>Sincerely,</p>
 		<p>- CharityQ Team</p>'
@@ -466,32 +493,63 @@ class CqAppSeeder extends Seeder {
 			'id' => '6',
 			'template_type_id' => $eaprv->id, 
 			'organization_id' => $oroot->id, 
-			'email_subject' => 'Approval Decision 2', 
-			'email_message' => 'Decision 2'
+			'email_desc' => 'Donation Approved - Special Instructions', 
+			'email_subject' => 'Your donation request has been approved', 
+			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
+			<p>Thank you for submitting a donation request through our website. We have reviewed your request and wanted to let you know that we are able to fulfill your request. </p>
+			<p>Here are the instructions to pick up your donation:</p>
+			
+			<p>Best of luck with your event.</p>
+			<p>Thank you,</p>
+
+			<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
 			));
 
 			EmailTemplate::create(array(
 				'id' => '7',
 				'template_type_id' => $eaprv->id, 
 				'organization_id' => $oroot->id, 
-				'email_subject' => 'Custom Approval email', 
-				'email_message' => 'Custom Email'
-				));
+				'email_desc' => 'Donation Approved - Adjusted Donation Amount',
+				'email_subject' => 'Your donation request has been approved', 				 
+				'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
+				<p>Thank you for submitting a donation request through our website. We were not able to approve the amount that you originally requested but we would still like to donate to your event.  We are able to donate <INSERT HERE WHAT YOU CAN DONATE>.  Your donation will be ready after 24 hours. Please stop by to pick up your donation during any of our business hours.</p>
+				
+				<p>Best of luck with your event.</p>
+
+				<p>Thank you,				</p>
+				<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
+			));
+
 
 				EmailTemplate::create(array(
 					'id' => '8',
 					'template_type_id' => $erjct->id, 
-					'organization_id' => $oroot->id, 
-					'email_subject' => 'Rejection Decision 2', 
-					'email_message' => 'Decision 2'
+					'organization_id' => $oroot->id,  
+					'email_desc' => 'Donation Declined - Special Message', 
+					'email_subject' => 'Your donation request has been declined',
+					'email_message' => '<p> &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
+					<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us, however we are unable to fulfill the request at this time because we (INSERT REASON HERE….only donate to 501c3 organizations, have reached our budget for giving, only donate to local charities, etc) </p>
+					<p> Best of luck with your event.</p>
+					<p>Thank you,</p>
+					<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
 					));
 		
 					EmailTemplate::create(array(
 						'id' => '9',
 						'template_type_id' => $erjct->id, 
 						'organization_id' => $oroot->id, 
-						'email_subject' => 'Custom Rejection email', 
-						'email_message' => 'Custom Email'
+						'email_desc' => 'Donation Declined - on TAGG',
+						'email_subject' => 'Your donation request has been declined',  
+						'email_message' => '<p> &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;<p>
+						<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us for your event, however we are unable to fulfill your request at this time. However we can support you through our partnership with TAGG (Together a Greater Good). We proudly donate part of every purchase to an organization of our customer’s choosing. </p>
+						 
+						<p>This is done through the TAGG mobile app, which is available for download on iPhones and Androids. Just search “Together a Greater Good” and you should find it!</p>
+						 
+						<p>This is a great way for your organization to supplement your annual fundraising efforts long term. I encourage your organization to join TAGG if you haven’t yet and check out their website for more information. www.togetheragreatergood.com </p>
+						 
+						<p>Best of luck with your event.</p>
+						<p>Thank you,</p>
+						<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
 						));
 			$this->command->info('email stuff done ! ');
 	}

@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1 style="text-align: left;font-weight: bold;">  View & Update Profile </h1></div>
+                    <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">  View & Update Profile </h1></div>
 
                     <div class="panel-body">
                         <table class="table table-striped table-bordered table-hover">
@@ -30,7 +30,7 @@
                                     <td style="vertical-align: middle">{{ $user->email }}</td>
                                     <td style="vertical-align: middle">{{ $user->street_address1 }} {{ $user->street_address2 }}, {{ $user->city }}, {{ $user->state }} {{ $user->zipcode }}</td>
                                     <td style="vertical-align: middle">{{ $user->phone_number }}</td>
-                                    <td style="vertical-align: middle"><a href="{{action('UserController@editProfile')}}" class="btn savebtn"> Edit </a>
+                                    <td style="vertical-align: middle"><a href="{{action('UserController@editProfile')}}" class="btn btn-basic"> Edit </a>
                                     </td>
                                 </tr>
                             </tbody>
