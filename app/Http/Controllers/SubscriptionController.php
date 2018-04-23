@@ -39,6 +39,7 @@ class SubscriptionController extends Controller
     public function postJoin(Request $request)
     {
         $id = Auth::user()->organization_id;
+        $email = Auth::user()->email;
         $organization = Organization::findOrFail($id);
 
         $locations = $request->input('user_locations');
@@ -55,19 +56,21 @@ class SubscriptionController extends Controller
                 if ($request->input('plan') == "Annually") {
 
                     if (isset($coupon)) {
-                        $organization->newSubscription('main', $plan)->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
-                            'email' => $organization->org_name
+                        $organization->newSubscription('main', $plan)->withCoupon($coupon)
+                                    ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
+                                    ->create($request->input('token'), [
+                                        'email' => $email //$organization->org_name
 
-                        ]);
+                                    ]);
 
                     } else {
 
-                        $organization->newSubscription('main', $plan)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
-                            'email' => $organization->org_name
+                        $organization->newSubscription('main', $plan)
+                                    ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
+                                    ->create($request->input('token'), [
+                                        'email' => $email //$organization->org_name
 
-                        ]);
-
-
+                                    ]);
                     }
                     Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
 
@@ -81,14 +84,16 @@ class SubscriptionController extends Controller
 
                         if (isset($coupon)) {
 
-                            $organization->newSubscription('main', $plan)->withCoupon($coupon)->withMetadata(array('organization_id' => $organization->id))->create($request->input('token'), [
-                                'email' => $organization->org_name
-                            ]);
+                            $organization->newSubscription('main', $plan)->withCoupon($coupon)
+                                        ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
+                                        ->create($request->input('token'), [
+                                            'email' => $email //$organization->org_name
+                                        ]);
 
                         } else {
                                 $organization->newSubscription('main', $plan)
-                                    ->withMetadata(array('organization_id' => $organization->id))
-                                    ->create($request->input('token'), ['email' => $organization->org_name
+                                    ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
+                                    ->create($request->input('token'), ['email' => $email //$organization->org_name
                                     ]);
                         }
                         Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
