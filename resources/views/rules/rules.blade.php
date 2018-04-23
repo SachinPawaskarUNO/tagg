@@ -1,11 +1,5 @@
 @extends('layouts.app')
-@section('css')
-    <!-- <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://querybuilder.js.org/assets/css/docs.min.css" rel="stylesheet">
-    <link href="http://querybuilder.js.org/assets/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
-@endsection
 @section('header')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.3.0/bootbox.min.js"></script>
 @endsection
@@ -127,8 +121,8 @@
     </div>
 </div>
  <script>
-    $('#monthlyBudget').number();
-    $('#amtReq').number();
+    $('#monthlyBudget').val();
+    $('#amtReq').val();
     $("#monthlyBudget").keyup(function () {
         new_val = $("#monthlyBudget").val().replace(/[^0-9\.]/g, '');
         new_val = parseInt(new_val);
