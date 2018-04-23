@@ -55,7 +55,7 @@
                     <!-- <form class="form-horizontal" method="POST" action="{{ action('DonationRequestController@store') }}">
                             {{ csrf_field() }} -->                       
                         <div class="form-group{{ $errors->has('type_name') ? ' has-error' : '' }}">
-                            <label for="type_name" class="col-md-4 control-label">Select Business location <span
+                            <label for="type_name" class="col-md-4 control-label">Business location <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-md-6">
                                 {!! Form::select('type_name', array(null => 'Select...') + $b_locs->all(), null, ['class'=>'form-control', 'id' => 'type_name', 'required']) !!}
