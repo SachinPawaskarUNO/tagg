@@ -139,7 +139,7 @@
                             <label for="zip_code" class="col-md-4 control-label">Zip Code <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
                                 <input id="zip_code" type="text" class="form-control" name="zip_code"
-                                       value="{{ old('zip_code', $organization->zipcode) }}" maxlength="5" required >
+                                       value="{{ old('zip_code', $organization->zipcode) }}" maxlength="5" required min="0">
                             </div>
                         </div>
 
