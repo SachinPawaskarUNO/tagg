@@ -74,12 +74,12 @@ class DonationRequestController extends Controller
                 $p_org = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $id)->pluck('parent_org_id')->first();
                 if(!is_null($p_org)){
                     //get parent business id from child and list all locations under that business
-                    $c_orgids = ParentChildOrganizations::where('parent_org_id', $p_org)->pluck('child_org_id');
+                    $c_orgids = ParentChildOrganizations::active()->where('parent_org_id', $p_org)->pluck('child_org_id');
                     $cnames = Organization::wherein('id', $c_orgids)->pluck('org_name', 'id');
                     
                 } else {
                     // if the create url is not from child business thn use parnet business id to list all child businesses
-                    $c_orgids = ParentChildOrganizations::where('parent_org_id', $id)->pluck('child_org_id');
+                    $c_orgids = ParentChildOrganizations::active()->where('parent_org_id', $id)->pluck('child_org_id');
                     $cnames = Organization::wherein('id', $c_orgids)->pluck('org_name', 'id');
                     
                 }
