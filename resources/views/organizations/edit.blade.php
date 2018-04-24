@@ -125,7 +125,7 @@
 
                             <div class="col-md-6">
 
-                                {!! Form::select('state', array(null => 'Select...') + $states->all(), old('state'), ['class'=>'form-control', 'id' => 'state']) !!}
+                                {!! Form::select('state', array(null => 'Select...') + $states->all(), old('state'), ['class'=>'form-control', 'id' => 'state' , 'required']) !!}
 
                                 @if ($errors->has('state'))
                                     <span class="help-block">
@@ -172,7 +172,7 @@
                                     <input type="text" class="form-control" id="cardNumber" maxlength="16"
                                            data-stripe="number"
                                            placeholder="**** **** **** {{ $organization->card_last_four }}"
-                                           required autofocus/>
+                                           required />
                                     <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-lock"></span></span>
                                 </div>
