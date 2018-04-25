@@ -78,7 +78,7 @@
 
 
                                 @if ($errors->has('requester'))
-                                    <span class="help-block">
+                                    <span class="help-block alert-danger">
                                         <strong>{{ $errors->first('requester') }}</strong>
                                     </span>
                                 @endif
@@ -92,7 +92,7 @@
                             <div class="col-md-6">
                                 {!! Form::select('requester_type', array(null => 'Select...') + $requester_types->all(), null, ['class'=>'form-control', 'id' => 'Org_type', 'required']) !!}
                                 @if ($errors->has('requester_type'))
-                                    <span class="help-block">
+                                    <span class="help-block alert-danger">
                                         <strong>{{ $errors->first('requester_type') }}</strong>
                                     </span>
                                 @endif
@@ -110,7 +110,7 @@
                                        placeholder="Enter Your First Name" required>
 
                                 @if ($errors->has('firstname'))
-                                    <span class="help-block">
+                                    <span class="help-block alert-danger">
                                         <strong>{{ $errors->first('firstname') }}</strong>
                                     </span>
                                 @endif
@@ -128,7 +128,7 @@
                                        required>
 
                                 @if ($errors->has('lastname'))
-                                    <span class="help-block">
+                                    <span class="help-block alert-danger">
                                         <strong>{{ $errors->first('lastname') }}</strong>
                                     </span>
                                 @endif
@@ -145,7 +145,7 @@
                                        required>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="help-block alert-danger">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
