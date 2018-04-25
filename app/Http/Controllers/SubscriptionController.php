@@ -57,18 +57,18 @@ class SubscriptionController extends Controller
 
                     if (isset($coupon)) {
                         $organization->newSubscription('main', $plan)->withCoupon($coupon)
-                                    ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
+                                    ->withMetadata(array('organization_id' => $organization->id))
                                     ->create($request->input('token'), [
-                                        'email' => $email //$organization->org_name
+                                        'email' => $email 
 
                                     ]);
 
                     } else {
 
                         $organization->newSubscription('main', $plan)
-                                    ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
+                                    ->withMetadata(array('organization_id' => $organization->id))
                                     ->create($request->input('token'), [
-                                        'email' => $email //$organization->org_name
+                                        'email' => $email 
 
                                     ]);
                     }
@@ -85,15 +85,15 @@ class SubscriptionController extends Controller
                         if (isset($coupon)) {
 
                             $organization->newSubscription('main', $plan)->withCoupon($coupon)
-                                        ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
+                                        ->withMetadata(array('organization_id' => $organization->id))
                                         ->create($request->input('token'), [
-                                            'email' => $email //$organization->org_name
+                                            'email' => $email 
                                         ]);
 
                         } else {
                                 $organization->newSubscription('main', $plan)
-                                    ->withMetadata(array('organization_id' => $organization->id,'organization_name', $organization->org_name))
-                                    ->create($request->input('token'), ['email' => $email //$organization->org_name
+                                    ->withMetadata(array('organization_id' => $organization->id))
+                                    ->create($request->input('token'), ['email' => $email 
                                     ]);
                         }
                         Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
@@ -106,7 +106,8 @@ class SubscriptionController extends Controller
                     $organization->error_message = $e->getMessage();
                     $organization->update();
                 }
-                return redirect('subscription')->with('message', 'Your payment cannot be processed at this time. Please try again later.');
+                return $e;
+                // return redirect('subscription')->with('message', 'Your payment cannot be processed at this time. Please try again later.');
 
             }
             return redirect('/dashboard')->with('message', 'Successfully  Subscribed!');
