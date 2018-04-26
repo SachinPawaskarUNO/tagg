@@ -96,7 +96,7 @@
 
 
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <a href="#" id="username" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                         <span class="caret"></span>
                                     </a>
