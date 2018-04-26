@@ -59,7 +59,7 @@
                                         </a>
                                     @endif
                                     <h1 style="text-align: left;font-size:22px;">Your account allows
-                                        for {{$subscriptionQuantity}} locations. You have used {{$count + 1}}.</h1>
+                                        for {{$subscriptionQuantity}} locations. You have used {{$count}}.</h1>
 
                                 </div>
                             @else

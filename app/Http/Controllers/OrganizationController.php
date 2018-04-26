@@ -29,7 +29,7 @@ class OrganizationController extends Controller
         $count = $childOrganizations->count();
         $subscriptionQuantity = Subscription::where('organization_id', $organizationId)->value('quantity');
         $subscriptionEnds = Subscription::where('organization_id', $organizationId)->value('ends_at');
-        $subscription = $subscriptionQuantity - 1;
+        $subscription = $subscriptionQuantity - $count;
         return view('organizations.index', compact('loggedOnUserOrganization', 'childOrganizations', 'count', 'subscriptionQuantity', 'subscription', 'subscriptionEnds'));
 
     }
