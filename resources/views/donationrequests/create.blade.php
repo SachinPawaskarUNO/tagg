@@ -306,7 +306,7 @@
                         <div class="form-group{{ $errors->has('dollar_amount') ? ' has-error' : '' }}">
                             <label for="dollar_amount" class="col-md-4 control-label">Dollar Amount<span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span> </label>
-                            <div class="col-md-6">
+                            <div class="input-group col-md-6"><span class="input-group-addon">$</span>
                                 <input id="dollar_amount" type="text" min="0" step="1" 
                                        required
                                        title="Please use the format $ for this field. " class="form-control"
