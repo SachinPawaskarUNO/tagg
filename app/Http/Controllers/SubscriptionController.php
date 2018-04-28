@@ -29,7 +29,7 @@ class SubscriptionController extends Controller
             }
         } else {
 
-            if ($organization->subscribed('main') AND $organization->trial_ends_at->gte(Carbon::now())) {
+            if (!is_null($organization->trial_ends_at) && $organization->subscribed('main') && $organization->trial_ends_at->gte(Carbon::now()) ) {
                 return redirect('/dashboard');
             } else {
                 return view('subscriptions.payment');
@@ -41,13 +41,16 @@ class SubscriptionController extends Controller
         $id = Auth::user()->organization_id;
         $email = Auth::user()->email;
         $organization = Organization::findOrFail($id);
-
+        $qty = $request->user_locations;
+        if($qty == "101+"){
+            $qty = 101;    
+        }
         $locations = $request->input('user_locations');
         $pickedPlan = $request->get('plan');
         $plan = $pickedPlan . $locations;
         $coupon = $request->get('coupon');
         if ($organization->subscribed('main')) {
-            return redirect('subscription')->with('message', 'Plan Already Submitted!');
+            return redirect('subscription')->with('message', 'Plan lready Submitted!');
         } else {
             try{
 
@@ -72,7 +75,8 @@ class SubscriptionController extends Controller
 
                                     ]);
                     }
-                    Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
+                
+                    Subscription::where('organization_id', $id)->update(['quantity' => $qty]);
 
                     $organization->trial_ends_at = Carbon::now()->addYear(1);
 
@@ -96,7 +100,8 @@ class SubscriptionController extends Controller
                                     ->create($request->input('token'), ['email' => $email 
                                     ]);
                         }
-                        Subscription::where('organization_id', $id)->update(['quantity' => $locations]);
+                        $t = Subscription::where('organization_id', $id);
+                        Subscription::where('organization_id', $id)->update(['quantity' => $qty]);
                         $organization->trial_ends_at = Carbon::now()->addMonth(1);
                         $organization->save();
                     }
@@ -106,8 +111,8 @@ class SubscriptionController extends Controller
                     $organization->error_message = $e->getMessage();
                     $organization->update();
                 }
-                return $e;
-                // return redirect('subscription')->with('message', 'Your payment cannot be processed at this time. Please try again later.');
+                
+                    return redirect('subscription')->with('message', 'Your payment cannot be processed at this time. Please try again later.');
 
             }
             return redirect('/dashboard')->with('message', 'Successfully  Subscribed!');
