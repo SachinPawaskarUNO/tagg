@@ -195,9 +195,9 @@ class EmailController extends Controller
                         // requested amount is greater than remaining budget
                         $budgetfail = true;
                         $e = 'Monthly budget limit of $'.$monthlyBudget . ' ' . 'has been reached.';
-                        $request->email_message = $rjctemail->email_message;
-                        $request->email_message = str_replace('{Addressee}', $firstNames[$index], $request->email_message);
-                        $request->email_message = str_replace('{My Business Name}', Auth::user()->organization->org_name, $request->email_message);                                  
+                        $email_templates->email_message = $rjctemail->email_message;
+                        $email_templates->email_message = str_replace('{Addressee}', $firstNames[$index], $email_templates->email_message);
+                        $email_templates->email_message = str_replace('{My Business Name}', Auth::user()->organization->org_name, $email_templates->email_message);                                  
                         $donation->update([
                             'approved_dollar_amount' => 0.00,
                             'approval_status_id' => Constant::REJECTED,
