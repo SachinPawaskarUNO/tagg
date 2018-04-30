@@ -95,11 +95,12 @@
                                         <input id="coupon" type="text" class="form-control" name="coupon"
                                                value="{{ old('coupon') }}" placeholder="Promo Code"
                                                autofocus>
-                                        <div style="padding-bottom: 15px;"></div>
+
                                         <input style="text-align:center" type="button"
                                                class="btn savebtn pull-right" style="padding-left:1%;" id="apply"
                                                value='Apply'
                                                disabled/>
+
 
                                         @if ($errors->has('coupon'))
                                             <span class="help-block">
@@ -109,7 +110,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-sm-12" style="max-height: 15px;font-size: 14px;" id="coupon-message"></div>
+
                             </div>
                             <div class="col-xs-12 col-md-4 hide" id="cart" style="display:none">
                                 <div class="panel panel-default">
@@ -206,9 +207,8 @@
                                 <button class="btn btn-success btn-lg btn-block" type="button" id="buttonPay">Pay</button>
                             </div>
                         </div>
-
                     </fieldset>
-
+                    <div class="alert" id="coupon-message"></div>
                 </div>
                 {{form::token()}}
                 {{ Form::close() }}
