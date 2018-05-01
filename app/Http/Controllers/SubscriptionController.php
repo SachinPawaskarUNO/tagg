@@ -29,7 +29,7 @@ class SubscriptionController extends Controller
             }
         } else {
 
-            if (!is_null($organization->trial_ends_at) && $organization->subscribed('main') && $organization->trial_ends_at->gte(Carbon::now()) ) {
+            if ($organization->subscribed('main') AND $organization->trial_ends_at->gte(Carbon::now())) {
                 return redirect('/dashboard');
             } else {
                 return view('subscriptions.payment');
@@ -50,7 +50,7 @@ class SubscriptionController extends Controller
         $plan = $pickedPlan . $locations;
         $coupon = $request->get('coupon');
         if ($organization->subscribed('main')) {
-            return redirect('subscription')->with('message', 'Plan lready Submitted!');
+            return redirect('subscription')->with('message', 'Plan Already Submitted!');
         } else {
             try{
 
@@ -100,7 +100,7 @@ class SubscriptionController extends Controller
                                     ->create($request->input('token'), ['email' => $email 
                                     ]);
                         }
-                        $t = Subscription::where('organization_id', $id);
+                       
                         Subscription::where('organization_id', $id)->update(['quantity' => $qty]);
                         $organization->trial_ends_at = Carbon::now()->addMonth(1);
                         $organization->save();
