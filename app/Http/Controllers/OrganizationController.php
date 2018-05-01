@@ -167,6 +167,7 @@ class OrganizationController extends Controller
         return Validator::make($data->toArray(), [
             'org_name' => 'required|string|max:255',
             'organization_type_id' => 'required',
+            'monthly_budget' => 'required',
             'street_address1' => 'required|string|max:255',
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:255',
@@ -189,7 +190,7 @@ class OrganizationController extends Controller
      * @return mixed
      */
     protected function create(Request $request)
-    {
+    { 
         /*return Validator::make($request->all(), [
             'org_name' => 'required|string|max:255',
             'organization_type_id' => 'required',
@@ -206,6 +207,7 @@ class OrganizationController extends Controller
         $organization->org_name = $request['org_name'];
         $organization->org_description = $request['org_description'];
         $organization->organization_type_id = Auth::user()->organization->organizationType->id;
+        $organization->monthly_budget = $request['monthly_budget'];
         $organization->street_address1 = $request['street_address1'];
         $organization->street_address2 = $request['street_address2'];
         $organization->city = $request['city'];
@@ -216,14 +218,13 @@ class OrganizationController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        
         $organization->save();
 
         // add location based preferences 
         $rl = new Ruls;
         $rl->rule_type_id = 1;
         $rl->rule_owner_id = $organization->id;
-        // $rl->orgtype = "["1","2","3","4","5","6","7","8","9","10","11","12","13"]";
-        // $rl->dntype = "["1","2","3","4","5"]";
         $rl->taxex = false;
         $rl->save();    
 
