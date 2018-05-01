@@ -948,3 +948,9 @@ nav.navbar-findcond span.badge.new {
     padding: 1px;
     max-width:35%;
   }
+
+.alert-donation {
+    background-color: #18B1C1;
+    border-color: #18d9e9;
+    color: #ffffff;
+}

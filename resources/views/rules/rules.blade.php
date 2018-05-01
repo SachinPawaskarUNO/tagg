@@ -26,7 +26,7 @@
                 </div>
         <div class="panel-body">
             @if(session()->has('message'))
-            <div class="alert alert-success">
+            <div class="alert alert-donation">
                 {{ session()->get('message') }}
             </div>
             @endif
