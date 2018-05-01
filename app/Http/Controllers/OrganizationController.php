@@ -14,6 +14,7 @@ use Billable;
 use Illuminate\Http\Request;
 use Validator;
 use App\Rule as Ruls;
+use App\Events\AddDefaultTemplates;
 
 
 class OrganizationController extends Controller
@@ -22,6 +23,13 @@ class OrganizationController extends Controller
     public function index()
     {
         $organizationId = Auth::user()->organization_id;
+        
+        $child = ParentChildOrganizations::where('child_org_id', $organizationId)->first();
+           
+        if(is_null($child)) {
+            $child = false;
+             }
+
         $loggedOnUserOrganization = Organization::where('id', '=', $organizationId)->get();
         $childOrganizationIds = ParentChildOrganizations::active()->where('parent_org_id', '=', $organizationId)->pluck('child_org_id');
         $childOrganizations = Organization::active()->whereIn('id', $childOrganizationIds)->get();
@@ -30,7 +38,7 @@ class OrganizationController extends Controller
         $subscriptionQuantity = Subscription::where('organization_id', $organizationId)->value('quantity');
         $subscriptionEnds = Subscription::where('organization_id', $organizationId)->value('ends_at');
         $subscription = $subscriptionQuantity - $count;
-        return view('organizations.index', compact('loggedOnUserOrganization', 'childOrganizations', 'count', 'subscriptionQuantity', 'subscription', 'subscriptionEnds'));
+        return view('organizations.index', compact('loggedOnUserOrganization','child', 'childOrganizations', 'count', 'subscriptionQuantity', 'subscription', 'subscriptionEnds'));
 
     }
 
@@ -221,7 +229,11 @@ class OrganizationController extends Controller
 
         // Inserting the relation between parent organization and child organization
         ParentChildOrganizations::create(['parent_org_id' => Auth::user()->organization_id, 'child_org_id' => $organization->id]);
+        
+        //fire AddDefaultTemplates event to update database with default email templates
 
+         event(new AddDefaultTemplates($organization->id));
+         
         //$childOrganizations = ParentChildOrganizations::where('parent_org_id', '=', Auth::user()->organization_id)->get();
         return redirect()->route("organizations.index")->with('message', 'Successfully added the Business Location');
     }

@@ -31,7 +31,7 @@
                             @foreach($email_templates as $email_template)
                             <tr>
                                     <td style="vertical-align: middle">{{ $email_template->emailTemplateTypes->template_type }}</td>
-                                    <td style="vertical-align: middle">{{ $email_template->email_subject }}</td>
+                                    <td style="vertical-align: middle">{{ $email_template->email_desc }}</td>
                                     <td style="vertical-align: middle"> 
                                     <input type="radio" class="myCheckbox" name="emailtype" id ="EditEmailTemp" ids="{{$email_template->id}}" required/>Choose</td>
                             </tr>
