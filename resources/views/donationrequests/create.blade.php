@@ -555,6 +555,17 @@
         }
         
     });
+    $("#dollar_amount").keyup(function () {
+            new_val = $("#dollar_amount").val().replace(/[^0-9\.]/g, '');
+            new_val = parseInt(new_val);
+            new_val_formatted = new_val.toLocaleString("en");
+            if (new_val_formatted != 'NaN') {
+                $('#dollar_amount').val(new_val_formatted);
+            }
+            else {
+                $('#dollar_amount').val('');
+            }
+        });
 
     </script>
 @endsection

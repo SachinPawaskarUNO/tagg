@@ -167,7 +167,8 @@ class DonationRequestController extends Controller
         }
         $donationRequest->item_requested = $request->item_requested;
         $donationRequest->other_item_requested = $request->item_requested_explain;
-        $donationRequest->dollar_amount = $request->dollar_amount;
+        $dollar_amount = str_replace(',','',$request->dollar_amount);
+        $donationRequest->dollar_amount = (int)$dollar_amount;
         $donationRequest->approved_dollar_amount = $request->approved_dollar_amount;
         $donationRequest->approved_organization_id = $id;
         $donationRequest->item_purpose = $request->item_purpose;
