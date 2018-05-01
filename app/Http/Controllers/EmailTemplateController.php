@@ -31,6 +31,7 @@ class EmailTemplateController extends Controller
         if ($user_role == Constant::ROOT_USER OR $user_role == Constant::TAGG_ADMIN OR $user_role == Constant::BUSINESS_ADMIN) {
             //find approval and rejection emails templates 
             $approval_email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_APPROVED, Constant::REQUEST_APPROVED_DEFAULT])->where('organization_id', $org_id)->get();
+            
             $rejection_email_templates = EmailTemplate::wherein('template_type_id', [Constant::REQUEST_REJECTED, Constant::REQUEST_REJECTED_DEFAULT])->where('organization_id', $org_id)->get();
 
         }
@@ -88,10 +89,10 @@ class EmailTemplateController extends Controller
             $lastNames = DonationRequest::whereIn('id', $ids_array)->pluck('last_name');
             
             //if current organization is a child location get parent's email template
-            $organizationId = ParentChildOrganizations::where('child_org_id', $org_id)->value('parent_org_id');
-            if ($organizationId){
-                $org_id = $organizationId;
-            }
+            // $organizationId = ParentChildOrganizations::where('child_org_id', $org_id)->value('parent_org_id');
+            // if ($organizationId){
+            //     $org_id = $organizationId;
+            // }
             
             $email_templates = [];           
             $user_id = Auth::id();
@@ -146,10 +147,10 @@ class EmailTemplateController extends Controller
         $lastNames = $request->lastNames;           // donation requestor's last names
 
         //if current organization is a child location get parent's email template
-        $organizationId = ParentChildOrganizations::where('child_org_id', $org_id)->value('parent_org_id');
-            if ($organizationId){
-                $org_id = $organizationId;
-            }
+        // $organizationId = ParentChildOrganizations::where('child_org_id', $org_id)->value('parent_org_id');
+        //     if ($organizationId){
+        //         $org_id = $organizationId;
+        //     }
         //find selected email template 
         
         $email_template = EmailTemplate::findOrFail($request->emailid);

@@ -143,7 +143,8 @@ class EmailController extends Controller
         // This is called by EmailTemplateController to send default approval and rejection emails.
         // Get email ids
         $emails = DonationRequest::whereIn('id', $ids_array)->pluck('email');
-              
+        $firstNames = str_replace(array("[", "]", '"'), '', $firstNames);
+        $firstNames = explode(',', $firstNames);     
         // Storing the existing template that was populated in the editor
         $default_template = $email_templates->email_message;
         $organizationId = Auth::user()->organization_id;
@@ -154,7 +155,6 @@ class EmailController extends Controller
         foreach($emails as $index => $email) {          
             $email_templates->email_message = str_replace("{Addressee}", $firstNames[$index], $email_templates->email_message);
             $email_templates->email_message = str_replace("{My Business Name}", Auth::user()->organization->org_name, $email_templates->email_message);
-            
             $donation_id = $ids_array[$index];
             $donation = DonationRequest::find($donation_id);
             $userName = Auth::user()->first_name . ' ' . Auth::user()->last_name;

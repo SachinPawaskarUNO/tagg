@@ -56,9 +56,9 @@
                                     </div>
                                     {{--<label class="control-label" for="user_locations">Locations</label>--}}
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 choose-plan-block">
                                         <fieldset class="form-group" name = "user_locations" id="user_locations" required>
-                                            <label class="control-label" for="user_locations">Locations</label><br/>
+                                            <label class="control-label large-font" for="user_locations">Locations</label><br/>
                                             <input type="radio" value="5" name="user_locations" checked><label >&nbsp; Up to 5</label><br />
                                             <input type="radio" value="25" name="user_locations"><label >&nbsp; Up to 25</label><br />
                                             <input type="radio" value="100" name="user_locations"><label >&nbsp; Up to 100</label><br />
@@ -74,9 +74,9 @@
                                     </div>
                                 </div>
                                 <div style="padding-top: 12px;">
-                                    <div class="col-md-6" >
+                                    <div class="col-md-6 choose-plan-block" >
                                         <fieldset class="form-group" name="plan" id="plan" required>
-                                            <label class="control-label" for="plan">Plan <span
+                                            <label class="control-label large-font" for="plan">Plan <span
                                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label><br/>
                                             <input id = "plan" type="radio" name="plan" value="Monthly" ><label>&nbsp; Monthly</label><br />
                                             <input id = "plan" type="radio" name="plan" value="Annually"><label>&nbsp; Annually</label><br />
@@ -90,17 +90,16 @@
                                     <span class="choose-plan-error">Please choose a plan.</span>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="coupon" class="control-label">PROMO CODE</label>
+                                    <label for="coupon" class="control-label normal-font">PROMO CODE</label>
                                     <div class="col-md-6" style="padding-left: 0px;">
                                         <input id="coupon" type="text" class="form-control" name="coupon"
                                                value="{{ old('coupon') }}" placeholder="Promo Code"
                                                autofocus>
-
+                                        <div style="padding-bottom: 15px;"></div>
                                         <input style="text-align:center" type="button"
                                                class="btn savebtn pull-right" style="padding-left:1%;" id="apply"
                                                value='Apply'
                                                disabled/>
-
 
                                         @if ($errors->has('coupon'))
                                             <span class="help-block">
@@ -110,7 +109,7 @@
                                     </div>
 
                                 </div>
-
+                                <div class="col-sm-12" style="max-height: 15px;font-size: 14px;" id="coupon-message"></div>
                             </div>
                             <div class="col-xs-12 col-md-4 hide" id="cart" style="display:none">
                                 <div class="panel panel-default">
@@ -154,11 +153,11 @@
 
 
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="panel-body card-info-block">
                                         <div class="stripe-errors panel" style="color:red;"></div>
                                         <form role="form">
                                             <div class="form-group">
-                                                <label id = cardNumberLabel for="cardNumber">
+                                                <label id = cardNumberLabel class="large-font" for="cardNumber">
                                                     CARD NUMBER</label>
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" id="cardNumber" maxlength="16"
@@ -173,7 +172,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-7 col-md-7 pull-left">
-                                                    <label for="expityMonth">EXPIRY DATE</label>
+                                                    <label for="expityMonth" class="large-font">EXPIRY DATE</label>
                                                     <div class="form-group">
 
                                                         <div class="col-xs-6" style="padding-right: 5px;">
@@ -191,7 +190,7 @@
                                                 </div>
                                                 <div class="col-xs-5 col-md-5 pull-right">
                                                     <div class="form-group">
-                                                        <label for="cvCode">
+                                                        <label for="cvCode" class="large-font">
                                                             CVV</label>
                                                         <input type="password" class="form-control" data-stripe="cvc"
                                                                maxlength="3" size="3"
@@ -207,8 +206,10 @@
                                 <button class="btn btn-success btn-lg btn-block" type="button" id="buttonPay">Pay</button>
                             </div>
                         </div>
+
                     </fieldset>
-                    <div class="alert" id="coupon-message"></div>
+                     <div class="alert" id="coupon-message"></div>
+                
                 </div>
                 {{form::token()}}
                 {{ Form::close() }}
@@ -220,6 +221,11 @@
 {{--@section('scripts')--}}
 
 {{--@endsection--}}
+
+
+
+
+
 
 
 

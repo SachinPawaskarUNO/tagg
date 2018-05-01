@@ -159,15 +159,17 @@ class DonationRequestController extends Controller
         $donationRequest->zipcode = $request->zipcode;
         $donationRequest->tax_exempt = $request->tax_exempt;
 
-        if ($request->hasFile('attachment') && $request->tax_exempt==1) {
-            $imageName = time() . '.' . $request->attachment->getClientOriginalExtension();
-            $imageName = Storage::disk('s3')->url($imageName);
-            $imageName = Storage::disk('s3')->url($imageName);
-            $donationRequest->file_url = $imageName;
-        }
+        // if ($request->hasFile('attachment') && $request->tax_exempt==1) {
+        //     dd()
+        //     $imageName = time() . '.' . $request->attachment->getClientOriginalExtension();
+        //     $imageName = Storage::disk('s3')->url($imageName);
+        //     $imageName = Storage::disk('s3')->url($imageName);
+        //     $donationRequest->file_url = $imageName;
+        // }
         $donationRequest->item_requested = $request->item_requested;
         $donationRequest->other_item_requested = $request->item_requested_explain;
-        $donationRequest->dollar_amount = $request->dollar_amount;
+        $dollar_amount = str_replace(',','',$request->dollar_amount);
+        $donationRequest->dollar_amount = (int)$dollar_amount;
         $donationRequest->approved_dollar_amount = $request->approved_dollar_amount;
         $donationRequest->approved_organization_id = $id;
         $donationRequest->item_purpose = $request->item_purpose;
@@ -192,21 +194,21 @@ class DonationRequestController extends Controller
             'attachment' => 'max:2048',
         ]);
 
-
-
+         // check attachement and save it.
+         if ($request->hasFile('attachment') && $request->tax_exempt== true) {
+            $this->validate($request, [
+                'attachment' => 'required|mimes:doc,docx,pdf,jpeg,png,jpg,svg|max:2048',
+            ]);
+            $imageName = time() . '.' . $request->attachment->getClientOriginalExtension();
+            $image = $request->file('attachment'); 
+            // make them private and retrieve with time out values later
+            $uploadStatus = Storage::disk('s3')->put($imageName, file_get_contents($image), 'private');
+            $donationRequest->file_url = $imageName;
+            // save donation request finally 
+         }
 
         $donationRequest->save();
-        if ($request->hasFile('attachment') && $request->tax_exempt==1) {
-            $this->validate($request, [
-                    'attachment' => 'required|mimes:doc,docx,pdf,jpeg,png,jpg,svg|max:2048',
-                ]);
-            $imageName = time() . '.' . $request->attachment->getClientOriginalExtension();
-            $image = $request->file('attachment');
-            $uploadStatus = Storage::disk('s3')->put($imageName, file_get_contents($image), 'public');
-
-        }
-
-
+        
         //fire NewBusiness event to initiate sending donation received mail
         event(new DonationRequestReceived($donationRequest));
 
@@ -247,6 +249,12 @@ class DonationRequestController extends Controller
             $donationRequestName = $donationRequest->type_name;
         }
 
+        if ($donationrequest->file_url) {
+            // get file name and query s3 disk 
+            $atch = $donationrequest->file_url;
+            $donationrequest->file_url = Storage::disk('s3')->temporaryUrl($atch, now()->addMinutes(5)); // link valid for 5 minutes
+            }
+
         return view('donationrequests.show', compact('donationrequest', 'event_purpose_name', 'donation_purpose_name'
             , 'item_requested_name', 'donationRequestName', 'donationAcceptanceFlag'));
     }
@@ -268,10 +276,10 @@ class DonationRequestController extends Controller
         $backPageFlag = $request->fromPage;
         $change_status = $request->submitbutton;
         //if current organization is a child location get parent's email template
-        $orgId = ParentChildOrganizations::where('child_org_id', $organizationId)->value('parent_org_id');
-        if($orgId){
-            $organizationId = $orgId;
-        }
+        // $orgId = ParentChildOrganizations::where('child_org_id', $organizationId)->value('parent_org_id');
+        // if($orgId){
+        //     $organizationId = $orgId;
+        // }
 
         if ($change_status == 'Approve & customize response' || $change_status == 'Approve & send default email') {
             if ($request->approved_amount) {

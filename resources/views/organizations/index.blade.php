@@ -24,7 +24,7 @@
                         </ul>
                     </div>
                 @endif
-
+                @if (!$child)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                             @if ($subscriptionQuantity =='101')
@@ -82,7 +82,8 @@
                             @endif
 
 {{--  My Business div  --}}
-                    </div>
+                </div>
+                @endif
                     <div class="panel-body">
                         <div class="panel-heading">
                             <h1 style="font-weight: bold;">My Business</h1>
@@ -119,6 +120,7 @@
                             </table>
                         </div>
 {{--  Locations div  --}}
+                    @if (!$child)
                         <div class="panel-heading">
                             <table width="100%">
                                 <tr>
@@ -132,7 +134,7 @@
 
                             </table>
                         </div>
-
+                    
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -174,6 +176,7 @@
                                 </tbody>
                             </table>
                         </div>
+                    @endif
                     </div>
                 </div>
             </div>
