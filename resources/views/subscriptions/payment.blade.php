@@ -208,7 +208,8 @@
                         </div>
 
                     </fieldset>
-
+                     <div class="alert" id="coupon-message"></div>
+                
                 </div>
                 {{form::token()}}
                 {{ Form::close() }}
