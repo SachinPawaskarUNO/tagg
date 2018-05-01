@@ -45,7 +45,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="divRequestForm" class="panel panel-default">
-                    <div class="panel-heading"><h1 style="font-size:22px;">Please complete the following information to submit your donation request</h1></div>
+                    <div class="panel-heading"><h1 style="">Please complete the following information to submit your donation request</h1></div>
 
                     <div class="panel-body">
                     {!! Form::open(['url' => 'attachment', 'class' => 'form-horizontal', 'id' => 'donationRequestForm', 'files' => true]) !!}
