@@ -20,7 +20,7 @@
                     <div class="panel-body">
                             {!! Form::open(['action' => 'EmailTemplateController@sendemail', 'method' => 'GET']) !!}
                             {{ csrf_field() }}
-                            <table class="table table-striped table-bordered table-hover">
+                            <table class="table table-bordered table-hover">
                             <thead>
                             <tr class="bg-info">
                                 <th>Email Type</th>
