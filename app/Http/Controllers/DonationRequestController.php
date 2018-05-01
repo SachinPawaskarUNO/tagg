@@ -269,10 +269,10 @@ class DonationRequestController extends Controller
         $backPageFlag = $request->fromPage;
         $change_status = $request->submitbutton;
         //if current organization is a child location get parent's email template
-        $orgId = ParentChildOrganizations::where('child_org_id', $organizationId)->value('parent_org_id');
-        if($orgId){
-            $organizationId = $orgId;
-        }
+        // $orgId = ParentChildOrganizations::where('child_org_id', $organizationId)->value('parent_org_id');
+        // if($orgId){
+        //     $organizationId = $orgId;
+        // }
 
         if ($change_status == 'Approve & customize response' || $change_status == 'Approve & send default email') {
             if ($request->approved_amount) {
