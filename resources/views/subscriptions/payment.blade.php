@@ -127,7 +127,7 @@
                                                 <th>Total Price</th>
                                             </tr>
                                             <tr>
-                                                <td id="location_selected"></td>
+                                                <td style="text-align:center;" id="location_selected"></td>
                                                 <td id="plan_selected"></td>
                                                 <td id="total_price"></td>
                                             </tr>
