@@ -57,7 +57,7 @@ class EmailController extends Controller
         $default_template = $request->email_message;
         $change_status = $request->status; // approve or reject 
         $budgetfail = false; // used later when budget limit is crossed 
-        $rjctemail = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED_DEFAULT)->where('organization_id',  $organizationId)->first();
+        
         foreach($emails as $index => $email) {
             // $request->email_message = str_replace('{Addressee}', $firstNames[$index] . ' ' . $lastNames[$index], $request->email_message);
             $request->email_message = str_replace('{Addressee}', $firstNames[$index], $request->email_message);
@@ -101,13 +101,10 @@ class EmailController extends Controller
                         // requested amount is greater than remaining budget
                         $budgetfail = true;
                         $e = 'Monthly budget limit of $'.$monthlyBudget . ' ' . 'has been reached.';
-                        $request->email_message = $rjctemail->email_message;
-                        $request->email_message = str_replace('{Addressee}', $firstNames[$index], $request->email_message);
-                        $request->email_message = str_replace('{My Business Name}', $oname, $request->email_message);                                  
                         $donation->update([
-                            'approved_dollar_amount' => 0.00,
-                            'approval_status_id' => Constant::REJECTED,
-                            'approval_status_reason' => 'Would Exceed Monthly Budget',
+                            'approved_dollar_amount' => $donation->approved_dollar_amount,
+                            'approval_status_id' => Constant::APPROVED,
+                            'approval_status_reason' => 'Approved by '.$userName,
                             'approved_organization_id' => $organizationId,
                             'approved_user_id' => $userId,
                             'email_sent' => true
@@ -169,7 +166,6 @@ class EmailController extends Controller
         $oname = Organization::where('id', $organizationId)->pluck('org_name')->first(); 
 
         $budgetfail = false; // used later when budget limit is crossed 
-        $rjctemail = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED_DEFAULT)->where('organization_id',  $organizationId)->first();
 
         foreach($emails as $index => $email) {          
             $email_templates->email_message = str_replace("{Addressee}", $firstNames[$index], $email_templates->email_message);
@@ -213,19 +209,15 @@ class EmailController extends Controller
                     } else { 
                         // requested amount is greater than remaining budget
                         $budgetfail = true;
-                        $e = 'Monthly budget limit of $'.$monthlyBudget . ' ' . 'has been reached.';
-                        $email_templates->email_message = $rjctemail->email_message;
-                        $email_templates->email_message = str_replace('{Addressee}', $firstNames[$index], $email_templates->email_message);
-                        $email_templates->email_message = str_replace('{My Business Name}', $oname, $email_templates->email_message);                                  
+                        $e = 'Monthly budget limit of $'.$monthlyBudget . ' ' . 'has been reached.';                       
                         $donation->update([
-                            'approved_dollar_amount' => 0.00,
-                            'approval_status_id' => Constant::REJECTED,
-                            'approval_status_reason' => 'Would Exceed Monthly Budget',
+                            'approved_dollar_amount' => $donation->approved_dollar_amount,
+                            'approval_status_id' => Constant::APPROVED,
+                            'approval_status_reason' => 'Approved by '.$userName,
                             'approved_organization_id' => $organizationId,
                             'approved_user_id' => $userId,
                             'email_sent' => true
                         ]);
-                        return $e;
                     }
                 } else {
                 // if monthly budget is not set all requests will be approved. 
