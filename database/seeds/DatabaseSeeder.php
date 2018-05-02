@@ -163,20 +163,8 @@ class CqAppSeeder extends Seeder {
 		'phone_number' => '(402) 715-5230',
 		'trial_ends_at' => '2038-01-16'
 		));
-
-		$buser = Organization::create(array(
-		'org_name' => 'NFM',
-		'organization_type_id' => $ortl->id,
-		'org_description' => 'NFM',
-		'street_address1' => 'NFM St',
-		'street_address2' => 'Ste. A',
-		'city' => 'Omaha',
-		'zipcode' => '68130',
-		'state' => $ne->state_code,
-		'phone_number' => '(402) 715-5230',
-		'trial_ends_at' => '2019-01-16'
-		));
-			$this->command->info('Orgs done ! ');
+		
+		$this->command->info('Orgs done ! ');
 
 		// create user
 		$rootuser = User::create(array(
@@ -193,30 +181,12 @@ class CqAppSeeder extends Seeder {
             'zipcode' => '68130',
             'state' => $ne->state_code,
 			'phone_number' => '(402) 715-5230'));
-			// business user
-			$nfmusr = User::create(array(
-				'first_name' => 'Admin',
-				'last_name' => 'Nfm',
-				'user_name' => 'admin@nfm.com',
-				'email' => 'admin@nfm.com',
-				'password' => bcrypt('secret'),
-				'organization_id' => $buser->id,
-				'street_address1' => '17117 Oak Drive',
-				'street_address2' => 'Ste. A',
-				'city' => 'Omaha',
-				'zipcode' => '68130',
-				'state' => $ne->state_code,
-				'phone_number' => '(402) 715-5230'));
 		// assign role 
 		RoleUser::create(array(
 			'id' => '1',
             'role_id' => $ru->id,
             'user_id' => $rootuser->id
 		));
-		RoleUser::create(array(
-            'role_id' => $bau->id,
-            'user_id' => $nfmusr->id
-        ));
 			$this->command->info('Root user done ! ');
 
 		// create rule 
@@ -233,16 +203,8 @@ class CqAppSeeder extends Seeder {
 			'taxex' => false,
 			// 'dntype' => "["1","2","3","4","5"]"	
 			        ));
-		Rule::create(array(
-			'id' => '2',
-			'rule_type_id' => $preacpt->id, 
-			'rule_owner_id' => $buser->id, 
-			'active' => true,
-			// 'orgtype' => "["1","2","3","4","5","6","7","8","9","10","11","12","13"]",
-			'taxex' => false,
-			// 'dntype' => "["1","2","3","4","5"]"	
-		 ));
 			$this->command->info('Rules done  ! ');
+		
 		// Request_event_typesTableSeeder
 		Request_event_type::create(array(
 		'id' => '1',
@@ -385,17 +347,6 @@ class CqAppSeeder extends Seeder {
             'created_at' => \Carbon\Carbon::now(),
             'updated_at' => \Carbon\Carbon::now()
 		));
-		Subscription::create(array(
-			'id' => '2',
-            'organization_id' => $oroot->id,
-            'name' => 'main',
-            'stripe_id' => 'sub_CfA4BKNMmuEEDG',
-            'stripe_plan' => 'annually5',
-            'quantity' => 5,
-            'created_at' => \Carbon\Carbon::now(),
-            'updated_at' => \Carbon\Carbon::now()
-        ));
-
 
 		// we'll create diff email EmailTemplateTypes
 
@@ -429,6 +380,7 @@ class CqAppSeeder extends Seeder {
 		));
 
 		// Email templates
+		
 		//chairtyq emails 
 		EmailTemplate::create(array(
 			'id' => '1',
@@ -436,9 +388,9 @@ class CqAppSeeder extends Seeder {
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
 			'email_desc' => 'Welcome Email - CharityQ!', 
-			'email_message' => '<p>Thank you &nbsp;<strong>{Addressee}</strong>&nbsp;&nbsp;for registering your business on CharityQ. We look forward to helping your business save time and make it easy to support the charities you truly care about.</p>
-		<p>You can log in any time to your account by using your email address as your user name.</p>
-		<p>Thank you again for using CharityQ.</p>'
+			'email_message' => '<p>Thank you <strong>{Addressee}</strong> for registering your business on CharityQ. We look forward to helping your business save time and make it easy to support the charities you truly care about.</p>
+								<p>You can log in any time to your account by using your email address as your user name.</p>
+								<p>Thank you again for using CharityQ.</p>'
 		));
 		
 		EmailTemplate::create(array(
@@ -447,109 +399,115 @@ class CqAppSeeder extends Seeder {
 			'organization_id' => $oroot->id, 
 			'email_subject' => 'Welcome to CharityQ!', 
 			'email_desc' => 'Welcome Email - CharityQ!', 
-			'email_message' => '<p>Hello &nbsp;<strong>{Addressee}</strong>&nbsp;,</p>
-		<p>You have been added as a new user to CharityQ for &nbsp;<strong>{My Business Name}.&nbsp;</strong>&nbsp;Please follow the link below to set up your new account.</p>
-		<p>Thank you!</p>
-		<p>&nbsp;- CharityQ Team</p>'
+			'email_message' => '<p>Hello <strong>{Addressee}</strong>,</p>
+								<p>You have been added as a new user to CharityQ for <strong>{My Business Name}</strong>. Please follow the link below to set up your new account.</p>
+								<p>Thank you!</p>
+								<p>- CharityQ Team</p>'
 		));
 		// business emails
+			//Donation Approved - Default Message
 		EmailTemplate::create(array(
 			'id' => '3',
 			'template_type_id' => $eaprvdef->id, 
 			'organization_id' => $oroot->id, 
 			'email_desc' => 'Donation Approved - Default Message', 
 			'email_subject' => 'Your donation request has been approved', 
-			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
-			<p>Thank you for submitting a donation request through our website. We have reviewed your request and wanted to let you know that we are able to fulfill your request. Your donation will be ready after 24 hours. Please stop by to pick up your donation during our business hours.</p>
-			<p>Best of luck with your event.</p>
-			<p>Thank you,</p>
-			<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
+			'email_message' => '<p>Dear <strong>{Addressee}</strong>,</p>
+								<p>Thank you for submitting a donation request through our website. We have reviewed your request and wanted to let you know that we are able to fulfill your request. Your donation will be ready after 24 hours. Please stop by to pick up your donation during our business hours.</p>
+								<p>Best of luck with your event.</p>
+								<p>Thank you,</p>
+								<p><strong>{My Business Name}</strong></p>'
 			));
-		
+
+		//Donation Declined - Default Message
 		EmailTemplate::create(array(
 			'id' => '4',
 			'template_type_id' => $erjctdef->id, 
 			'organization_id' => $oroot->id, 
 			'email_desc' => 'Donation Declined - Default Message', 
 			'email_subject' => 'Your donation request has been declined', 
-			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
-			<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us for your event, however we are unable to fulfill the request at this time. </p>
-			<p>Best of luck with your event.</p>
-			<p>Thank you,</p>
-			<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>
-			'));
-		
+			'email_message' => '<p>Dear <strong>{Addressee}</strong>,</p>
+								<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us for your event, however we are unable to fulfill the request at this time. </p>
+								<p>Best of luck with your event.</p>
+								<p>Thank you,</p>
+								<p><strong>{My Business Name}</strong></p>'
+								));
+
+		//Password Change Request
 		EmailTemplate::create(array(
 		'id' => '5',
 		'template_type_id' => $efpwd->id, 'organization_id' => $oroot->id, 
 		'email_subject' => 'Password Change Request', 
 		'email_desc' => 'Default Email - Password Change', 
-		'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
+		'email_message' => '<p>Dear <strong>{Addressee}</strong>,</p>
 		<p>You have changed your password for CharityQ application. If it is not you that changed password please contact your admin as soon as possible.</p>
 		<p>Sincerely,</p>
 		<p>- CharityQ Team</p>'
 		));
+
+		//Donation Approved - Special Instructions
 		EmailTemplate::create(array(
 			'id' => '6',
 			'template_type_id' => $eaprv->id, 
 			'organization_id' => $oroot->id, 
 			'email_desc' => 'Donation Approved - Special Instructions', 
 			'email_subject' => 'Your donation request has been approved', 
-			'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
+			'email_message' => '<p>Dear <strong>{Addressee}</strong>,</p>
 			<p>Thank you for submitting a donation request through our website. We have reviewed your request and wanted to let you know that we are able to fulfill your request. </p>
 			<p>Here are the instructions to pick up your donation:</p>
 			
 			<p>Best of luck with your event.</p>
 			<p>Thank you,</p>
 
-			<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
+			<p><strong>{My Business Name}</strong></p>'
 			));
 
+			//Donation Approved - Adjusted Donation Amount
 			EmailTemplate::create(array(
 				'id' => '7',
 				'template_type_id' => $eaprv->id, 
 				'organization_id' => $oroot->id, 
 				'email_desc' => 'Donation Approved - Adjusted Donation Amount',
 				'email_subject' => 'Your donation request has been approved', 				 
-				'email_message' => '<p>Dear &nbsp;<strong>{Addressee},&nbsp;</strong></p>
+				'email_message' => '<p>Dear <strong>{Addressee}</strong>,</p>
 				<p>Thank you for submitting a donation request through our website. We were not able to approve the amount that you originally requested but we would still like to donate to your event.  We are able to donate <INSERT HERE WHAT YOU CAN DONATE>.  Your donation will be ready after 24 hours. Please stop by to pick up your donation during any of our business hours.</p>
 				
 				<p>Best of luck with your event.</p>
 
-				<p>Thank you,				</p>
-				<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
+				<p>Thank you,</p>
+				<p><strong>{My Business Name}</strong></p>'
 			));
 
-
+				//Donation Declined - Special Message
 				EmailTemplate::create(array(
 					'id' => '8',
 					'template_type_id' => $erjct->id, 
 					'organization_id' => $oroot->id,  
 					'email_desc' => 'Donation Declined - Special Message', 
 					'email_subject' => 'Your donation request has been declined',
-					'email_message' => '<p> &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;</p>
-					<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us, however we are unable to fulfill the request at this time because we (INSERT REASON HERE….only donate to 501c3 organizations, have reached our budget for giving, only donate to local charities, etc) </p>
-					<p> Best of luck with your event.</p>
-					<p>Thank you,</p>
-					<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
+					'email_message' => '<p><strong>{Addressee}</strong>,</p>
+										<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us, however we are unable to fulfill the request at this time because we (INSERT REASON HERE….only donate to 501c3 organizations, have reached our budget for giving, only donate to local charities, etc)</p>
+										<p>Best of luck with your event.</p>
+										<p>Thank you,</p>
+										<p><strong>{My Business Name}</strong></p>'
 					));
-		
+					//Donation Declined - on TAGG
 					EmailTemplate::create(array(
 						'id' => '9',
 						'template_type_id' => $erjct->id, 
 						'organization_id' => $oroot->id, 
 						'email_desc' => 'Donation Declined - on TAGG',
 						'email_subject' => 'Your donation request has been declined',  
-						'email_message' => '<p> &nbsp;<strong>{Addressee},&nbsp;</strong>&nbsp;<p>
-						<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us for your event, however we are unable to fulfill your request at this time. However we can support you through our partnership with TAGG (Together a Greater Good). We proudly donate part of every purchase to an organization of our customer’s choosing. </p>
-						 
-						<p>This is done through the TAGG mobile app, which is available for download on iPhones and Androids. Just search “Together a Greater Good” and you should find it!</p>
-						 
-						<p>This is a great way for your organization to supplement your annual fundraising efforts long term. I encourage your organization to join TAGG if you haven’t yet and check out their website for more information. www.togetheragreatergood.com </p>
-						 
-						<p>Best of luck with your event.</p>
-						<p>Thank you,</p>
-						<p>&nbsp;<strong>{My Business Name}</strong>&nbsp;</p>'
+						'email_message' => '<p><strong>{Addressee}</strong>,<p>
+											<p>Thank you for submitting a donation request through our website. We appreciate you thinking of us for your event, however we are unable to fulfill your request at this time. However we can support you through our partnership with TAGG (Together a Greater Good). We proudly donate part of every purchase to an organization of our customer’s choosing.</p>
+											
+											<p>This is done through the TAGG mobile app, which is available for download on iPhones and Androids. Just search “Together a Greater Good” and you should find it!</p>
+											
+											<p>This is a great way for your organization to supplement your annual fundraising efforts long term. I encourage your organization to join TAGG if you haven’t yet and check out their website for more information. www.togetheragreatergood.com </p>
+											
+											<p>Best of luck with your event.</p>
+											<p>Thank you,</p>
+											<p><strong>{My Business Name}</strong></p>'
 						));
 			$this->command->info('email stuff done ! ');
 	}

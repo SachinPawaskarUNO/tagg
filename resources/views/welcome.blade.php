@@ -505,16 +505,9 @@
 </section>
            
 	<footer>
-        <div id="how" class="containerimg" >
-            <img src="{{ asset('img/HomePage4.png') }}" class="wide img-responsive" />
-                <script>
-                    $(window).load(function(){
-                        $('.containerimg').find('img').each(function(){
-                            var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
-                            $(this).addClass(imgClass);
-                        })
-                    })
-                </script>
+        <div id="contact" class="" >
+            <img src="{{ asset('img/HomePage4.png') }}" class="img-responsive center-block" width="60%" height="60%" />
+               
         </div>
     </footer>
 </div>

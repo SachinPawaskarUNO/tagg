@@ -8349,4 +8349,24 @@ button.close {
     display: none !important;
   }
 }
+.choose-plan-block label{
+  font-weight: normal;
+    font-size: large;
+}
+
+.large-font{
+  font-size: large;
+    font-weight: normal;
+}
+
+.card-info-block label{
+  font-weight: normal;
+  font-size: large;
+}
+
+.normal-font{
+  font-weight: normal;
+  font-size: inherit;
+}
+
 

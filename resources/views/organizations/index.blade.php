@@ -24,11 +24,10 @@
                         </ul>
                     </div>
                 @endif
-
+                @if (!$child)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-
-                            @if ($subscriptionQuantity=='101')
+                            @if ($subscriptionQuantity =='101')
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
@@ -36,7 +35,6 @@
                                             Cancel Subscription
                                         </a>
                                     @else
-
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
                                            class="btn backbtnsubs pull-right" style="" id="resume">
                                             Resume Subscription
@@ -45,7 +43,7 @@
                                     <span class="pull-right">&nbsp;&nbsp;&nbsp;</span>
                                     <h1 style="text-align: center;width: 50%;">Unlimited Locations can be added</h1>
                                 </div>
-                            @elseif ($count < $subscription)
+                            @elseif ($count <= $subscriptionQuantity)
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
@@ -59,13 +57,11 @@
                                         </a>
                                     @endif
                                     <h1 style="text-align: left;font-size:22px;">Your account allows
-                                        for {{$subscriptionQuantity}} locations. You have used {{$count + 1}}.</h1>
+                                        for {{$subscriptionQuantity}} locations. You have used {{$count}}.</h1>
 
                                 </div>
                             @else
-                            <div class="alert alert-info">Plan limit includes the parent business and the limit
-                                    is
-                                    crossed, upgrade to add more locations.
+                            <div class="alert alert-info">Plan limit includes the parent business and the limit is crossed, upgrade to add more locations.
                                 </div>
 
                                 <div class="panel-heading">
@@ -85,8 +81,9 @@
                                 </div>
                             @endif
 
-
-                    </div>
+{{--  My Business div  --}}
+                </div>
+                @endif
                     <div class="panel-body">
                         <div class="panel-heading">
                             <h1 style="font-weight: bold;">My Business</h1>
@@ -122,24 +119,22 @@
                                 </tbody>
                             </table>
                         </div>
-
+{{--  Locations div  --}}
+                    @if (!$child)
                         <div class="panel-heading">
                             <table width="100%">
                                 <tr>
-                                    <td align="left"><h1 style="font-weight: bold;">Business
-                                            Locations</h1></td>
-                                    <td align="right"
-                                        style="padding-right: 10px;padding-top: 0px"> @if ($subscriptionQuantity=='101' || ($count < $subscription))
+                                    <td align="left"><h1 style="font-weight: bold;">Business Locations</h1></td>
+                                    <td align="right" style="padding-right: 10px;padding-top: 0px">
+                                        @if ($subscriptionQuantity > '101' || $subscription !== 0)
                                             <a href="{{action('OrganizationController@createOrganization')}}"
                                                id = 'Add_locations' class="btn btn-basic">[+] Add Business Location </a>
                                         @endif</td>
                                 </tr>
 
                             </table>
-
-
                         </div>
-
+                    
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -154,9 +149,6 @@
                                 </thead>
                                 <tbody>
                                 @foreach($childOrganizations as $organization)
-
-
-
                                     <tr class="text-center">
                                         <td style="vertical-align: middle">{{ $organization['org_name'] }}</td>
                                         <td style="vertical-align: middle">{{ $organization['org_description'] }}</td>
@@ -184,10 +176,7 @@
                                 </tbody>
                             </table>
                         </div>
-
-
-
-
+                    @endif
                     </div>
                 </div>
             </div>

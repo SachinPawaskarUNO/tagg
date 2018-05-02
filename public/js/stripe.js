@@ -63,7 +63,7 @@ $(document).ready(function () {
         });
         request.fail(function (jqXHR, textStatus) {
             document.getElementById("coupon-message").style.color = "red";
-            document.getElementById("coupon-message").innerHTML = "The coupon entered is invalid.";
+            document.getElementById("coupon-message").innerHTML = "The promote code entered is invalid or expired.";
             var total = document.getElementById("cart_table").rows[1].cells.namedItem("total_price").innerHTML;
             var msg = 0;
             document.getElementById("cart_table").rows[2].cells.namedItem("discounted_price").innerHTML = "$"+((total * msg) / 100).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,");

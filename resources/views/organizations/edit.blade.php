@@ -125,7 +125,7 @@
 
                             <div class="col-md-6">
 
-                                {!! Form::select('state', array(null => 'Select...') + $states->all(), old('state'), ['class'=>'form-control', 'id' => 'state']) !!}
+                                {!! Form::select('state', array(null => 'Select...') + $states->all(), old('state'), ['class'=>'form-control', 'id' => 'state' , 'required']) !!}
 
                                 @if ($errors->has('state'))
                                     <span class="help-block">
@@ -139,7 +139,7 @@
                             <label for="zip_code" class="col-md-4 control-label">Zip Code <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
                             <div class="col-lg-6">
                                 <input id="zip_code" type="text" class="form-control" name="zip_code"
-                                       value="{{ old('zip_code', $organization->zipcode) }}" maxlength="5" required >
+                                       value="{{ old('zip_code', $organization->zipcode) }}" maxlength="5" required min="0">
                             </div>
                         </div>
 
@@ -172,7 +172,7 @@
                                     <input type="text" class="form-control" id="cardNumber" maxlength="16"
                                            data-stripe="number"
                                            placeholder="**** **** **** {{ $organization->card_last_four }}"
-                                           required autofocus/>
+                                           required />
                                     <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-lock"></span></span>
                                 </div>
