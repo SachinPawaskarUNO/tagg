@@ -147,9 +147,10 @@ class RuleEngineController extends Controller
                                                 ->sum('approved_dollar_amount');
             
             $monthlyBudget = Organization::where('id', $donationRequest->organization_id)->pluck('monthly_budget')->first();
+            
             $remainingBudget = $monthlyBudget - $totaldonatedamt;
 
-            if ($monthlyBudget == 0) { 
+            if ($monthlyBudget === "0.00") { 
                 // if monthly budget is not set we assign the total donated amount that month as budget  
                 // to make it through conditions.
                 $monthlyBudget = $totaldonatedamt;
@@ -157,7 +158,7 @@ class RuleEngineController extends Controller
             }
             
             if (
-                ( $donationRequest->approved_dollar_amount <= $remainingBudget) && // 1 Monthly budget check 
+                ( $donationRequest->dollar_amount <= $remainingBudget) && // 1 Monthly budget check 
                 ( $daydiff >= $noticedays) && // 2 notice days check $daydiff is no of days till needed date  
                 ( is_null($ruleRow->orgtype) || !in_array($donationRequest->requester_type, $ruleRow->orgtype) ) && // 3 org type check   
                 ( $donationRequest->tax_exempt == $ruleRow->taxex || $donationRequest->tax_exempt == true ) && // 4 tax exempt check
@@ -165,7 +166,6 @@ class RuleEngineController extends Controller
                 ( $donationRequest->dollar_amount <= $ruleRow->amtreq ) // 6 amount requested check    
             ) { 
                 // update to auto approved.
-
                 $chk = DB::table('donation_requests')
                         ->where('id', $donationRequest->id)
                         ->update(['approval_status_id' => Constant::PENDING_APPROVAL,
@@ -177,7 +177,7 @@ class RuleEngineController extends Controller
             } else {
                     $ex = (
                     (   
-                        ( ($donationRequest->approved_dollar_amount > $remainingBudget) ? "Pending Rejection - Budget" : //1 
+                        ( ($donationRequest->dollar_amount > $remainingBudget) ? "Pending Rejection - Budget" : //1 
                             ( ($daydiff < $noticedays ) ? "Pending Rejection - Not Enough Notice" : //2
                                 ( (!is_null($ruleRow->orgtype) && (in_array($donationRequest->requester_type,$ruleRow->orgtype))) ? "Pending Rejection - Organization Type" : //3 
                                     (   ($donationRequest->tax_exempt !== $ruleRow->taxex) ? "Pending Rejection - Not 501c3" ://4 
