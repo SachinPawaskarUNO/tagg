@@ -7,6 +7,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Auth;
+use App\ParentChildOrganizations;
+use App\User;
 
 class SendManualRequest extends Mailable
 {
@@ -21,6 +23,8 @@ class SendManualRequest extends Mailable
     public $email;
     public function __construct($email)
     {
+        $p_org = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $email->organization_id)->pluck('parent_org_id')->first();
+        $usr = User::where('organization_id', $p_org)->firstOrFail();
         $this-> email = $email;
     }
 
@@ -34,6 +38,6 @@ class SendManualRequest extends Mailable
     {
         return $this->view('emails.decisionmail.senddecision')
             ->subject($this->email-> email_subject)
-            ->from(Auth::user()->email);
+            ->from($usr->email);
     }
 }
