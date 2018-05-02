@@ -23,9 +23,7 @@ class SendManualRequest extends Mailable
     public $email;
     public function __construct($email)
     {
-        $p_org = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $email->organization_id)->pluck('parent_org_id')->first();
-        $usr = User::where('organization_id', $p_org)->firstOrFail();
-        $this-> email = $email;
+        $this->email = $email;
     }
 
 
@@ -36,6 +34,8 @@ class SendManualRequest extends Mailable
      */
     public function build()
     {
+        $p_org = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $this->email->organization_id)->pluck('parent_org_id')->first();
+        $usr = User::where('organization_id', $p_org)->firstOrFail();
         return $this->view('emails.decisionmail.senddecision')
             ->subject($this->email-> email_subject)
             ->from($usr->email);

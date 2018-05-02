@@ -11,6 +11,7 @@ use App\Mail\SendManualRequest;
 use Auth;
 use Illuminate\Http\Request;
 use Mail;
+use App\ParentChildOrganizations;
 
 
 
@@ -41,7 +42,17 @@ class EmailController extends Controller
         $firstNames = explode(',', $firstNames);
         $lastNames = str_replace(array("[", "]", '"'), '', $request->lastNames);
         $lastNames = explode(',', $lastNames);
-        $organizationId = Auth::user()->organization_id;
+        
+        $orgid = Auth::user()->organization_id;
+        
+        $organizationId = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $orgid)->pluck('parent_org_id')->first();
+        
+        if(is_null($organizationId)){
+            $organizationId =  $orgid;
+        }
+        $oname = Organization::where('id', $organizationId)->pluck('org_name')->first(); 
+
+
         // Storing the existing template that was populated in the editor
         $default_template = $request->email_message;
         $change_status = $request->status; // approve or reject 
@@ -50,7 +61,7 @@ class EmailController extends Controller
         foreach($emails as $index => $email) {
             // $request->email_message = str_replace('{Addressee}', $firstNames[$index] . ' ' . $lastNames[$index], $request->email_message);
             $request->email_message = str_replace('{Addressee}', $firstNames[$index], $request->email_message);
-            $request->email_message = str_replace('{My Business Name}', Auth::user()->organization->org_name, $request->email_message);
+            $request->email_message = str_replace('{My Business Name}', $oname, $request->email_message);
 
             $donation_id = $ids_array[$index];
             $donation = DonationRequest::find($donation_id);
@@ -92,7 +103,7 @@ class EmailController extends Controller
                         $e = 'Monthly budget limit of $'.$monthlyBudget . ' ' . 'has been reached.';
                         $request->email_message = $rjctemail->email_message;
                         $request->email_message = str_replace('{Addressee}', $firstNames[$index], $request->email_message);
-                        $request->email_message = str_replace('{My Business Name}', Auth::user()->organization->org_name, $request->email_message);                                  
+                        $request->email_message = str_replace('{My Business Name}', $oname, $request->email_message);                                  
                         $donation->update([
                             'approved_dollar_amount' => 0.00,
                             'approval_status_id' => Constant::REJECTED,
@@ -147,14 +158,22 @@ class EmailController extends Controller
         $firstNames = explode(',', $firstNames);     
         // Storing the existing template that was populated in the editor
         $default_template = $email_templates->email_message;
-        $organizationId = Auth::user()->organization_id;
+         
+        $orgid = Auth::user()->organization_id;
+        
+        $organizationId = ParentChildOrganizations::select('parent_org_id')->where('child_org_id', $orgid)->pluck('parent_org_id')->first();
+        
+        if(is_null($organizationId)){
+            $organizationId =  $orgid;
+        }
+        $oname = Organization::where('id', $organizationId)->pluck('org_name')->first(); 
 
         $budgetfail = false; // used later when budget limit is crossed 
         $rjctemail = EmailTemplate::where('template_type_id', Constant::REQUEST_REJECTED_DEFAULT)->where('organization_id',  $organizationId)->first();
 
         foreach($emails as $index => $email) {          
             $email_templates->email_message = str_replace("{Addressee}", $firstNames[$index], $email_templates->email_message);
-            $email_templates->email_message = str_replace("{My Business Name}", Auth::user()->organization->org_name, $email_templates->email_message);
+            $email_templates->email_message = str_replace("{My Business Name}", $oname, $email_templates->email_message);
             $donation_id = $ids_array[$index];
             $donation = DonationRequest::find($donation_id);
             $userName = Auth::user()->first_name . ' ' . Auth::user()->last_name;
@@ -197,7 +216,7 @@ class EmailController extends Controller
                         $e = 'Monthly budget limit of $'.$monthlyBudget . ' ' . 'has been reached.';
                         $email_templates->email_message = $rjctemail->email_message;
                         $email_templates->email_message = str_replace('{Addressee}', $firstNames[$index], $email_templates->email_message);
-                        $email_templates->email_message = str_replace('{My Business Name}', Auth::user()->organization->org_name, $email_templates->email_message);                                  
+                        $email_templates->email_message = str_replace('{My Business Name}', $oname, $email_templates->email_message);                                  
                         $donation->update([
                             'approved_dollar_amount' => 0.00,
                             'approval_status_id' => Constant::REJECTED,
