@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <table class="table table-striped table-hover table-bordered" id="cart_table">
+                                        <table class="table table-striped table-hover table-bordered large-font" id="cart_table">
                                             <tbody>
                                             <tr>
                                                 <th>Locations</th>
@@ -127,7 +127,7 @@
                                                 <th>Total Price</th>
                                             </tr>
                                             <tr>
-                                                <td id="location_selected"></td>
+                                                <td style="text-align:center;" id="location_selected"></td>
                                                 <td id="plan_selected"></td>
                                                 <td id="total_price"></td>
                                             </tr>
