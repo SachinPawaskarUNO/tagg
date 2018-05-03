@@ -5,7 +5,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Search Donations</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">Search Donations</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -16,7 +16,7 @@
             {{--<div class="col-md-10 col-md-offset-1">--}}
             <div class="panel panel-default" >
                 <div class="panel-heading" ><h1
-                            style="text-align: left;font-weight: bold;">Business Name:&nbsp {{ $organizationName }}</h1>
+                            style="text-align: left;font-size:22px;">Business Name:&nbsp {{ $organizationName }}</h1>
                 </div>
                 <br>
 
@@ -37,6 +37,7 @@
                             <tr class="bg-info">
                                 <th class="text-center">Organization Name</th>
                                 <th class="text-center">Requested Amount</th>
+                                <th class="text-center">Approved Amount</th>
                                 <th class="text-center">Type of Donation</th>
                                 <th class="text-center">Location</th>
                                 {{--<th class="text-center">Event Name</th>--}}
@@ -50,7 +51,8 @@
                             @foreach ($donationrequests as $donationrequest)
                                 <tr>
                                     <td style="vertical-align: middle">{{ $donationrequest->requester }}</td>
-                                    <td style="vertical-align: middle">${{ number_format($donationrequest->approved_dollar_amount, 2) }}</td>
+                                    <td style="vertical-align: middle">${{ number_format($donationrequest->dollar_amount) }}</td>
+                                    <td style="vertical-align: middle">${{ number_format($donationrequest->approved_dollar_amount) }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->donationRequestType->item_name }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->organization->org_name }}</td>
                                     {{--<td style="vertical-align: middle">{{ $donationrequest->event_name }}</td>--}}
@@ -68,11 +70,11 @@
                                                 {{ csrf_field() }}
                                                 {!! Form::hidden('fromPage','searchdonations',['class'=>'form-control', 'id' => 'searchDonations', 'readonly']) !!}
                                                 {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
-                                                {{Form::button('<i class="glyphicon glyphicon-ok"></i>', ['type' => 'submit', 'class' => 'btn btn-success', 'name' => 'approve', 'value' => 'Approve'])}}
+                                                {{Form::button('<i class="glyphicon glyphicon-ok"></i>', ['type' => 'submit', 'style' => 'background-color: #18B1C1;', 'class' => 'btn btn-success', 'name' => 'submitbutton', 'value' => 'Approve & customize response'])}}
                                                 <a href="{{route('donationrequests.show',encrypt($donationrequest->id))}}"
                                                    class="btn btn-info" title="Detail">
                                                     <span class="glyphicon glyphicon-list-alt"></span></a>
-                                                {{Form::button('<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit', 'class' => 'btn btn-danger', 'name' => 'reject', 'value' => 'Reject'])}}
+                                                {{Form::button('<i class="glyphicon glyphicon-remove"></i>', ['type' => 'submit', 'class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'Reject & customize response'])}}
                                             {!! Form::close() !!}
                                             </div>
                                         @else
@@ -82,8 +84,8 @@
                                         @endif
 
                                     </td>
-                                    {{--<td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn savebtn"> Detail </a>--}}
-                                    {{--                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn savebtn"> Edit </a>--}}
+                                    {{--<td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn btn-basic"> Detail </a>--}}
+                                    {{--                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn btn-basic"> Edit </a>--}}
                                 </tr>
                             @endforeach
 

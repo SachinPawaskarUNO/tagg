@@ -15,6 +15,7 @@ class CreateRequesterTypesTable extends Migration
     {
         Schema::create('requester_types', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('seq_id');
             $table->string('type_name');
             $table->string('type_description')->nullable;
             $table->boolean('active')->default(true);

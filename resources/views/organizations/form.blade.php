@@ -174,7 +174,7 @@
 
 <div class="form-group">
     <div class="col-md-6 col-md-offset-4">
-        {!! Form::submit($submitButtonText, ['class' => 'btn savebtn', 'id' => 'Submit']) !!}
+        {!! Form::submit($submitButtonText, ['class' => 'btn btn-basic', 'id' => 'Submit']) !!}
         <a href="{{ route('organizations.index')}}" id = 'cancel' class="btn backbtn">Cancel</a>
         <span style="color: red"> <h5>Fields Marked With (<span style="color: red; font-size: 20px; vertical-align:middle;">*</span>) Are Mandatory</h5></span>
     </div>

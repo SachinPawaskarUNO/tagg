@@ -7,7 +7,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Dashboard
+                    <h1 class="page-header text-center" style="font-size:26px;">Dashboard
                         for {{ $parentOrgName }}</h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -25,14 +25,14 @@
                                         </div>
                                     </td>
                                     <td><div style="font-weight: bold"> REQUESTS APPROVED :  </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $approvedNumber }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($approvedNumber) }}</div></td>
                                 </tr>
                                 <tr>
                                     <td><div style="font-weight: bold;"> REQUESTS REJECTED : </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $rejectedNumber }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($rejectedNumber)}}</div></td>
                                 </tr>
                                 <td><div style="font-weight: bold;"> REQUESTS PENDING :</div></td>
-                                <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $pendingNumber }}</div></td>
+                                <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($pendingNumber) }}</div></td>
                             </table>
                         </div>
                     </div>
@@ -52,14 +52,14 @@
                                         </div>
                                     </td>
                                     <td><div style="font-weight: bold"> AVG AMOUNT DONATED : </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">${{ $avgAmountDonated }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">${{ number_format($avgAmountDonated)}}</div></td>
                                 </tr>
                                 <tr>
                                     <td><div style="font-weight: bold;"> ACTIVE USERS :  </div></td>
-                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $activeUsers }}</div></td>
+                                    <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($activeUsers) }}</div></td>
                                 </tr>
                                 <td><div style="font-weight: bold;"> ACTIVE LOCATIONS : </div></td>
-                                <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ $numActiveLocations }}</div></td>
+                                <td><div class="huge" style="font-weight: bolder; font-size: 20px">{{ number_format($numActiveLocations) }}</div></td>
                             </table>
                         </div>
                     </div>
@@ -127,9 +127,9 @@
                                             <tr>
                                                 <td style="vertical-align: middle">{{ $organization->org_name }}</td>
                                                 <td style="vertical-align: middle"><?php echo ($organization->street_address1 . ' ' . $organization->street_address2 . ' ' . $organization->city . ' ' . $organization->state . ' ' . $organization->zipcode); ?></td>
-                                                <td style="vertical-align: middle">{{ App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->count() }}</td>
-                                                <td style="vertical-align: middle">{{ App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::REJECTED)->count() }}</td>
-                                                <td style="vertical-align: middle">${{ number_format(App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())->sum('approved_dollar_amount'), 2)  }} </td>
+                                                <td style="vertical-align: middle">{{ number_format(App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->count()) }}</td>
+                                                <td style="vertical-align: middle">{{ number_format(App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::REJECTED)->count()) }}</td>
+                                                <td style="vertical-align: middle">${{ number_format(App\Organization::find($organization->id)->approvedDonationRequest->where('approval_status_id', \App\Custom\Constant::APPROVED)->where('updated_at', '>', \Carbon\Carbon::now()->startOfYear())-> sum('approved_dollar_amount') ) }} </td>
                                                 <td style="vertical-align: middle"> {{ $organization->is_active }}</td>
                                             </tr>
                                         @endforeach

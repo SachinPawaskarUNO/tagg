@@ -17,10 +17,16 @@ class CreateRulesTable extends Migration
             $table->increments('id');
             $table->integer('rule_type_id')->unsigned()->index();
             $table->foreign('rule_type_id')->references('id')->on('rule_types')->onDelete('cascade');
+
             $table->integer('rule_owner_id')->unsigned()->index();
             $table->foreign('rule_owner_id')->references('id')->on('organizations')->onDelete('cascade');
-            $table->longText('rule')->nullable();
+            
+            $table->text('orgtype')->nullable(); // preferred organization types
+            $table->text('dntype')->nullable(); // preferred donation request types
+            $table->integer('amtreq')->default(0); // preferred request donation amount 
+            $table->boolean('taxex')->default(true);
             $table->boolean('active')->default(true);
+            
             $table->timestamps();
         });
         Schema::table('parent_child_organizations', function (Blueprint $table) {

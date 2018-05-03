@@ -3,7 +3,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">User Profile</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">User Profile</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -15,7 +15,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1 style="text-align: left;font-weight: bold;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h1>
+                        <h1 style="text-align: left;font-size:22px;">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h1>
                     </div>
 
 
@@ -60,7 +60,7 @@
                         <input name="userId" type="hidden" id="userId" value="{{ $user->id }}" />
                         <div class="form-group">
                             <label for="email" class="col-md-4 control-label">Role</label>
-                            <div class="col-lg-6"><p>&nbsp;&nbsp;{!! $user->roles[0]->name !!}</p></div>
+                            <div class="col-lg-6"><h5>{!! $user->roles[0]->name !!}</h5></div>
                         </div>
                         <div class="form-group">
                             <label for="first_name" class="col-md-4 control-label"> First Name <span
@@ -136,8 +136,8 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-5">
-                                {!! Form::submit('Save', ['class' => 'btn savebtn', 'id' => 'btnSave']) !!}
-                                <button id="btnEdit" class="btn savebtn" style="background-color: #0099CC;"
+                                {!! Form::submit('Save', ['class' => 'btn btn-basic', 'id' => 'btnSave']) !!}
+                                <button id="btnEdit" class="btn btn-basic"
                                         type="button">Edit
                                 </button>
                                 <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
@@ -146,11 +146,8 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+                <div class="row">
     <script>
         $(window).load(function() {
             $("input").attr("readonly", true);

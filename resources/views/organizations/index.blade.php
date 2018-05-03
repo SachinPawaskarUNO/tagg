@@ -4,13 +4,10 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Business Locations</h1>
-
+                <h1 class="page-header text-center" style="font-size:26px;">Business Locations</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
-    </div>
-
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
@@ -35,13 +32,13 @@
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
-                                           class="btn backbtn pull-right" style="" id="cancel">
+                                           class="btn backbtnsubs pull-right" style="" id="cancel">
                                             Cancel Subscription
                                         </a>
                                     @else
 
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn savebtn pull-right" style="" id="resume">
+                                           class="btn backbtnsubs pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
@@ -52,16 +49,16 @@
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
-                                           class="btn backbtn pull-right" style="" id="cancel">
+                                           class="btn backbtnsubs pull-right" style="" id="cancel">
                                             Cancel Subscription
                                         </a>
                                     @else
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn savebtn pull-right" style="" id="resume">
+                                           class="btn backbtnsubs pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
-                                    <h1 style="text-align: left;">Your account allows
+                                    <h1 style="text-align: left;font-size:22px;">Your account allows
                                         for {{$subscriptionQuantity}} locations. You have used {{$count + 1}}.</h1>
 
                                 </div>
@@ -74,12 +71,12 @@
                                 <div class="panel-heading">
                                     @if($subscriptionEnds == '')
                                         <a href="{{ URL::action('SubscriptionController@cancel') }}"
-                                           class="btn backbtn pull-right" style="" id="cancel">
+                                           class="btn backbtnsubs pull-right" style="" id="cancel">
                                             Cancel Subscription
                                         </a>
                                     @else
                                         <a href="{{ URL::action('SubscriptionController@resume') }}"
-                                           class="btn savebtn pull-right" style="" id="resume">
+                                           class="btn backbtnsubs pull-right" style="" id="resume">
                                             Resume Subscription
                                         </a>
                                     @endif
@@ -120,7 +117,7 @@
                                     <td style="vertical-align: middle">{{'$'}}{{ $loggedOnUserOrganization[0]->monthly_budget}}</td>
                                     <td style="vertical-align: middle"><a
                                                 href="{{route('organizations.edit',encrypt($loggedOnUserOrganization[0]->id))}}"
-                                                id = 'edit_location' class="btn savebtn" style="background-color: #0099CC;">Edit</a></td>
+                                                id = 'edit_location' class="btn btn-basic">Edit</a></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -134,7 +131,7 @@
                                     <td align="right"
                                         style="padding-right: 10px;padding-top: 0px"> @if ($subscriptionQuantity=='101' || ($count < $subscription))
                                             <a href="{{action('OrganizationController@createOrganization')}}"
-                                               id = 'Add_locations' class="btn savebtn">[+] Add Business Location </a>
+                                               id = 'Add_locations' class="btn btn-basic">[+] Add Business Location </a>
                                         @endif</td>
                                 </tr>
 
@@ -171,7 +168,7 @@
                                         <td style="vertical-align: middle">{{'$'}}{{ $organization['monthly_budget']}}</td>
                                         <td style="vertical-align: middle"><a
                                                     href="{{route('organizations.edit',encrypt($organization->id))}}"
-                                                    class="btn savebtn">Edit</a>
+                                                    class="btn btn-basic">Edit</a>
                                         </td>
                                         <td style="vertical-align: middle">
                                             {{ Form::open([
@@ -197,6 +194,7 @@
 
         </div>
     </div>
+</div>
 @endsection
 @section('scripts')
     <script>

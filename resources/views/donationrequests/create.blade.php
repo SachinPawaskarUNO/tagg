@@ -33,11 +33,19 @@
     </script>
     {{ csrf_field() }}
 
+    <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header text-center" style="font-size:26px;">Donation Request</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
     <div class="container donationrequest">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div id="divRequestForm" class="panel panel-default">
-                    <div class="panel-heading">Please complete the following information to submit your donation request</div>
+                    <div class="panel-heading"><h1 style="font-size:22px;">Please complete the following information to submit your donation request</h1></div>
 
                     <div class="panel-body">
                     {!! Form::open(['url' => 'attachment', 'class' => 'form-horizontal', 'id' => 'donationRequestForm', 'files' => true]) !!}
@@ -45,8 +53,20 @@
 
 
                     <!-- <form class="form-horizontal" method="POST" action="{{ action('DonationRequestController@store') }}">
-                            {{ csrf_field() }} -->
-                        <input type="hidden" name="orgId" value="{{ $_GET['orgId'] }}">
+                            {{ csrf_field() }} -->                       
+                        <div class="form-group{{ $errors->has('type_name') ? ' has-error' : '' }}">
+                            <label for="type_name" class="col-md-4 control-label">Business location <span
+                                        style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+                            <div class="col-md-6">
+                                {!! Form::select('type_name', array(null => 'Select...') + $b_locs->all(), null, ['class'=>'form-control', 'id' => 'type_name', 'required']) !!}
+                                @if ($errors->has('type_name'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('type_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        
                         <div class="form-group{{ $errors->has('requester') ? ' has-error' : '' }}">
                             <label for="requester" class="col-md-4 control-label ">Name of the Organization <span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
@@ -206,7 +226,7 @@
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="zipcode" type="number"
+                                <input id="zipcode" type="number" min ='0'
                                        oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                        maxlength="5" class="form-control" name="zipcode"
                                        value="{{ old('zipcode') }}" placeholder="Zip Code" required>
@@ -287,12 +307,13 @@
                             <label for="dollar_amount" class="col-md-4 control-label">Dollar Amount<span
                                         style="color: red; font-size: 20px; vertical-align:middle;">*</span> </label>
                             <div class="col-md-6">
-                                <input id="dollar_amount" type="number" min="0.00" step="0.01" pattern="\d+(\.\d{2})"
+                                <input id="dollar_amount" type="text" min="0" step="1" 
                                        required
-                                       title="Please use the format $.$$ for this field. " class="form-control"
+                                       title="Please use the format $ for this field. " class="form-control"
                                        name="dollar_amount" value="{{ old('dollar_amount') }}"
                                        onblur="setTwoNumberDecimal(this)"
-                                       placeholder="0.00" required>
+                                       placeholder="0" 
+                                       maxlength="7">
 
                                 @if ($errors->has('dollar_amount'))
                                     <span class="help-block">
@@ -455,8 +476,10 @@
                                     Send Request
                                 </button>
 
-                                <input id="hiddenSubmit" type="submit" class="btn btn-success" style="display: none">
-                            <span style="color: red"> <h5> Fields Marked With (*) Are Mandatory </h5></span>
+                                <input id="hiddenSubmit" type="submit" class="btn btn-basic" style="display: none">
+                            <div><span style="color: red"> <h5>Fields Marked With (<span
+                                style="color: red; font-size: 20px; align:middle;">*</span>) Are Mandatory</h5></span>
+                                </div>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -472,8 +495,7 @@
         $('#explain').hide();
         $('#explain_purpose').hide();
         @endif
-    </script>
-    <script type="text/javascript">
+
         $('#attachment').removeProp('required');
 
         function yesnoCheck() {
@@ -486,8 +508,6 @@
                 $('#attachment').removeProp('required');
             }
         }
-    </script>
-    <script>
         $('#item_requested').change(function () {
             if ($(this).val() == 5) {
                 $('#explain').show();
@@ -506,7 +526,9 @@
         });
 
         function setTwoNumberDecimal(e) {
-            e.value = parseFloat(e.value).toFixed(2);
+                if(e.value == 0) {
+                e.value =0;
+            }
         }
 
         $('#btnSubmit').on('click', function () {
@@ -525,5 +547,14 @@
                 $('#hiddenSubmit').click();
             }
         });
+    
+        $("#zipcode").on('keypress', function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            //display error message
+            return false;
+        }
+        
+    });
+
     </script>
 @endsection

@@ -4,7 +4,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Search Donations</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">Search Donations</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -14,8 +14,7 @@
         <div class="row">
             {{--<div class="col-md-10 col-md-offset-1">--}}
             <div class="panel panel-default">
-                <div class="panel-heading"><h1
-                            style="text-align: left;font-weight: bold;">Business Name:&nbsp{{ $organizationName }}</h1>
+                <div class="panel-heading"><h1 style="text-align: left;font-size:22px;">Business Name:&nbsp{{ $organizationName }}</h1>
                 </div>
                 <br>
 
@@ -69,7 +68,7 @@
                                 <tr>
                                     <td style="vertical-align: middle">{{ $donationrequest->requester }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->donationRequestTypes->type_name }}</td>
-                                    <td style="vertical-align: middle">${{ number_format($donationrequest->dollar_amount, 2) }}</td>
+                                    <td style="vertical-align: middle">${{ number_format($donationrequest->dollar_amount) }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->donationRequestType->item_name }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->organization->org_name }}</td>
                                     <td style="vertical-align: middle">{{ $donationrequest->event_name }}</td>
@@ -93,8 +92,8 @@
 
 
                                     </td>
-                                    {{--<td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn savebtn"> Detail </a>--}}
-                                    {{--                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn savebtn"> Edit </a>--}}
+                                    {{--<td style="vertical-align: middle"><a href="{{route('donationrequests.show',$donationrequest->id)}}" class="btn btn-basic"> Detail </a>--}}
+                                    {{--                                    <td style="vertical-align: middle"><a href="{{route('donationrequests.edit',$donationrequest->id)}}" class="btn btn-basic"> Edit </a>--}}
                                 </tr>
                             @endforeach
 

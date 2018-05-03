@@ -13,6 +13,7 @@ use App\Role;
 use App\RoleUser;
 use App\State;
 use App\User;
+use App\Rule as Ruls;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\withErrors;
@@ -108,6 +109,14 @@ class UserController extends Controller
         $user->zipcode = $request->zipcode;
         $user->phone_number = $request->phone_number;
         $user->organization_id = $orgId;
+        // save default rule to accept all
+        $rl = new Ruls;
+        $rl->rule_type_id = 1;
+        $rl->rule_owner_id = $orgId;
+        // $rl->orgtype = "["1","2","3","4","5","6","7","8","9","10","11","12","13"]";
+        // $rl->dntype = "["1","2","3","4","5"]";
+        $rl->taxex = false;
+        $rl->save();
 
         $validator = Validator::make($request->all(), [
             'phone_number' => 'required|regex:/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/',
@@ -346,10 +355,29 @@ class UserController extends Controller
         return view('users.indexUsers', compact('users', 'admin'));
     }
 
-    public function destroy($id)
+//    public function destroy($id)
+//    {
+//        User::find($id)->update(['active' => Constant::INACTIVE]);
+//        return redirect('users.indexUsers');
+//    }
+
+    public function destroy($id, $active)
     {
-        User::find($id)->update(['active' => Constant::INACTIVE]);
-        return redirect('users.indexUsers');
+        //
+        $user = User::findOrFail($id);
+        if ($active == 1) {
+            $active = 0;
+        }else {
+            $active = 1;
+        }
+        \DB::table('users')->where('id', 'LIKE', $user->id)->update(['active' => $active]);
+        Return redirect('user/manageusers');
+    }
+
+    public function deactivate ($id) {
+        $user = Auth::user();
+        \DB::table('users')->where('id', 'LIKE', $user->id)->update(['active' => 0]);
+        Auth::logout();
     }
 
     protected function getRoles()

@@ -3,7 +3,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Users</h1>
+                <h1 class="page-header text-center" style="font-size:26px;">Users</h1>
 
             </div>
             <!-- /.col-lg-12 -->
@@ -19,9 +19,9 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1 style="text-align: left;font-weight: bold;"> Active Users </h1>
-                        <a href="{{route('users.show', encrypt($admin->id))}}" class="btn savebtn"
-                           style="position: absolute; top: 26px; right:32px;background-color: #0099CC;">[+] Add
+                        <h1 style="text-align: left;font-size:22px;"> Active Users </h1> 
+                        <a href="{{route('users.show', encrypt($admin->id))}}" class="btn btn-basic pull-right"
+                           style="position: absolute; top: 26px; right:32px;">[+] Add
                             User </a>
                     </div>
 
@@ -52,8 +52,10 @@
 
                                 <td style="vertical-align: middle"><a href="{{route('edituser',encrypt($user->id))}}"
 
-                                                                      class="btn savebtn"
-                                                                      style="background-color: #0099CC;"> Edit </a>
+                                                                      class="btn btn-basic"
+                                                                      style="background-color: #18B1C1;"> Edit </a>
+                                    <a href="/user/destroy/{{$user->id}}/{{$user->active}}" onclick="return confirm('Are you sure you want to deactivate this user account')" class="btn backbtnsubs">Delete</a>
+
                                 </td>
                                 <!--<td style="vertical-align: middle">
                                     <input type="submit" value="Delete" class='btn backbtn'

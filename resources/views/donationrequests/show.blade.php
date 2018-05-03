@@ -3,9 +3,9 @@
     <br>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+                
                 <div class="panel panel-default">
-                    <div class="panel-heading">Donation Request Detail</div>
+                     <div class="panel-heading"><h1  style="font-size:22px";>Donation Request Detail</h1></div>
 
                     <table class="table table-striped table-bordered table-hover">
                         <div>
@@ -100,7 +100,7 @@
 
                             <tr>
                                 <td>Requested Dollar Amount</td>
-                                <td>$<?php echo ($donationrequest['dollar_amount']); ?></td>
+                                <td>$<?php echo (number_format($donationrequest['dollar_amount'])); ?></td>
                             </tr>
                             <tr>
                                 <td>Donation Purpose</td>
@@ -144,7 +144,7 @@
                             @if($donationrequest->est_attendee_count)
                                 <tr>
                                     <td>Estimated Number of Attendes</td>
-                                    <td><?php echo ($donationrequest['est_attendee_count']); ?></td>
+                                    <td><?php echo (number_format($donationrequest['est_attendee_count'])); ?></td>
                                 </tr>
                             @endif
                             <tr>
@@ -176,17 +176,9 @@
                                     <div class="col-lg-6">
 
                                         {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
-                                        {!! Form::number('approved_amount', $donationrequest['dollar_amount'], ['id' => 'approved_amount', 'class' => 'form-control', 'min'=>'0.00', 'step'=>'0.01', 'pattern'=>'\d+(\.\d{2})', 'required', 'onblur' => 'setEmptyToZero(this)'] )!!}
+                                        {!! Form::text('approved_amount',round($donationrequest->dollar_amount), ['id' => 'approved_amount', 'class' => 'form-control', 'min'=>'0', 'step'=>'1', 'required'] )!!}
                                     </div>
                                 </div>
-                        <script type="text/javascript">
-                            function setEmptyToZero(e) {
-                                if (e.value == null || e.value == '')
-                                {
-                                    e.value = '0.00';
-                                }
-                            }
-                        </script>
                                 <br><br>
                             @endif
                         @endif
@@ -194,13 +186,20 @@
 
                             @if ($donationrequest->approval_status_id == \App\Custom\Constant::SUBMITTED OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_REJECTION OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_APPROVAL)
                                 @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                                    <input class="btn active btn-success" type="submit" name="approve" value="Approve">
-                                    <input class="btn active btn-danger" type="submit" name="reject" value="Reject">
+                                 <div class="row">
+                                  <div class="col-md-6">
+                                    {!! Form::submit( 'Approve & customize response', ['class' => 'btn btn-success', 'style' => 'background-color: #18B1C1;', 'name' => 'submitbutton', 'value' => 'approve'])!!}
+                                    {!! Form::submit( 'Approve & send default email', ['class' => 'btn btn-success',  'style' => 'background-color: #18B1C1;','name' => 'submitbutton', 'value' => 'approvedef'])!!}
+                                  </div>
+                                  <div class="col-md-6">
+                                    {!! Form::submit( 'Reject & customize response', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'reject']) !!}
+                                    {!! Form::submit( 'Reject & send default email', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
+                                  </div>
+                                  </div>
                                 @endif
 
-
                                 <input id = 'cancel' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
-                                {{--<a href="{{ route('donationrequests.index')}} " class="btn savebtn">Return to Donation--}}
+                                {{--<a href="{{ route('donationrequests.index')}} " class="btn btn-basic">Return to Donation--}}
                                 {{--Request</a>--}}
                             @else
                                 <input id = 'cancel1' class="btn backbtn" type="button" value="Cancel" onClick="history.go(-1);">
@@ -212,4 +211,5 @@
             </div>
         </div>
     </div>
+ 
 @stop

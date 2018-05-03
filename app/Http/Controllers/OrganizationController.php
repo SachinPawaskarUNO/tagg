@@ -13,6 +13,7 @@ use Auth;
 use Billable;
 use Illuminate\Http\Request;
 use Validator;
+use App\Rule as Ruls;
 
 
 class OrganizationController extends Controller
@@ -37,10 +38,16 @@ class OrganizationController extends Controller
     {
         $id = decrypt($id);
         if (in_array($id, $this->getAllMyOrganizationIds())) {
+            $parent = True; // by default parent business 
             $organization = Organization::find($id);
+            $child = ParentChildOrganizations::active()->where('child_org_id', $organization->id)->exists();
+            if($child == True ) {
+                $parent = False;
+                // if not parent than any of business location, wouldn't see card update
+            }
             $states = State::pluck('state_name', 'state_code');
             $Organization_types = Organization_type::pluck('type_name', 'id');
-            return view('organizations.edit', compact('organization', 'states', 'Organization_types'));
+            return view('organizations.edit', compact('organization', 'states', 'Organization_types', 'parent'));
         } else {
             return redirect('/home')->withErrors(array('0' => 'You do not have access to view this Business!!'));
         }
@@ -50,10 +57,17 @@ class OrganizationController extends Controller
     {
         $id = decrypt($id);
          if (in_array($id, $this->getAllMyOrganizationIds())) {
+            $parent = True; // by default parent business 
+            $organization = Organization::find($id);
+            $child = ParentChildOrganizations::active()->where('child_org_id', $organization->id)->exists();
+            if($child == True ) {
+                $parent = False;
+                // if not parent than any of business location, wouldn't see card update
+            }
             $organization = Organization::find($id);
             $states = State::pluck('state_name', 'state_code');
             $Organization_types = Organization_type::pluck('type_name', 'id');
-            return view('organizations.donationurl', compact('organization', 'states', 'Organization_types'));
+            return view('organizations.donationurl', compact('organization', 'states', 'Organization_types','parent'));
         } else {
             return redirect('/home')->withErrors(array('0' => 'You do not have access to view this Business!!'));
         }
@@ -62,17 +76,55 @@ class OrganizationController extends Controller
 
     public function update(Request $request, $id)
     {
+
         if (in_array($id, $this->getAllMyOrganizationIds())) {
-            $validator = Validator::make($request->all(), [
-                'phone_number' => 'required|regex:/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/',
-                'zip_code' => 'required|regex:/[0-9]{5}/',
-                'state' => 'required',
-            ]);
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
+            if (!$request->input('token')) {
+                $validator = Validator::make($request->all(), [
+                    'phone_number' => 'required|regex:/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/',
+                    'zip_code' => 'required|regex:/[0-9]{5}/',
+                    'state' => 'required',
+                ]);
+                if ($validator->fails()) {
+                    return redirect()->back()->withErrors($validator)->withInput();
+                }
             }
 
             $organization = Organization::find($id);
+
+            if ($request->input('token')) {
+
+                \Stripe\Stripe::setApiKey("sk_test_JCvbZAQM8DJUxfP5e9Ru2ihT");
+
+                try {
+                    $cu = \Stripe\Customer::retrieve($organization->stripe_id);
+                    $cu->source = $request->input('token');
+                    $cu->save();
+
+                    $cu = \Stripe\Customer::Retrieve(
+                        array("id" => $organization->stripe_id, "expand" => array("default_source"))
+                    );
+
+                    $organization->card_last_four = $cu->default_source->last4;
+                    $organization->card_brand = $cu->default_source->brand;
+                    $organization->save();
+
+                    return redirect()->route('organizations.edit', encrypt($id))->withSuccess('Card is updated');
+
+                }
+                catch(\Stripe\Error\Card $e) {
+
+                    // Use the variable $error to save any errors
+                    // To be displayed to the customer later in the page
+                    $body = $e->getJsonBody();
+                    $err  = $body['error'];
+                    $error = $err['message'];
+
+                    return redirect()->route('organizations.edit', encrypt($id))->withErrors(array('0' => $err['message']));
+
+                }
+
+            }
+
             $organization->org_name = $request->org_name;
             $organization->org_description = $request->org_description;
             $organization->street_address1 = $request->street_address1;
@@ -82,7 +134,7 @@ class OrganizationController extends Controller
             $organization->zipcode = $request->zip_code;
             $organization->phone_number = $request->phone_number;
             $organization->save();
-
+    
             // If user is editing their own organization then redirect back to their business profile page
             // If user is parent organization and try to edit a child organization then redirect to organizations page
             // else redirect users to home page with error that access is denied
@@ -158,6 +210,15 @@ class OrganizationController extends Controller
         }
         $organization->save();
 
+        // add location based preferences 
+        $rl = new Ruls;
+        $rl->rule_type_id = 1;
+        $rl->rule_owner_id = $organization->id;
+        // $rl->orgtype = "["1","2","3","4","5","6","7","8","9","10","11","12","13"]";
+        // $rl->dntype = "["1","2","3","4","5"]";
+        $rl->taxex = false;
+        $rl->save();    
+
         // Inserting the relation between parent organization and child organization
         ParentChildOrganizations::create(['parent_org_id' => Auth::user()->organization_id, 'child_org_id' => $organization->id]);
 
@@ -189,3 +250,4 @@ class OrganizationController extends Controller
         return $arr;
     }
 }
+

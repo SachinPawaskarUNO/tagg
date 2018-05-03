@@ -9,7 +9,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h1 style="text-align: left;font-weight: bold;">Change Password</h1>
+                        <h1 style="text-align: left;font-size:22px;">Change Password</h1>
                     </div>
                     <div class="panel-body">
                         @if (Session::has('success'))
@@ -25,7 +25,7 @@
                                 <label for="password" class="col-md-4 control-label">Old Password <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="old"
+                                    <input id="password-old" type="password" class="form-control" name="old"
                                            placeholder="Enter Your Old Password">
 
                                     @if ($errors->has('old'))
@@ -40,7 +40,7 @@
                                 <label for="password" class="col-md-4 control-label">New Password <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password"
+                                    <input id="password-new" type="password" class="form-control" name="password"
                                            placeholder="Enter Your New Password">
 
                                     @if ($errors->has('password'))
@@ -68,7 +68,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-3 col-md-offset-5">
-                                    <button type="submit" class="btn savebtn form-control">Submit</button>
+                                    <button type="submit" class="btn btn-basic form-control">Submit</button>
                                 </div><br><br>
                                   <div class="col-md-5 col-md-offset-5">
                                 <span style="color: red"> <h5> Fields Marked With (*) Are Mandatory </h5></span>

@@ -9,7 +9,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header text-center" style="font-size:20px;font-weight: 900;">Request Management
+                    <h1 class="page-header text-center" style="font-size:26px;">Request Management
                         Dashboard</h1>
 
                 </div>
@@ -18,15 +18,15 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading" style="background-color: #56ba94 ;">
+                    <div class="panel panel1">
+                        <div class="panel-heading" style="background-color: #18B1C1;">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-money fa-5x" style="color: white"></i>
                                 </div>
                                 <div class="col-xs-9 text-left">
                                     <div class="huge" style="color: white;font-size: 35px;font-weight: bolder;">
-                                        ${{number_format($amountDonated, 2)}}</div>
+                                        ${{number_format($amountDonated)}}</div>
                                     <div style="color: white;font-size: 15px;font-weight: bolder;">TOTAL AMOUNT
                                         DONATED
                                     </div>
@@ -37,8 +37,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-yellow">
-                        <div class="panel-heading" style="background-color: #9f8cb9;">
+                    <div class="panel panel2">
+                        <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-check-square-o fa-5x" style="color: white"></i>
@@ -53,8 +53,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-red">
-                        <div class="panel-heading" style="background-color: #6c6ba4;">
+                    <div class="panel panel3">
+                        <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-clock-o fa-5x" style="color: white;"></i>
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <div class="panel panel-green">
-                        <div class="panel-heading" style="background-color: #332f52;">
+                    <div class="panel panel4">
+                        <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3" style="padding-bottom: 15px;">
                                     <i class="fa fa-window-close-o fa-5x" style="color: white"></i>
@@ -92,10 +92,17 @@
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-12">
                     <div class="panel panel-default text-left">
-                        <div class="panel-heading text-center" style="color:#0077aa;font-size:15px;">
-                            <b>Pending Requests</b>
+                        <div class="panel-heading text-center" style="color:#18B1C1;font-size:22px;">
+                            Pending Requests
                         </div>
-
+                        @if(session()->has('message'))
+                        <div class="alert alert-warning alert-dismissible text-center center-block" style="width: 30%;" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                         {{ session()->get('message') }}
+                         {{ Session::forget('message') }}
+                         {{ Session::save() }}
+                        </div>
+                        @endif
                         <!-- Donation request -->
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -120,7 +127,7 @@
                                             <tr>
                                                 <td style="vertical-align: middle"><input type="checkbox" class="myCheckbox" ids="{{$donationrequest->id}}"/></td>
                                                 <td style="vertical-align: middle">{{ $donationrequest->requester }}</td>
-                                                <td style="vertical-align: middle">${{ number_format($donationrequest->dollar_amount, 2) }}</td>
+                                                <td style="vertical-align: middle">${{ number_format($donationrequest->dollar_amount) }}</td>
                                                 <td style="vertical-align: middle">{{ $donationrequest->donationRequestType->item_name }}</td>
                                                 <td style="vertical-align: middle">{{$donationrequest->organization->org_name }}</td>
                                                 <td style="vertical-align: middle"><?php echo date("m/d/Y", strtotime($donationrequest->needed_by_date)); ?></td>
@@ -138,15 +145,21 @@
                                 <div>No pending donation requests to show.</div>
                             @endif
                                 </table>
-                                {!! Form::open(['action' =>  'EmailTemplateController@send', 'method' => 'GET']) !!}
+                                {!! Form::open(['action' => 'EmailTemplateController@send', 'method' => 'GET']) !!}
                                 {{ csrf_field() }}
                                 {{ Form::hidden('ids_string','' , array('id' => 'selected-ids-hidden')) }}
                                 {{ Form::hidden('page_from', '/dashboard') }}
                                 {{--add if condition to show approve and reject buttons only if there are pending requests and atleast one is selected--}}
                                 @if(sizeOf($donationrequests) != 0)
-                                  <div class="col-md-6 col-md-offset-5">
-                                    {!! Form::submit( 'Approve', ['class' => 'btn btn-success', 'name' => 'submitbutton', 'value' => 'approve'])!!}
-                                    {!! Form::submit( 'Reject', ['class' => 'btn btn-danger', 'name' => 'submitbutton', 'value' => 'reject']) !!}
+                                <div class="row">
+                                  <div class="col-xs-5 col-md-offset-2">
+                                    {!! Form::submit( 'Approve & customize response', ['class' => 'btn btn-success', 'style' => 'background-color: #18B1C1;', 'name' => 'submitbutton', 'value' => 'approve'])!!}
+                                    {!! Form::submit( 'Approve & send default email', ['class' => 'btn btn-success',  'style' => 'background-color: #18B1C1;','name' => 'submitbutton', 'value' => 'approvedef'])!!}
+                                  </div>
+                                  <div class="col-xs-4">
+                                    {!! Form::submit( 'Reject & customize response', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'reject']) !!}
+                                    {!! Form::submit( 'Reject & send default email', ['class' => 'btn backbtnsubs', 'name' => 'submitbutton', 'value' => 'rejectdef']) !!}
+                                  </div>
                                   </div>
                                 @endif
                                 {!! Form::close() !!}
@@ -165,10 +178,11 @@
 
         </div>
         <!-- /#wrapper -->
-
+    </div>
         <script>
 
             $(document).ready(function() {
+                $('input').prop('checked', false);
                 $('#example').DataTable(
                     {
                         responsive: true
