@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="./public/img/New-logo.jpg" alt="CharityQ Logo"/>
+    <img src="./public/img/New-Logo.jpg" alt="CharityQ Logo"/>
     
 </p>
 
