@@ -118,7 +118,7 @@
                                     </thead>
                                     <?php $cancelled = false ?>
                                     <tbody  style="text-align: center">
-                                        @foreach ($organizations as $organization)
+                                        @foreach ($biz as $organization)
                                             @if(is_null($organization->created_at))
                                                 @continue;
                                             @endif
