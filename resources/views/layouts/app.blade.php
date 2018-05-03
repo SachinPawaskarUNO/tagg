@@ -9,7 +9,11 @@
 
 @yield('scripts')
 
-@include('layouts.partials.nav')
+@if(Auth::guest() && Route::is('donationrequests.create*'))
+
+@else
+    @include('layouts.partials.nav')
+@endif
 
 @yield('content')
 
