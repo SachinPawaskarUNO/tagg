@@ -22,12 +22,19 @@ class DashboardController extends Controller
     {
         if ($request->user()->roleuser->role_id == Constant::ROOT_USER OR $request->user()->roleuser->role_id == Constant::TAGG_ADMIN OR $request->user()->roleuser->role_id == Constant::TAGG_USER) {
             $organizations = Organization::where('id', '!=', Constant::CHARITYQ_ID)->get(); // non CharityQ user selection
+            // dd($organizations);
             $activeParent = Organization::active()
                             ->where('trial_ends_at', '>=', Carbon::now()->toDateTimeString())
                             ->where('id', '!=', Constant::CHARITYQ_ID)
                             ->pluck('id')->toArray(); // select non CQ businesses
             $activeOrgIds = ParentChildOrganizations::active()->whereIn('parent_org_id', $activeParent)->pluck('child_org_id')->toArray();
-            
+
+            $biz = Organization::active()->whereNotIn('id', $activeOrgIds)
+                                        ->where('id', '!=', Constant::CHARITYQ_ID)
+                                        ->get();
+                            // select non CQ businesses
+
+
             $idCount = count($activeOrgIds);
             foreach ($activeParent as $key => $activeID) {
                 $test = [$idCount => $activeID];
@@ -68,7 +75,7 @@ class DashboardController extends Controller
                 ->whereNotNull('pc.child_org_id')
                 ->select(\DB::raw("c.*, CASE WHEN (p.active = 0 OR p.trial_ends_at <= now()) THEN 'Cancelled' WHEN (c.active = 0 OR c.trial_ends_at <= now()) THEN 'Cancelled' ELSE 'Active' END as is_active"))->get();
 
-            return view('dashboard.admin-index', compact('organizations', 'avgAmountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber', 'numActiveLocations', 'userCount', 'userThisWeek', 'userThisMonth', 'userThisYear','subscriptions','orgChildren'));
+            return view('dashboard.admin-index', compact('biz','organizations', 'avgAmountDonated', 'rejectedNumber', 'approvedNumber', 'pendingNumber', 'numActiveLocations', 'userCount', 'userThisWeek', 'userThisMonth', 'userThisYear','subscriptions','orgChildren'));
         } else {
             $organizationId = Auth::user()->organization_id;
             $organization = Organization::findOrFail($organizationId);
