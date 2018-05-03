@@ -10,7 +10,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header text-center" style="font-size:26px;">Donation Preferences</h1>
             </div>
-            <!-- /.col-lg-12 -->
+        @endif
         </div>
     </div>
 
