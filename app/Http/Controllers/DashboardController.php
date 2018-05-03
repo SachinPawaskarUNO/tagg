@@ -28,10 +28,12 @@ class DashboardController extends Controller
                             ->where('id', '!=', Constant::CHARITYQ_ID)
                             ->pluck('id')->toArray(); // select non CQ businesses
             $activeOrgIds = ParentChildOrganizations::active()->whereIn('parent_org_id', $activeParent)->pluck('child_org_id')->toArray();
+
             $biz = Organization::active()->whereNotIn('id', $activeOrgIds)
                                         ->where('id', '!=', Constant::CHARITYQ_ID)
                                         ->get();
                             // select non CQ businesses
+
 
             $idCount = count($activeOrgIds);
             foreach ($activeParent as $key => $activeID) {
