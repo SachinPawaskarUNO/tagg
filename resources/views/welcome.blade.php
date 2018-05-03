@@ -369,7 +369,6 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
-
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
@@ -423,7 +422,6 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
-
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
@@ -477,7 +475,6 @@
                         <!--//HEAD PRICE DETAIL END-->
                         
                         <!--FEATURE LIST START-->
-
                         <!--//FEATURE LIST END-->
                         
                         <!--BUTTON START-->
