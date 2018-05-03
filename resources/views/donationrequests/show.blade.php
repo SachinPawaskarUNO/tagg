@@ -171,10 +171,9 @@
                     {!! Form::hidden('fromPage','detailspage',['class'=>'form-control', 'readonly']) !!}
                         @if ($donationrequest->approval_status_id == \App\Custom\Constant::SUBMITTED OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_REJECTION OR $donationrequest->approval_status_id == \App\Custom\Constant::PENDING_APPROVAL)
                             @if(Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_ADMIN OR Auth::user()->roles[0]->id == \App\Custom\Constant::BUSINESS_USER)
-                                <div>
+                               <div>
                                     <label for="dollar_amount" class="col-md-3 control-label">Dollar Amount Approval</label>
-                                    <div class="col-lg-6">
-
+                                    <div class="input-group col-lg-6"><span class="input-group-addon">$</span>
                                         {!! Form::hidden('id',$donationrequest->id,['class'=>'form-control', 'readonly']) !!}
                                         {!! Form::text('approved_amount',round($donationrequest->dollar_amount), ['id' => 'approved_amount', 'class' => 'form-control', 'min'=>'0', 'step'=>'1', 'required'] )!!}
                                     </div>

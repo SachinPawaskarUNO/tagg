@@ -79,6 +79,21 @@
     </div>
 </div>--}}
 
+<div class="form-group{{ $errors->has('monthly_budget') ? ' has-error' : '' }}">
+    <label for="monthly_budget" class="col-md-4 control-label"> Monthly Budget <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
+
+    <div class="col-md-6 input-group">
+        <span class="input-group-addon">$</span><input id="monthly_budget" type="text" class="form-control" name="monthly_budget"
+               value="{{ old('monthly_budget') }}" placeholder="Monthly Budget" min="0" maxlength="7" required />
+
+        @if ($errors->has('monthly_budget'))
+            <span class="help-block">
+                <strong>{{ $errors->first('monthly_budget') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+
 <div class="form-group{{ $errors->has('street_address1') ? ' has-error' : '' }}">
     <label for="street_address1" class="col-md-4 control-label"> Address 1 <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
@@ -143,7 +158,7 @@
     <label for="zipcode" class="col-md-4 control-label">Zip Code <span style="color: red; font-size: 20px; vertical-align:middle;">*</span></label>
 
     <div class="col-md-6">
-        <input id="zipcode" type="number"
+        <input id="zipcode" type="number" min="0"
                oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                maxlength="5" class="form-control" name="zipcode"
                value="{{ old('zipcode') }}"

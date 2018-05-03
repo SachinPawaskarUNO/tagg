@@ -8,7 +8,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><img src="{{ asset('img/newlogo.png') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
+                        <a class="navbar-brand" href="/"><img src="{{ asset('img/newlogo.png') }}" alt="{{ env('APP_NAME', 'CharityQ')  }}"
                             id="logo" class="img-responsive"></a>
                 </div>
                      <!-- Collect the nav links, forms, and other content for toggling -->
@@ -96,7 +96,7 @@
 
 
                                 <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <a href="#" id="username" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                         {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
                                         <span class="caret"></span>
                                     </a>
