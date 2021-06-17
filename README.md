@@ -1,6 +1,5 @@
 <p align="center">
     <img src="./public/img/New-Logo.jpg" alt="CharityQ Logo"/>
-    
 </p>
 
 <p align="center">CharityQ helps caring business managers in streamlining contributions to their community, charities, non-profits, and other organizations. This allows our business partners to operate more efficiently and successfully within their community.</p>
